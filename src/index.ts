@@ -1,0 +1,3 @@
+// index.ts
+
+import "@/app";

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%-include('./_layouts/meta.ejs') %>
+  </head>
+  <body>
+    <h1>유저 목록 페이지</h1>
+    <ul>
+      <% users.forEach(function(user){ %>
+      <li>
+        <span>이름: <%= user.name %></span>
+        <span>나이: <%= user.age %></span>
+      </li>
+      <% }); %>
+    </ul>
+  </body>
+</html>
