@@ -5,5 +5,5 @@ export const healthCheck = (
   res: Response,
   next: NextFunction
 ) => {
-  res.send("서버 건강하다잉");
+  res.send("Server is up and running");
 };

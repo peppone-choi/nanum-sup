@@ -1,3 +1,1 @@
-// index.ts
-
 import "@/app";
