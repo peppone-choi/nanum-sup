@@ -7,6 +7,12 @@ import viewRouter from "./routers/views/view.router";
 import adminViewRouter from "./routers/views/adminView.router";
 import cookieParser from "cookie-parser";
 import errorHandler from "./api/common/middlewares/errorHandler.middleware";
+import dotenv from "dotenv";
+import adminCategoryRouter from "./api/category/router/adminCategory.router";
+import categoryRouter from "./api/category/router/category.router";
+
+import { ROUTES_INDEX } from "./routers";
+
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -15,6 +21,15 @@ app.use(appRouter);
 app.use(userRouter);
 app.use(viewRouter);
 app.use(adminViewRouter);
+app.use(categoryRouter);
+app.use(adminCategoryRouter);
+
+/** -------- category ---------  */
+app.use(ROUTES_INDEX.CATEGORY_API, categoryRouter);
+app.use(ROUTES_INDEX.ADMIN_CATEGORY_API, adminCategoryRouter);
+// app.use(ROUTES_INDEX.ADMIN_CATEGORY_VIEW, adminCategoryViewRouter);
+// app.use(ROUTES_INDEX.CATEGORY_VIEW, categoryViewRouter);
+
 const PORT = process.env.PORT || 4000;
 // view 파일들 모아놓는 위치 설정
 app.set("views", path.join(__dirname, "views"));
@@ -27,5 +42,5 @@ app.use("/static", express.static(path.join(__dirname, "../public"))); // 정적
 app.use(errorHandler);
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });
