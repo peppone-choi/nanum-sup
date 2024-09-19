@@ -1,0 +1,5 @@
+SERVER_PORT=4000
+SERVER_HOST=localhost
+MONGODB_USER=dbUser
+MONGODB_PASSWORD=fYlquYPk4uXZOYco
+MONGODB_CLUSTER=cluster0.qgkeiid.mongodb.net
