@@ -1,14 +1,20 @@
-import PostResponseDTO from "@/api/posts/dto/PostResponseDTO"
+import { PostResponseDTO } from "@/api/posts/dto/postResponse.dto"
 
 export interface PostsService {
   /** 게시글 생성 */
-  createPost(): Promise<PostResponseDTO>;
+  createPost(
+    userId: string,
+    post: Omit<IPost, "id" | "author">
+  ): Promise<PostResponseDTO>;
   /** 게시글 목록 조회 */
   getPosts(): Promise<PostResponseDTO[]>;
   /** 게시글 생성 */
-  getPostDetail(): Promise<PostResponseDTO | null>;
+  getPostDetail(id: string): Promise<PostResponseDTO | null>;
   /** 게시글 생성 */
-  updatePost(): Promise<void>;
+  updatePost(
+    postId: string,
+    updatedPost: Omit<IPost, "id" | "author">
+  ): Promise<void>;
   /** 게시글 생성 */
-  deletePost(): Promise<void>;
+  deletePost(postId: string): Promise<void>;
 }

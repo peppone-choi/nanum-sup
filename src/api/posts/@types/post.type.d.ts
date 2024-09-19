@@ -13,6 +13,6 @@ interface IPost {
   category: string;
   /** 댓글 리스트 */
   // comments: IComment[];
-  comments: string;
+  comments: string[];
 }
 
