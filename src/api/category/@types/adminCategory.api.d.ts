@@ -1,4 +1,3 @@
-import { category } from "../model/category.model";
 declare type adminGetCategoryRequestPath = {};
 declare type adminGetCategoryRequestParams = {};
 declare type adminGetCategoryRequestBody = {};
@@ -41,7 +40,7 @@ declare type adminGetCategoryDetailRequestBody = {
 };
 
 declare type adminGetCategoryDetailRequestPath = {};
-declare type adminGetCategoryDetailRequestRequest = {};
+declare type adminGetCategoryDetailRequestParams = {};
 
 /** 카테고리 생성 (관리자) 요청 */
 declare type adminCreateCategoryRequest = {
@@ -53,7 +52,7 @@ declare type adminCreateCategoryRequest = {
 /** 카테고리 생성 (관리자) 응답 */
 declare type adminCreateCategoryResponse = ICategoryResponseDTO;
 
-declare type adminUpdateCategoryRequestBody = Omit<ICategory, "category_id">;
+declare type adminUpdateCategoryRequestBody = Omit<ICategory, "id">;
 
 declare type adminUpdateCategoryRequestPath = {
     /** 카테고리 ID */

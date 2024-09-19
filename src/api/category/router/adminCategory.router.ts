@@ -1,6 +1,17 @@
 import express from "express";
-import AdminCategoryController from "../controller/adminCategory.controller";
-import { CategoryServiceImpl } from "../service/category.service";
+import AdminCategoryController from "@/api/category/controller/adminCategory.controller";
+import { CategoryServiceImpl } from "@/api/category/service/category.service";
+import { MemoryCategoryRepository } from "@/api/category/repository/memoryCategory.repository";
+import {
+    adminCreateCategoryValidator,
+    adminDeleteCategoryValidator,
+    adminGetCategoryDetailValidator,
+    adminGetCategoryValidator,
+    adminUpdateCategoryValidator,
+} from "@/api/category/dto/validation/adminCategory.validation";
+import { validate } from "@/api/common/middleware/validation.moddleware";
+import { extractPath } from "@/utils/path.util";
+import { ROUTES_INDEX } from "@/routers";
 
 const adminCategoryRouter = express.Router();
 
@@ -19,31 +30,51 @@ const ADMIN_CATEGORY_ROUTES = {
 } as const;
 
 const adminCategoryController = new AdminCategoryController(
-    new CategoryServiceImpl()
+    new CategoryServiceImpl(new MemoryCategoryRepository())
 );
 
 adminCategoryRouter.get(
-    ADMIN_CATEGORY_ROUTES.GET_CATEGORY,
+    extractPath(
+        ADMIN_CATEGORY_ROUTES.GET_CATEGORY,
+        ROUTES_INDEX.ADMIN_CATEGORY_API
+    ),
+    validate(adminGetCategoryValidator),
     adminCategoryController.getCategory
 );
 
 adminCategoryRouter.get(
-    ADMIN_CATEGORY_ROUTES.GET_CATEGORY_DETAIL,
+    extractPath(
+        ADMIN_CATEGORY_ROUTES.GET_CATEGORY_DETAIL,
+        ROUTES_INDEX.ADMIN_CATEGORY_API
+    ),
+    validate(adminGetCategoryDetailValidator),
     adminCategoryController.getCategoryDetail
 );
 
 adminCategoryRouter.post(
-    ADMIN_CATEGORY_ROUTES.CREATE_CATEGORY,
+    extractPath(
+        ADMIN_CATEGORY_ROUTES.CREATE_CATEGORY,
+        ROUTES_INDEX.ADMIN_CATEGORY_API
+    ),
+    validate(adminCreateCategoryValidator),
     adminCategoryController.createCategory
 );
 
 adminCategoryRouter.put(
-    ADMIN_CATEGORY_ROUTES.UPDATE_CATEGORY,
+    extractPath(
+        ADMIN_CATEGORY_ROUTES.UPDATE_CATEGORY,
+        ROUTES_INDEX.ADMIN_CATEGORY_API
+    ),
+    validate(adminUpdateCategoryValidator),
     adminCategoryController.updateCategory
 );
 
 adminCategoryRouter.delete(
-    ADMIN_CATEGORY_ROUTES.DELETE_CATEGORY,
+    extractPath(
+        ADMIN_CATEGORY_ROUTES.DELETE_CATEGORY,
+        ROUTES_INDEX.ADMIN_CATEGORY_API
+    ),
+    validate(adminDeleteCategoryValidator),
     adminCategoryController.deleteCategory
 );
 

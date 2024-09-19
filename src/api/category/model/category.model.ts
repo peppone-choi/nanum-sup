@@ -1,7 +1,7 @@
-export class category implements ICategory {
+export class Category implements ICategory {
     id: string;
     title: string;
-    // post: IPost;
+    // post: IPost[];
     // author: IUSer;
 
     constructor(params: ICategory) {
