@@ -1,12 +1,19 @@
 import { NextFunction, Request, Response } from "express";
+import { CategoryService } from "../service/category.service.type";
 
 // [유저]
 // 카테고리 목록 조회 - getCategory
 
 export default class CategoryController {
+    /** 컨트롤러 DI 구조 잡아주기 */
+    private readonly _categoryService: CategoryService;
+    constructor(_categoryService: CategoryService) {
+        this._categoryService = _categoryService;
+    }
     async getCategory(req: Request, res: Response, next: NextFunction) {
         try {
-            res.send("카테고리 목록 조회 [유저]");
+            const category = await this._categoryService.getCategory();
+            res.send(category);
         } catch (error) {
             next(error);
         }

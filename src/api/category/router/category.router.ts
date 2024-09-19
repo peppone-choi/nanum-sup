@@ -1,5 +1,6 @@
 import express from "express";
 import CategoryController from "../controller/category.controller";
+import { CategoryServiceImpl } from "../service/category.service";
 
 const categoryRouter = express.Router();
 
@@ -8,7 +9,7 @@ const CATEGORY_ROUTES = {
     GET_CATEGORY: `/api/category`,
 } as const;
 
-const categoryController = new CategoryController();
+const categoryController = new CategoryController(new CategoryServiceImpl());
 
 categoryRouter.get(
     CATEGORY_ROUTES.GET_CATEGORY,

@@ -1,5 +1,6 @@
 import express from "express";
 import AdminCategoryController from "../controller/adminCategory.controller";
+import { CategoryServiceImpl } from "../service/category.service";
 
 const adminCategoryRouter = express.Router();
 
@@ -15,7 +16,9 @@ const ADMIN_CATEGORY_ROUTES = {
     DELETE_CATEGORY: `/admin-api/category/:categoryId`,
 } as const;
 
-const adminCategoryController = new AdminCategoryController();
+const adminCategoryController = new AdminCategoryController(
+    new CategoryServiceImpl()
+);
 
 adminCategoryRouter.get(
     ADMIN_CATEGORY_ROUTES.GET_CATEGORY,
