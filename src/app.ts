@@ -11,7 +11,6 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-dotenv.config();
 app.use(appRouter);
 app.use(userRouter);
 app.use(viewRouter);
