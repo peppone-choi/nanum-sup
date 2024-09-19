@@ -1,6 +1,6 @@
+import { PostRepository } from '@/api/posts/repository/post.repository';
 import HttpException from "@/common/exceptions/http.exception";
 import { PostResponseDTO } from "../dto/postResponse.dto";
-import { PostRepository } from "../repository/post.repository";
 import { PostsService } from "./posts.service.type";
 // userRepository 가져오기
 
@@ -8,6 +8,11 @@ import { PostsService } from "./posts.service.type";
 export class PostsServiceImpl implements PostsService {
   private readonly _postRepository: PostRepository;
   private readonly _userRepository: UserRepository;
+
+  constructor(PostRepository: PostRepository, UserRepository: UserRepository) {
+    this._postRepository = PostRepository;
+    this._userRepository = UserRepository;
+  }
 
   /** 게시글 생성 */
   async createPost(

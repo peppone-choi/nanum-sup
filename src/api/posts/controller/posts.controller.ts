@@ -14,42 +14,99 @@ export default class PostsController {
     this._postsService = _postsService;
   }
 
-  async getPosts (req: Request, res: Response, next: NextFunction) {
+  async getPosts (
+    req: Request<
+      getPostsRequest["path"],
+      getPostsResponse,
+      getPostsRequest["body"],
+      getPostsRequest["params"]
+    
+    >,
+     res: Response,
+     next: NextFunction
+    ) {
     try {
       const posts = await this._postsService.getPosts();
-      res.send("글목록조회")
+
+      res.send(posts)
     } catch (error) {
       next(error);
     }
   }
-  async getPostDetail (req: Request, res: Response, next: NextFunction) {
+  async getPostDetail (
+    req: Request<
+    getPostDetailRequest["path"],
+    getPostDetailResponse,
+    getPostDetailRequest["body"],
+    getPostDetailRequest["params"]
+    >,
+    res: Response,
+    next: NextFunction
+  ) {
+    const { postId } = req.params;
     try {
-      const postDetail = await this._postsService.getPostDetail();
-      res.send("글상세조회")
+      const post = await this._postsService.getPostDetail(postId);
+      res.send(post)
     } catch (error) {
       next(error);
     }
   }
-  async createPost (req: Request, res: Response, next: NextFunction) {
+  async createPost (
+    req: Request<
+    createPostRequest["path"],
+    createPostResponse,
+    createPostRequest["body"],
+    createPostRequest["params"]
+    >,
+    res: Response,
+    next: NextFunction
+  ) {
+    const { userId, ...rest } = req.body;
     try {
-      const createdPost  = await this._postsService.createPost();
-      res.send("글작성")
+      const createdPost  = await this._postsService.createPost(userId, {
+        title: rest.title,
+        content: rest.content,
+      });
+      res.send(createdPost)
     } catch (error) {
       next(error);
     }
   }
-  async updatePost (req: Request, res: Response, next: NextFunction) {
+  async updatePost(
+    req: Request<
+      updatePostRequest["path"],
+      updatePostResponse,
+      updatePostRequest["body"],
+      updatePostRequest["params"]
+    >,
+    res: Response,
+    next: NextFunction
+  ) {
+    const { postId } = req.params;
+
     try {
-      await this._postsService.updatePost();
-      res.send("글수정")
+      await this._postsService.updatePost(postId, req.body);
+
+      res.status(204).json();
     } catch (error) {
       next(error);
     }
   }
-  async deletePost (req: Request, res: Response, next: NextFunction) {
+
+  async deletePost(
+    req: Request<
+      deletePostRequest["path"],
+      deletePostResponse,
+      deletePostRequest["body"],
+      deletePostRequest["params"]
+    >,
+    res: Response,
+    next: NextFunction
+  ) {
+    const { postId } = req.params;
     try {
-      await this._postsService.deletePost();
-      res.send("글삭제")
+      await this._postsService.deletePost(postId);
+      res.status(204).json();
     } catch (error) {
       next(error);
     }
