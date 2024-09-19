@@ -3,7 +3,8 @@ import { CategoryService } from "../service/category.service.type";
 
 // [관리자]
 // 카테고리 목록 조회 - getCategory
-// 카테고리 등록 - createCategory
+// 카테고리 상세 조회 - getCategoryDetail
+// 카테고리 생성 - createCategory
 // 카테고리 수정 - updateCategory
 // 카테고리 삭제 - deleteCategory
 
@@ -16,6 +17,14 @@ export default class AdminCategoryController {
     async getCategory(req: Request, res: Response, next: NextFunction) {
         try {
             const category = await this._categoryService.getCategory();
+            res.send(category);
+        } catch (error) {
+            next(error);
+        }
+    }
+    async getCategoryDetail(req: Request, res: Response, next: NextFunction) {
+        try {
+            const category = await this._categoryService.getCategoryDetail();
             res.send(category);
         } catch (error) {
             next(error);

@@ -8,6 +8,8 @@ const adminCategoryRouter = express.Router();
 const ADMIN_CATEGORY_ROUTES = {
     /**카테고리 목록 조회 (관리자) */
     GET_CATEGORY: `/admin-api/category`,
+    /**카테고리 상세 조회 (관리자) */
+    GET_CATEGORY_DETAIL: `/admin-api/category:categoryId`,
     /**카테고리 등록 (관리자) */
     CREATE_CATEGORY: `/admin-api/category`,
     /** 카테고리 수정 (관리자) */
@@ -23,6 +25,11 @@ const adminCategoryController = new AdminCategoryController(
 adminCategoryRouter.get(
     ADMIN_CATEGORY_ROUTES.GET_CATEGORY,
     adminCategoryController.getCategory
+);
+
+adminCategoryRouter.get(
+    ADMIN_CATEGORY_ROUTES.GET_CATEGORY_DETAIL,
+    adminCategoryController.getCategoryDetail
 );
 
 adminCategoryRouter.post(

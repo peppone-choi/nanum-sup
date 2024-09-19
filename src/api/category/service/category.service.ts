@@ -8,6 +8,9 @@ export class CategoryServiceImpl implements CategoryService {
     async getCategory(): Promise<CategoryResponseDTO[]> {
         throw new Error("Method not implemented.");
     }
+    async getCategoryDetail(): Promise<CategoryResponseDTO | null> {
+        throw new Error("Method not implemented.");
+    }
     async updateCategory(): Promise<void> {
         throw new Error("Method not implemented.");
     }
