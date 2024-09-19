@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from "express";
 import HttpException from "../exceptions/http.exception";
-import { JwtService } from "../services/jwt.service";
+import { JwtService } from "../services/jwt.services";
 
 /** 인증 & 인가 미들웨어 */
-export const authCookieRoleMiddleware = (roles: RoleType[]) => {
+export const authCookieRoleMiddleware = (roles: string[]) => {
   return (req: Request, res: Response, next: NextFunction) => {
     try {
       // 헤더에서 토큰을 가져옵니다.

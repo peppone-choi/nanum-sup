@@ -24,6 +24,7 @@
     "typescript": "^5.5.4"
   },
   "dependencies": {
+    "@types/mongoose": "^5.11.96",
     "cookie-parser": "^1.4.6",
     "cross-env": "^7.0.3",
     "dotenv": "^16.4.5",
@@ -32,6 +33,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.6.3",
     "morgan": "^1.10.0",
+    "nanoid": "^5.0.7",
     "yup": "^1.4.0"
   }
 }
