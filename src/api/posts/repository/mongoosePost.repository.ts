@@ -1,7 +1,7 @@
 import HttpException from "@/api/common/exceptions/http.exception";
 import { MongoosePost } from "@/api/posts/model/post.schema";
 import { PostRepository } from "@/api/posts/repository/post.repository";
-import { IPost } from "../@types/post.type";
+// import { IPost } from "../@types/post.type";
 
 export class MongoosePostRepository implements PostRepository {
   async save(post: Omit<IPost, "id">): Promise<IPost> {

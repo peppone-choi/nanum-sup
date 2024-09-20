@@ -6,10 +6,10 @@ export class PostResponseDTO {
   //   id: string;
   //   userName: string;
   // };
-  // category: {
-  //   id: string;
-  // };
-  // comments: string[];
+  category: {
+    id: string;
+  };
+  comments: string[];
 
   constructor(params: IPost) {
     this.postId = params.id;
@@ -19,9 +19,9 @@ export class PostResponseDTO {
     //   id: params.author.id,
     //   userName: params.author.profile.firstName,
     // };
-    // this.category = {
-    //   id: params.category.id,
-    // };
-    // this.comments = params.comments;
+    this.category = {
+      id: params.category.id,
+    };
+    this.comments = params.comments;
   }
 }
