@@ -20,18 +20,19 @@ export const adminGetCategoryDetailValidator = {
 const adminCreateCategoryBodyValidator = yup.object({
     title: yup
         .string()
-        .required("카테고리명은 필수 입력값입니다.")
-        .max(500, "카테고리명은 15자 이내로 입력해주세요."),
+        .matches(REGEX.EMPTY_VARIABLE_PATH, "categoryId 필수 입력값입니다."),
 });
 
 /** 카테고리 생성 */
 export const adminCreateCategoryValidator = {
-    body: adminGetCategoryValidator,
+    body: adminCreateCategoryBodyValidator,
 };
 
 const adminUpdateCategoryBodyValidator = yup.object({
-    title: yup.string().max(15, "카테고리명은 15자 이내로 입력해주세요."),
-    content: yup.string(),
+    title: yup
+        .string()
+        .max(15, "카테고리명은 15자 이내로 입력해주세요.")
+        .required("카테고리명을 입력해주세요"),
 });
 
 const adminUpdateCategoryPathValidator = yup.object({
