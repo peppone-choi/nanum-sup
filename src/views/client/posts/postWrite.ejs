@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>게시글 작성</title>
-  <link rel="stylesheet" href="/static/styles/common.css">
+  <link rel="stylesheet" href="/static/styles/pages/posts/postWrite.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   
 <!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -13,8 +13,12 @@
 </head>
 <body>
   <div id="wrap">
-    <h1>게시글 작성</h1>
+    
     <form id="postWriteForm">
+      <label for="category">
+        <span>카테고리 선택</span>
+        <input type="select" name="category" id="category" />
+      </label>
       <label for="title">
         <span>제목</span>
         <input type="text" name="title" id="title" />
