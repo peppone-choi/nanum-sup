@@ -3,9 +3,69 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>게시글 작성</title>
+  <link rel="stylesheet" href="/static/styles/common.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+
 </head>
 <body>
-  클라이언트 페이지 게시글 작성
+  <div id="wrap">
+    <h1>게시글 작성</h1>
+    <form id="postWriteForm">
+      <label for="title">
+        <span>제목</span>
+        <input type="text" name="title" id="title" />
+      </label>
+      <div id="summernote"></div>
+      <button type="submit">작성</button>
+    </form>
+    
+    <script>
+      const $form = document.getElementById("postWriteForm");
+
+      $form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        try {
+          const title = $form.title.value;
+          const content = $("#summernote").summernote("code");
+
+          console.log({
+            title,
+            content,
+          });
+
+          const cookies = document.cookie.split(";").reduce((acc, cookie) => {
+            const [key, value] = cookie.split("=");
+            acc[key.trim()] = decodeURIComponent(value);
+            return acc;
+          }, {});
+
+          const token = `${cookies.accessToken}`;
+
+          const res = await fetch("/api/posts", {
+            method: "post",
+            headers: {
+              "Content-Type": "application/json",
+              authorization: token,
+            },
+            body: JSON.stringify({ title, content }),
+          });
+
+          const data = await res.json();
+
+          if (!res.ok) {
+            throw new Error(data.details);
+          }
+
+          location.href = `/posts/${data.postId}`;
+        } catch (error) {
+          alert("게시글 작성에 실패했습니다.", error.message);
+        }
+      });
+    </script>
+  </div>
 </body>
 </html>
