@@ -1,6 +1,20 @@
 import express from "express";
 import AdminPostsController from "@/api/posts/controller/adminPosts.controller";
-import { PostsServiceImpl } from "../service/posts.service";
+import { PostsServiceImpl } from "@/api/posts/service/posts.service";
+import { validate } from "@/api/common/middlewares/validation.middleware";
+import { 
+  adminCreatePostValidator, 
+  adminDeletePostValidator, 
+  adminGetPostDetailValidator, 
+  adminGetPostsValidator, 
+  adminUpdatePostValidator 
+} from "@/api/posts/dto/validations/adminPost.validation";
+import { MongoosePostRepository } from "@/api/posts/repository/mongoosePost.repository";
+import { MongooseCategoryRepository } from "@/api/category/repository/mongooseCategory.repository";
+import { extractPath } from "@/utils/path.util";
+import { ROUTES_INDEX } from "@/routers";
+import { authUserMiddleware } from "@/api/common/middlewares/authUser.middleware";
+
 
 const adminPostRouter = express.Router();
 
@@ -20,29 +34,42 @@ const ADMIN_POST_ROUTES = {
 
 
 const adminPostsController = new AdminPostsController(
-  new PostsServiceImpl()
+  new PostsServiceImpl(
+    new MongoosePostRepository(),
+    new MongooseUserRepository(),
+    new MongooseCategoryRepository(),
+    new MongooseCommentRepository(),
+  )
 );
 
 
 
 adminPostRouter.get(
-  ADMIN_POST_ROUTES.GET_POSTS,
+  extractPath(ADMIN_POST_ROUTES.GET_POSTS, ROUTES_INDEX.ADMIN_POSTS_API),
+  validate(adminGetPostsValidator),
   adminPostsController.getPosts
 );
 adminPostRouter.get(
-  ADMIN_POST_ROUTES.GET_POST_DETAIL,
+  extractPath(ADMIN_POST_ROUTES.GET_POST_DETAIL, ROUTES_INDEX.ADMIN_POSTS_API),
+  validate(adminGetPostDetailValidator),
+  authUserMiddleware,
   adminPostsController.getPostDetail
 );
 adminPostRouter.post(
-  ADMIN_POST_ROUTES.CREATE_POST,
+  extractPath(ADMIN_POST_ROUTES.CREATE_POST, ROUTES_INDEX.ADMIN_POSTS_API),
+  validate(adminCreatePostValidator),
+  authUserMiddleware,
   adminPostsController.createPost
 );
 adminPostRouter.put(
-  ADMIN_POST_ROUTES.UPDATE_POST,
+  extractPath(ADMIN_POST_ROUTES.UPDATE_POST, ROUTES_INDEX.ADMIN_POSTS_API),
+  validate(adminUpdatePostValidator),
   adminPostsController.updatePost
 );
 adminPostRouter.delete(
-  ADMIN_POST_ROUTES.DELETE_POST,
+  extractPath(ADMIN_POST_ROUTES.DELETE_POST, ROUTES_INDEX.ADMIN_POSTS_API),
+  validate(adminDeletePostValidator),
   adminPostsController.deletePost
 );
 
+export default adminPostRouter;
