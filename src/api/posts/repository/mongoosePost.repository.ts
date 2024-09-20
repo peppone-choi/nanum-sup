@@ -1,6 +1,7 @@
 import HttpException from "@/api/common/exceptions/http.exception";
 import { MongoosePost } from "@/api/posts/model/post.schema";
 import { PostRepository } from "@/api/posts/repository/post.repository";
+import { IPost } from "../@types/post.type";
 
 export class MongoosePostRepository implements PostRepository {
   async save(post: Omit<IPost, "id">): Promise<IPost> {
@@ -17,12 +18,9 @@ export class MongoosePostRepository implements PostRepository {
     return post;
   }
   async update(postId: string, updatePostInfo: Partial<IPost>): Promise<IPost> {
-    const results = await MongoosePost.findByIdAndUpdate(
-      postId,
-      updatePostInfo
-    );
+    const results = await MongoosePost.findByIdAndUpdate(postId, updatePostInfo);
 
-    if(!results) {
+    if (!results) {
       throw new HttpException(404, "게시글을 찾을 수 없습니다.");
     }
     return results;
@@ -31,5 +29,4 @@ export class MongoosePostRepository implements PostRepository {
     await MongoosePost.deleteOne({ _id: postId });
     return;
   }
-  
 }
