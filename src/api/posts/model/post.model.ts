@@ -9,8 +9,8 @@ export class Post implements IPost {
   // author: IUser;
   author: string;
   /** 카테고리 */
-  // category: ICategory;
-  category: string;
+  category: ICategory;
+  // category: string;
   /** 댓글 리스트 */
   // comments: IComment[];
   comments: string[];

@@ -6,7 +6,7 @@ export class PostResponseDTO {
     id: string;
     userName: string;
   };
-  category: string;
+  category: ICategory;
   comments: string[];
 
   constructor(params: IPost) {

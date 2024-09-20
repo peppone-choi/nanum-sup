@@ -12,6 +12,12 @@ export default class AdminPostsController {
   private readonly _postsService: PostsService;
   constructor(_postsService: PostsService) {
     this._postsService = _postsService;
+
+    this.getPosts = this.getPosts.bind(this);
+    this.getPostDetail = this.getPostDetail.bind(this);
+    this.createPost = this.createPost.bind(this);
+    this.updatePost = this.updatePost.bind(this);
+    this.deletePost = this.deletePost.bind(this);
   } 
    /** [관리자] 글 목록 조회 */
    async getPosts (
@@ -70,9 +76,12 @@ export default class AdminPostsController {
     const createdPost = await this._postsService.createPost(userId, {
       title: rest.title,
       content: rest.content,
-    })
+    });
+    res.send(createdPost);
+  } catch (error) {
+    next(error);
   }
-   res.send(createdPost);
+   
  }
 
   /** [관리자] 글 수정 */

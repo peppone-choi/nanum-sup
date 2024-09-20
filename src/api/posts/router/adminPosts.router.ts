@@ -1,6 +1,9 @@
 import express from "express";
 import AdminPostsController from "@/api/posts/controller/adminPosts.controller";
 import { PostsServiceImpl } from "../service/posts.service";
+import { MemoryPostRepository } from "../repository/memoryPost.repository";
+import { validate } from "@/api/common/middlewares/validation.middleware";
+import { adminCreatePostValidator, adminDeletePostValidator, adminGetPostDetailValidator, adminGetPostsValidator, adminUpdatePostValidator } from "../dto/validations/adminPost.validation";
 
 const adminPostRouter = express.Router();
 
@@ -20,29 +23,34 @@ const ADMIN_POST_ROUTES = {
 
 
 const adminPostsController = new AdminPostsController(
-  new PostsServiceImpl()
+  new PostsServiceImpl(new MemoryPostRepository(), new MemoryUserRepository())
 );
 
 
 
 adminPostRouter.get(
   ADMIN_POST_ROUTES.GET_POSTS,
+  validate(adminGetPostsValidator),
   adminPostsController.getPosts
 );
 adminPostRouter.get(
   ADMIN_POST_ROUTES.GET_POST_DETAIL,
+  validate(adminGetPostDetailValidator),
   adminPostsController.getPostDetail
 );
 adminPostRouter.post(
   ADMIN_POST_ROUTES.CREATE_POST,
+  validate(adminCreatePostValidator),
   adminPostsController.createPost
 );
 adminPostRouter.put(
   ADMIN_POST_ROUTES.UPDATE_POST,
+  validate(adminUpdatePostValidator),
   adminPostsController.updatePost
 );
 adminPostRouter.delete(
   ADMIN_POST_ROUTES.DELETE_POST,
+  validate(adminDeletePostValidator),
   adminPostsController.deletePost
 );
 

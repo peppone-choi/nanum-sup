@@ -12,6 +12,12 @@ export default class PostsController {
   private readonly _postsService: PostsService;
   constructor(_postsService: PostsService) {
     this._postsService = _postsService;
+
+    this.getPosts = this.getPosts.bind(this);
+    this.getPostDetail = this.getPostDetail.bind(this);
+    this.createPost = this.createPost.bind(this);
+    this.updatePost = this.updatePost.bind(this);
+    this.deletePost = this.deletePost.bind(this);
   }
 
   async getPosts (
