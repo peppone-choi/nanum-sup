@@ -13,6 +13,8 @@ import categoryRouter from "./api/category/router/category.router";
 import { ROUTES_INDEX } from "./routers";
 import postRouter from "./api/posts/router/posts.router";
 import adminPostRouter from "./api/posts/router/adminPosts.router";
+import adminCategoryViewRouter from "./api/category/router/adminCategory.view.router";
+import categoryViewRouter from "./api/category/router/category.view.router";
 
 const app = express();
 app.use(express.json());
@@ -28,8 +30,8 @@ app.use(adminCategoryRouter);
 /** -------- category ---------  */
 app.use(ROUTES_INDEX.CATEGORY_API, categoryRouter);
 app.use(ROUTES_INDEX.ADMIN_CATEGORY_API, adminCategoryRouter);
-// app.use(ROUTES_INDEX.ADMIN_CATEGORY_VIEW, adminCategoryViewRouter);
-// app.use(ROUTES_INDEX.CATEGORY_VIEW, categoryViewRouter);
+app.use(ROUTES_INDEX.ADMIN_CATEGORY_VIEW, adminCategoryViewRouter);
+app.use(ROUTES_INDEX.CATEGORY_VIEW, categoryViewRouter);
 
 
 /** -------- posts ---------  */
