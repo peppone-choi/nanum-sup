@@ -96,11 +96,6 @@ body {
     margin-top: 100px;
 }
 
-.admin-setup i {
-    color: black;
-    font-size: 16px;
-}
-
 .logout {
     display: flex;
     justify-content: end;
