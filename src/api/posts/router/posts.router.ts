@@ -36,9 +36,9 @@ const POST_ROUTES = {
 const postsController = new PostsController(
   new PostsServiceImpl(
     new MongoosePostRepository(),
-    new MongooseUserRepository(),
-    new MongooseCategoryRepository(),
-    new MongooseCommentRepository(),
+    // new MongooseUserRepository(),
+    // new MongooseCategoryRepository(),
+    // new MongooseCommentRepository(),
   )
 );
 

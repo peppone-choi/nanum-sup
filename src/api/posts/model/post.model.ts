@@ -8,6 +8,7 @@ export class Post implements IPost {
   title: string;
   /** 게시글 내용 */
   content: string;
+
   /** 작성자 */
   // author: IUser;
   author: string;
@@ -20,8 +21,8 @@ export class Post implements IPost {
     this.id = params.id;
     this.title = params.title;
     this.content = params.content;
-    this.author = params.author;
-    this.category = params.category;
-    this.comments = params.comments;
+    // this.author = params.author;
+    // this.category = params.category;
+    // this.comments = params.comments;
   }
 }

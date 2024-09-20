@@ -41,7 +41,8 @@ export default class PostsController {
   async createPost(req: Request<createPostRequest["path"], createPostResponse, createPostRequest["body"], createPostRequest["params"]>, res: Response, next: NextFunction) {
     const { ...rest } = req.body;
     try {
-      const createdPost = await this._postsService.createPost(req.user.userId, rest.categoryId, {
+      const createdPost  = await this._postsService.createPost({
+
         title: rest.title,
         content: rest.content,
       });

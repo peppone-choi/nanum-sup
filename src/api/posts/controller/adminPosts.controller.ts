@@ -44,18 +44,27 @@ export default class AdminPostsController {
     }
   }
 
-  /** [관리자] 글 생성 */
-  async createPost(req: Request<adminCreatePostRequest["path"], adminCreatePostResponse, adminCreatePostRequest["body"], adminCreatePostRequest["params"]>, res: Response, next: NextFunction) {
-    const { ...rest } = req.body;
-    try {
-      const createdPost = await this._postsService.createPost(req.user.userId, req.body.category, {
-        title: rest.title,
-        content: rest.content,
-      });
-      res.send(createdPost);
-    } catch (error) {
-      next(error);
-    }
+ /** [관리자] 글 생성 */
+ async createPost (
+   req: Request<
+   adminCreatePostRequest["path"],
+   adminCreatePostResponse,
+   adminCreatePostRequest["body"],
+   adminCreatePostRequest["params"]
+ >,
+ res: Response,
+ next: NextFunction
+ ) {
+  const { ...rest } = req.body;
+  try {
+    const createdPost = await this._postsService.createPost({
+      title: rest.title,
+      content: rest.content,
+    });
+    res.send(createdPost);
+  } catch (error) {
+    next(error);
+
   }
 
   /** [관리자] 글 수정 */
