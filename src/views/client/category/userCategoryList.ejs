@@ -9,7 +9,7 @@
         />
         <link
             rel="stylesheet"
-            href="/static/styles/pages/category/categoryList.css"
+            href="/static/styles/pages/category/userCategoryList.css"
         />
         <link rel="stylesheet" href="/static/styles/reset.css" />
         <title>Document</title>
@@ -30,23 +30,20 @@
             <section>
                 <% category.forEach(function(category) { %>
                 <div class="category-list">
-                    <a href="/admin/category/<%= category.categoryId %>/posts">
+                    <a
+                        href="/client/category/<%= category.categoryId %>/posts>"
+                    >
                         <p><%= category.title %></p>
                     </a>
                 </div>
                 <% }) %>
             </section>
-            <section class="category-bottom">
-                <a href="/admin/category/write" class="admin-setup">
-                    <i class="fa-solid fa-pen"></i>
+            <div class="logout">
+                <a href="">
+                    <p>로그아웃</p>
+                    <i class="fa-solid fa-right-from-bracket"></i>
                 </a>
-                <div class="logout">
-                    <a href="">
-                        <p>로그아웃</p>
-                        <i class="fa-solid fa-right-from-bracket"></i>
-                    </a>
-                </div>
-            </section>
+            </div>
         </div>
 
         <!-- 로그아웃 창 -->

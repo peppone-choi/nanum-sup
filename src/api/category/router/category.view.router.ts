@@ -20,7 +20,7 @@ const categoryViewController = new CategoryViewController(
 
 categoryViewRouter.get(
     extractPath(CATEGORY_VIEW_ROUTES.CATEGORY_LIST, ROUTES_INDEX.CATEGORY_VIEW),
-    categoryViewController.categoryListPage
+    categoryViewController.userCategoryListPage
 );
 
 categoryViewRouter.get(
@@ -28,7 +28,7 @@ categoryViewRouter.get(
         CATEGORY_VIEW_ROUTES.CATEGORY_DETAIL,
         ROUTES_INDEX.CATEGORY_VIEW
     ),
-    categoryViewController.categoryDetailPage
+    categoryViewController.userCategoryListPage
 );
 
 export default categoryViewRouter;
