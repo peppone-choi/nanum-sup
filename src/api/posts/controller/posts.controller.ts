@@ -69,7 +69,7 @@ export default class PostsController {
   ) {
     const { ...rest } = req.body;
     try {
-      const createdPost  = await this._postsService.createPost(req.user.userId  {
+      const createdPost  = await this._postsService.createPost({
         title: rest.title,
         content: rest.content,
       });

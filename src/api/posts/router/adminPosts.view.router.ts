@@ -10,7 +10,7 @@ const ADMIN_POST_VIEW_ROUTES = {
     /** 게시글 목록 */
     POST_LIST: "/admin/posts",
     /** 게시글 상세 | 수정 */
-    POST_DETAIL: "/posts/:postId",
+    POST_DETAIL: "/admin/posts/:postId",
 } as const;
 
 

@@ -14,30 +14,30 @@ const postSchema = new mongoose.Schema<IPost>({
     trim: true,
     maxLength: 200,
   },
-  author: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-    required: true,
-  },
-  category: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Category",
-    required: true,
-  },
-  comments: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Comment",
-    }
-  ],
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-  updatedAt: {
-    type: Date,
-    default: Date.now,
-  },
+  // author: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: "User",
+  //   required: true,
+  // },
+  // category: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: "Category",
+  //   required: true,
+  // },
+  // comments: [
+  //   {
+  //     type: mongoose.Schema.Types.ObjectId,
+  //     ref: "Comment",
+  //   }
+  // ],
+  // createdAt: {
+  //   type: Date,
+  //   default: Date.now,
+  // },
+  // updatedAt: {
+  //   type: Date,
+  //   default: Date.now,
+  // },
 });
 
 
