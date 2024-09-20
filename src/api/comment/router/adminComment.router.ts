@@ -3,7 +3,7 @@ import AdminCommentController from "@/api/comment/controller/adminComment.contro
 import CommentServiceImpl from "@/api/comment/service/comment.service";
 import { MemoryCommentRepository } from "@/api/comment/repository/memoryComment.repository";
 import { adminCreateCommentValidator, adminDeleteCommentValidator, adminEditCommentValidator, adminGetCommentValidator } from "@/api/comment/dto/validation/adminComment.validation";
-import { validate } from "@/api/common/middleware/validation.moddleware";
+import { validate } from "@/api/common/middlewares/validation.middleware";
 import { extractPath } from "@/utils/path.util";
 import { ROUTES_INDEX } from "@/routers";
 

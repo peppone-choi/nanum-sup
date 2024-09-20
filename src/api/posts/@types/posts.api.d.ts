@@ -37,7 +37,7 @@ declare type createPostRequestBody = {
   // /** 작성자 ID */
   // userId: string;
   // /** 카테고리 ID */
-  // categoryId: string;
+  categoryId: string;
   title: string;
   content: string;
 };
@@ -56,7 +56,7 @@ declare type createPostRequest = {
 /** 게시글 생성 응답 */
 declare type createPostResponse = IPostResponseDTO;
 
-declare type updatePostRequestBody = Omit<IPost, "id" | "user">;
+declare type updatePostRequestBody = Pick<IPost, "title", "content", "category">;
 
 declare type updatePostRequestPath = {
   /** 게시글 ID */
