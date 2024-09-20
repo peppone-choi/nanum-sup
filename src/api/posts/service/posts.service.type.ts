@@ -3,7 +3,7 @@ import { PostResponseDTO } from "@/api/posts/dto/postResponse.dto"
 export interface PostsService {
   /** 게시글 생성 */
   createPost(
-    userId: string,
+    // userId: string,
     // categoryId: string,
     post: Omit<IPost, "id" | "author">
   ): Promise<PostResponseDTO>;

@@ -36,9 +36,9 @@ const ADMIN_POST_ROUTES = {
 const adminPostsController = new AdminPostsController(
   new PostsServiceImpl(
     new MongoosePostRepository(),
-    new MongooseUserRepository(),
-    new MongooseCategoryRepository(),
-    new MongooseCommentRepository(),
+    // new MongooseUserRepository(),
+    // new MongooseCategoryRepository(),
+    // new MongooseCommentRepository(),
   )
 );
 
