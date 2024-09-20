@@ -4,6 +4,7 @@ import { CategoryServiceImpl } from "@/api/category/service/category.service";
 import { MemoryCategoryRepository } from "@/api/category/repository/memoryCategory.repository";
 import { extractPath } from "@/utils/path.util";
 import { ROUTES_INDEX } from "@/routers";
+import { authUserMiddleware } from "@/api/common/middlewares/authUser.middleware";
 
 const categoryRouter = express.Router();
 
@@ -20,11 +21,13 @@ const categoryController = new CategoryController(
 
 categoryRouter.get(
     extractPath(CATEGORY_ROUTES.GET_CATEGORY, ROUTES_INDEX.CATEGORY_API),
+    authUserMiddleware,
     categoryController.getCategory
 );
 
 categoryRouter.get(
     extractPath(CATEGORY_ROUTES.GET_CATEGORY_DETAIL, ROUTES_INDEX.CATEGORY_API),
+    authUserMiddleware,
     categoryController.getCategoryDetail
 );
 

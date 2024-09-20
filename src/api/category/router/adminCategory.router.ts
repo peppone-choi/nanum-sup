@@ -12,6 +12,7 @@ import {
 import { validate } from "@/api/common/middleware/validation.moddleware";
 import { extractPath } from "@/utils/path.util";
 import { ROUTES_INDEX } from "@/routers";
+import { authUserMiddleware } from "@/api/common/middlewares/authUser.middleware";
 
 const adminCategoryRouter = express.Router();
 
@@ -38,6 +39,7 @@ adminCategoryRouter.get(
         ADMIN_CATEGORY_ROUTES.GET_CATEGORY,
         ROUTES_INDEX.ADMIN_CATEGORY_API
     ),
+    // authUserMiddleware,
     validate(adminGetCategoryValidator),
     adminCategoryController.getCategory
 );
@@ -47,6 +49,7 @@ adminCategoryRouter.get(
         ADMIN_CATEGORY_ROUTES.GET_CATEGORY_DETAIL,
         ROUTES_INDEX.ADMIN_CATEGORY_API
     ),
+    // authUserMiddleware,
     validate(adminGetCategoryDetailValidator),
     adminCategoryController.getCategoryDetail
 );
@@ -56,6 +59,7 @@ adminCategoryRouter.post(
         ADMIN_CATEGORY_ROUTES.CREATE_CATEGORY,
         ROUTES_INDEX.ADMIN_CATEGORY_API
     ),
+    // authUserMiddleware,
     validate(adminCreateCategoryValidator),
     adminCategoryController.createCategory
 );
@@ -65,6 +69,7 @@ adminCategoryRouter.put(
         ADMIN_CATEGORY_ROUTES.UPDATE_CATEGORY,
         ROUTES_INDEX.ADMIN_CATEGORY_API
     ),
+    // authUserMiddleware,
     validate(adminUpdateCategoryValidator),
     adminCategoryController.updateCategory
 );
@@ -74,6 +79,7 @@ adminCategoryRouter.delete(
         ADMIN_CATEGORY_ROUTES.DELETE_CATEGORY,
         ROUTES_INDEX.ADMIN_CATEGORY_API
     ),
+    // authUserMiddleware,
     validate(adminDeleteCategoryValidator),
     adminCategoryController.deleteCategory
 );
