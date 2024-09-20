@@ -1,3 +1,6 @@
+import IComment from "@/api/comment/@types/comment.type";
+import { IPost } from "../@types/post.type";
+
 export class Post implements IPost {
   /** 게시글 ID */
   id: string;
@@ -10,10 +13,8 @@ export class Post implements IPost {
   author: string;
   /** 카테고리 */
   category: ICategory;
-  // category: string;
   /** 댓글 리스트 */
-  // comments: IComment[];
-  comments: string[];
+  comments: IComment[];
 
   constructor(params: IPost) {
     this.id = params.id;
