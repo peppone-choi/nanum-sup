@@ -23,9 +23,9 @@ export class PostsServiceImpl implements PostsService {
   }
 
   /** 게시글 생성 */
-  async createPost(userId: string, categoryId: string, post: Pick<IPost, "title" | "content" | "category">): Promise<PostResponseDTO> {
+  async createPost(userId: string, categoryId: string, post: Pick<IPost, "title" | "content">): Promise<PostResponseDTO> {
     const author = await this._userRepository.findById(userId);
-    const category = await this._categoryRepository.findById(post.category.id);
+    const category = await this._categoryRepository.findById(categoryId);
 
     if (!author) {
       throw new HttpException(404, "작성자를 찾을 수 없습니다.");
