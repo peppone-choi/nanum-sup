@@ -11,7 +11,9 @@ import {
 } from "@/api/posts/dto/validations/adminPost.validation";
 import { MongoosePostRepository } from "@/api/posts/repository/mongoosePost.repository";
 import { MongooseCategoryRepository } from "@/api/category/repository/mongooseCategory.repository";
-
+import { extractPath } from "@/utils/path.util";
+import { ROUTES_INDEX } from "@/routers";
+import { authUserMiddleware } from "@/api/common/middlewares/authUser.middleware";
 
 
 const adminPostRouter = express.Router();
@@ -43,27 +45,27 @@ const adminPostsController = new AdminPostsController(
 
 
 adminPostRouter.get(
-  ADMIN_POST_ROUTES.GET_POSTS,
+  extractPath(ADMIN_POST_ROUTES.GET_POSTS, ROUTES_INDEX.ADMIN_POSTS_API),
   validate(adminGetPostsValidator),
   adminPostsController.getPosts
 );
 adminPostRouter.get(
-  ADMIN_POST_ROUTES.GET_POST_DETAIL,
+  extractPath(ADMIN_POST_ROUTES.GET_POST_DETAIL, ROUTES_INDEX.ADMIN_POSTS_API),
   validate(adminGetPostDetailValidator),
   adminPostsController.getPostDetail
 );
 adminPostRouter.post(
-  ADMIN_POST_ROUTES.CREATE_POST,
+  extractPath(ADMIN_POST_ROUTES.CREATE_POST, ROUTES_INDEX.ADMIN_POSTS_API),
   validate(adminCreatePostValidator),
   adminPostsController.createPost
 );
 adminPostRouter.put(
-  ADMIN_POST_ROUTES.UPDATE_POST,
+  extractPath(ADMIN_POST_ROUTES.UPDATE_POST, ROUTES_INDEX.ADMIN_POSTS_API),
   validate(adminUpdatePostValidator),
   adminPostsController.updatePost
 );
 adminPostRouter.delete(
-  ADMIN_POST_ROUTES.DELETE_POST,
+  extractPath(ADMIN_POST_ROUTES.DELETE_POST, ROUTES_INDEX.ADMIN_POSTS_API),
   validate(adminDeletePostValidator),
   adminPostsController.deletePost
 );
