@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import HttpException from "../exceptions/http.exception";
-import { JwtService } from "../services/jwt.service";
+import { JwtService } from "../services/jwt.services";
 
 /** 쿠키속 토큰으로 인증하는 인증 미들웨어 */
 export const authCookieViewMiddleware = (authRedirect: boolean = true) => {

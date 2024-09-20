@@ -5,10 +5,12 @@ import appRouter from "./routers/app.router";
 import userRouter from "./routers/users.router";
 import viewRouter from "./routers/views/view.router";
 import adminViewRouter from "./routers/views/adminView.router";
+import cookieParser from "cookie-parser";
+import errorHandler from "./api/common/middlewares/errorHandler.middleware";
 import dotenv from "dotenv";
 import adminCategoryRouter from "./api/category/router/adminCategory.router";
 import categoryRouter from "./api/category/router/category.router";
-import cookieParser from "cookie-parser";
+
 import { ROUTES_INDEX } from "./routers";
 
 const app = express();
@@ -36,6 +38,8 @@ app.set("view engine", "ejs");
 
 app.use(morgan("dev")); // 로그 찍어주는 미들웨어
 app.use("/static", express.static(path.join(__dirname, "../public"))); // 정적 파일 제공 미들웨어
+
+app.use(errorHandler);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
