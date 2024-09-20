@@ -9,8 +9,7 @@ body {
     background-color: rgba(255, 255, 255, 0.8);
     padding: 15px;
     width: 280px;
-    height: 100vh; /* 화면 높이의 80% */
-    outline: #ff8d8d;
+    height: 100vh;
     position: relative;
     overflow-y: auto;
 }
@@ -83,7 +82,7 @@ body {
 
 .category-list {
     font-weight: bold;
-    padding: 10px 0;
+    margin: 10px 0;
     color: black;
     flex: 1;
 }
