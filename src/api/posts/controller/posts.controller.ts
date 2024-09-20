@@ -20,74 +20,38 @@ export default class PostsController {
     this.deletePost = this.deletePost.bind(this);
   }
 
-  async getPosts (
-    req: Request<
-      getPostsRequest["path"],
-      getPostsResponse,
-      getPostsRequest["body"],
-      getPostsRequest["params"]
-    
-    >,
-     res: Response,
-     next: NextFunction
-    ) {
+  async getPosts(req: Request<getPostsRequest["path"], getPostsResponse, getPostsRequest["body"], getPostsRequest["params"]>, res: Response, next: NextFunction) {
     try {
       const posts = await this._postsService.getPosts();
 
-      res.send(posts)
+      res.send(posts);
     } catch (error) {
       next(error);
     }
   }
-  async getPostDetail (
-    req: Request<
-    getPostDetailRequest["path"],
-    getPostDetailResponse,
-    getPostDetailRequest["body"],
-    getPostDetailRequest["params"]
-    >,
-    res: Response,
-    next: NextFunction
-  ) {
+  async getPostDetail(req: Request<getPostDetailRequest["path"], getPostDetailResponse, getPostDetailRequest["body"], getPostDetailRequest["params"]>, res: Response, next: NextFunction) {
     const { postId } = req.params;
     try {
       const post = await this._postsService.getPostDetail(postId);
-      res.send(post)
+      res.send(post);
     } catch (error) {
       next(error);
     }
   }
-  async createPost (
-    req: Request<
-    createPostRequest["path"],
-    createPostResponse,
-    createPostRequest["body"],
-    createPostRequest["params"]
-    >,
-    res: Response,
-    next: NextFunction
-  ) {
+  async createPost(req: Request<createPostRequest["path"], createPostResponse, createPostRequest["body"], createPostRequest["params"]>, res: Response, next: NextFunction) {
     const { ...rest } = req.body;
     try {
       const createdPost  = await this._postsService.createPost({
+
         title: rest.title,
         content: rest.content,
       });
-      res.send(createdPost)
+      res.send(createdPost);
     } catch (error) {
       next(error);
     }
   }
-  async updatePost(
-    req: Request<
-      updatePostRequest["path"],
-      updatePostResponse,
-      updatePostRequest["body"],
-      updatePostRequest["params"]
-    >,
-    res: Response,
-    next: NextFunction
-  ) {
+  async updatePost(req: Request<updatePostRequest["path"], updatePostResponse, updatePostRequest["body"], updatePostRequest["params"]>, res: Response, next: NextFunction) {
     const { postId } = req.params;
 
     try {
@@ -99,16 +63,7 @@ export default class PostsController {
     }
   }
 
-  async deletePost(
-    req: Request<
-      deletePostRequest["path"],
-      deletePostResponse,
-      deletePostRequest["body"],
-      deletePostRequest["params"]
-    >,
-    res: Response,
-    next: NextFunction
-  ) {
+  async deletePost(req: Request<deletePostRequest["path"], deletePostResponse, deletePostRequest["body"], deletePostRequest["params"]>, res: Response, next: NextFunction) {
     const { postId } = req.params;
     try {
       await this._postsService.deletePost(postId);
@@ -118,5 +73,3 @@ export default class PostsController {
     }
   }
 }
-
-

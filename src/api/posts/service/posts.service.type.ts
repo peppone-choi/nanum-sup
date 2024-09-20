@@ -1,4 +1,5 @@
-import { PostResponseDTO } from "@/api/posts/dto/postResponse.dto"
+import { PostResponseDTO } from "@/api/posts/dto/postResponse.dto";
+import { IPost } from "../@types/post.type";
 
 export interface PostsService {
   /** 게시글 생성 */
@@ -12,10 +13,7 @@ export interface PostsService {
   /** 게시글 상세 조회 */
   getPostDetail(id: string): Promise<PostResponseDTO | null>;
   /** 게시글 수정 */
-  updatePost(
-    postId: string,
-    updatedPost: Omit<IPost, "id" | "author">,
-  ): Promise<void>;
+  updatePost(postId: string, updatedPost: Pick<IPost, "title" | "content" | "category">): Promise<void>;
   /** 게시글 삭제 */
   deletePost(postId: string): Promise<void>;
 }
