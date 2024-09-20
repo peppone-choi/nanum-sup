@@ -50,11 +50,11 @@ export default class AdminPostsController {
  next: NextFunction
  ) {
   try {
-    const post = await this._postsService.getPostDetail(
+    const postDetail = await this._postsService.getPostDetail(
       req.params.postId
     );
    
-    res.send(post);
+    res.send(postDetail);
   } catch (error) {
     next(error);
   }
@@ -71,11 +71,12 @@ export default class AdminPostsController {
  res: Response,
  next: NextFunction
  ) {
-  const { userId, categoryId, ...rest } = req.body;
+  const { ...rest } = req.body;
   try {
-    const createdPost = await this._postsService.createPost(userId, categoryId, {
+    const createdPost = await this._postsService.createPost(req.user.userId {
       title: rest.title,
       content: rest.content,
+    
     });
     res.send(createdPost);
   } catch (error) {

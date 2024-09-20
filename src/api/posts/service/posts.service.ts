@@ -31,23 +31,25 @@ export class PostsServiceImpl implements PostsService {
   /** 게시글 생성 */ 
   async createPost(
     userId: string,
-    categoryId: string,
+    // categoryId: string,
     post: Omit<IPost, "id" | "author">
   ): Promise<PostResponseDTO> {
     const author = await this._userRepository.findById(userId);
-    const category = await this._categoryRepository.findById(categoryId);
+    // const category = await this._categoryRepository.findById(categoryId);
 
-    if (!author || !category) {
+    if (!author) {
       throw new HttpException(404, "작성자를 찾을 수 없습니다.");
     }
 
     const newPost = await this._postRepository.save({
       ...post,
       author,
-      category
+      // category
     });
     return new PostResponseDTO(newPost);
   }
+
+
   /** 게시글 목록 조회 */
   async getPosts(): Promise<PostResponseDTO[]> {
     const posts = await this._postRepository.findAll();

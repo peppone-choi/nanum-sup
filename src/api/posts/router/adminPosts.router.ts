@@ -52,11 +52,13 @@ adminPostRouter.get(
 adminPostRouter.get(
   extractPath(ADMIN_POST_ROUTES.GET_POST_DETAIL, ROUTES_INDEX.ADMIN_POSTS_API),
   validate(adminGetPostDetailValidator),
+  authUserMiddleware,
   adminPostsController.getPostDetail
 );
 adminPostRouter.post(
   extractPath(ADMIN_POST_ROUTES.CREATE_POST, ROUTES_INDEX.ADMIN_POSTS_API),
   validate(adminCreatePostValidator),
+  authUserMiddleware,
   adminPostsController.createPost
 );
 adminPostRouter.put(

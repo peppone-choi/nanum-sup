@@ -34,10 +34,10 @@ declare type getPostDetailRequest = {
 declare type getPostDetailResponse = IPostResponseDTO | null;
 
 declare type createPostRequestBody = {
-  /** 작성자 ID */
-  userId: string;
-  /** 카테고리 ID */
-  categoryId: string;
+  // /** 작성자 ID */
+  // userId: string;
+  // /** 카테고리 ID */
+  // categoryId: string;
   title: string;
   content: string;
 };

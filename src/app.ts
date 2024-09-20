@@ -10,8 +10,9 @@ import errorHandler from "./api/common/middlewares/errorHandler.middleware";
 import dotenv from "dotenv";
 import adminCategoryRouter from "./api/category/router/adminCategory.router";
 import categoryRouter from "./api/category/router/category.router";
-
 import { ROUTES_INDEX } from "./routers";
+import postRouter from "./api/posts/router/posts.router";
+import adminPostRouter from "./api/posts/router/adminPosts.router";
 
 const app = express();
 app.use(express.json());
@@ -29,6 +30,15 @@ app.use(ROUTES_INDEX.CATEGORY_API, categoryRouter);
 app.use(ROUTES_INDEX.ADMIN_CATEGORY_API, adminCategoryRouter);
 // app.use(ROUTES_INDEX.ADMIN_CATEGORY_VIEW, adminCategoryViewRouter);
 // app.use(ROUTES_INDEX.CATEGORY_VIEW, categoryViewRouter);
+
+
+/** -------- posts ---------  */
+app.use(ROUTES_INDEX.POSTS_API, postRouter);
+app.use(ROUTES_INDEX.ADMIN_POSTS_API, adminPostRouter);
+// app.use(ROUTES_INDEX.ADMIN_POST_VIEW, adminPostViewRouter);
+// app.use(ROUTES_INDEX.POST_VIEW, postViewRouter);
+
+
 
 const PORT = process.env.PORT || 4000;
 // view 파일들 모아놓는 위치 설정

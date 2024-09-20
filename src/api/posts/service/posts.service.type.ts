@@ -4,7 +4,7 @@ export interface PostsService {
   /** 게시글 생성 */
   createPost(
     userId: string,
-    categoryId: string,
+    // categoryId: string,
     post: Omit<IPost, "id" | "author">
   ): Promise<PostResponseDTO>;
   /** 게시글 목록 조회 */

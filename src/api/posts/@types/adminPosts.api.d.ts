@@ -33,19 +33,26 @@ declare type adminGetPostDetailRequest = {
 declare type adminGetPostDetailResponse = {
   /** 게시글 ID */
   postId: string;
+  /** 제목 */
   title: string;
+  /** 내용 */
   content: string;
+  /** 작성자 */
   author: {
     id: string;
     userName: string;
   };
+  /** 카테고리 */
+  // category: {
+  //   id: string;
+  // };
 } | null;
 
 declare type adminCreatePostRequestBody = {
-  /** 작성자 ID */
-  userId: string;
-  /** 카테고리 ID */
-  categoryId: string;
+  // /** 작성자 ID */
+  // userId: string;
+  // /** 카테고리 ID */
+  // categoryId: string;
   title: string;
   content: string;
 };
