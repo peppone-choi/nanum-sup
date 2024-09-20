@@ -1,6 +1,21 @@
+// import { MongooseUserRepository } from '@/api/users/repository/user/mongooseUser.repository';
 import express from "express";
 import PostsController from "@/api/posts/controller/posts.controller";
-import { PostsServiceImpl } from "../service/posts.service";
+import { PostsServiceImpl } from "@/api/posts/service/posts.service";
+import {
+  createPostValidator,
+  deletePostValidator,
+  getPostDetailValidator,
+  getPostsValidator,
+  updatePostValidator,
+} from "@/api/posts/dto/validations/post.validation";
+import { validate } from "@/api/common/middlewares/validation.middleware";
+import { MongoosePostRepository } from "@/api/posts/repository/mongoosePost.repository";
+import { MongooseCategoryRepository } from '@/api/category/repository/mongooseCategory.repository';
+import { extractPath } from "@/utils/path.util";
+import { ROUTES_INDEX } from "@/routers";
+import { authUserMiddleware } from "@/api/common/middlewares/authUser.middleware";
+
 
 const postRouter = express.Router();
 
@@ -19,27 +34,40 @@ const POST_ROUTES = {
 } as const;
 
 const postsController = new PostsController(
-  new PostsServiceImpl()
-)
+  new PostsServiceImpl(
+    new MongoosePostRepository(),
+    new MongooseUserRepository(),
+    new MongooseCategoryRepository(),
+    new MongooseCommentRepository(),
+  )
+);
 
 postRouter.get(
-  POST_ROUTES.GET_POSTS,
+  extractPath(POST_ROUTES.GET_POSTS, ROUTES_INDEX.POSTS_API),
+  validate(getPostsValidator),
   postsController.getPosts
 );
 postRouter.get(
-  POST_ROUTES.GET_POST_DETAIL,
+  extractPath(POST_ROUTES.GET_POST_DETAIL, ROUTES_INDEX.POSTS_API),
+  validate(getPostDetailValidator),
+  authUserMiddleware,
   postsController.getPostDetail
 );
 postRouter.post(
-  POST_ROUTES.CREATE_POST,
+  extractPath(POST_ROUTES.CREATE_POST, ROUTES_INDEX.POSTS_API),
+  validate(createPostValidator),
+  authUserMiddleware,
   postsController.createPost
 );
 postRouter.put(
-  POST_ROUTES.UPDATE_POST,
+  extractPath(POST_ROUTES.UPDATE_POST, ROUTES_INDEX.POSTS_API),
+  validate(updatePostValidator),
   postsController.updatePost
 );
 postRouter.delete(
-  POST_ROUTES.DELETE_POST,
+  extractPath(POST_ROUTES.DELETE_POST, ROUTES_INDEX.POSTS_API),
+  validate(deletePostValidator),
   postsController.deletePost
 );
 
+export default postRouter;
