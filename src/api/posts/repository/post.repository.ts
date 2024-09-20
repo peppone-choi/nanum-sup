@@ -1,4 +1,4 @@
-import { IPost } from "../@types/post.type";
+// import { IPost } from "../@types/post.type";
 
 export interface PostRepository {
   /** 게시글 생성 */

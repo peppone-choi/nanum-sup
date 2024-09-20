@@ -14,6 +14,7 @@ import { MongooseCategoryRepository } from "@/api/category/repository/mongooseCa
 import { extractPath } from "@/utils/path.util";
 import { ROUTES_INDEX } from "@/routers";
 import { authUserMiddleware } from "@/api/common/middlewares/authUser.middleware";
+import { MongooseCommentRepository } from "@/api/comment/repository/mongooseComment.repository";
 
 
 const adminPostRouter = express.Router();
@@ -37,8 +38,8 @@ const adminPostsController = new AdminPostsController(
   new PostsServiceImpl(
     new MongoosePostRepository(),
     // new MongooseUserRepository(),
-    // new MongooseCategoryRepository(),
-    // new MongooseCommentRepository(),
+    new MongooseCategoryRepository(),
+    new MongooseCommentRepository(),
   )
 );
 

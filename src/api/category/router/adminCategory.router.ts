@@ -9,7 +9,8 @@ import {
     adminGetCategoryValidator,
     adminUpdateCategoryValidator,
 } from "@/api/category/dto/validation/adminCategory.validation";
-import { validate } from "@/api/common/middleware/validation.moddleware";
+// import { validate } from "@/api/common/middleware/validation.moddleware";
+import { validate } from "@/api/common/middlewares/validation.middleware";
 import { extractPath } from "@/utils/path.util";
 import { ROUTES_INDEX } from "@/routers";
 import { authUserMiddleware } from "@/api/common/middlewares/authUser.middleware";

@@ -43,18 +43,24 @@ declare type adminGetPostDetailResponse = {
     userName: string;
   };
   /** 카테고리 */
-  // category: {
-  //   id: string;
-  // };
+  category: {
+    id: string;
+  };
 } | null;
 
 declare type adminCreatePostRequestBody = {
   title: string;
   content: string;
-  category: string;
+  categoryId: string;
+
 };
 
-declare type adminCreatePostRequestPath = {};
+declare type adminCreatePostRequestPath = {
+  // /** 작성자 ID */
+  // userId: string;
+  // /** 카테고리 ID */
+  // categoryId: string;
+};
 
 declare type adminCreatePostRequestParams = {};
 
@@ -68,7 +74,7 @@ declare type adminCreatePostRequest = {
 /** [관리자] 게시글 생성 응답 */
 declare type adminCreatePostResponse = IPostResponseDTO;
 
-declare type adminUpdatePostRequestBody = Pick<IPost, "id" | "title" | "content" | "category">;
+declare type adminUpdatePostRequestBody = Pick<IPost, "title" | "content" | "category">;
 
 declare type adminUpdatePostRequestPath = {
   /** 게시글 ID */
