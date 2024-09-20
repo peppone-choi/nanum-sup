@@ -1,33 +1,50 @@
+// import { Category } from '@/api/category/model/category.model';
+import { CategoryRepository } from '@/api/category/repository/category.repository';
 import { PostRepository } from '@/api/posts/repository/post.repository';
-import HttpException from "@/common/exceptions/http.exception";
-import { PostResponseDTO } from "../dto/postResponse.dto";
-import { PostsService } from "./posts.service.type";
+import HttpException from "@/api/common/exceptions/http.exception";
+import { PostResponseDTO } from "@/api/posts/dto/postResponse.dto";
+import { PostsService } from "@/api/posts/service/posts.service.type";
 // userRepository 가져오기
+// commentRepository 가져오기
 
 
 export class PostsServiceImpl implements PostsService {
   private readonly _postRepository: PostRepository;
   private readonly _userRepository: UserRepository;
+  private readonly _categoryRepository: CategoryRepository;
+  private readonly _commentRepository: CommentRepository;
 
-  constructor(PostRepository: PostRepository, UserRepository: UserRepository) {
+
+  constructor(
+    PostRepository: PostRepository, 
+    UserRepository: UserRepository,
+    CategoryRepository: CategoryRepository,
+    CommentRepository: CommentRepository
+  ) {
+
     this._postRepository = PostRepository;
     this._userRepository = UserRepository;
+    this._categoryRepository = CategoryRepository;
+    this._commentRepository = CommentRepository;
   }
 
-  /** 게시글 생성 */
+  /** 게시글 생성 */ 
   async createPost(
     userId: string,
+    categoryId: string,
     post: Omit<IPost, "id" | "author">
   ): Promise<PostResponseDTO> {
     const author = await this._userRepository.findById(userId);
+    const category = await this._categoryRepository.findById(categoryId);
 
-    if (!author) {
+    if (!author || !category) {
       throw new HttpException(404, "작성자를 찾을 수 없습니다.");
     }
 
     const newPost = await this._postRepository.save({
       ...post,
-      author, 
+      author,
+      category
     });
     return new PostResponseDTO(newPost);
   }
@@ -48,7 +65,8 @@ export class PostsServiceImpl implements PostsService {
   /** 게시글 수정 */
   async updatePost(
     postId: string,
-    updatedPost: Omit<IPost, "id" | "author">
+    updatedPost: Omit<IPost, "id" | "author">,
+
   ): Promise<void> {
     await this._postRepository.update(postId, updatedPost);
     return;

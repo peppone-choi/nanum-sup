@@ -6,7 +6,9 @@ export class PostResponseDTO {
     id: string;
     userName: string;
   };
-  category: ICategory;
+  category: {
+    id: string;
+  };
   comments: string[];
 
   constructor(params: IPost) {
@@ -17,7 +19,9 @@ export class PostResponseDTO {
       id: params.author.id,
       userName: params.author.profile.firstName,
     };
-    this.category = params.category;
+    this.category = {
+      id: params.category.id,
+    };
     this.comments = params.comments;
   }
 }

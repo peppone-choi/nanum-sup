@@ -1,6 +1,6 @@
 import { Post } from "@/api/posts/model/post.model";
 import { PostRepository } from "@/api/posts/repository/post.repository";
-import HttpException from "@/common/exceptions/http.exception";
+import HttpException from "@/api/common/exceptions/http.exception";
 
 export class MemoryPostRepository implements PostRepository {
   static index = 0;

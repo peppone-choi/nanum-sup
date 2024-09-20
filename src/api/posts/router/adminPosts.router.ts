@@ -1,9 +1,18 @@
 import express from "express";
 import AdminPostsController from "@/api/posts/controller/adminPosts.controller";
-import { PostsServiceImpl } from "../service/posts.service";
-import { MemoryPostRepository } from "../repository/memoryPost.repository";
+import { PostsServiceImpl } from "@/api/posts/service/posts.service";
 import { validate } from "@/api/common/middlewares/validation.middleware";
-import { adminCreatePostValidator, adminDeletePostValidator, adminGetPostDetailValidator, adminGetPostsValidator, adminUpdatePostValidator } from "../dto/validations/adminPost.validation";
+import { 
+  adminCreatePostValidator, 
+  adminDeletePostValidator, 
+  adminGetPostDetailValidator, 
+  adminGetPostsValidator, 
+  adminUpdatePostValidator 
+} from "@/api/posts/dto/validations/adminPost.validation";
+import { MongoosePostRepository } from "@/api/posts/repository/mongoosePost.repository";
+import { MongooseCategoryRepository } from "@/api/category/repository/mongooseCategory.repository";
+
+
 
 const adminPostRouter = express.Router();
 
@@ -23,7 +32,12 @@ const ADMIN_POST_ROUTES = {
 
 
 const adminPostsController = new AdminPostsController(
-  new PostsServiceImpl(new MemoryPostRepository(), new MemoryUserRepository())
+  new PostsServiceImpl(
+    new MongoosePostRepository(),
+    new MongooseUserRepository(),
+    new MongooseCategoryRepository(),
+    new MongooseCommentRepository(),
+  )
 );
 
 
@@ -54,3 +68,4 @@ adminPostRouter.delete(
   adminPostsController.deletePost
 );
 
+export default adminPostRouter;

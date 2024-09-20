@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { PostsService } from "../service/posts.service.type";
+import { PostsService } from "@/api/posts/service/posts.service.type";
 
 // [관리자]
 // 글 목록 조회 - getPosts
@@ -71,9 +71,9 @@ export default class AdminPostsController {
  res: Response,
  next: NextFunction
  ) {
-  const { userId, ...rest } = req.body;
+  const { userId, categoryId, ...rest } = req.body;
   try {
-    const createdPost = await this._postsService.createPost(userId, {
+    const createdPost = await this._postsService.createPost(userId, categoryId, {
       title: rest.title,
       content: rest.content,
     });

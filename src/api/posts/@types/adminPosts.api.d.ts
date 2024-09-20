@@ -31,6 +31,7 @@ declare type adminGetPostDetailRequest = {
 
 /** 게시글 상세 조회 응답 (DTO 참고) */
 declare type adminGetPostDetailResponse = {
+  /** 게시글 ID */
   postId: string;
   title: string;
   content: string;
@@ -41,7 +42,10 @@ declare type adminGetPostDetailResponse = {
 } | null;
 
 declare type adminCreatePostRequestBody = {
+  /** 작성자 ID */
   userId: string;
+  /** 카테고리 ID */
+  categoryId: string;
   title: string;
   content: string;
 };

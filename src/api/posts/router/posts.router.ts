@@ -1,15 +1,17 @@
+// import { MongooseUserRepository } from '@/api/users/repository/user/mongooseUser.repository';
 import express from "express";
 import PostsController from "@/api/posts/controller/posts.controller";
-import { PostsServiceImpl } from "../service/posts.service";
-import { MemoryPostRepository } from "../repository/memoryPost.repository";
+import { PostsServiceImpl } from "@/api/posts/service/posts.service";
 import {
   createPostValidator,
   deletePostValidator,
   getPostDetailValidator,
   getPostsValidator,
   updatePostValidator,
-} from "../dto/validations/post.validation";
+} from "@/api/posts/dto/validations/post.validation";
 import { validate } from "@/api/common/middlewares/validation.middleware";
+import { MongoosePostRepository } from "@/api/posts/repository/mongoosePost.repository";
+import { MongooseCategoryRepository } from '@/api/category/repository/mongooseCategory.repository';
 
 
 const postRouter = express.Router();
@@ -29,7 +31,12 @@ const POST_ROUTES = {
 } as const;
 
 const postsController = new PostsController(
-  new PostsServiceImpl(new MemoryPostRepository(), newMemoryUserRepository())
+  new PostsServiceImpl(
+    new MongoosePostRepository(),
+    new MongooseUserRepository(),
+    new MongooseCategoryRepository(),
+    new MongooseCommentRepository(),
+  )
 );
 
 postRouter.get(
@@ -58,3 +65,4 @@ postRouter.delete(
   postsController.deletePost
 );
 
+export default postRouter;
