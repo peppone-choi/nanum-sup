@@ -18,23 +18,35 @@ export default class AdminCategoryViewController {
             category: [
                 {
                     categoryId: 1,
-                    title: "카테고리 1",
+                    title: "영화 나눔숲",
                 },
                 {
                     categoryId: 2,
-                    title: "카테고리 2",
+                    title: "운동 나눔숲",
                 },
                 {
-                    categoryId: 2,
-                    title: "카테고리 2",
+                    categoryId: 3,
+                    title: "개발 나눔숲",
                 },
                 {
-                    categoryId: 2,
-                    title: "카테고리 2",
+                    categoryId: 4,
+                    title: "맛집 나눔숲",
                 },
                 {
-                    categoryId: 2,
-                    title: "카테고리 2",
+                    categoryId: 5,
+                    title: "잡담",
+                },
+                {
+                    categoryId: 5,
+                    title: "잡담",
+                },
+                {
+                    categoryId: 5,
+                    title: "잡담",
+                },
+                {
+                    categoryId: 5,
+                    title: "잡담",
                 },
             ],
         });
