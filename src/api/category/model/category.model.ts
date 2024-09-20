@@ -1,4 +1,4 @@
-import { IPost } from "@/api/posts/@types/post.type";
+// import { IPost } from "@/api/posts/@types/post.type";
 
 export class Category implements ICategory {
   id: string;
