@@ -1,11 +1,12 @@
 import IComment from "../@types/comment.type";
 
 export class Comment implements IComment {
-    commentId!: string;
-    author: IUser;
-    post: IComment[];
+  id!: string;
+  author: IUser;
+  post: IPost;
 
-    constructor(params: IComment) {
-        this.post = params.post;
-    }
+  constructor(params: IComment) {
+    this.id = params.id;
+    this.post = params.post;
+  }
 }

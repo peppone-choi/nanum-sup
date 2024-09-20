@@ -1,19 +1,19 @@
 import IComment from "../@types/comment.type";
 export class CommentResponseDTO {
-    commentId!: string;
-    author: {
-        id: string;
-        userName: string;
-    };
-    post!: {
-        id: string;
-    };
+  id!: string;
+  author: {
+    id: string;
+    userName: string;
+  };
+  post!: {
+    id: string;
+  };
 
-    constructor(params: IComment) {
-        this.commentId = params.commentId;
-        this.author ={
-            id: params.author.id,
-            userName:params.author.profile.firstName
-        }
-    }
+  constructor(params: IComment) {
+    this.id = params.id;
+    this.author = {
+      id: params.author.id,
+      userName: params.author.profile.firstName,
+    };
+  }
 }

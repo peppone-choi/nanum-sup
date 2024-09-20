@@ -2,15 +2,12 @@ import IComment from "../@types/comment.type";
 import { CommentResponseDTO } from "../dto/commentResponse.dto";
 
 export interface CommentService {
-    createComment(       // userId: string,
+  createComment( // userId: string,
     comment: Omit<IComment, "id">
-): Promise<CommentResponseDTO>;
-    editComment(
-        commentId: string,
-        putComment: Omit<IComment, "id">
-    ): Promise<void>;
+  ): Promise<CommentResponseDTO>;
+  editComment(commentId: string, putComment: Omit<IComment, "id">): Promise<void>;
 
-    getComment(commentId: string): Promise<IComment[]>;
+  getComment(): Promise<CommentResponseDTO[]>;
 
-    deleteComment(commentId: string): Promise<void>;
+  deleteComment(commentId: string): Promise<void>;
 }
