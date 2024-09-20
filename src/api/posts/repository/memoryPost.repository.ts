@@ -1,6 +1,6 @@
 import { Post } from "@/api/posts/model/post.model";
 import { PostRepository } from "@/api/posts/repository/post.repository";
-import HttpException from "@/common/exceptions/http.exception";
+import HttpException from "@/api/common/exceptions/http.exception";
 
 export class MemoryPostRepository implements PostRepository {
   static index = 0;
@@ -19,12 +19,11 @@ export class MemoryPostRepository implements PostRepository {
   async findAll(): Promise<IPost[]> {
     const values = Array.from(MemoryPostRepository.store.values());
     return values;
-  
   }
 
   async findById(id: string): Promise<IPost | null> {
     const findPost = MemoryPostRepository.store.get(id);
-    return findPost || null;
+    return findPost ?? null;
   }
 
   async update(postId: string, updatePostInfo: Partial<IPost>): Promise<IPost> {
@@ -38,7 +37,7 @@ export class MemoryPostRepository implements PostRepository {
       ...updatePostInfo,
     });
 
-    return MemoryPostRepository.store.get(postId);
+    return MemoryPostRepository.store.get(postId)!;
   }
   async delete(postId: string): Promise<void> {
     const findPost = MemoryPostRepository.store.get(postId);
