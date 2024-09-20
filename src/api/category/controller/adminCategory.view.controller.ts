@@ -24,6 +24,18 @@ export default class AdminCategoryViewController {
                     categoryId: 2,
                     title: "카테고리 2",
                 },
+                {
+                    categoryId: 2,
+                    title: "카테고리 2",
+                },
+                {
+                    categoryId: 2,
+                    title: "카테고리 2",
+                },
+                {
+                    categoryId: 2,
+                    title: "카테고리 2",
+                },
             ],
         });
     }
