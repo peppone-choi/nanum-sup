@@ -11,13 +11,12 @@ import dotenv from "dotenv";
 import adminCategoryRouter from "./api/category/router/adminCategory.router";
 import categoryRouter from "./api/category/router/category.router";
 import { ROUTES_INDEX } from "./routers";
-<<<<<<< HEAD
 import postRouter from "./api/posts/router/posts.router";
 import adminPostRouter from "./api/posts/router/adminPosts.router";
-=======
 import adminCategoryViewRouter from "./api/category/router/adminCategory.view.router";
 import categoryViewRouter from "./api/category/router/category.view.router";
->>>>>>> develop
+import adminPostViewRouter from "./api/posts/router/adminPosts.view.router";
+import postViewRouter from "./api/posts/router/posts.view.router";
 
 const app = express();
 app.use(express.json());
@@ -40,8 +39,8 @@ app.use(ROUTES_INDEX.CATEGORY_VIEW, categoryViewRouter);
 /** -------- posts ---------  */
 app.use(ROUTES_INDEX.POSTS_API, postRouter);
 app.use(ROUTES_INDEX.ADMIN_POSTS_API, adminPostRouter);
-// app.use(ROUTES_INDEX.ADMIN_POST_VIEW, adminPostViewRouter);
-// app.use(ROUTES_INDEX.POST_VIEW, postViewRouter);
+app.use(ROUTES_INDEX.ADMIN_POST_VIEW, adminPostViewRouter);
+app.use(ROUTES_INDEX.POST_VIEW, postViewRouter);
 
 
 
