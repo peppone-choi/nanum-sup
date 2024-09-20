@@ -1,12 +1,13 @@
 // import { Category } from '@/api/category/model/category.model';
-import { CategoryRepository } from '@/api/category/repository/category.repository';
-import { PostRepository } from '@/api/posts/repository/post.repository';
+import { CategoryRepository } from "@/api/category/repository/category.repository";
+import { PostRepository } from "@/api/posts/repository/post.repository";
 import HttpException from "@/api/common/exceptions/http.exception";
 import { PostResponseDTO } from "@/api/posts/dto/postResponse.dto";
 import { PostsService } from "@/api/posts/service/posts.service.type";
+import { CommentRepository } from "@/api/comment/repository/comment.repository";
+import { IPost } from "../@types/post.type";
 // userRepository 가져오기
 // commentRepository 가져오기
-
 
 export class PostsServiceImpl implements PostsService {
   private readonly _postRepository: PostRepository;
@@ -15,12 +16,14 @@ export class PostsServiceImpl implements PostsService {
   // private readonly _commentRepository: CommentRepository;
 
 
+
   constructor(
     PostRepository: PostRepository, 
     // UserRepository: UserRepository,
     // CategoryRepository: CategoryRepository,
     // CommentRepository: CommentRepository
   ) {
+
 
     this._postRepository = PostRepository;
     // this._userRepository = UserRepository;
@@ -41,6 +44,10 @@ export class PostsServiceImpl implements PostsService {
     //   throw new HttpException(404, "작성자를 찾을 수 없습니다.");
     // }
 
+    if (!category) {
+      throw new HttpException(404, "카테고리를 찾을 수 없습니다.");
+    }
+
     const newPost = await this._postRepository.save({
       ...post,
       // author,
@@ -50,7 +57,6 @@ export class PostsServiceImpl implements PostsService {
     return new PostResponseDTO(newPost);
   }
 
-
   /** 게시글 목록 조회 */
   async getPosts(): Promise<PostResponseDTO[]> {
     const posts = await this._postRepository.findAll();
@@ -59,18 +65,14 @@ export class PostsServiceImpl implements PostsService {
   /** 게시글 상세 조회 */
   async getPostDetail(postId: string): Promise<PostResponseDTO | null> {
     const post = await this._postRepository.findById(postId);
-    if(!post) {
-      throw new HttpException(404, "게시글을 찾을 수 없습니다.")
+    if (!post) {
+      throw new HttpException(404, "게시글을 찾을 수 없습니다.");
     }
     return new PostResponseDTO(post);
   }
 
   /** 게시글 수정 */
-  async updatePost(
-    postId: string,
-    updatedPost: Omit<IPost, "id" | "author">,
-
-  ): Promise<void> {
+  async updatePost(postId: string, updatedPost: Pick<IPost, "title" | "content" | "category">): Promise<void> {
     await this._postRepository.update(postId, updatedPost);
     return;
   }
@@ -79,5 +81,4 @@ export class PostsServiceImpl implements PostsService {
   async deletePost(postId: string): Promise<void> {
     await this._postRepository.delete(postId);
   }
-  
 }

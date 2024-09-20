@@ -1,6 +1,7 @@
 import { Post } from "@/api/posts/model/post.model";
 import { PostRepository } from "@/api/posts/repository/post.repository";
 import HttpException from "@/api/common/exceptions/http.exception";
+import { IPost } from "../@types/post.type";
 
 export class MemoryPostRepository implements PostRepository {
   static index = 0;
@@ -13,7 +14,6 @@ export class MemoryPostRepository implements PostRepository {
     });
     MemoryPostRepository.store.set(newPost.id, newPost);
     return newPost;
-
   }
 
   async findAll(): Promise<IPost[]> {
@@ -49,5 +49,4 @@ export class MemoryPostRepository implements PostRepository {
 
     return;
   }
-  
 }
