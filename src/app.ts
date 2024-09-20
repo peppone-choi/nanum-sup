@@ -13,10 +13,14 @@ import categoryRouter from "./api/category/router/category.router";
 import { ROUTES_INDEX } from "./routers";
 import postRouter from "./api/posts/router/posts.router";
 import adminPostRouter from "./api/posts/router/adminPosts.router";
-import adminCategoryViewRouter from "./api/category/router/adminCategory.view.router";
-import categoryViewRouter from "./api/category/router/category.view.router";
 import adminPostViewRouter from "./api/posts/router/adminPosts.view.router";
 import postViewRouter from "./api/posts/router/posts.view.router";
+import adminCategoryViewRouter from "./api/category/router/adminCategory.view.router";
+import categoryViewRouter from "./api/category/router/category.view.router";
+
+
+
+
 
 const app = express();
 app.use(express.json());
