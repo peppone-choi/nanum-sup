@@ -3,9 +3,10 @@ import {
   AuthService,
   LoginResponseType,
 } from "@/api/auth/service/auth.service.type";
-import UserRepository from "@/api/user/repository/user.repository";
+
 import HttpException from "@/api/common/exceptions/http.exception";
 import { JwtService } from "@/api/common/services/jwt.service";
+import { UserRepository } from "@/api/user/repository/user.repository";
 
 export class AuthServiceImpl implements AuthService {
   private readonly _userRepository: UserRepository;
