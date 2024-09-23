@@ -1,9 +1,9 @@
 export default class UserResponseDto {
-  userId: string;
+  accountId: string;
   email: string;
   role: string;
   constructor(user: IUser) {
-    this.userId = user.userId;
+    this.accountId = user.accountId;
     this.email = user.email;
     this.role = user.role;
   }

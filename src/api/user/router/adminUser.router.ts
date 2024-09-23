@@ -2,6 +2,8 @@ import { ROUTES_INDEX } from "@/routers";
 import { extractPath } from "@/utils/path.util";
 import express from "express";
 import AdminUserController from "../controller/adminUser.controller";
+import UserServiceImpl from "../service/user.service";
+import { MemoryUserRepository } from "../repository/memoryUser.repository";
 
 const adminUserRouter = express.Router();
 
@@ -19,31 +21,33 @@ const USER_ROUTES = {
   DELETE_USER: `/api/users/:userId`,
 } as const;
 
-const adminUserController = new AdminUserController();
+const adminUserController = new AdminUserController(
+  new UserServiceImpl(new MemoryUserRepository())
+);
 
 adminUserRouter.get(
   extractPath(USER_ROUTES.GET_USERS, ROUTES_INDEX.ADMIN_USER_API),
-  adminUserController.getUsers
+  adminUserController.getAdminUsers
 );
 
 adminUserRouter.get(
   extractPath(USER_ROUTES.GET_USER_DETAIL, ROUTES_INDEX.ADMIN_USER_API),
-  adminUserController.getUserDetail
+  adminUserController.getAdminUserDetail
 );
 
 adminUserRouter.post(
   extractPath(USER_ROUTES.CREATE_USER, ROUTES_INDEX.ADMIN_USER_API),
-  adminUserController.createUser
+  adminUserController.createAdminUser
 );
 
 adminUserRouter.put(
   extractPath(USER_ROUTES.UPDATE_USER, ROUTES_INDEX.ADMIN_USER_API),
-  adminUserController.updateUser
+  adminUserController.updateAdminUser
 );
 
 adminUserRouter.delete(
   extractPath(USER_ROUTES.DELETE_USER, ROUTES_INDEX.ADMIN_USER_API),
-  adminUserController.deleteUser
+  adminUserController.deleteAdminUser
 );
 
 export default adminUserRouter;

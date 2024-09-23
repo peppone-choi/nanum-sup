@@ -4,12 +4,23 @@ export interface UserService {
   /** 유저 상세 정보 확인 */
   getUserDetail(id: string): Promise<IUser>;
   /** 회원가입 */
-  signIn(user: Omit<IUser, "id">): Promise<IUser>;
+  signIn(user: Omit<IUser, "id" | "salt">): Promise<IUser>;
   /** 유저 정보 수정 */
   updateUser(
+    _tokenInfo: {
+      userId: string;
+      role: string;
+    },
     id: string,
-    updateData: Omit<IUser, "id" | "userId">
+    updateData: Omit<IUser, "id" | "accountId" | "salt" | "password">,
+    password?: string
   ): Promise<void>;
   /** 유저 삭제 */
-  deleteUser(id: string): Promise<void>;
+  deleteUser(
+    _tokenInfo: {
+      userId: string;
+      role: string;
+    },
+    id: string
+  ): Promise<void>;
 }

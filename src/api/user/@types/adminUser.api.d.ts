@@ -28,23 +28,49 @@ declare type getAdminUserDetailRequest = {
 /** [사용자] 유저 상세 정보 확인 응답 */
 declare type getAdminUserDetailResponse = UserResponseDto | null;
 /** [사용자] 회원가입 요청 */
-declare type getAdminUserDetailRequestPath = {};
-declare type getAdminUserDetailRequestBody = {
-  userId: string;
+declare type createAdminUserRequestPath = {};
+declare type createAdminUserRequestBody = {
+  accountId: string;
   password: string;
   email: string;
 };
-declare type getAdminUserDetailRequestParams = {};
-declare type getAdminUserDetailRequest = {
-  params?: getAdminUserDetailRequestParams;
-  path?: getAdminUserDetailRequestPath;
-  body: getAdminUserDetailRequestBody;
+declare type createAdminUserRequestParams = {};
+declare type createAdminUserRequest = {
+  params?: createAdminUserRequestParams;
+  path?: createAdminUserRequestPath;
+  body: createAdminUserRequestBody;
 };
-/** [사용자] 유저 상세 정보 확인 응답 */
-declare type getAdminUserDetailResponse = UserResponseDto | null;
-
 /** [사용자] 회원 가입 응답 */
+declare type createAdminUserResponse = UserResponseDto | null;
 /** [사용자] 유저 정보 수정 요청 */
+declare type updateAdminUserRequestPath = {
+  /** 유저 ID */
+  userId: string;
+};
+declare type updateAdminUserRequestBody = {
+  email: string;
+  password?: string;
+  role: string;
+};
+declare type updateAdminUserRequestParams = {};
+declare type updateAdminUserRequest = {
+  params?: updateAdminUserRequestParams;
+  path: updateAdminUserRequestPath;
+  body: updateAdminUserRequestBody;
+};
 /** [사용자] 유저 정보 수정 응답 */
+declare type updateAdminUserResponse = void;
 /** [사용자] 유저 삭제 요청 */
+declare type deleteAdminUserRequestPath = {
+  /** 유저 ID */
+  userId: string;
+};
+declare type deleteAdminUserRequestBody = {};
+declare type deleteAdminUserRequestParams = {};
+declare type deleteAdminUserRequest = {
+  params?: deleteAdminUserRequestParams;
+  path: deleteAdminUserRequestPath;
+  body?: deleteAdminUserRequestBody;
+};
 /** [사용자] 유저 삭제 응답 */
+declare type deleteAdminUserResponse = void;

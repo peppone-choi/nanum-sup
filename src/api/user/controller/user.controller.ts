@@ -1,21 +1,94 @@
 import { NextFunction, Request, Response } from "express";
+import { UserService } from "../service/user.service.type";
+import UserResponseDto from "../dto/userResponse.dto";
 
 export default class UserController {
-  constructor() {}
+  private readonly _userService: UserService;
+  constructor(userService: UserService) {
+    this._userService = userService;
+  }
 
-  async getUsers(req: Request, res: Response, next: NextFunction) {
-    res.send("유저 전체 리스트 확인");
+  async getUsers(
+    req: Request<
+      getUsersRequest["path"],
+      getUsersResponse,
+      getUsersRequest["body"],
+      getUsersRequest["params"]
+    >,
+    res: Response,
+    next: NextFunction
+  ) {
+    const users = await this._userService.getUsers();
+    users.map((user) => new UserResponseDto(user));
+    res.send(users);
   }
-  async getUserDetail(req: Request, res: Response, next: NextFunction) {
-    res.send("유저 상세 정보 확인");
+  async getUserDetail(
+    req: Request<
+      getUserDetailRequest["path"],
+      getUserDetailResponse,
+      getUserDetailRequest["body"],
+      getUserDetailRequest["params"]
+    >,
+    res: Response,
+    next: NextFunction
+  ) {
+    const { userId } = req.params;
+    const user = await this._userService.getUserDetail(userId);
+    const userDto = user ? new UserResponseDto(user) : null;
+    res.send(userDto);
   }
-  async signIn(req: Request, res: Response, next: NextFunction) {
-    res.send("회원가입");
+  async signIn(
+    req: Request<
+      createUserRequest["path"],
+      createUserResponse,
+      createUserRequest["body"],
+      createUserRequest["params"]
+    >,
+    res: Response,
+    next: NextFunction
+  ) {
+    const { accountId, password, email } = req.body;
+    const user = await this._userService.signIn({
+      accountId,
+      password,
+      email,
+      role: "user",
+    });
+    res.status(201).send(new UserResponseDto(user));
   }
-  async updateUser(req: Request, res: Response, next: NextFunction) {
-    res.send("유저 정보 수정");
+  async updateUser(
+    req: Request<
+      updateUserRequest["path"],
+      updateUserResponse,
+      updateUserRequest["body"],
+      updateUserRequest["params"]
+    >,
+    res: Response,
+    next: NextFunction
+  ) {
+    req.user;
+    const { userId } = req.params;
+    const { email, password, role } = req.body;
+    await this._userService.updateUser(
+      req.user,
+      userId,
+      { email, role },
+      password
+    );
+    res.status(204).send();
   }
-  async deleteUser(req: Request, res: Response, next: NextFunction) {
-    res.send("유저 삭제");
+  async deleteUser(
+    req: Request<
+      deleteUserRequest["path"],
+      deleteUserResponse,
+      deleteUserRequest["body"],
+      deleteUserRequest["params"]
+    >,
+    res: Response,
+    next: NextFunction
+  ) {
+    const { userId } = req.params;
+    await this._userService.deleteUser(req.user, userId);
+    res.status(204).send();
   }
 }
