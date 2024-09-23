@@ -38,4 +38,13 @@ export default class MongooseUserRepository implements UserRepository {
     await MongooseUser.deleteOne({ _id: id });
     return;
   }
+  async findByEmail(email: string): Promise<IUser> {
+    const user = await MongooseUser.findOne({
+      email: email,
+    });
+    if (!user) {
+      throw new HttpException(404, "유저가 존재하지 않습니다.");
+    }
+    return user;
+  }
 }

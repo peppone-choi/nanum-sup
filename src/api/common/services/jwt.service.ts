@@ -1,5 +1,4 @@
-// src/api/common/services/jwt.service.ts
-
+import { RoleType } from "@/@types/jsonwebtoken";
 import jwt from "jsonwebtoken";
 
 type Params = {
