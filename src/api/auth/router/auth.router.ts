@@ -1,9 +1,9 @@
-import express from "express";
-import AuthController from "@/api/auth/controller/auth.controller";
-import { AuthServiceImpl } from "@/api/auth/service/auth.service";
-import { MongooseUserRepository } from "@/api/users/repository/user/mongooseUser.repository";
-import { extractPath } from "@/utils/path.util";
+import MongooseUserRepository from "@/api/user/repository/mongooseUser.repository";
 import { ROUTES_INDEX } from "@/routers";
+import { extractPath } from "@/utils/path.util";
+import express from "express";
+import { AuthServiceImpl } from "../service/auth.service";
+import AuthController from "../controller/auth.controller";
 
 const authRouter = express.Router();
 

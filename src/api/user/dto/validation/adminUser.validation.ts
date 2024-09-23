@@ -14,8 +14,8 @@ export const adminGetUserDetailValidator = {
 
 /** 유저 생성 Validator */
 const adminCreateUserBodyValidator = yup.object({
-  userId: yup.string().required(),
-  email: yup.string().required(),
+  accountId: yup.string().required().max(30),
+  email: yup.string().required().email(),
   password: yup.string().required(),
 });
 
@@ -30,9 +30,9 @@ const adminUpdateUserPathValidator = yup.object({
 });
 
 const adminUpdateUserBodyValidator = yup.object({
-  email: yup.string().required(),
+  email: yup.string().email(),
   password: yup.string(),
-  role: yup.string().required(),
+  role: yup.string(),
 });
 
 export const adminUpdateUserValidator = {

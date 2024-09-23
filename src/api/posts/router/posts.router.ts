@@ -16,6 +16,7 @@ import { extractPath } from "@/utils/path.util";
 import { ROUTES_INDEX } from "@/routers";
 import { authUserMiddleware } from "@/api/common/middlewares/authUser.middleware";
 import { MongooseCommentRepository } from "@/api/comment/repository/mongooseComment.repository";
+import MongooseUserRepository from "@/api/user/repository/mongooseUser.repository";
 
 const postRouter = express.Router();
 

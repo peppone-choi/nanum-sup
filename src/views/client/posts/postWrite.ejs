@@ -9,23 +9,49 @@
   
 <!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
-
 </head>
 <body>
-  <div id="wrap">
-    
-    <form id="postWriteForm">
-      <label for="category">
-        <span>카테고리 선택</span>
-        <input type="select" name="category" id="category" />
-      </label>
-      <label for="title">
-        <span>제목</span>
-        <input type="text" name="title" id="title" />
-      </label>
-      <div id="summernote"></div>
-      <button type="submit">작성</button>
-    </form>
+  <div class="inner">
+    <%- include('../../_layouts/header') %>
+  </div>
+  
+    <div id="wrap">
+      <div class="inner">
+        
+        <form id="postWriteForm" class="flex-column-center">
+          <!-- 카테고리 선택 시작 -->
+          <label for="category" class="category">
+            <!-- <span>카테고리 선택</span> -->
+            <select name="category" id="category" required>
+              <option disabled selected>카테고리 선택</option>
+              <option value="movie">영화 나눔숲</option>
+              <option value="exercise">운동 나눔숲</option>
+              <option value="develop">개발 나눔숲</option>
+              <option value="food">맛집 나눔숲</option>
+              <option value="food"> 나눔숲</option>
+              <option value="food"> 나눔숲</option>
+            </select>
+          </label>
+        <!-- 카테고리 선택 끝 -->
+
+          <!-- 제목 입력 시작 -->
+          <label for="title" class="title">
+            <!-- <span>제목</span> -->
+            <input type="text" name="title" id="title" required placeholder="제목을 작성해 주세요." />
+          </label>
+          <!-- 제목 입력 끝 -->
+          <!-- <div id="summernote"></div> -->
+
+            <!-- 내용 입력 시작 -->
+          <textarea name="content" id="content" maxlength= "200" placeholder="게시글 내용을 작성해 주세요.">
+          </textarea>
+          <!-- 내용 입력 끝 -->
+
+            <!-- 작성 (제출) 버튼 -->
+          <button type="submit">작성</button>
+        </form>
+    </div>
+  
     
     <script>
       const $form = document.getElementById("postWriteForm");
@@ -34,12 +60,12 @@
         e.preventDefault();
         try {
           const title = $form.title.value;
-          const content = $("#summernote").summernote("code");
+          const content = $form.content.value;
 
-          console.log({
-            title,
-            content,
-          });
+          // console.log({
+          //   title,
+          //   content,
+          // });
 
           const cookies = document.cookie.split(";").reduce((acc, cookie) => {
             const [key, value] = cookie.split("=");

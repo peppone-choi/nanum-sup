@@ -1,4 +1,4 @@
-export default interface IComment {
+interface IComment {
   /** 카테고리 ID */
   id: string;
 

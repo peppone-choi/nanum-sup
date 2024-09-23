@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import IComment from "../@types/comment.type";
 
 const commentSchema = new mongoose.Schema<IComment>({
   id: {
@@ -10,4 +9,7 @@ const commentSchema = new mongoose.Schema<IComment>({
   post: { type: String, required: true, length: 300 },
 });
 
-export const MongooseComment = mongoose.model<IComment>("Comment", commentSchema);
+export const MongooseComment = mongoose.model<IComment>(
+  "Comment",
+  commentSchema
+);

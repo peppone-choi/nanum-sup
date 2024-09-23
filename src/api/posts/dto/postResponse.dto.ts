@@ -2,10 +2,10 @@ export class PostResponseDTO {
   postId: string;
   title: string;
   content: string;
-  // author: {
-  //   id: string;
-  //   userName: string;
-  // };
+  author: {
+    id: string;
+    // userName: string;
+  };
   category: {
     id: string;
   };
@@ -15,10 +15,10 @@ export class PostResponseDTO {
     this.postId = params.id;
     this.title = params.title;
     this.content = params.content;
-    // this.author = {
-    //   id: params.author.id,
-    //   userName: params.author.profile.firstName,
-    // };
+    this.author = {
+      id: params.author.id,
+      // userName: params.author.profile.firstName,
+    };
     this.category = {
       id: params.category.id,
     };

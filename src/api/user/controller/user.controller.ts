@@ -6,6 +6,11 @@ export default class UserController {
   private readonly _userService: UserService;
   constructor(userService: UserService) {
     this._userService = userService;
+    this.getUsers = this.getUsers.bind(this);
+    this.getUserDetail = this.getUserDetail.bind(this);
+    this.signIn = this.signIn.bind(this);
+    this.updateUser = this.updateUser.bind(this);
+    this.deleteUser = this.deleteUser.bind(this);
   }
 
   async getUsers(
