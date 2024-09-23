@@ -1,6 +1,7 @@
 import HttpException from "@/api/common/exceptions/http.exception";
 import { User } from "../model/user.model";
-import UserRepository from "./user.repository";
+import { UserRepository } from "./user.repository";
+
 
 export class MemoryUserRepository implements UserRepository {
   static index = 0;
