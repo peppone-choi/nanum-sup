@@ -16,7 +16,7 @@ declare type getCategoryResponse = Array<ICategoryResponseDTO>;
 
 declare type getCategoryDetailRequsetPath = {
     /** 카테고리 ID */
-    caegoryId: string;
+    categoryId: string;
 };
 declare type getPostDetailRequestBody = {};
 

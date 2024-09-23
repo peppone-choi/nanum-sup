@@ -16,7 +16,8 @@ export default class CategoryViewController {
         res: Response,
         next: NextFunction
     ) {
-        const category = await this._categoryService.getCategory();
+        console.log("g");
+        // const category = await this._categoryService.getCategory();
         res.render("client/category/userCategoryList", {
             category: [
                 {

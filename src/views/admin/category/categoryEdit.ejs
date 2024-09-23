@@ -3,9 +3,46 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        />
+        <link
+            rel="stylesheet"
+            href="/static/styles/pages/category/categoryEdit.css"
+        />
+        <link rel="stylesheet" href="/static/styles/reset.css" />
+        <title>카테고리 수정 및 삭제</title>
     </head>
     <body>
-        관리자 카테고리 수정 / 삭제
-    </body>
+        <section class="category-write-edit-wrapper">
+            <div class="category-setup-menu-bar">
+                <a href="">
+                    <i class="fa-solid fa-gear"></i>
+                </a>
+                <div class="category-profile">
+                    <i class="fa-solid fa-user"></i>
+                    <p class="category-nickName">닉네임</p>
+                    <p class="category-id">@ggaong</p>
+                </div>
+                <div class="menu-contents">
+                    <a href="/admin/category/write"><p>카테고리 관리</p></a>
+                </div>
+            </div>
+            <section class="category-write-edit-body">
+                <div class="create-category">
+                    <p>카테고리 수정 및 생성</p>
+                    <input type="text" placeholder="카테고리명을 입력하세요." />
+                    <button type="submit">작성</button>
+                </div>
+                <div>
+                    <% category.forEach(function(category) { %>
+                    <div class="category-list">
+                        <p onclick="location.href='/admin/category/<%= category.categoryId %>/posts'">
+                            <p><%= category.title %></p>
+                    </div>
+                    <% }) %>
+                </section>
+            </section>
+        </div>    </body>
 </html>
