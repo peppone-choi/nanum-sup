@@ -11,12 +11,11 @@ import {
 } from "@/api/posts/dto/validations/post.validation";
 import { validate } from "@/api/common/middlewares/validation.middleware";
 import { MongoosePostRepository } from "@/api/posts/repository/mongoosePost.repository";
-import { MongooseCategoryRepository } from '@/api/category/repository/mongooseCategory.repository';
+import { MongooseCategoryRepository } from "@/api/category/repository/mongooseCategory.repository";
 import { extractPath } from "@/utils/path.util";
 import { ROUTES_INDEX } from "@/routers";
 import { authUserMiddleware } from "@/api/common/middlewares/authUser.middleware";
-import { MongooseCommentRepository } from "@/api/comment/repository/mongooseComment.repository";
-
+// import { MongooseCommentRepository } from "@/api/comment/repository/mongooseComment.repository";
 
 const postRouter = express.Router();
 
@@ -34,41 +33,41 @@ const POST_ROUTES = {
   DELETE_POST: `/api/posts/:postId`,
 } as const;
 
-const postsController = new PostsController(
-  new PostsServiceImpl(
-    new MongoosePostRepository(),
-    // new MongooseUserRepository(),
-    new MongooseCategoryRepository(),
-    new MongooseCommentRepository(),
-  )
-);
+// const postsController = new PostsController(
+//   new PostsServiceImpl(
+//     new MongoosePostRepository(),
+//     // new MongooseUserRepository(),
+//     new MongooseCategoryRepository()
+//     // new MongooseCommentRepository()
+//   )
+// );
 
-postRouter.get(
-  extractPath(POST_ROUTES.GET_POSTS, ROUTES_INDEX.POSTS_API),
-  validate(getPostsValidator),
-  postsController.getPosts
-);
-postRouter.get(
-  extractPath(POST_ROUTES.GET_POST_DETAIL, ROUTES_INDEX.POSTS_API),
-  validate(getPostDetailValidator),
-  authUserMiddleware,
-  postsController.getPostDetail
-);
-postRouter.post(
-  extractPath(POST_ROUTES.CREATE_POST, ROUTES_INDEX.POSTS_API),
-  validate(createPostValidator),
-  authUserMiddleware,
-  postsController.createPost
-);
-postRouter.put(
-  extractPath(POST_ROUTES.UPDATE_POST, ROUTES_INDEX.POSTS_API),
-  validate(updatePostValidator),
-  postsController.updatePost
-);
-postRouter.delete(
-  extractPath(POST_ROUTES.DELETE_POST, ROUTES_INDEX.POSTS_API),
-  validate(deletePostValidator),
-  postsController.deletePost
-);
+// postRouter.get(
+//   extractPath(POST_ROUTES.GET_POSTS, ROUTES_INDEX.POSTS_API),
+//   validate(getPostsValidator),
+//   postsController.getPosts
+// );
+// postRouter.get(
+//   extractPath(POST_ROUTES.GET_POST_DETAIL, ROUTES_INDEX.POSTS_API),
+//   validate(getPostDetailValidator),
+//   authUserMiddleware,
+//   postsController.getPostDetail
+// );
+// postRouter.post(
+//   extractPath(POST_ROUTES.CREATE_POST, ROUTES_INDEX.POSTS_API),
+//   validate(createPostValidator),
+//   authUserMiddleware,
+//   postsController.createPost
+// );
+// postRouter.put(
+//   extractPath(POST_ROUTES.UPDATE_POST, ROUTES_INDEX.POSTS_API),
+//   validate(updatePostValidator),
+//   postsController.updatePost
+// );
+// postRouter.delete(
+//   extractPath(POST_ROUTES.DELETE_POST, ROUTES_INDEX.POSTS_API),
+//   validate(deletePostValidator),
+//   postsController.deletePost
+// );
 
 export default postRouter;
