@@ -45,13 +45,13 @@ const COMMENT_ROUTES = {
 
 const USER_ROUTES = {
   /** 유저 API */
-  USER_API: "/api/user",
+  USER_API: "/api/users",
   /** 관리자 유저 API */
-  ADMIN_USER_API: "/admin-api/user",
+  ADMIN_USER_API: "/admin-api/users",
   /** 유저 뷰 */
-  USER_VIEW: "/user",
+  USER_VIEW: "/users",
   /** 관리자 유저 뷰 */
-  ADMIN_USER_VIEW: "/admin-api/user",
+  ADMIN_USER_VIEW: "/admin-api/users",
 } as const;
 
 export const ROUTES_INDEX = {

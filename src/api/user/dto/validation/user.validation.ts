@@ -2,7 +2,7 @@ import * as yup from "yup";
 
 /** 유저 상세 조회 Validator */
 const getUserDetailPathValidator = yup.object({
-  userId: yup.string().required("유저ID는 필수 입력값입니다."),
+  userId: yup.string().required("유저 ID는 필수 입력값입니다."),
 });
 
 export const getUserDetailValidator = {
@@ -12,8 +12,8 @@ export const getUserDetailValidator = {
 /** 유저 생성 Validator */
 
 const createUserBodyValidator = yup.object({
-  userId: yup.string().required(),
-  email: yup.string().required(),
+  accountId: yup.string().required().max(30),
+  email: yup.string().required().email(),
   password: yup.string().required(),
 });
 
@@ -28,9 +28,9 @@ const updateUserPathValidator = yup.object({
 });
 
 const updateUserBodyValidator = yup.object({
-  email: yup.string().required(),
+  email: yup.string().email(),
   password: yup.string(),
-  role: yup.string().required(),
+  role: yup.string(),
 });
 
 export const updateUserValidator = {
