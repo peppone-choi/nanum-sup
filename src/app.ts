@@ -22,16 +22,16 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-// app.use(appRouter);
-// app.use(userRouter);
-// app.use(viewRouter);
-// app.use(adminViewRouter);
+app.use(appRouter);
+app.use(userRouter);
+app.use(viewRouter);
+app.use(adminViewRouter);
 
 /** -------- category ---------  */
 app.use(ROUTES_INDEX.CATEGORY_API, categoryRouter);
+app.use(ROUTES_INDEX.CATEGORY_VIEW, categoryViewRouter);
 app.use(ROUTES_INDEX.ADMIN_CATEGORY_API, adminCategoryRouter);
 app.use(ROUTES_INDEX.ADMIN_CATEGORY_VIEW, adminCategoryViewRouter);
-app.use(ROUTES_INDEX.CATEGORY_VIEW, categoryViewRouter);
 
 /** -------- posts ---------  */
 app.use(ROUTES_INDEX.POSTS_API, postRouter);

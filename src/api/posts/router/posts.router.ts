@@ -33,14 +33,14 @@ const POST_ROUTES = {
     DELETE_POST: `/api/posts/:postId`,
 } as const;
 
-// const postsController = new PostsController(
-//   new PostsServiceImpl(
-//     new MongoosePostRepository(),
-//     // new MongooseUserRepository(),
-//     new MongooseCategoryRepository(),
-//     new MongooseCommentRepository(),
-//   )
-// );
+const postsController = new PostsController(
+    new PostsServiceImpl(
+        new MongoosePostRepository(),
+        // new MongooseUserRepository(),
+        new MongooseCategoryRepository(),
+        new MongooseCommentRepository()
+    )
+);
 
 // postRouter.get(
 //   extractPath(POST_ROUTES.GET_POSTS, ROUTES_INDEX.POSTS_API),
