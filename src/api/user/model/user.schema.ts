@@ -19,9 +19,6 @@ const userSchema = new mongoose.Schema<IUser>({
     type: String,
     required: true,
   },
-  refreshToken: {
-    type: String,
-  },
   role: {
     type: String,
     required: true,

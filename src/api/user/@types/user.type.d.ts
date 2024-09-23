@@ -4,7 +4,6 @@ interface IUser {
   email: string;
   password: string;
   salt: string;
-  refreshToken?: string;
   role: RoleType;
 }
 
