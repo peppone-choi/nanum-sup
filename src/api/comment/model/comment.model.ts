@@ -3,7 +3,7 @@ import IComment from "../@types/comment.type";
 
 export class Comment implements IComment {
   id!: string;
-  author: IUser;
+  author!: IUser;
   post: IPost;
 
   constructor(params: IComment) {

@@ -3,11 +3,8 @@ import { CommentService } from "@/api/comment/service/comment.service.type";
 
 
 export default class CommentController {
-    /** 컨트롤러 DI 구조 잡아주기 */
-    private readonly _commentService: CommentService;
 
     constructor(_commentService: CommentService) {
-        this._commentService = _commentService;
 
         this.createComment = this.createComment.bind(this);
         this.getComment = this.getComment.bind(this);

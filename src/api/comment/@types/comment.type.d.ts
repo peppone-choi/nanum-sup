@@ -1,5 +1,5 @@
-interface IComment {
-  /** 카테고리 ID */
+export default interface IComment {
+  /** 댓글 ID */
   id: string;
 
   // /** 게시글 */

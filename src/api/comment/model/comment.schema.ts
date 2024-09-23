@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import IComment from "../@types/comment.type";
 
 const commentSchema = new mongoose.Schema<IComment>({
   id: {

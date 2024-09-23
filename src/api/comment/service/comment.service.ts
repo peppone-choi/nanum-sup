@@ -1,4 +1,3 @@
-import HttpException from "@/api/common/exceptions/http.exception";
 import IComment from "../@types/comment.type";
 import { CommentResponseDTO } from "@/api/comment/dto/commentResponse.dto";
 import { CommentRepository } from "@/api/comment/repository/comment.repository";
@@ -25,7 +24,6 @@ export default class CommentServiceImpl implements CommentService {
     //       }
     const newComment = await this._commentRepository.save({
       ...comment,
-      author: undefined,
     });
     return new CommentResponseDTO(newComment);
   }
