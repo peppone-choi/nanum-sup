@@ -40,18 +40,18 @@ adminCategoryViewRouter.get(
 
 adminCategoryViewRouter.get(
     extractPath(
-        ADMIN_CATEGORY_VIEW_ROUTES.CATEGORY_DETAIL,
-        ROUTES_INDEX.ADMIN_CATEGORY_VIEW
-    ),
-    adminCategoryViewController.categoryDetailPage
-);
-
-adminCategoryViewRouter.get(
-    extractPath(
         ADMIN_CATEGORY_VIEW_ROUTES.CATEGORY_EDIT,
         ROUTES_INDEX.ADMIN_CATEGORY_VIEW
     ),
     adminCategoryViewController.categoryEditPage
+);
+
+adminCategoryViewRouter.get(
+    extractPath(
+        ADMIN_CATEGORY_VIEW_ROUTES.CATEGORY_DETAIL,
+        ROUTES_INDEX.ADMIN_CATEGORY_VIEW
+    ),
+    adminCategoryViewController.categoryDetailPage
 );
 
 export default adminCategoryViewRouter;

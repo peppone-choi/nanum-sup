@@ -48,6 +48,18 @@ export default class AdminCategoryViewController {
                     categoryId: 5,
                     title: "잡담",
                 },
+                {
+                    categoryId: 5,
+                    title: "잡담",
+                },
+                {
+                    categoryId: 5,
+                    title: "잡담",
+                },
+                {
+                    categoryId: 5,
+                    title: "잡담",
+                },
             ],
         });
     }
@@ -59,11 +71,53 @@ export default class AdminCategoryViewController {
 
     /** 카테고리 생성 페이지 */
     async categoryWritePage(req: Request, res: Response, next: NextFunction) {
-        res.render("admin/category/categoryWrite");
+        res.render("admin/category/categoryWrite", {
+            category: [
+                {
+                    categoryId: 1,
+                    title: "영화 나눔숲",
+                },
+                {
+                    categoryId: 2,
+                    title: "운동 나눔숲",
+                },
+                {
+                    categoryId: 3,
+                    title: "개발 나눔숲",
+                },
+                {
+                    categoryId: 4,
+                    title: "맛집 나눔숲",
+                },
+                {
+                    categoryId: 5,
+                    title: "잡담",
+                },
+                {
+                    categoryId: 5,
+                    title: "잡담",
+                },
+                {
+                    categoryId: 5,
+                    title: "잡담",
+                },
+                {
+                    categoryId: 5,
+                    title: "잡담",
+                },
+            ],
+        });
     }
 
     /** 카테고리 수정 페이지 */
     async categoryEditPage(req: Request, res: Response, next: NextFunction) {
-        res.render("admin/category/categoryEdit");
+        res.render("admin/category/categoryEdit", {
+            category: [
+                {
+                    categoryId: 1,
+                    title: "영화 나눔숲",
+                },
+            ],
+        });
     }
 }

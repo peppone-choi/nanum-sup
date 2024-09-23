@@ -1,1 +1,106 @@
-// {}
+.category-menu-bar {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 15px;
+    width: 280px;
+    height: 100vh;
+    position: relative;
+    overflow-y: auto;
+}
+
+.category-menu-bar::-webkit-scrollbar {
+    width: 10px;
+}
+
+.category-menu-bar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+
+.category-menu-bar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.6);
+}
+
+.fa-x {
+    padding-bottom: 15px;
+    font-size: 16px;
+}
+
+.fa-gear {
+    position: absolute;
+    right: 0px;
+    top: 5px;
+    color: black;
+    font-size: 16px;
+    padding: 15px;
+    border-radius: 50%;
+}
+
+.category-profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    padding-bottom: 10px;
+    position: relative;
+}
+
+.fa-user {
+    font-size: 35px;
+    padding: 10px;
+    background-color: #d9d9d9;
+    border-radius: 50%;
+}
+
+.category-nickName {
+    padding: 10px 0 0;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.category-id {
+    font-size: 12px;
+    padding: 0 0 15px 0;
+    font-weight: bold;
+}
+
+.category-id:after {
+    content: "";
+    position: absolute;
+    left: 0px;
+    bottom: -2px;
+    height: 1px;
+    width: 100%;
+    background: #a5a4a4;
+}
+
+.menu-contents p {
+    margin: 15px 0;
+    font-weight: bold;
+}
+.category-write-edit-body {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+.create-category {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px;
+    gap: 15px;
+}
+
+.create-category p {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.create-category input::placeholder {
+    font-size: 14px;
+}
+
+.category-list {
+    margin: 20px;
+}
+
+.category-list p {
+    width: 200px;
+}

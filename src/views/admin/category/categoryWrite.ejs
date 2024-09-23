@@ -12,7 +12,7 @@
             href="/static/styles/pages/category/categoryWrite.css"
         />
         <link rel="stylesheet" href="/static/styles/reset.css" />
-        <title>Document</title>
+        <title>카테고리 추가</title>
     </head>
     <body>
         <div class="category-write-edit-wrapper">
@@ -25,17 +25,36 @@
                     <p class="category-nickName">닉네임</p>
                     <p class="category-id">@ggaong</p>
                 </div>
-                <div class="menu-contents">
-                    <a href=""><p>카테고리 생성</p></a>
-                    <a href=""><p>카테고리 수정</p></a>
+                <div class="category-setup-menu-bar-main">
+                    <div class="menu-contents">
+                        <a href="/admin/category/write"><p>카테고리 관리</p></a>
+                    </div>
+                    <div class="logout">
+                        <a href="">
+                            <p>로그아웃</p>
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                        </a>
+                    </div>
                 </div>
             </section>
-            <section>
+            <section class="category-write-edit-main">
                 <div class="create-category">
                     <p>카테고리 생성</p>
                     <input type="text" placeholder="카테고리명을 입력하세요." />
-                    <button>작성</button>
+                    <button type="submit">생성</button>
                 </div>
+                <div >
+                    <% category.forEach(function(category) { %>
+                    <div class="category-list">
+                        <a href="/admin/category/<%= category.categoryId %>/posts">
+                            <p><%= category.title %></p></a>
+                            <div class="category-edit-icons">
+                                <a href=""><i class="fa-solid fa-pen"></i></a> 
+                                <a href=""><i class="fa-solid fa-check hidden"></i></a>
+                            </div>
+                        
+                    </div>
+                    <% }) %>
             </section>
         </div>
     </body>
