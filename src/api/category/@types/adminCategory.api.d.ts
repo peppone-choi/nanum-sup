@@ -11,13 +11,10 @@ declare type adminGetCategoryRequest = {
 
 /** 카테고리 목록 조회 (관리자) 응답 */
 declare type adminGetCategoryResponse = Array<ICategoryResponseDTO>;
-
 declare type adminGetCategoryDetailRequestPath = {
     categoryId: string;
 };
-
 declare type adminGetCategoryDetailRequestBody = {};
-
 declare type adminGetCategoryDetailRequestParams = {};
 
 /** 카테고리 상세조회 (관리자) 요청 */
@@ -31,9 +28,11 @@ declare type adminGetCategoryDetailRequest = {
 declare type adminGetCategoryDetailResponse = {
     categoryId: string;
     title: string;
-    // post:{}
+    post: {
+        id: string;
+    };
     // author:{}
-};
+} | null;
 
 declare type adminGetCategoryDetailRequestBody = {
     title: stirng;

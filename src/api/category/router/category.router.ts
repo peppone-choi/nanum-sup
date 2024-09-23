@@ -10,6 +10,7 @@ import {
     getCategoryDetailValidator,
     getCategoryValidator,
 } from "../dto/validation/category.validation";
+import { MongooseCategoryRepository } from "../repository/mongooseCategory.repository";
 
 const categoryRouter = express.Router();
 
@@ -21,7 +22,7 @@ const CATEGORY_ROUTES = {
 } as const;
 
 const categoryController = new CategoryController(
-    new CategoryServiceImpl(new MemoryCategoryRepository())
+    new CategoryServiceImpl(new MongooseCategoryRepository())
 );
 
 categoryRouter.get(

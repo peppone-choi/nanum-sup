@@ -43,7 +43,7 @@
                     <a href="/admin/category/write" class="admin-setup">
                         <i class="fa-solid fa-pen"></i>
                     </a>
-                    <div class="logout">
+                    <div class="logout" id="logout-btn">
                         <a href="">
                             <p>로그아웃</p>
                             <i class="fa-solid fa-right-from-bracket"></i>
@@ -58,10 +58,31 @@
             <div class="popup-content">
                 <p>로그아웃 하시겠습니까?</p>
                 <div class="logout-btn">
-                    <a href=""><button class="btn-cancel">취소</button></a>
-                    <a href=""> <button class="btn-confirm">확인</button></a>
+                    <button class="btn-cancel" id="cancel-btn">취소</button>
+                    <button class="btn-confirm" id="confirm-btn">확인</button>
                 </div>
             </div>
         </div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const logoutBtn = document.getElementById("logout-btn");
+                const logoutPopup = document.getElementById("logout-popup");
+                const cancelBtn = document.getElementById("cancel-btn");
+                const confirmBtn = document.getElementById("confirm-btn");
+
+                logoutBtn.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    logoutPopup.classList.remove("hidden");
+                });
+
+                cancelBtn.addEventListener("click", function () {
+                    logoutPopup.classList.add("hidden");
+                });
+
+                confirmBtn.addEventListener("click", function () {
+                    window.location.href = "/login";
+                });
+            });
+        </script>
     </body>
 </html>
