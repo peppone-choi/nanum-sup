@@ -65,7 +65,7 @@ body {
   background-image: url("/static/images/menu-btn.svg");
 }
 /* 메뉴 버튼 흰 */
-#header .menuButton {
+#header .menuButtonWhite {
   background-image: url("/static/images/menu-btn-w.svg");
 }
 
