@@ -75,7 +75,7 @@ export default class AdminPostsController {
 
 
   try {
-    const createdPost = await this._postsService.createPost(categoryId, { 
+    const createdPost = await this._postsService.createPost(categoryId, userId, { 
       title,
       content,
     });
