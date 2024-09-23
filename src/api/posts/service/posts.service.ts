@@ -5,31 +5,44 @@ import HttpException from "@/api/common/exceptions/http.exception";
 import { PostResponseDTO } from "@/api/posts/dto/postResponse.dto";
 import { PostsService } from "@/api/posts/service/posts.service.type";
 import { CommentRepository } from "@/api/comment/repository/comment.repository";
-import { IPost } from "../@types/post.type";
+
 // userRepository 가져오기
 // commentRepository 가져오기
 
 export class PostsServiceImpl implements PostsService {
   private readonly _postRepository: PostRepository;
-  private readonly _userRepository: UserRepository;
+  // private readonly _userRepository: UserRepository;
   private readonly _categoryRepository: CategoryRepository;
   private readonly _commentRepository: CommentRepository;
 
-  constructor(PostRepository: PostRepository, UserRepository: UserRepository, CategoryRepository: CategoryRepository, CommentRepository: CommentRepository) {
+
+
+  constructor(
+    PostRepository: PostRepository, 
+    // UserRepository: UserRepository,
+    CategoryRepository: CategoryRepository,
+    CommentRepository: CommentRepository
+  ) {
+
+
     this._postRepository = PostRepository;
-    this._userRepository = UserRepository;
+    // this._userRepository = UserRepository;
     this._categoryRepository = CategoryRepository;
     this._commentRepository = CommentRepository;
   }
 
-  /** 게시글 생성 */
-  async createPost(userId: string, categoryId: string, post: Pick<IPost, "title" | "content" | "category">): Promise<PostResponseDTO> {
-    const author = await this._userRepository.findById(userId);
-    const category = await this._categoryRepository.findById(post.category.id);
+  /** 게시글 생성 */ 
+  async createPost(
+    // userId: string,
+    categoryId: string,
+    post: Omit<IPost, "id" | "author" | "category">
+  ): Promise<PostResponseDTO> {
+    // const author = await this._userRepository.findById(userId);
+    const category = await this._categoryRepository.findById(categoryId);
 
-    if (!author) {
-      throw new HttpException(404, "작성자를 찾을 수 없습니다.");
-    }
+    // if (!author) {
+    //   throw new HttpException(404, "작성자를 찾을 수 없습니다.");
+    // }
 
     if (!category) {
       throw new HttpException(404, "카테고리를 찾을 수 없습니다.");
@@ -37,10 +50,11 @@ export class PostsServiceImpl implements PostsService {
 
     const newPost = await this._postRepository.save({
       ...post,
-      author,
+      // author,
       category,
-      comments: [],
+     
     });
+
     return new PostResponseDTO(newPost);
   }
 
@@ -49,12 +63,15 @@ export class PostsServiceImpl implements PostsService {
     const posts = await this._postRepository.findAll();
     return await Promise.all(posts.map((post) => new PostResponseDTO(post)));
   }
+
   /** 게시글 상세 조회 */
   async getPostDetail(postId: string): Promise<PostResponseDTO | null> {
     const post = await this._postRepository.findById(postId);
     if (!post) {
       throw new HttpException(404, "게시글을 찾을 수 없습니다.");
     }
+
+    const comments = await this._commentRepository.findById(postId);
     return new PostResponseDTO(post);
   }
 
@@ -63,6 +80,8 @@ export class PostsServiceImpl implements PostsService {
     await this._postRepository.update(postId, updatedPost);
     return;
   }
+
+    /** 게시글 삭제 */
   async deletePost(postId: string): Promise<void> {
     await this._postRepository.delete(postId);
   }

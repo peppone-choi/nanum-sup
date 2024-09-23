@@ -20,7 +20,16 @@ export default class PostsController {
     this.deletePost = this.deletePost.bind(this);
   }
 
-  async getPosts(req: Request<getPostsRequest["path"], getPostsResponse, getPostsRequest["body"], getPostsRequest["params"]>, res: Response, next: NextFunction) {
+  async getPosts(
+    req: Request<
+    getPostsRequest["path"], 
+    getPostsResponse, 
+    getPostsRequest["body"], 
+    getPostsRequest["params"]
+    >, 
+    res: Response, 
+    next: NextFunction
+  ) {
     try {
       const posts = await this._postsService.getPosts();
 
@@ -29,7 +38,16 @@ export default class PostsController {
       next(error);
     }
   }
-  async getPostDetail(req: Request<getPostDetailRequest["path"], getPostDetailResponse, getPostDetailRequest["body"], getPostDetailRequest["params"]>, res: Response, next: NextFunction) {
+  async getPostDetail(
+    req: Request<
+    getPostDetailRequest["path"], 
+    getPostDetailResponse, 
+    getPostDetailRequest["body"], 
+    getPostDetailRequest["params"]
+    >, 
+    res: Response, 
+    next: NextFunction
+  ) {
     const { postId } = req.params;
     try {
       const post = await this._postsService.getPostDetail(postId);
@@ -38,17 +56,27 @@ export default class PostsController {
       next(error);
     }
   }
-  async createPost(req: Request<createPostRequest["path"], createPostResponse, createPostRequest["body"], createPostRequest["params"]>, res: Response, next: NextFunction) {
-    const { ...rest } = req.body;
+  async createPost(
+    req: Request<
+    createPostRequest["path"], 
+    createPostResponse, 
+    createPostRequest["body"], 
+    createPostRequest["params"]
+    >, 
+    res: Response, 
+    next: NextFunction
+  ) {
+    const { title, content, categoryId } = req.body;
+
     try {
-      const createdPost = await this._postsService.createPost(req.user.userId, rest.categoryId, {
-        title: rest.title,
-        content: rest.content,
+      const createdPost = await this._postsService.createPost(categoryId, { 
+        title,
+        content,
       });
       res.send(createdPost);
     } catch (error) {
       next(error);
-    }
+     }
   }
   async updatePost(req: Request<updatePostRequest["path"], updatePostResponse, updatePostRequest["body"], updatePostRequest["params"]>, res: Response, next: NextFunction) {
     const { postId } = req.params;

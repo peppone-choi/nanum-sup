@@ -1,9 +1,13 @@
 import { PostResponseDTO } from "@/api/posts/dto/postResponse.dto";
-import { IPost } from "../@types/post.type";
+// import { IPost } from "../@types/post.type";
 
 export interface PostsService {
   /** 게시글 생성 */
-  createPost(userId: string, categoryId: string, post: Pick<IPost, "title" | "content">): Promise<PostResponseDTO>;
+  createPost(
+    // userId: string,
+    categoryId: string,
+    post: Omit<IPost, "id" | "author" | "category" | "comments">
+  ): Promise<PostResponseDTO>;
   /** 게시글 목록 조회 */
   getPosts(): Promise<PostResponseDTO[]>;
   /** 게시글 상세 조회 */
