@@ -2,6 +2,7 @@ import HttpException from "@/api/common/exceptions/http.exception";
 
 import { MongooseComment } from "../model/comment.schema";
 import { CommentRepository } from "./comment.repository";
+import IComment from "../@types/comment.type";
 
 export class MongooseCommentRepository implements CommentRepository {
   async save(comment: Omit<IComment, "id">): Promise<IComment> {

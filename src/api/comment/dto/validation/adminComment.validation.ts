@@ -15,7 +15,7 @@ export const adminGetCommentDetailValidator = {
   path: adminGetCommentDetailPathValidator,
 };
 
-const adminCreateCommentBodyValidator = yup.object({
+export const adminCreateCommentBodyValidator = yup.object({
   title: yup.string().required("댓글명은 필수 입력값입니다.").max(500, "댓글명은 15자 이내로 입력해주세요."),
 });
 
