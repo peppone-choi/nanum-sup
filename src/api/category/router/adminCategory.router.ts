@@ -9,7 +9,7 @@ import {
     adminGetCategoryValidator,
     adminUpdateCategoryValidator,
 } from "@/api/category/dto/validation/adminCategory.validation";
-import { validate } from "@/api/common/middleware/validation.moddleware";
+import { validate } from "@/api/common/middlewares/validation.middleware";
 import { extractPath } from "@/utils/path.util";
 import { ROUTES_INDEX } from "@/routers";
 import { authUserMiddleware } from "@/api/common/middlewares/authUser.middleware";
@@ -21,7 +21,7 @@ const ADMIN_CATEGORY_ROUTES = {
     /**카테고리 목록 조회 (관리자) */
     GET_CATEGORY: `/admin-api/category`,
     /**카테고리 상세 조회 (관리자) */
-    GET_CATEGORY_DETAIL: `/admin-api/category:categoryId`,
+    GET_CATEGORY_DETAIL: `/admin-api/category/:categoryId`,
     /**카테고리 등록 (관리자) */
     CREATE_CATEGORY: `/admin-api/category`,
     /** 카테고리 수정 (관리자) */
