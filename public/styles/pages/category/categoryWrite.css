@@ -13,6 +13,20 @@ body {
     width: 280px;
     height: 100vh;
     position: relative;
+    overflow-y: auto;
+}
+
+.category-setup-menu-bar::-webkit-scrollbar {
+    width: 10px;
+}
+
+.category-setup-menu-bar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+
+.category-setup-menu-bar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.6);
 }
 
 .fa-gear {
@@ -68,7 +82,7 @@ body {
     flex-direction: column;
     justify-content: space-between;
     padding-top: 10px;
-    height: 83%;
+    height: 100%;
 }
 
 .menu-contents p {
@@ -93,6 +107,7 @@ body {
 .category-write-edit-main {
     background-color: rgba(255, 255, 255, 0.8);
 }
+
 .create-category {
     display: flex;
     justify-content: center;
@@ -110,13 +125,74 @@ body {
     font-size: 14px;
 }
 
+.category-list-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 .category-list {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
-    margin: 20px;
+    align-items: center; /* 수직 중앙 정렬 */
+    margin: 15px;
 }
 
 .category-list p {
     width: 200px;
+    margin: 0;
+}
+
+.category-edit-icons {
+    display: flex;
+    gap: 10px; /* 아이콘들 간의 간격 조정 */
+}
+/* 로그아웃 창 */
+.logout-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    width: 250px;
+    height: 100px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.logout-popup.hidden {
+    display: none;
+}
+
+.popup-content p {
+    padding-bottom: 15px;
+    font-weight: 700;
+}
+
+.logout-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.btn-cancel {
+    background-color: #ff8d8d;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-confirm {
+    background-color: #9ccaff;
+    border: none;
+    border-radius: 10px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-weight: bold;
 }

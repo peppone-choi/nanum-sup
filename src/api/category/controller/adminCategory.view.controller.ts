@@ -14,54 +14,9 @@ export default class AdminCategoryViewController {
 
     /** 카테고리 목록 페이지 */
     async categoryListPage(req: Request, res: Response, next: NextFunction) {
-        res.render("admin/category/categoryList", {
-            category: [
-                {
-                    categoryId: 1,
-                    title: "영화 나눔숲",
-                },
-                {
-                    categoryId: 2,
-                    title: "운동 나눔숲",
-                },
-                {
-                    categoryId: 3,
-                    title: "개발 나눔숲",
-                },
-                {
-                    categoryId: 4,
-                    title: "맛집 나눔숲",
-                },
-                {
-                    categoryId: 5,
-                    title: "잡담",
-                },
-                {
-                    categoryId: 5,
-                    title: "잡담",
-                },
-                {
-                    categoryId: 5,
-                    title: "잡담",
-                },
-                {
-                    categoryId: 5,
-                    title: "잡담",
-                },
-                {
-                    categoryId: 5,
-                    title: "잡담",
-                },
-                {
-                    categoryId: 5,
-                    title: "잡담",
-                },
-                {
-                    categoryId: 5,
-                    title: "잡담",
-                },
-            ],
-        });
+        const category = await this._categoryService.getCategory();
+        console.log(category);
+        res.render("admin/category/categoryList", { category });
     }
 
     /** 카테고리 상세 페이지 */
