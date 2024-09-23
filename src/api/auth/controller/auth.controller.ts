@@ -10,9 +10,9 @@ export default class AuthController {
 
   async login(req: Request, res: Response, next: NextFunction) {
     try {
-      const { email, password } = req.body;
+      const { id, password } = req.body;
 
-      const result = await this._authService.login(email, password);
+      const result = await this._authService.login(id, password);
 
       res.send(result);
     } catch (error) {
