@@ -3,9 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>관리자 로그인</title>
   </head>
   <body>
-    관리자 페이지의 로그인 페이지
+    <header>
+      <h1>나눔 숲<i class="fa-solid fa-tree"></i></h1>
+    </header>
+    <main>
+      <form action="/login" method="POST">
+        <div>
+          <label for="username">아이디</label>
+          <input type="text" id="username" name="username" required />
+        </div>
+        <div>
+          <label for="password">비밀번호</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+        <div>
+          <button type="submit">로그인</button>
+        </div>
+      </form>
+    </main>
   </body>
 </html>
