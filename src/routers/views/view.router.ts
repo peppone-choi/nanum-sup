@@ -16,4 +16,10 @@ viewRouter.get(`${BASE_PATH}`, (req, res) => {
   });
 });
 
+viewRouter.get(`${BASE_PATH}/signup`, (req, res) => {
+  res.render("signUp", {
+    title: "회원가입",
+  });
+});
+
 export default viewRouter;

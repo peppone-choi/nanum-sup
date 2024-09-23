@@ -11,10 +11,7 @@ interface IUser {
   password: string;
   /** salt */
   salt: string;
-  /** 암호화 */
-  refreshToken?: string;
-  /** 역할 */
-  role: string;
-  /** 프로필 */
-  profile: IProfile;
+  role: RoleType;
 }
+
+type RoleType = "admin" | "user";
