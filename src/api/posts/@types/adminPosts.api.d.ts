@@ -46,20 +46,21 @@ declare type adminGetPostDetailResponse = {
   category: {
     id: string;
   };
+  /** 댓글 */
+  category: {
+    comments: string[];
+  };
 } | null;
 
 declare type adminCreatePostRequestBody = {
   title: string;
   content: string;
   categoryId: string;
-
+  userId: string;
 };
 
 declare type adminCreatePostRequestPath = {
-  // /** 작성자 ID */
-  // userId: string;
-  // /** 카테고리 ID */
-  // categoryId: string;
+
 };
 
 declare type adminCreatePostRequestParams = {};

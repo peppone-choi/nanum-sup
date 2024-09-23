@@ -11,11 +11,12 @@ import {
 } from "@/api/posts/dto/validations/post.validation";
 import { validate } from "@/api/common/middlewares/validation.middleware";
 import { MongoosePostRepository } from "@/api/posts/repository/mongoosePost.repository";
-import { MongooseCategoryRepository } from '@/api/category/repository/mongooseCategory.repository';
+import { MongooseCategoryRepository } from "@/api/category/repository/mongooseCategory.repository";
 import { extractPath } from "@/utils/path.util";
 import { ROUTES_INDEX } from "@/routers";
 import { authUserMiddleware } from "@/api/common/middlewares/authUser.middleware";
-// import { MongooseCommentRepository } from "@/api/comment/repository/mongooseComment.repository";
+import { MongooseCommentRepository } from "@/api/comment/repository/mongooseComment.repository";
+import MongooseUserRepository from "@/api/user/repository/mongooseUser.repository";
 
 
 const postRouter = express.Router();
@@ -37,9 +38,9 @@ const POST_ROUTES = {
 const postsController = new PostsController(
   new PostsServiceImpl(
     new MongoosePostRepository(),
-    // new MongooseUserRepository(),
+    new MongooseUserRepository(),
     new MongooseCategoryRepository(),
-    // new MongooseCommentRepository(),
+    new MongooseCommentRepository(),
   )
 );
 

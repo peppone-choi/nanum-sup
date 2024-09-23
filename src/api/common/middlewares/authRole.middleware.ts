@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import HttpException from "../exceptions/http.exception";
-import { JwtService } from "../services/jwt.services";
+import { JwtService } from "../services/jwt.service";
 
 /** 인증 & 인가 미들웨어 */
 export const authRoleMiddleware = (roles: string[]) => {

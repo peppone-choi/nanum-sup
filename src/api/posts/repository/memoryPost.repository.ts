@@ -11,6 +11,7 @@ export class MemoryPostRepository implements PostRepository {
     const newPost = new Post({
       ...post,
       id: `post-${MemoryPostRepository.index++}`,
+
     });
     MemoryPostRepository.store.set(newPost.id, newPost);
     return newPost;

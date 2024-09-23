@@ -14,6 +14,8 @@ import { MongooseCategoryRepository } from "@/api/category/repository/mongooseCa
 import { extractPath } from "@/utils/path.util";
 import { ROUTES_INDEX } from "@/routers";
 import { authUserMiddleware } from "@/api/common/middlewares/authUser.middleware";
+import MongooseUserRepository from "@/api/user/repository/mongooseUser.repository";
+import { MongooseCommentRepository } from "@/api/comment/repository/mongooseComment.repository";
 // import { MongooseCommentRepository } from "@/api/comment/repository/mongooseComment.repository";
 
 
@@ -37,9 +39,9 @@ const ADMIN_POST_ROUTES = {
 const adminPostsController = new AdminPostsController(
   new PostsServiceImpl(
     new MongoosePostRepository(),
-    // new MongooseUserRepository(),
+    new MongooseUserRepository(),
     new MongooseCategoryRepository(),
-    // new MongooseCommentRepository(),
+    new MongooseCommentRepository(),
   )
 );
 
