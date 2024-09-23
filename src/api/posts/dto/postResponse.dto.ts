@@ -9,7 +9,7 @@ export class PostResponseDTO {
   category: {
     id: string;
   };
-  comments: string[];
+  // comments: string[];
 
   constructor(params: IPost) {
     this.postId = params.id;
@@ -22,6 +22,6 @@ export class PostResponseDTO {
     this.category = {
       id: params.category.id,
     };
-    this.comments = params.comments;
+    // this.comments = params.comments;
   }
 }

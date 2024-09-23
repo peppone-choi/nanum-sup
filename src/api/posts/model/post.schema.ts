@@ -24,12 +24,12 @@ const postSchema = new mongoose.Schema<IPost>({
     ref: "Category",
     required: true,
   },
-  comments: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Comment",
-    }
-  ],
+  // comments: [
+  //   {
+  //     type: mongoose.Schema.Types.ObjectId,
+  //     ref: "Comment",
+  //   }
+  // ],
   // createdAt: {
   //   type: Date,
   //   default: Date.now,

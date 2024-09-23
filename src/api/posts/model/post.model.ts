@@ -1,4 +1,4 @@
-import IComment from "@/api/comment/@types/comment.type";
+// import IComment from "@/api/comment/@types/comment.type";
 // import { IPost } from "../@types/post.type";
 
 export class Post implements IPost {
@@ -13,7 +13,7 @@ export class Post implements IPost {
   /** 카테고리 */
   category: ICategory;
   /** 댓글 리스트 */
-  comments: IComment[];
+  // comments: IComment[];
 
   constructor(params: IPost) {
     this.id = params.id;
@@ -21,6 +21,6 @@ export class Post implements IPost {
     this.content = params.content;
     // this.author = params.author;
     this.category = params.category;
-    this.comments = params.comments;
+    // this.comments = params.comments;
   }
 }

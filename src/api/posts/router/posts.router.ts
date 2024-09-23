@@ -15,7 +15,7 @@ import { MongooseCategoryRepository } from '@/api/category/repository/mongooseCa
 import { extractPath } from "@/utils/path.util";
 import { ROUTES_INDEX } from "@/routers";
 import { authUserMiddleware } from "@/api/common/middlewares/authUser.middleware";
-import { MongooseCommentRepository } from "@/api/comment/repository/mongooseComment.repository";
+// import { MongooseCommentRepository } from "@/api/comment/repository/mongooseComment.repository";
 
 
 const postRouter = express.Router();
@@ -39,7 +39,7 @@ const postsController = new PostsController(
     new MongoosePostRepository(),
     // new MongooseUserRepository(),
     new MongooseCategoryRepository(),
-    new MongooseCommentRepository(),
+    // new MongooseCommentRepository(),
   )
 );
 
