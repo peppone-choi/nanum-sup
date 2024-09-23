@@ -1,7 +1,7 @@
 import HttpException from "@/api/common/exceptions/http.exception";
 import { MongooseUser } from "../model/user.schema";
-import UserRepository from "./user.repository";
-import e from "express";
+import { UserRepository } from "./user.repository";
+
 
 export default class MongooseUserRepository implements UserRepository {
   async create(user: Omit<IUser, "id">): Promise<IUser> {

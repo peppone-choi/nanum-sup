@@ -19,11 +19,11 @@ const postSchema = new mongoose.Schema<IPost>({
   //   ref: "User",
   //   required: true,
   // },
-  // category: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: "Category",
-  //   required: true,
-  // },
+  category: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Category",
+    required: true,
+  },
   // comments: [
   //   {
   //     type: mongoose.Schema.Types.ObjectId,
