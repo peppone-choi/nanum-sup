@@ -3,11 +3,17 @@ import { UserService } from "../service/user.service.type";
 import UserResponseDto from "../dto/userResponse.dto";
 import { CryptoService } from "@/api/common/services/crypto.service";
 import HttpException from "@/api/common/exceptions/http.exception";
+import { get } from "http";
 
 export default class AdminUserController {
   private readonly _userService: UserService;
   constructor(userService: UserService) {
     this._userService = userService;
+    this.getAdminUsers = this.getAdminUsers.bind(this);
+    this.getAdminUserDetail = this.getAdminUserDetail.bind(this);
+    this.createAdminUser = this.createAdminUser.bind(this);
+    this.updateAdminUser = this.updateAdminUser.bind(this);
+    this.deleteAdminUser = this.deleteAdminUser.bind(this);
   }
 
   async getAdminUsers(

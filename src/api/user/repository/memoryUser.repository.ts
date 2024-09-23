@@ -45,4 +45,13 @@ export class MemoryUserRepository implements UserRepository {
     MemoryUserRepository.store.delete(id);
     return;
   }
+  async findByEmail(email: string): Promise<IUser> {
+    const user = Array.from(MemoryUserRepository.store.values()).find(
+      (user) => user.email === email
+    );
+    if (!user) {
+      throw new HttpException(404, "유저가 존재하지 않습니다.");
+    }
+    return Promise.resolve(user);
+  }
 }
