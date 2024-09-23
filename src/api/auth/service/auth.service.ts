@@ -13,10 +13,10 @@ export class AuthServiceImpl implements AuthService {
     this._userRepository = userRepository;
   }
   async adminLogin(
-    email: string,
+    accountId: string,
     password: string
   ): Promise<LoginResponseType> {
-    const findUser = await this._userRepository.findByEmail(email);
+    const findUser = await this._userRepository.findByAccountId(accountId);
 
     if (!findUser) {
       throw new HttpException(404, "존재하지 않는 회원입니다.");
@@ -47,8 +47,8 @@ export class AuthServiceImpl implements AuthService {
     };
   }
 
-  async login(email: string, password: string): Promise<LoginResponseType> {
-    const findUser = await this._userRepository.findByEmail(email);
+  async login(accountId: string, password: string): Promise<LoginResponseType> {
+    const findUser = await this._userRepository.findByAccountId(accountId);
 
     if (!findUser) {
       throw new HttpException(404, "존재하지 않는 회원입니다.");

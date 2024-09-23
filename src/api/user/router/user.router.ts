@@ -5,7 +5,12 @@ import { authUserMiddleware } from "@/api/common/middlewares/authUser.middleware
 import UserController from "../controller/user.controller";
 import UserServiceImpl from "../service/user.service";
 import { MemoryUserRepository } from "../repository/memoryUser.repository";
-import { getUserDetailValidator } from "../dto/validation/user.validation";
+import {
+  createUserValidator,
+  deleteUserValidator,
+  getUserDetailValidator,
+  updateUserValidator,
+} from "../dto/validation/user.validation";
 import { validate } from "@/api/common/middlewares/validation.middleware";
 import MongooseUserRepository from "../repository/mongooseUser.repository";
 const userRouter = express.Router();
@@ -43,22 +48,21 @@ userRouter.get(
 
 userRouter.post(
   extractPath(USER_ROUTES.SIGN_IN, ROUTES_INDEX.USER_API),
-  authUserMiddleware,
-  validate(getUserDetailValidator),
+  validate(createUserValidator),
   userController.signIn
 );
 
 userRouter.put(
   extractPath(USER_ROUTES.UPDATE_USER, ROUTES_INDEX.USER_API),
   authUserMiddleware,
-  validate(getUserDetailValidator),
+  validate(updateUserValidator),
   userController.updateUser
 );
 
 userRouter.delete(
   extractPath(USER_ROUTES.DELETE_USER, ROUTES_INDEX.USER_API),
   authUserMiddleware,
-  validate(getUserDetailValidator),
+  validate(deleteUserValidator),
   userController.deleteUser
 );
 

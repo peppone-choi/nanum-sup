@@ -20,3 +20,5 @@ authRouter.post(
   extractPath(AUTH_ROUTES.SIGN_IN, ROUTES_INDEX.AUTH_API),
   authController.login
 );
+
+export default authRouter;
