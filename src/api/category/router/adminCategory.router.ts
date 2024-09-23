@@ -14,6 +14,7 @@ import { validate } from "@/api/common/middlewares/validation.middleware";
 import { extractPath } from "@/utils/path.util";
 import { ROUTES_INDEX } from "@/routers";
 import { authUserMiddleware } from "@/api/common/middlewares/authUser.middleware";
+import { MongooseCategoryRepository } from "../repository/mongooseCategory.repository";
 
 const adminCategoryRouter = express.Router();
 
@@ -32,7 +33,7 @@ const ADMIN_CATEGORY_ROUTES = {
 } as const;
 
 const adminCategoryController = new AdminCategoryController(
-    new CategoryServiceImpl(new MemoryCategoryRepository())
+    new CategoryServiceImpl(new MongooseCategoryRepository())
 );
 
 adminCategoryRouter.get(

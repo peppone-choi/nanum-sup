@@ -30,32 +30,75 @@
                         <a href="/admin/category/write"><p>카테고리 관리</p></a>
                     </div>
                     <div class="logout">
-                        <a href="">
+                        <a href="" id="logout-btn">
                             <p>로그아웃</p>
                             <i class="fa-solid fa-right-from-bracket"></i>
                         </a>
                     </div>
                 </div>
             </section>
-            <section class="category-write-edit-main">
-                <div class="create-category">
-                    <p>카테고리 생성</p>
-                    <input type="text" placeholder="카테고리명을 입력하세요." />
-                    <button type="submit">생성</button>
+            <!-- 로그아웃 창 -->
+            <div id="logout-popup" class="logout-popup hidden">
+                <div class="popup-content">
+                    <p>로그아웃 하시겠습니까?</p>
+                    <div class="logout-btn">
+                        <button class="btn-cancel" id="cancel-btn">취소</button>
+                        <button class="btn-confirm" id="confirm-btn">
+                            확인
+                        </button>
+                    </div>
                 </div>
-                <div >
+            </div>
+            <section class="category-write-edit-main">
+                <form class="create-category" id="category-form">
+                    <label for="category-title">
+                        <p>카테고리 생성</p>
+                        <input
+                            type="text"
+                            id="category-input"
+                            placeholder="카테고리명을 입력하세요."
+                        />
+                        <button type="submit" id="create-button">생성</button>
+                    </label>
+                </form>
+                <div class="category-list-wrapper" id="category-list">
                     <% category.forEach(function(category) { %>
                     <div class="category-list">
-                        <a href="/admin/category/<%= category.categoryId %>/posts">
-                            <p><%= category.title %></p></a>
-                            <div class="category-edit-icons">
-                                <a href=""><i class="fa-solid fa-pen"></i></a> 
-                                <a href=""><i class="fa-solid fa-check hidden"></i></a>
-                            </div>
-                        
+                        <a href="/admin/category/<%= category.categoryId %>">
+                            <p><%= category.title %></p></a
+                        >
+                        <div class="category-edit-icons">
+                            <a href=""><i class="fa-solid fa-pen"></i></a>
+                            <a href=""
+                                ><i class="fa-solid fa-check hidden"></i
+                            ></a>
+                        </div>
                     </div>
                     <% }) %>
+                </div>
             </section>
         </div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const logoutBtn = document.getElementById("logout-btn");
+                const logoutPopup = document.getElementById("logout-popup");
+                const cancelBtn = document.getElementById("cancel-btn");
+                const confirmBtn = document.getElementById("confirm-btn");
+
+                logoutBtn.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    logoutPopup.classList.remove("hidden");
+                });
+
+                cancelBtn.addEventListener("click", function () {
+                    logoutPopup.classList.add("hidden");
+                });
+
+                confirmBtn.addEventListener("click", function () {
+                    window.location.href = "/login";
+                });
+            });
+        </script>
+        <script></script>
     </body>
 </html>
