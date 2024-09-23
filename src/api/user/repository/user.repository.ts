@@ -1,4 +1,4 @@
-interface UserRepository {
+export interface UserRepository {
   /** CREATE USER */
   create(user: Omit<IUser, "id">): Promise<IUser>;
   /** READ USERS */
@@ -9,7 +9,7 @@ interface UserRepository {
   update(id: string, updateData: Omit<IUser, "id" | "userId">): Promise<void>;
   /** DELETE USER */
   delete(id: string): Promise<void>;
-  findByEmail(email: string): Promise<IUser>;
+  findByAccountId(accountId: string): Promise<IUser>;
 }
 
-export default UserRepository;
+// export default UserRepository;

@@ -1,5 +1,5 @@
 import HttpException from "@/api/common/exceptions/http.exception";
-import IComment from "../@types/comment.type";
+
 import { MongooseComment } from "../model/comment.schema";
 import { CommentRepository } from "./comment.repository";
 

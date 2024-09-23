@@ -5,7 +5,9 @@ import { PostRepository } from "@/api/posts/repository/post.repository";
 
 export class MongoosePostRepository implements PostRepository {
   async save(post: Omit<IPost, "id">): Promise<IPost> {
-    const newPost = new MongoosePost(post);
+    const newPost = new MongoosePost({
+      ...post,
+    });
     await newPost.save();
     return newPost;
   }
@@ -14,7 +16,9 @@ export class MongoosePostRepository implements PostRepository {
     return values;
   }
   async findById(id: string): Promise<IPost | null> {
-    const post = await MongoosePost.findById(id).populate("author");
+    const post = await MongoosePost.findById(id)
+    .populate("author")
+    .populate("comments");
     return post;
   }
   async update(postId: string, updatePostInfo: Partial<IPost>): Promise<IPost> {

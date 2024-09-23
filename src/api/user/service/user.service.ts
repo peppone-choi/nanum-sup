@@ -1,7 +1,7 @@
 import { CryptoService } from "@/api/common/services/crypto.service";
-import UserRepository from "../repository/user.repository";
 import { UserService } from "./user.service.type";
 import HttpException from "@/api/common/exceptions/http.exception";
+import { UserRepository } from "../repository/user.repository";
 
 export default class UserServiceImpl implements UserService {
   private readonly _userRepository: UserRepository;
