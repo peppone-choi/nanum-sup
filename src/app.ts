@@ -29,14 +29,12 @@ app.use(appRouter);
 app.use(ROUTES_INDEX.AUTH_API, authRouter);
 
 app.use(adminViewRouter);
-app.use(categoryRouter);
-app.use(adminCategoryRouter);
 
 /** -------- category ---------  */
 app.use(ROUTES_INDEX.CATEGORY_API, categoryRouter);
+app.use(ROUTES_INDEX.CATEGORY_VIEW, categoryViewRouter);
 app.use(ROUTES_INDEX.ADMIN_CATEGORY_API, adminCategoryRouter);
 app.use(ROUTES_INDEX.ADMIN_CATEGORY_VIEW, adminCategoryViewRouter);
-app.use(ROUTES_INDEX.CATEGORY_VIEW, categoryViewRouter);
 
 /** -------- posts ---------  */
 app.use(ROUTES_INDEX.POSTS_API, postRouter);
@@ -60,5 +58,5 @@ app.use("/static", express.static(path.join(__dirname, "../public"))); // 정적
 app.use(errorHandler);
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });

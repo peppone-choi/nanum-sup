@@ -85,7 +85,7 @@ body {
     flex-direction: column;
     justify-content: space-between;
     padding-top: 10px;
-    height: 80%;
+    height: 100%;
 }
 
 .category-list {
@@ -139,10 +139,16 @@ body {
     width: 250px;
     height: 100px;
     border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.logout-popup.hidden {
+    display: none;
 }
 
 .popup-content p {
     padding-bottom: 15px;
+    font-weight: 700;
 }
 
 .logout-btn {
@@ -158,6 +164,7 @@ body {
     padding: 5px 10px;
     border-radius: 10px;
     cursor: pointer;
+    font-weight: bold;
 }
 
 .btn-confirm {
@@ -166,4 +173,5 @@ body {
     border-radius: 10px;
     padding: 5px 10px;
     cursor: pointer;
+    font-weight: bold;
 }

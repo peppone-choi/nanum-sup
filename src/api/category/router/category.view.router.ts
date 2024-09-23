@@ -9,9 +9,9 @@ const categoryViewRouter = express.Router();
 
 const CATEGORY_VIEW_ROUTES = {
     /** 카테고리 목록 */
-    CATEGORY_LIST: "/category",
+    CATEGORY_LIST: "/client/category",
     /** 카테고리 상세  */
-    CATEGORY_DETAIL: "/category/:categoryId",
+    CATEGORY_DETAIL: "/client/category/:categoryId",
 } as const;
 
 const categoryViewController = new CategoryViewController(
@@ -28,30 +28,6 @@ categoryViewRouter.get(
         CATEGORY_VIEW_ROUTES.CATEGORY_DETAIL,
         ROUTES_INDEX.CATEGORY_VIEW
     ),
-    categoryViewController.userCategoryDetailPage
-);
-
-// CATEGORY_LIST 경로 확인
-const categoryListPath = extractPath(
-    CATEGORY_VIEW_ROUTES.CATEGORY_LIST,
-    ROUTES_INDEX.CATEGORY_VIEW
-);
-console.log("카테고리 목록 경로:", categoryListPath);
-
-categoryViewRouter.get(
-    categoryListPath,
-    categoryViewController.userCategoryListPage
-);
-
-// CATEGORY_DETAIL 경로 확인
-const categoryDetailPath = extractPath(
-    CATEGORY_VIEW_ROUTES.CATEGORY_DETAIL,
-    ROUTES_INDEX.CATEGORY_VIEW
-);
-console.log("카테고리 상세 경로:", categoryDetailPath);
-
-categoryViewRouter.get(
-    categoryDetailPath,
     categoryViewController.userCategoryDetailPage
 );
 
