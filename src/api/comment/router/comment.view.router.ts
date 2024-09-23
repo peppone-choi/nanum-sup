@@ -8,9 +8,9 @@ import CommentServiceImpl from "../service/comment.service";
 const commentViewRouter = express.Router();
 
 const CATEGORY_VIEW_ROUTES = {
-    /** 카테고리 목록 */
+    /** 댓글 목록 */
     CATEGORY_LIST: "/client/comment",
-    /** 카테고리 상세  */
+    /** 댓글 상세  */
     CATEGORY_DETAIL: "/client/comment/:commentId",
 } as const;
 

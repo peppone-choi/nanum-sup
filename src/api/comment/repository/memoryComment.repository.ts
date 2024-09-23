@@ -31,7 +31,7 @@ export class MemoryCommentRepository implements CommentRepository {
     const findComment = MemoryCommentRepository.store.get(id);
 
     if (!findComment) {
-      throw new HttpException(404, "카테고리를 찾을 수 없습니다.");
+      throw new HttpException(404, "댓글를 찾을 수 없습니다.");
     }
 
     MemoryCommentRepository.store.set(id, {
@@ -44,7 +44,7 @@ export class MemoryCommentRepository implements CommentRepository {
   async delete(id: string): Promise<void> {
     const findComment = MemoryCommentRepository.store.get(id);
     if (!findComment) {
-      throw new HttpException(404, "카테고리를 찾을 수 없습니다.");
+      throw new HttpException(404, "댓글를 찾을 수 없습니다.");
     }
     MemoryCommentRepository.store.delete(id);
   }

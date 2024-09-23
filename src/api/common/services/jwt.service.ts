@@ -6,6 +6,7 @@ type Params = {
   userId: string;
   /** 역할 */
   role?: RoleType;
+
   /** 만료 시간 */
   expiresIn?: string;
 };

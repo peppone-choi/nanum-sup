@@ -1,4 +1,4 @@
-// import IComment from "@/api/comment/@types/comment.type";
+import IComment from "@/api/comment/@types/comment.type";
 
 interface IPost {
   /** 게시글 ID */
