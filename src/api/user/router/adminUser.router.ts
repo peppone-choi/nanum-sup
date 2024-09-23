@@ -12,6 +12,7 @@ import {
   adminGetUserDetailValidator,
   adminUpdateUserValidator,
 } from "../dto/validation/adminUser.validation";
+import MongooseUserRepository from "../repository/mongooseUser.repository";
 
 const adminUserRouter = express.Router();
 
@@ -30,7 +31,7 @@ const USER_ROUTES = {
 } as const;
 
 const adminUserController = new AdminUserController(
-  new UserServiceImpl(new MemoryUserRepository())
+  new UserServiceImpl(new MongooseUserRepository())
 );
 
 adminUserRouter.get(

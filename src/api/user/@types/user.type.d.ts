@@ -5,5 +5,7 @@ interface IUser {
   password: string;
   salt: string;
   refreshToken?: string;
-  role: string;
+  role: RoleType;
 }
+
+type RoleType = "admin" | "user";

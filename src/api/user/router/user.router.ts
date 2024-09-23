@@ -7,6 +7,7 @@ import UserServiceImpl from "../service/user.service";
 import { MemoryUserRepository } from "../repository/memoryUser.repository";
 import { getUserDetailValidator } from "../dto/validation/user.validation";
 import { validate } from "@/api/common/middlewares/validation.middleware";
+import MongooseUserRepository from "../repository/mongooseUser.repository";
 const userRouter = express.Router();
 
 /** 사용자 API 객체 */
@@ -24,7 +25,7 @@ const USER_ROUTES = {
 } as const;
 
 const userController = new UserController(
-  new UserServiceImpl(new MemoryUserRepository())
+  new UserServiceImpl(new MongooseUserRepository())
 );
 
 userRouter.get(

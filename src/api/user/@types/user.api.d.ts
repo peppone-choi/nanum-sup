@@ -50,7 +50,7 @@ declare type updateUserRequestPath = {
 declare type updateUserRequestBody = {
   email: string;
   password?: string;
-  role: string;
+  role: RoleType;
 };
 declare type updateUserRequestParams = {};
 declare type updateUserRequest = {

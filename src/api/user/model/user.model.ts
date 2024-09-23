@@ -5,7 +5,7 @@ export class User implements IUser {
   password: string;
   salt: string;
   refreshToken?: string;
-  role: string;
+  role: RoleType;
   constructor({
     id,
     accountId,
