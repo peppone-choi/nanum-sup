@@ -1,6 +1,7 @@
 import HttpException from "@/api/common/exceptions/http.exception";
 import { MongooseUser } from "../model/user.schema";
 import UserRepository from "./user.repository";
+import e from "express";
 
 export default class MongooseUserRepository implements UserRepository {
   async create(user: Omit<IUser, "id">): Promise<IUser> {
@@ -36,5 +37,14 @@ export default class MongooseUserRepository implements UserRepository {
     }
     await MongooseUser.deleteOne({ _id: id });
     return;
+  }
+  async findByEmail(email: string): Promise<IUser> {
+    const user = await MongooseUser.findOne({
+      email: email,
+    });
+    if (!user) {
+      throw new HttpException(404, "유저가 존재하지 않습니다.");
+    }
+    return user;
   }
 }

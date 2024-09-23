@@ -9,6 +9,7 @@ interface UserRepository {
   update(id: string, updateData: Omit<IUser, "id" | "userId">): Promise<void>;
   /** DELETE USER */
   delete(id: string): Promise<void>;
+  findByEmail(email: string): Promise<IUser>;
 }
 
 export default UserRepository;
