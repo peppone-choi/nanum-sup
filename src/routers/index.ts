@@ -43,9 +43,21 @@ const COMMENT_ROUTES = {
   COMMENT_VIEW: "/comment",
 } as const;
 
+const USER_ROUTES = {
+  /** 유저 API */
+  USER_API: "/api/user",
+  /** 관리자 유저 API */
+  ADMIN_USER_API: "/admin-api/user",
+  /** 유저 뷰 */
+  USER_VIEW: "/user",
+  /** 관리자 유저 뷰 */
+  ADMIN_USER_VIEW: "/admin-api/user",
+} as const;
+
 export const ROUTES_INDEX = {
   ...CATEGORY_ROUTES,
   ...POST_ROUTES,
   ...AUTH_ROUTES,
   ...COMMENT_ROUTES,
+  ...USER_ROUTES,
 } as const;
