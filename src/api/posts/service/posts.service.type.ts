@@ -4,9 +4,9 @@ import { PostResponseDTO } from "@/api/posts/dto/postResponse.dto";
 export interface PostsService {
   /** 게시글 생성 */
   createPost(
-    // userId: string,
+    userId: string,
     categoryId: string,
-    post: Omit<IPost, "id" | "author" | "category" | "comments">
+    post: Omit<IPost, "id" | "author" | "comments" | "category">
   ): Promise<PostResponseDTO>;
   /** 게시글 목록 조회 */
   getPosts(): Promise<PostResponseDTO[]>;
