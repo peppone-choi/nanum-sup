@@ -12,6 +12,7 @@ interface IUser {
   /** salt */
   salt: string;
   role: RoleType;
+  profile: IProfile;
 }
 
 type RoleType = "admin" | "user";
