@@ -4,6 +4,14 @@ import express from "express";
 import AdminUserController from "../controller/adminUser.controller";
 import UserServiceImpl from "../service/user.service";
 import { MemoryUserRepository } from "../repository/memoryUser.repository";
+import { authRoleMiddleware } from "@/api/common/middlewares/authRole.middleware";
+import { validate } from "@/api/common/middlewares/validation.middleware";
+import {
+  adminCreateUserValidator,
+  adminDeleteUserValidator,
+  adminGetUserDetailValidator,
+  adminUpdateUserValidator,
+} from "../dto/validation/adminUser.validation";
 
 const adminUserRouter = express.Router();
 
@@ -27,26 +35,35 @@ const adminUserController = new AdminUserController(
 
 adminUserRouter.get(
   extractPath(USER_ROUTES.GET_USERS, ROUTES_INDEX.ADMIN_USER_API),
+  authRoleMiddleware(["admin"]),
   adminUserController.getAdminUsers
 );
 
 adminUserRouter.get(
   extractPath(USER_ROUTES.GET_USER_DETAIL, ROUTES_INDEX.ADMIN_USER_API),
+  authRoleMiddleware(["admin"]),
+  validate(adminGetUserDetailValidator),
   adminUserController.getAdminUserDetail
 );
 
 adminUserRouter.post(
   extractPath(USER_ROUTES.CREATE_USER, ROUTES_INDEX.ADMIN_USER_API),
+  authRoleMiddleware(["admin"]),
+  validate(adminCreateUserValidator),
   adminUserController.createAdminUser
 );
 
 adminUserRouter.put(
   extractPath(USER_ROUTES.UPDATE_USER, ROUTES_INDEX.ADMIN_USER_API),
+  authRoleMiddleware(["admin"]),
+  validate(adminUpdateUserValidator),
   adminUserController.updateAdminUser
 );
 
 adminUserRouter.delete(
   extractPath(USER_ROUTES.DELETE_USER, ROUTES_INDEX.ADMIN_USER_API),
+  authRoleMiddleware(["admin"]),
+  validate(adminDeleteUserValidator),
   adminUserController.deleteAdminUser
 );
 
