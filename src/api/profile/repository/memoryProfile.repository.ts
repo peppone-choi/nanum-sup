@@ -6,7 +6,7 @@ export class MemoryProfileRepository implements ProfileRepository {
   static index = 0;
   static readonly store: Map<string, IProfile> = new Map();
 
-  async save(): Promise<IProfile> {
+  async save(profile: Omit<IProfile, "id">): Promise<IProfile> {
     const newProfile = new Profile({
       ...profile,
       id: `profile-${MemoryProfileRepository.index++}`,

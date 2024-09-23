@@ -1,4 +1,6 @@
 interface IProfile {
+  /** 프로필 ID */
+  id: string;
   /** 닉네임 */
   nickname: string;
   /** 소개글 */
