@@ -31,6 +31,8 @@ body {
   color: var(--mono-500);
 }
 
+
+
 /* 헤더 */
 #header {
   display: flex;
@@ -39,30 +41,43 @@ body {
   height: 55px;
 }
 
-#header img {
-  width: 100%;
-  max-width: 120px;
-}
-
 #header button {
   border: 0;
   background-repeat: no-repeat;
-
-}
-
-#header .backButton {
-  background-image: url("/static/images/arrow-left.svg");
   width: 20px;
   height: 20px;
+  background-color: transparent;
 }
 
+
+/* 뒤로가기 버튼 검정 */
+#header .backButton {
+  background-image: url("/static/images/arrow-left.svg");
+
+}
+/* 뒤로가기 버튼 흰색 */
+#header .backButtonWhite {
+  background-image: url("/static/images/arrow-left-w.svg");
+}
+
+/* 찾기 버튼 검정 */
 #header .searchButton {
   background-image: url("/static/images/search-btn.svg");
-  width: 25px;
-  height: 20px;
-  background-position: center center;
+}
+/* 찾기 버튼 흰 */
+#header .searchButtonWhite {
+  background-image: url("/static/images/search-btn-w.svg");
 }
 
+/* 로고이미지 */
+#header img {
+  width: 100%;
+  max-width: 110px;
+}
+
+
+
+/* 레이아웃 */
 
 #wrap {
   height: 100vh;
@@ -76,15 +91,8 @@ body {
 }
 
 
-/* select */
-/* select::-ms-expand {
-  display: none;
-}
-select {
-      background:url('../images/ico-select-arrow.svg') no-repeat right 8px center/12px auto; 
-      -webkit-appearance: none;
-      padding: 5px 25px 5px 5px;
-} */
+
+
 
 /* input radio & checkbox 옵션 */
 input[type='radio'],
