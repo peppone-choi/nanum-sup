@@ -6,3 +6,5 @@ declare module "jsonwebtoken" {
     role: RoleType;
   }
 }
+
+type RoleType = "admin" | "user";
