@@ -51,20 +51,20 @@
             </div>
             <section class="category-write-edit-main">
                 <form class="create-category" id="category-form">
-                    <p>카테고리 생성</p>
-                    <input
-                        type="text"
-                        id="category-input"
-                        placeholder="카테고리명을 입력하세요."
-                    />
-                    <button type="submit" id="create-button">생성</button>
+                    <label for="category-title">
+                        <p>카테고리 생성</p>
+                        <input
+                            type="text"
+                            id="category-input"
+                            placeholder="카테고리명을 입력하세요."
+                        />
+                        <button type="submit" id="create-button">생성</button>
+                    </label>
                 </form>
                 <div class="category-list-wrapper" id="category-list">
                     <% category.forEach(function(category) { %>
                     <div class="category-list">
-                        <a
-                            href="/admin/category/<%= category.categoryId %>/posts"
-                        >
+                        <a href="/admin/category/<%= category.categoryId %>">
                             <p><%= category.title %></p></a
                         >
                         <div class="category-edit-icons">
@@ -99,5 +99,6 @@
                 });
             });
         </script>
+        <script></script>
     </body>
 </html>

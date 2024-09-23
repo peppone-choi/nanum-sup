@@ -17,29 +17,9 @@ export default class CategoryViewController {
         next: NextFunction
     ) {
         const category = await this._categoryService.getCategory();
+        console.log(category);
         res.render("client/category/userCategoryList", {
-            category: [
-                {
-                    categoryId: 1,
-                    title: "영화 나눔숲",
-                },
-                {
-                    categoryId: 2,
-                    title: "운동 나눔숲",
-                },
-                {
-                    categoryId: 3,
-                    title: "개발 나눔숲",
-                },
-                {
-                    categoryId: 4,
-                    title: "맛집 나눔숲",
-                },
-                {
-                    categoryId: 5,
-                    title: "잡담",
-                },
-            ],
+            category,
         });
     }
 
