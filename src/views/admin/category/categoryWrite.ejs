@@ -12,12 +12,13 @@
             href="/static/styles/pages/category/categoryWrite.css"
         />
         <link rel="stylesheet" href="/static/styles/reset.css" />
+        <link rel="stylesheet" href="/static/styles/init.css" />
         <title>카테고리 추가</title>
     </head>
     <body>
         <div class="category-write-edit-wrapper">
             <section class="category-setup-menu-bar">
-                <a href="">
+                <a href="#">
                     <i class="fa-solid fa-gear"></i>
                 </a>
                 <div class="category-profile">
@@ -64,14 +65,22 @@
                 <div class="category-list-wrapper" id="category-list">
                     <% category.forEach(function(category) { %>
                     <div class="category-list">
-                        <a href="/admin/category/<%= category.categoryId %>">
-                            <p><%= category.title %></p></a
-                        >
+                        <input
+                            value="<%= category.title %>"
+                            name="change-category"
+                            type="text"
+                            href="/admin/category/<%= category.categoryId %>"
+                        />
                         <div class="category-edit-icons">
                             <a href=""><i class="fa-solid fa-pen"></i></a>
                             <a href=""
-                                ><i class="fa-solid fa-check hidden"></i
+                                ><i
+                                    name="check"
+                                    id="<%= category.categoryId %>"
+                                    class="fa-solid fa-check hidden"
+                                ></i
                             ></a>
+                            <a href=""><i class="fa-solid fa-x"></i></a>
                         </div>
                     </div>
                     <% }) %>
@@ -99,6 +108,10 @@
                 });
             });
         </script>
-        <script></script>
+        <script>
+            const changeCategory =
+                document.getElementsByName("change-category");
+            console.log(changeCategory);
+        </script>
     </body>
 </html>

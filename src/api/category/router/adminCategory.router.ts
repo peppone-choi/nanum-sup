@@ -1,7 +1,6 @@
 import express from "express";
 import AdminCategoryController from "@/api/category/controller/adminCategory.controller";
 import { CategoryServiceImpl } from "@/api/category/service/category.service";
-import { MemoryCategoryRepository } from "@/api/category/repository/memoryCategory.repository";
 import {
     adminCreateCategoryValidator,
     adminDeleteCategoryValidator,
@@ -14,7 +13,9 @@ import { validate } from "@/api/common/middlewares/validation.middleware";
 import { extractPath } from "@/utils/path.util";
 import { ROUTES_INDEX } from "@/routers";
 import { authUserMiddleware } from "@/api/common/middlewares/authUser.middleware";
-import { MongooseCategoryRepository } from "../repository/mongooseCategory.repository";
+import { MongooseCategoryRepository } from "@/api/category/repository/mongooseCategory.repository";
+// import { MongooseUserRepository } from "@/api/user/repository/mongooseUser.repository";
+import { MongoosePostRepository } from "@/api/posts/repository/mongoosePost.repository";
 
 const adminCategoryRouter = express.Router();
 
@@ -33,7 +34,10 @@ const ADMIN_CATEGORY_ROUTES = {
 } as const;
 
 const adminCategoryController = new AdminCategoryController(
-    new CategoryServiceImpl(new MongooseCategoryRepository())
+    new CategoryServiceImpl(
+        new MongooseCategoryRepository()
+        // new MongoosePostRepository()
+    )
 );
 
 adminCategoryRouter.get(

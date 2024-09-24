@@ -51,7 +51,7 @@ declare type adminCreateCategoryRequest = {
 /** 카테고리 생성 (관리자) 응답 */
 declare type adminCreateCategoryResponse = ICategoryResponseDTO;
 
-declare type adminUpdateCategoryRequestBody = Omit<ICategory, "id">;
+declare type adminUpdateCategoryRequestBody = Omit<ICategory, "id" | "user">;
 
 declare type adminUpdateCategoryRequestPath = {
     /** 카테고리 ID */
