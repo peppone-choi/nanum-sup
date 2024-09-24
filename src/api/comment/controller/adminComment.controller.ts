@@ -1,15 +1,15 @@
 import { NextFunction, Request, Response } from "express";
-import { AdminCommentService } from "@/api/comment/service/adminComment.service.type";
+import { CommentService } from "@/api/comment/service/comment.service.type";
 
 // [관리자]
-// 카테고리 목록 조회 - getComment
-// 카테고리 생성 - createComment
-// 카테고리 수정 - editComment
-// 카테고리 삭제 - deleteComment
+// 댓글 목록 조회 - getComment
+// 댓글 생성 - createComment
+// 댓글 수정 - editComment
+// 댓글 삭제 - deleteComment
 
 export default class AdminCommentController {
-    private readonly _adminCommentService: AdminCommentService;
-    constructor(_adminCommentService: AdminCommentService) {
+    private readonly _adminCommentService: CommentService;
+    constructor(_adminCommentService: CommentService) {
         this._adminCommentService = _adminCommentService;
 
         this.getComment = this.getComment.bind(this);
@@ -46,7 +46,6 @@ export default class AdminCommentController {
         res: Response,
         next: NextFunction
     ) {
-        const { ...rest } = req.body;
     }
 
     async editComment(

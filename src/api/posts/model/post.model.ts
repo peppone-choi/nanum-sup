@@ -10,7 +10,7 @@ export class Post implements IPost {
   /** 카테고리 */
   category: ICategory;
   /** 댓글 리스트 */
-  comments: string[];
+  comments: IComment[];
 
   constructor(params: IPost) {
     this.id = params.id;

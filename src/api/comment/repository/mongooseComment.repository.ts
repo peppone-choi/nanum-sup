@@ -13,17 +13,27 @@ export class MongooseCommentRepository implements CommentRepository {
   }
 
   async findAll(): Promise<IComment[]> {
-    const values = await MongooseComment.find();
+    const values = await MongooseComment.find()
+      .populate("author")
+      .populate("post");
 
     return values;
   }
   async findById(id: string): Promise<IComment | null> {
-    const comment = await MongooseComment.findById(id);
+    const comment = await MongooseComment.findById(id)
+      .populate("author")
+      .populate("post");
     return comment;
   }
 
-  async update(id: string, updateCommentInfo: Partial<IComment>): Promise<IComment> {
-    const results = await MongooseComment.findByIdAndUpdate(id, updateCommentInfo);
+  async update(
+    id: string,
+    updateCommentInfo: Partial<IComment>
+  ): Promise<IComment> {
+    const results = await MongooseComment.findByIdAndUpdate(
+      id,
+      updateCommentInfo
+    );
     if (!results) {
       throw new HttpException(404, "댓글을 찾을 수 없습니다.");
     }

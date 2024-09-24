@@ -24,6 +24,10 @@ const userSchema = new mongoose.Schema<IUser>({
     required: true,
     enum: ["admin", "user"],
   },
+  profile: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Profile",
+  },
 });
 
 export const MongooseUser = mongoose.model<IUser>("User", userSchema);

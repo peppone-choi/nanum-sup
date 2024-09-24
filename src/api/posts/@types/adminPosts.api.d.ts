@@ -30,27 +30,7 @@ declare type adminGetPostDetailRequest = {
 };
 
 /** [관리자] 게시글 상세 조회 응답 (DTO 참고) */
-declare type adminGetPostDetailResponse = {
-  /** 게시글 ID */
-  postId: string;
-  /** 제목 */
-  title: string;
-  /** 내용 */
-  content: string;
-  /** 작성자 */
-  author: {
-    id: string;
-    userName: string;
-  };
-  /** 카테고리 */
-  category: {
-    id: string;
-  };
-  /** 댓글 */
-  category: {
-    comments: string[];
-  };
-} | null;
+declare type adminGetPostDetailResponse = PostResponseDTO;
 
 declare type adminCreatePostRequestBody = {
   title: string;
@@ -59,9 +39,7 @@ declare type adminCreatePostRequestBody = {
   userId: string;
 };
 
-declare type adminCreatePostRequestPath = {
-
-};
+declare type adminCreatePostRequestPath = {};
 
 declare type adminCreatePostRequestParams = {};
 
@@ -75,7 +53,10 @@ declare type adminCreatePostRequest = {
 /** [관리자] 게시글 생성 응답 */
 declare type adminCreatePostResponse = IPostResponseDTO;
 
-declare type adminUpdatePostRequestBody = Pick<IPost, "title" | "content" | "category">;
+declare type adminUpdatePostRequestBody = Pick<
+  IPost,
+  "title" | "content" | "category"
+>;
 
 declare type adminUpdatePostRequestPath = {
   /** 게시글 ID */
@@ -109,7 +90,6 @@ declare type adminDeletePostRequest = {
   path: adminDeletePostRequestPath;
   body?: adminDeletePostRequestBody;
 };
-
 
 /** [관리자] 게시글 삭제 응답 */
 declare type adminDeletePostResponse = void;

@@ -33,6 +33,7 @@ declare type createAdminUserRequestBody = {
   accountId: string;
   password: string;
   email: string;
+  profile: IProfile;
 };
 declare type createAdminUserRequestParams = {};
 declare type createAdminUserRequest = {
@@ -51,6 +52,7 @@ declare type updateAdminUserRequestBody = {
   email: string;
   password?: string;
   role: RoleType;
+  profile: IProfile;
 };
 declare type updateAdminUserRequestParams = {};
 declare type updateAdminUserRequest = {

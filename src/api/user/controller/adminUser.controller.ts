@@ -55,12 +55,13 @@ export default class AdminUserController {
     res: Response,
     next: NextFunction
   ) {
-    const { accountId, password, email } = req.body;
+    const { accountId, password, email, profile } = req.body;
     const user = await this._userService.signIn({
       accountId,
       password,
       email,
       role: "user",
+      profile: profile,
     });
     res.status(201).send(new UserResponseDto(user));
   }
@@ -75,13 +76,14 @@ export default class AdminUserController {
     next: NextFunction
   ) {
     const { userId } = req.params;
-    const { email, role, password } = req.body;
+    const { email, role, password, profile } = req.body;
     await this._userService.updateUser(
       req.user,
       userId,
       {
         email,
         role,
+        profile,
       },
       password
     );

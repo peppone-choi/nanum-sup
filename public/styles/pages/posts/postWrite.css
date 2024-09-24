@@ -2,11 +2,14 @@
 @import "../../common.css";
 
 
+body {
+  background-color: var(--sub-color-3);
+}
+
 
 #wrap {
   overflow-x: hidden;
 }
-
 
 
 #wrap > .inner {
@@ -19,6 +22,8 @@
 #postWriteForm {
   align-items: flex-start;
   flex-wrap: wrap;
+  border-radius: 10px;
+  gap: 10px;
   /* width: 100%; */
 }
 
@@ -26,13 +31,40 @@
 .category, #category {
   width: 60%;
   height: 40px;
-
+  border-radius: 10px;
+  color: var(--mono-500);
 }
+
+/* 카테고리 select 박스 */
+select.category::-ms-expand {
+  display: none;
+}
+select.category {
+  background-image: url('/static/images/arrow-down.svg'); 
+  background-repeat: no-repeat;
+  background-position: right 10px top 30%;
+  -o-appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 5px 25px 5px 5px;
+  background-size: 10px;
+  background-color: var(--mono-000);
+}
+
+select.category option {
+  cursor: pointer;
+  font-weight: 500;
+  width: 100%;
+}
+
+
 
 /* 제목 */
 .title, #title {
   width: 100%;
   height: 40px;
+  border-radius: 10px;
 }
 
 /* 내용 */
@@ -47,5 +79,6 @@
   font-size: 15px;
   color: var(--mono-400);
   resize: none;
+
 }
 
