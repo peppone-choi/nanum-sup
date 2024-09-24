@@ -90,8 +90,8 @@ body {
 /* 레이아웃 */
 
 #wrap {
-  /* height: calc(100vh - 55px); */
-  height: 100vh;
+  height: calc(100vh - 55px);
+  /* height: 100vh; */
 }
 
 .inner {

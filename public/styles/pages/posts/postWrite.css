@@ -8,7 +8,7 @@ body {
 
 
 #wrap {
-  overflow: hidden;
+  /* overflow: hidden; */
   /* height: calc(100vh - ); */
 }
 
@@ -18,7 +18,7 @@ body {
 
 
 #wrap > .container {
-  padding-top: 20%;
+  padding: 15% 15px 10px 15px;
  
 }
 
@@ -40,7 +40,7 @@ input, .contentArea {
 
 /* 카테고리 선택 */
 .category, #category {
-  width: 60%;
+  width: 65%;
   height: 45px;
   border-radius: 10px;
   color: var(--mono-400);
