@@ -5,8 +5,8 @@ interface ICategory {
     title: string;
     /** 게시글 */
     // /** 작성자 (운영자,부운영자) */
-    admin: IUser;
-    subAdmin: IUser[];
+    admin?: IUser;
+    subAdmin?: IUser[];
 }
 
 interface ICategoryResponseDTO {
@@ -14,6 +14,6 @@ interface ICategoryResponseDTO {
     categoryId: string;
     /** 게시글 제목 */
     title: string;
-    admin: UserResponseDto;
-    subAdmin: UserResponseDto[];
+    admin?: UserResponseDto;
+    subAdmin?: UserResponseDto[];
 }

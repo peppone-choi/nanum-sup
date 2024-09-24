@@ -3,8 +3,8 @@
 export class Category implements ICategory {
     id: string;
     title: string;
-    admin: IUser;
-    subAdmin: IUser[];
+    admin?: IUser;
+    subAdmin?: IUser[];
 
     constructor(params: ICategory) {
         this.id = params.id;
