@@ -34,7 +34,7 @@ export class PostsServiceImpl implements PostsService {
     categoryId: string,
     post: Omit<IPost, "id" | "author" | "comment">
   ): Promise<PostResponseDTO> {
-    const author = await this._userRepository.getById(userId);
+    const author = await this._userRepository.findByAccountId(userId);
     const category = await this._categoryRepository.findById(categoryId);
 
     // if (!author) {
