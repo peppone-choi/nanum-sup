@@ -42,6 +42,7 @@ app.use(ROUTES_INDEX.ADMIN_POSTS_API, adminPostRouter);
 app.use(ROUTES_INDEX.ADMIN_POST_VIEW, adminPostViewRouter);
 app.use(ROUTES_INDEX.POST_VIEW, postViewRouter);
 
+/** -------- users ---------  */
 app.use(ROUTES_INDEX.USER_API, userRouter);
 app.use(ROUTES_INDEX.ADMIN_USER_API, adminUserRouter);
 
@@ -58,5 +59,5 @@ app.use("/static", express.static(path.join(__dirname, "../public"))); // 정적
 app.use(errorHandler);
 
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });

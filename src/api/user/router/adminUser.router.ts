@@ -16,7 +16,7 @@ import MongooseUserRepository from "../repository/mongooseUser.repository";
 
 const adminUserRouter = express.Router();
 
-/** 문영자 API 객체 */
+/** 운영자 API 객체 */
 const USER_ROUTES = {
   /** [운영자] 유저 전체 리스트 확인 */
   GET_USERS: `/admin-api/users`,
