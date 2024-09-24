@@ -93,7 +93,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: end;
-    padding-bottom: 5px;
+    padding-bottom: 10px;
 }
 
 .admin-setup i {
@@ -107,7 +107,6 @@
     align-items: end;
     font-size: 18px;
     font-weight: 700;
-    margin-top: auto;
 }
 
 .logout a {

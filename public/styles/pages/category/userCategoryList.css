@@ -1,5 +1,6 @@
 /* 메뉴 팝업 */
 .category-menu-bar {
+    /* display: block; */
     background-color: rgba(255, 255, 255, 0.8);
     padding: 15px;
     width: 280px;
@@ -99,6 +100,7 @@
     align-items: end;
     font-size: 18px;
     font-weight: 700;
+    padding-bottom: 10px;
 }
 
 .logout a {
