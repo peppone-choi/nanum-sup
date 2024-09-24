@@ -116,6 +116,7 @@
     margin: 0 auto;
     gap: 100px;
     padding: 0 30px;
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
 .create-category {
@@ -137,9 +138,11 @@
     text-align: center;
     padding: 10px;
     border-radius: 10px;
+    background-color: var(--sub-color-3);
 }
 
 .create-category input::placeholder {
+    color: var(--mono-000);
     font-size: 14px;
 }
 
@@ -147,8 +150,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* height: 100%;
-    background-color: var(--sub-color-3); */
 }
 
 .category-list-wrapper p {
@@ -170,6 +171,9 @@
     padding: 5px;
     font-size: 14px;
     border-radius: 4px;
+    background-color: var(--sub-color-3);
+    color: var(--mono-000);
+    text-align: center;
 }
 
 .category-list p {
