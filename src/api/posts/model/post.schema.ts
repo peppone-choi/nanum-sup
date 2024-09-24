@@ -29,6 +29,12 @@ const postSchema = new mongoose.Schema<IPost>({
     trim: true,
     unique: true,
   },
+
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+
   // createdAt: {
   //   type: Date,
   //   default: Date.now,

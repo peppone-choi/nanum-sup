@@ -1,6 +1,5 @@
 .category-write-edit-wrapper {
     display: flex;
-    gap: 100px;
 }
 
 .category-setup-menu-bar {
@@ -10,6 +9,10 @@
     height: 100vh;
     position: relative;
     overflow-y: auto;
+}
+
+#header img {
+    margin: 0 auto;
 }
 
 .category-setup-menu-bar::-webkit-scrollbar {
@@ -25,6 +28,10 @@
     background: rgba(255, 255, 255, 0.6);
 }
 
+#header-img {
+    width: 200px;
+}
+
 .category-profile {
     display: flex;
     flex-direction: column;
@@ -38,7 +45,7 @@
     position: absolute;
     right: 0px;
     top: 5px;
-    color: black;
+    color: var(--mono-500);
     font-size: 16px;
     padding: 15px;
     border-radius: 50%;
@@ -79,7 +86,7 @@
     flex-direction: column;
     justify-content: space-between;
     padding-top: 10px;
-    height: 100%;
+    height: calc(100% - 180px);
 }
 
 .menu-contents p {
@@ -94,21 +101,22 @@
     font-size: 18px;
     font-weight: 700;
     gap: 10px;
+    padding-bottom: 10px;
 }
 
 .logout a {
     display: flex;
     align-items: center;
-}
-
-.logout p {
-    padding-right: 5px;
+    gap: 10px;
 }
 
 .category-write-edit-main {
-    background-color: rgba(255, 255, 255, 0.8);
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    margin: 0 auto;
+    gap: 100px;
+    padding: 0 30px;
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
 .create-category {
@@ -118,12 +126,23 @@
 }
 
 .create-category p {
+    text-align: center;
     font-size: 16px;
     font-weight: bold;
-    padding-bottom: 40px;
+    padding-bottom: 20px;
+}
+
+.create-category input {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: var(--sub-color-3);
 }
 
 .create-category input::placeholder {
+    color: var(--mono-000);
     font-size: 14px;
 }
 
@@ -131,6 +150,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.category-list-wrapper p {
+    padding: 20px 0;
+    font-weight: bold;
 }
 
 .category-list {
@@ -142,12 +166,14 @@
 }
 
 .category-list input {
-    width: 150px; /* 원하는 너비 */
-    height: 30px; /* 원하는 높이 */
-    padding: 5px; /* 여백 */
-    font-size: 14px; /* 폰트 크기 */
-    border: 1px solid #ccc; /* 테두리 스타일 */
-    border-radius: 4px; /* 테두리 둥글기 */
+    width: 150px;
+    height: 30px;
+    padding: 5px;
+    font-size: 14px;
+    border-radius: 4px;
+    background-color: var(--sub-color-3);
+    color: var(--mono-000);
+    text-align: center;
 }
 
 .category-list p {
@@ -168,7 +194,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #ffffff;
+    background-color: var(--mono-000);
     width: 250px;
     height: 100px;
     border-radius: 10px;
@@ -192,7 +218,7 @@
 }
 
 .btn-cancel {
-    background-color: #ff8d8d;
+    background-color: var(--sub-color-5);
     border: none;
     padding: 5px 10px;
     border-radius: 10px;
@@ -201,14 +227,10 @@
 }
 
 .btn-confirm {
-    background-color: #9ccaff;
+    background-color: var(--sub-color-4);
     border: none;
     border-radius: 10px;
     padding: 5px 10px;
     cursor: pointer;
     font-weight: bold;
 }
-
-/* .hidden {
-    display: none;
-} */

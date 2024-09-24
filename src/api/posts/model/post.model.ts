@@ -11,6 +11,8 @@ export class Post implements IPost {
   category: ICategory;
   /** 단축 URL */
   shortUrl: string;
+  /** 작성일 */
+  createdAt: Date;
 
   constructor(params: IPost) {
     this.id = params.id;
@@ -19,5 +21,6 @@ export class Post implements IPost {
     this.author = params.author;
     this.category = params.category;
     this.shortUrl = params.shortUrl;
+    this.createdAt = params.createdAt;
   }
 }

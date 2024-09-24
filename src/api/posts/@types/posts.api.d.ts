@@ -40,7 +40,7 @@ declare type createPostRequestBody = {
   categoryId: string;
   title: string;
   content: string;
-  comments: string[];
+  // comments: string[];
 };
 
 declare type createPostRequestPath = {};

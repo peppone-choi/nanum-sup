@@ -6,7 +6,10 @@ export interface PostsService {
   createPost(
     userId: string,
     categoryId: string,
-    post: Omit<IPost, "id" | "author" | "comments" | "category" | "shortUrl">
+    post: Omit<
+      IPost,
+      "id" | "author" | "comments" | "category" | "createdAt" | "shortUrl"
+    >
   ): Promise<PostResponseDTO>;
   /** 게시글 목록 조회 */
   getPosts(): Promise<PostResponseDTO[]>;
