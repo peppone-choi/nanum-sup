@@ -9,4 +9,6 @@ export interface CommentRepository {
   update(id: string, updateCommentInfo: Partial<IComment>): Promise<IComment>;
   /** 댓글 삭제 */
   delete(id: string): Promise<void>;
+  /**대댓글 생성 */
+  saveReply(parent: string, comment: Omit<IComment, "id">): Promise<IComment>;
 }

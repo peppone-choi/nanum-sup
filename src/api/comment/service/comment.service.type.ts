@@ -12,4 +12,9 @@ export interface CommentService {
   getComment(): Promise<CommentResponseDTO[]>;
 
   deleteComment(commentId: string): Promise<void>;
+
+  createCommentReply(
+    parent: string,
+    comment: Omit<IComment, "id">
+  ): Promise<void>;
 }
