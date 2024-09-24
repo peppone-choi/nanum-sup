@@ -9,6 +9,8 @@ export class Post implements IPost {
   author: IUser;
   /** 카테고리 */
   category: ICategory;
+  /** 단축 URL */
+  shortUrl: string;
   /** 작성일 */
   createdAt: Date;
 
@@ -18,6 +20,7 @@ export class Post implements IPost {
     this.content = params.content;
     this.author = params.author;
     this.category = params.category;
+    this.shortUrl = params.shortUrl;
     this.createdAt = params.createdAt;
   }
 }

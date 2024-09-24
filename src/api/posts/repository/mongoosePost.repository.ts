@@ -38,4 +38,10 @@ export class MongoosePostRepository implements PostRepository {
     await MongoosePost.deleteOne({ _id: postId });
     return;
   }
+  async findByShortUrl(shortUrl: string): Promise<IPost | null> {
+    const post = await MongoosePost.findOne({ shortUrl })
+      .populate("author")
+      .populate("category");
+    return post;
+  }
 }

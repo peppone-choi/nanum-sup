@@ -11,4 +11,6 @@ export interface CommentRepository {
   delete(id: string): Promise<void>;
   /**대댓글 생성 */
   saveReply(parent: string, comment: Omit<IComment, "id">): Promise<IComment>;
+  /** 게시글 ID로 코멘트 확인 */
+  findByPostId(postId: string): Promise<IComment[]>;
 }

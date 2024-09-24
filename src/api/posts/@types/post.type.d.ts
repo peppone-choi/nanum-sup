@@ -9,6 +9,8 @@ interface IPost {
   author: IUser;
   /** 카테고리 */
   category: ICategory;
+  /** 단축 URL */
+  shortUrl: string;
   /** 작성일 */
   createdAt: Date;
 }

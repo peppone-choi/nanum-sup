@@ -10,9 +10,8 @@ const commentRouter = express.Router();
 const COMMENT_ROUTES = {
   CREATE_COMMENT: "/api/comment",
   CREATE_COMMENT_REPLY: "/api/comment/:commentId",
-
+  GET_COMMENTS: "/api/comment/list/:postId",
   GET_COMMENT: "/api/comment/:commentId",
-
   EDIT_COMMENT: "/api/comment/:commentId",
 
   DELETE_COMMENT: "/api/comment/:commentId",
@@ -31,6 +30,8 @@ commentRouter.post(
   extractPath(COMMENT_ROUTES.CREATE_COMMENT_REPLY, ROUTES_INDEX.COMMENT_API),
   commentController.createCommentReply
 );
+
+commentRouter.get(COMMENT_ROUTES.GET_COMMENTS, commentController.getComments);
 
 commentRouter.get(
   extractPath(COMMENT_ROUTES.GET_COMMENT, ROUTES_INDEX.COMMENT_API),

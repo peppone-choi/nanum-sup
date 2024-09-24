@@ -10,6 +10,7 @@ export default class CommentController {
     this.editComment = this.editComment.bind(this);
     this.deleteComment = this.deleteComment.bind(this);
     this.createCommentReply = this.createCommentReply.bind(this);
+    this.getComments = this.getComments.bind(this);
   }
   async getComment(req: Request, res: Response, next: NextFunction) {
     try {
@@ -55,6 +56,16 @@ export default class CommentController {
         req.params.commentId
       );
       res.status(204).send();
+    } catch (error) {
+      next(error);
+    }
+  }
+  async getComments(req: Request, res: Response, next: NextFunction) {
+    try {
+      const comments = await this._commentService.getComments(
+        req.params.postId
+      );
+      res.send(comments);
     } catch (error) {
       next(error);
     }

@@ -60,4 +60,11 @@ export class MongooseCommentRepository implements CommentRepository {
     await newComment.save();
     return newComment;
   }
+  async findByPostId(postId: string): Promise<IComment[]> {
+    const comments = await MongooseComment.find({ post: postId })
+      .populate("author")
+      .populate("post");
+
+    return comments;
+  }
 }
