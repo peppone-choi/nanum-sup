@@ -20,7 +20,7 @@ const CATEGORY_ROUTES = {
     /** 카테고리 목록 조회 (사용자) */
     GET_CATEGORY: `/api/category`,
     /** 카테고리 상세 조회 (사용자) */
-    GET_CATEGORY_DETAIL: `/api/category/:categoryId`,
+    GET_CATEGORY_DETAIL: `/api/category/:categoryId/posts`,
 } as const;
 
 const categoryController = new CategoryController(
