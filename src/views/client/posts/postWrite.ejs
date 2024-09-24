@@ -11,13 +11,14 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
 </head>
 <body>
-  <div class="inner">
-    <%- include('../../_layouts/header-menu-w') %>
-  </div>
+
   
     <div id="wrap">
       <div class="inner">
-        
+        <%- include('../../_layouts/header-menu-w') %>
+      </div>
+      
+      <div class="inner container">
         <form id="postWriteForm" class="flex-column-center">
           <!-- 카테고리 선택 시작 -->
           <label for="category" class="category">
@@ -42,13 +43,24 @@
           <!-- 제목 입력 끝 -->
           <!-- <div id="summernote"></div> -->
 
-            <!-- 내용 입력 시작 -->
-          <textarea name="content" id="content" maxlength= "200" placeholder="게시글 내용을 작성해 주세요.">
-          </textarea>
-          <!-- 내용 입력 끝 -->
+          
+          <!-- 내용 입력 시작 -->
+            
+          <div class="contentArea">
+            <!-- <div id="content" contenteditable="true" placeholder="게시글 내용을 작성해 주세요."></div> -->
+            <textarea name="content" id="content" maxlength= "2000" placeholder="게시글 내용을 작성해 주세요."></textarea>
+            <div class="upload">
+              <label for="file">
+                  <img src="/static/images/upload-btn-gray.svg" class="formImg" alt="파일업로드버튼" />
+              </label>
+              <input type="file" id="file" />
+            </div>
+          </div>
 
+          <!-- 내용 입력 끝 -->
+         
             <!-- 작성 (제출) 버튼 -->
-          <button type="submit">작성</button>
+          <button type="submit">작성 완료</button>
         </form>
     </div>
   
