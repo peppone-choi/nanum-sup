@@ -79,14 +79,13 @@
     flex-direction: column;
     justify-content: space-between;
     padding-top: 10px;
-    height: 100%;
+    height: calc(100% - 180px);
 }
 
 .category-list {
     font-weight: bold;
     margin: 10px 0;
     color: black;
-    flex: 1;
 }
 
 .admin-setup i {

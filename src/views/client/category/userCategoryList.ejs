@@ -18,7 +18,7 @@
     <body>
         <section class="category-menu-bar">
             <div class="category-menu-bar-header">
-                <a href=""><i class="fa-solid fa-x"></i></a>
+                <a href="/posts"><i class="fa-solid fa-x"></i></a>
                 <a href="">
                     <i class="fa-solid fa-gear"></i>
                 </a>
@@ -32,11 +32,9 @@
                 <div>
                     <% category.forEach(function(category) { %>
                     <div class="category-list">
-                        <a 
-                            href="/admin/category/<%= category.categoryId %>/posts"
-                        >
+                        <a href="/category/<%= category.categoryId %>/posts">
                             <p><%= category.title %></p>
-                        </ㅁ>
+                        </a>
                     </div>
                     <% }) %>
                 </div>
