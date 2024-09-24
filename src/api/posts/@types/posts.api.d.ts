@@ -40,7 +40,7 @@ declare type createPostRequestBody = {
   categoryId: string;
   title: string;
   content: string;
-  comments: string[];
+  // comments: string[];
 };
 
 declare type createPostRequestPath = {};
@@ -57,7 +57,12 @@ declare type createPostRequest = {
 /** 게시글 생성 응답 */
 declare type createPostResponse = IPostResponseDTO;
 
-declare type updatePostRequestBody = Pick<IPost, "title", "content", "category">;
+declare type updatePostRequestBody = Pick<
+  IPost,
+  "title",
+  "content",
+  "category"
+>;
 
 declare type updatePostRequestPath = {
   /** 게시글 ID */
@@ -94,3 +99,21 @@ declare type deletePostRequest = {
 
 /** 게시글 삭제 응답 */
 declare type deletePostResponse = void;
+
+declare type findByShortUrlRequestPath = {
+  /** 단축 URL */
+  shortUrl: string;
+};
+
+declare type findByShortUrlRequestBody = {};
+
+declare type findByShortUrlRequestParams = {};
+
+/** 단축 URL */
+declare type findByShortUrlRequest = {
+  path: findByShortUrlRequestPath;
+  params?: findByShortUrlRequestParams;
+  body?: findByShortUrlRequestBody;
+};
+
+declare type findByShortUrlResponse = IPostResponseDTO | null;

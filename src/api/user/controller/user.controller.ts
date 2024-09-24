@@ -1,6 +1,11 @@
 import { NextFunction, Request, Response } from "express";
 import { UserService } from "../service/user.service.type";
 import UserResponseDto from "../dto/userResponse.dto";
+/** 유저 */
+// 회원가입 - signIn
+// 프로필 조회 - getUserDetail
+// 내 프로필 수정 - updateUser
+// 탈퇴? - deleteUser
 
 export default class UserController {
   private readonly _userService: UserService;

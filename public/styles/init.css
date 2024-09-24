@@ -1,28 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
-
-
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap");
 
 :root {
-  /* body */
-  --body-bg: #f4f4f4;
-  /* 메인컬러 */
-  --primary : #006400;   
-  /* 서브컬러 1,2,3 */
-  --sub-color-1 : #6EE5A3;
-  --sub-color-2 : #74D19D;
-  --sub-color-3 : #A1CB87;
-  /* mono */
-  --mono-000 : #ffffff;
-  --mono-100 : #e6e6e6; 
-  --mono-200 : #a5a5a5; 
-  --mono-300 : #71727A;
-  --mono-400 : #494A50;  
-  --mono-500 : #080909;  
-  /* max-width */
-  --max-width : 1080px;   
-  /* 텍스크 크기 */
-  --text-default : 16px;
-  --text-description : 14px;
+    /* body */
+    --body-bg: #f4f4f4;
+    /* 메인컬러 */
+    --primary: #006400;
+    /* 서브컬러 1,2,3 */
+    --sub-color-1: #6ee5a3;
+    --sub-color-2: #74d19d;
+    --sub-color-3: #a1cb87;
+    --sub-color-4: #9ccaff; /*긍정,성공*/
+    --sub-color-5: #ff8d8d; /*부정/실패*/
+    /* mono */
+    --mono-000: #ffffff;
+    --mono-100: #e6e6e6;
+    --mono-200: #a5a5a5;
+    --mono-300: #71727a;
+    --mono-400: #494a50;
+    --mono-500: #080909;
+    /* max-width */
+    --max-width: 1080px;
+    /* 텍스크 크기 */
+    --text-default: 16px;
+    --text-description: 14px;
 }
 
 body {
@@ -31,98 +31,89 @@ body {
   color: var(--mono-500);
 }
 
-
-
 /* 헤더 */
 #header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 55px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 55px;
 }
 
 #header button {
-  border: 0;
-  background-repeat: no-repeat;
-  width: 20px;
-  height: 20px;
-  background-color: transparent;
+    border: 0;
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
 }
-
 
 /* 뒤로가기 버튼 검정 */
 #header .backButton {
-  background-image: url("/static/images/arrow-left.svg");
-
+    background-image: url("/static/images/arrow-left.svg");
 }
 /* 뒤로가기 버튼 흰색 */
 #header .backButtonWhite {
-  background-image: url("/static/images/arrow-left-w.svg");
+    background-image: url("/static/images/arrow-left-w.svg");
 }
 
 /* 메뉴 버튼 검 */
 #header .menuButton {
-  background-image: url("/static/images/menu-btn.svg");
+    background-image: url("/static/images/menu-btn.svg");
 }
 /* 메뉴 버튼 흰 */
 #header .menuButtonWhite {
-  background-image: url("/static/images/menu-btn-w.svg");
+    background-image: url("/static/images/menu-btn-w.svg");
 }
 
 /* 찾기 버튼 검정 */
 #header .searchButton {
-  background-image: url("/static/images/search-btn.svg");
+    background-image: url("/static/images/search-btn.svg");
 }
 /* 찾기 버튼 흰 */
 #header .searchButtonWhite {
-  background-image: url("/static/images/search-btn-w.svg");
+    background-image: url("/static/images/search-btn-w.svg");
 }
 
 /* 로고이미지 */
 #header img {
-  width: 100%;
-  max-width: 110px;
+    width: 100%;
+    max-width: 110px;
 }
-
-
 
 /* 레이아웃 */
 
 #wrap {
-  height: 100vh;
+  height: calc(100vh - 55px);
+  /* height: 100vh; */
 }
 
 .inner {
-  /* width: 100%; */
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 15px;
+    /* width: 100%; */
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 15px;
 }
-
-
-
-
 
 /* input radio & checkbox 옵션 */
-input[type='radio'],
-input[type='checkbox'] {
-border: none;
-width: 25px;
-height: 25px;
-background-size: contain;
-vertical-align: middle;
-outline: 0;
-cursor: pointer;
-appearance: none;
--webkit-appearance: none;
--moz-appearance: none;
--o-appearance: none;
--ms-appearance: none;
-
+input[type="radio"],
+input[type="checkbox"] {
+    border: none;
+    width: 25px;
+    height: 25px;
+    background-size: contain;
+    vertical-align: middle;
+    outline: 0;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    -ms-appearance: none;
 }
 
-input[type='checkbox'] {
-background: transparent url('../../public/images/ico_checkbox_off.svg') no-repeat center center;
+input[type="checkbox"] {
+    background: transparent url("../../public/images/ico_checkbox_off.svg")
+        no-repeat center center;
 }
 
 /* input[type='radio'] {
@@ -132,45 +123,44 @@ background: transparent url('../images/ico_radio_off.svg') no-repeat center cent
 input[type='radio']:checked {
 background-image: url('../images/ico_radio_on.svg');
 } */
-input[type='checkbox']:checked {
-background-image: url('../../public/images/ico_checkbox_on.svg');
+input[type="checkbox"]:checked {
+    background-image: url("../../public/images/ico_checkbox_on.svg");
 }
 
 /* 제출버튼 (로그인, 회원가입 완료 버튼 등등) */
-input[type="submit"], button[type="submit"] {
-  margin-top: 40px;
-  color: var(--mono-000);
-  background-color: var(--primary);
-  font-size: var(--text-basic);
-  font-weight: 500;
-  border-radius: 10px;
-  border: none;
-  width: 100%;
-  height: 50px;
-  cursor: pointer;
+input[type="submit"],
+button[type="submit"] {
+    margin-top: 40px;
+    color: var(--mono-000);
+    background-color: var(--primary);
+    font-size: var(--text-basic);
+    font-weight: 500;
+    border-radius: 10px;
+    border: none;
+    width: 100%;
+    height: 50px;
+    cursor: pointer;
 }
 
-
-
-input[type="text"], select {
-  border: none;
-  outline: none;
+input[type="text"],
+select {
+    border: none;
+    outline: none;
 }
-
 
 /* flex */
 .flex-column-center {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* 텍스트 블라인드 속성 */
 .blind {
-  position: absolute;
-  clip: rect(0 0 0 0);
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
+    position: absolute;
+    clip: rect(0 0 0 0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
 }
