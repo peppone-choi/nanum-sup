@@ -1,117 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-        />
-        <link
-            rel="stylesheet"
-            href="/static/styles/pages/category/categoryWrite.css"
-        />
-        <link rel="stylesheet" href="/static/styles/reset.css" />
-        <link rel="stylesheet" href="/static/styles/init.css" />
-        <title>카테고리 추가</title>
-    </head>
-    <body>
-        <div class="category-write-edit-wrapper">
-            <section class="category-setup-menu-bar">
-                <a href="#">
-                    <i class="fa-solid fa-gear"></i>
-                </a>
-                <div class="category-profile">
-                    <i class="fa-solid fa-user"></i>
-                    <p class="category-nickName">닉네임</p>
-                    <p class="category-id">@ggaong</p>
-                </div>
-                <div class="category-setup-menu-bar-main">
-                    <div class="menu-contents">
-                        <a href="/admin/category/write"><p>카테고리 관리</p></a>
-                    </div>
-                    <div class="logout">
-                        <a href="" id="logout-btn">
-                            <p>로그아웃</p>
-                            <i class="fa-solid fa-right-from-bracket"></i>
-                        </a>
-                    </div>
-                </div>
-            </section>
-            <!-- 로그아웃 창 -->
-            <div id="logout-popup" class="logout-popup hidden">
-                <div class="popup-content">
-                    <p>로그아웃 하시겠습니까?</p>
-                    <div class="logout-btn">
-                        <button class="btn-cancel" id="cancel-btn">취소</button>
-                        <button class="btn-confirm" id="confirm-btn">
-                            확인
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <section class="category-write-edit-main">
-                <form class="create-category" id="category-form">
-                    <label for="category-title">
-                        <p>카테고리 생성</p>
-                        <input
-                            type="text"
-                            id="category-input"
-                            placeholder="카테고리명을 입력하세요."
-                        />
-                        <button type="submit" id="create-button">생성</button>
-                    </label>
-                </form>
-                <div class="category-list-wrapper" id="category-list">
-                    <% category.forEach(function(category) { %>
-                    <div class="category-list">
-                        <input
-                            value="<%= category.title %>"
-                            name="change-category"
-                            type="text"
-                            href="/admin/category/<%= category.categoryId %>"
-                        />
-                        <div class="category-edit-icons">
-                            <a href=""><i class="fa-solid fa-pen"></i></a>
-                            <a href=""
-                                ><i
-                                    name="check"
-                                    id="<%= category.categoryId %>"
-                                    class="fa-solid fa-check hidden"
-                                ></i
-                            ></a>
-                            <a href=""><i class="fa-solid fa-x"></i></a>
-                        </div>
-                    </div>
-                    <% }) %>
-                </div>
-            </section>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="/static/styles/pages/category/categoryWrite.css"
+    />
+    <link rel="stylesheet" href="/static/styles/reset.css" />
+    <link rel="stylesheet" href="/static/styles/init.css" />
+    <title>카테고리 추가</title>
+  </head>
+  <body>
+    <div class="category-write-edit-wrapper">
+      <section class="category-setup-menu-bar">
+        <a href="#">
+          <i class="fa-solid fa-gear"></i>
+        </a>
+        <div class="category-profile">
+          <i class="fa-solid fa-user"></i>
+          <p class="category-nickName">닉네임</p>
+          <p class="category-id">@ggaong</p>
         </div>
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                const logoutBtn = document.getElementById("logout-btn");
-                const logoutPopup = document.getElementById("logout-popup");
-                const cancelBtn = document.getElementById("cancel-btn");
-                const confirmBtn = document.getElementById("confirm-btn");
+        <div class="category-setup-menu-bar-main">
+          <div class="menu-contents">
+            <a href="/admin/category/write"><p>카테고리 관리</p></a>
+          </div>
+          <div class="logout">
+            <a href="" id="logout-btn">
+              <p>로그아웃</p>
+              <i class="fa-solid fa-right-from-bracket"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+      <!-- 로그아웃 창 -->
+      <div id="logout-popup" class="logout-popup hidden">
+        <div class="popup-content">
+          <p>로그아웃 하시겠습니까?</p>
+          <div class="logout-btn">
+            <button class="btn-cancel" id="cancel-btn">취소</button>
+            <button class="btn-confirm" id="confirm-btn">확인</button>
+          </div>
+        </div>
+      </div>
+      <section class="category-write-edit-main">
+        <form class="create-category" id="category-form">
+          <label for="category-title">
+            <p>카테고리 생성</p>
+            <input
+              type="text"
+              id="category-input"
+              placeholder="카테고리명을 입력하세요."
+            />
+            <button type="submit" id="create-button">생성</button>
+          </label>
+        </form>
+        <div class="category-list-wrapper" id="category-list">
+          <% category.forEach(function(category) { %>
+          <div class="category-list">
+            <input
+              value="<%= category.title %>"
+              readonly
+              name="change-category"
+              type="text"
+            />
+            <div class="category-edit-icons">
+              <a href=""><i class="fa-solid fa-pen"></i></a>
+              <a href=""
+                ><i
+                  id="check"
+                  data-categoryId="<%= category.categoryId %>"
+                  class="fa-solid fa-check hidden"
+                ></i
+              ></a>
+              <a href=""><i class="fa-solid fa-x"></i></a>
+            </div>
+          </div>
+          <% }) %>
+        </div>
+      </section>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const logoutBtn = document.getElementById("logout-btn");
+        const logoutPopup = document.getElementById("logout-popup");
+        const cancelBtn = document.getElementById("cancel-btn");
+        const confirmBtn = document.getElementById("confirm-btn");
 
-                logoutBtn.addEventListener("click", function (e) {
-                    e.preventDefault();
-                    logoutPopup.classList.remove("hidden");
-                });
+        logoutBtn.addEventListener("click", function (e) {
+          e.preventDefault();
+          logoutPopup.classList.remove("hidden");
+        });
 
-                cancelBtn.addEventListener("click", function () {
-                    logoutPopup.classList.add("hidden");
-                });
+        cancelBtn.addEventListener("click", function () {
+          logoutPopup.classList.add("hidden");
+        });
 
-                confirmBtn.addEventListener("click", function () {
-                    window.location.href = "/login";
-                });
-            });
-        </script>
-        <script>
-            const changeCategory =
-                document.getElementsByName("change-category");
-            console.log(changeCategory);
-        </script>
-    </body>
+        confirmBtn.addEventListener("click", function () {
+          window.location.href = "/login";
+        });
+      });
+    </script>
+    <script>
+      const categoryForm = document.getElementById("category-form");
+      const categoryInput = document.getElementById("category-input");
+      categoryForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        const title = categoryInput.value;
+        const res = await fetch("/admin-api/category", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ title }),
+        });
+        if (res.status === 201) {
+          location.reload();
+        } else {
+          alert("카테고리 생성에 실패했습니다.");
+        }
+      });
+    </script>
+    <script>
+      const categoryList = document.querySelectorAll(".category-list");
+      console.log(categoryList);
+      categoryList.forEach((category) => {
+        const categoryInput = category.querySelector("input");
+        const categoryEditIcons = category.querySelector(
+          ".category-edit-icons"
+        );
+        const penIcon = categoryEditIcons.querySelector(".fa-pen");
+        penIcon.addEventListener("click", function (e) {
+          e.preventDefault();
+          categoryInput.readOnly = false;
+          const checkIcon = categoryEditIcons.querySelector("#check");
+          checkIcon.classList.remove("hidden");
+        });
+        const checkIcon = categoryEditIcons.querySelector("#check");
+        checkIcon.addEventListener("click", async function (e) {
+          e.preventDefault();
+          console.log(categoryInput.value);
+          console.log(checkIcon.dataset.categoryid);
+          const categoryId = checkIcon.dataset.categoryid;
+          const title = categoryInput.value;
+          const res = await fetch(`/admin-api/category/${categoryId}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ title }),
+          });
+          if (res.ok) {
+            location.reload();
+          } else {
+            alert("카테고리 수정에 실패했습니다.");
+          }
+        });
+        const xIcon = categoryEditIcons.querySelector(".fa-x");
+        xIcon.addEventListener("click", async function (e) {
+          e.preventDefault();
+          const categoryId = checkIcon.dataset.categoryid;
+          const res = await fetch(`/admin-api/category/${categoryId}`, {
+            method: "DELETE",
+          });
+          if (res.ok) {
+            location.reload();
+          } else {
+            alert("카테고리 삭제에 실패했습니다.");
+          }
+        });
+      });
+    </script>
+  </body>
 </html>
