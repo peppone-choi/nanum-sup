@@ -1,4 +1,3 @@
-import IComment from "../@types/comment.type";
 import { CommentRepository } from "@/api/comment/repository/comment.repository";
 import { Comment } from "@/api/comment/model/comment.model";
 import HttpException from "@/api/common/exceptions/http.exception";
@@ -27,7 +26,10 @@ export class MemoryCommentRepository implements CommentRepository {
     return findComment ?? null;
   }
 
-  async update(id: string, updateCommentInfo: Partial<IComment>): Promise<IComment> {
+  async update(
+    id: string,
+    updateCommentInfo: Partial<IComment>
+  ): Promise<IComment> {
     const findComment = MemoryCommentRepository.store.get(id);
 
     if (!findComment) {

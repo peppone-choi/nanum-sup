@@ -1,4 +1,3 @@
-import IComment from "../@types/comment.type";
 export interface CommentRepository {
   /** 댓글 생성 */
   save(comment: Omit<IComment, "id">): Promise<IComment>;

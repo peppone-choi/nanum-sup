@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import IComment from "../@types/comment.type";
 
 const commentSchema = new mongoose.Schema<IComment>({
   id: {
@@ -7,7 +6,7 @@ const commentSchema = new mongoose.Schema<IComment>({
     required: true,
   },
   author: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-  post: { type: String, required: true, length: 300 },
+  post: { type: mongoose.Schema.Types.ObjectId, ref: "Post", required: true },
 });
 
 export const MongooseComment = mongoose.model<IComment>(
