@@ -12,6 +12,7 @@
             href="/static/styles/pages/category/userCategoryList.css"
         />
         <link rel="stylesheet" href="/static/styles/reset.css" />
+        <link rel="stylesheet" href="/static/styles/init.css" />
         <title>Document</title>
     </head>
     <body>
@@ -31,11 +32,11 @@
                 <div>
                     <% category.forEach(function(category) { %>
                     <div class="category-list">
-                        <a
+                        <a 
                             href="/admin/category/<%= category.categoryId %>/posts"
                         >
                             <p><%= category.title %></p>
-                        </a>
+                        </ㅁ>
                     </div>
                     <% }) %>
                 </div>

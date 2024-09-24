@@ -73,7 +73,7 @@ export default class AdminCategoryController {
         const { ...rest } = req.body;
         try {
             const createCategory = await this._categoryService.createCategory({
-                // author: rest.author,
+                author: rest.author,
                 post: rest.post,
                 title: rest.title,
             });

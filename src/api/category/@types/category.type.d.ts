@@ -5,8 +5,8 @@ interface ICategory {
     title: string;
     /** 게시글 */
     post: IPost[];
-    // /** 작성자 (운영자,부운영자) */
-    // author: IUser;
+    /** 작성자 (운영자,부운영자) */
+    author: IUser;
 }
 
 interface ICategoryResponseDTO {
@@ -16,5 +16,5 @@ interface ICategoryResponseDTO {
     title: string;
     /** 게시글 */
     post: { id: string };
-    // author: { id: string };
+    author: { id: string };
 }

@@ -12,12 +12,13 @@
             href="/static/styles/pages/category/categoryWrite.css"
         />
         <link rel="stylesheet" href="/static/styles/reset.css" />
+        <link rel="stylesheet" href="/static/styles/init.css" />
         <title>카테고리 추가</title>
     </head>
     <body>
         <div class="category-write-edit-wrapper">
             <section class="category-setup-menu-bar">
-                <a href="">
+                <a href="#">
                     <i class="fa-solid fa-gear"></i>
                 </a>
                 <div class="category-profile">
@@ -65,7 +66,9 @@
                     <% category.forEach(function(category) { %>
                     <div class="category-list">
                         <a href="/admin/category/<%= category.categoryId %>">
-                            <p><%= category.title %></p></a
+                            <p class="category-title">
+                                <%= category.title %>
+                            </p></a
                         >
                         <div class="category-edit-icons">
                             <a href=""><i class="fa-solid fa-pen"></i></a>
@@ -99,6 +102,5 @@
                 });
             });
         </script>
-        <script></script>
     </body>
 </html>
