@@ -22,12 +22,12 @@ export default class PostsController {
 
   async getPosts(
     req: Request<
-    getPostsRequest["path"], 
-    getPostsResponse, 
-    getPostsRequest["body"], 
-    getPostsRequest["params"]
-    >, 
-    res: Response, 
+      getPostsRequest["path"],
+      getPostsResponse,
+      getPostsRequest["body"],
+      getPostsRequest["params"]
+    >,
+    res: Response,
     next: NextFunction
   ) {
     try {
@@ -40,12 +40,12 @@ export default class PostsController {
   }
   async getPostDetail(
     req: Request<
-    getPostDetailRequest["path"], 
-    getPostDetailResponse, 
-    getPostDetailRequest["body"], 
-    getPostDetailRequest["params"]
-    >, 
-    res: Response, 
+      getPostDetailRequest["path"],
+      getPostDetailResponse,
+      getPostDetailRequest["body"],
+      getPostDetailRequest["params"]
+    >,
+    res: Response,
     next: NextFunction
   ) {
     const { postId } = req.params;
@@ -58,27 +58,40 @@ export default class PostsController {
   }
   async createPost(
     req: Request<
-    createPostRequest["path"], 
-    createPostResponse, 
-    createPostRequest["body"], 
-    createPostRequest["params"]
-    >, 
-    res: Response, 
+      createPostRequest["path"],
+      createPostResponse,
+      createPostRequest["body"],
+      createPostRequest["params"]
+    >,
+    res: Response,
     next: NextFunction
   ) {
     const { title, content, categoryId, userId } = req.body;
 
     try {
-      const createdPost = await this._postsService.createPost(categoryId, userId, { 
-        title,
-        content,
-      });
+      const createdPost = await this._postsService.createPost(
+        categoryId,
+        userId,
+        {
+          title,
+          content,
+        }
+      );
       res.send(createdPost);
     } catch (error) {
       next(error);
-     }
+    }
   }
-  async updatePost(req: Request<updatePostRequest["path"], updatePostResponse, updatePostRequest["body"], updatePostRequest["params"]>, res: Response, next: NextFunction) {
+  async updatePost(
+    req: Request<
+      updatePostRequest["path"],
+      updatePostResponse,
+      updatePostRequest["body"],
+      updatePostRequest["params"]
+    >,
+    res: Response,
+    next: NextFunction
+  ) {
     const { postId } = req.params;
 
     try {
@@ -90,11 +103,38 @@ export default class PostsController {
     }
   }
 
-  async deletePost(req: Request<deletePostRequest["path"], deletePostResponse, deletePostRequest["body"], deletePostRequest["params"]>, res: Response, next: NextFunction) {
+  async deletePost(
+    req: Request<
+      deletePostRequest["path"],
+      deletePostResponse,
+      deletePostRequest["body"],
+      deletePostRequest["params"]
+    >,
+    res: Response,
+    next: NextFunction
+  ) {
     const { postId } = req.params;
     try {
       await this._postsService.deletePost(postId);
       res.status(204).json();
+    } catch (error) {
+      next(error);
+    }
+  }
+  async findByShortUrl(
+    req: Request<
+      findByShortUrlRequest["path"],
+      findByShortUrlResponse,
+      findByShortUrlRequest["body"],
+      findByShortUrlRequest["params"]
+    >,
+    res: Response,
+    next: NextFunction
+  ) {
+    const { shortUrl } = req.params;
+    try {
+      const post = await this._postsService.findByShortUrl(shortUrl);
+      res.send(post);
     } catch (error) {
       next(error);
     }
