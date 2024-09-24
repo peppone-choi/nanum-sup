@@ -50,4 +50,8 @@ export default class CommentServiceImpl implements CommentService {
   ): Promise<void> {
     await this._commentRepository.saveReply(parent, comment);
   }
+  async getComments(postId: string): Promise<CommentResponseDTO[]> {
+    const comments = await this._commentRepository.findByPostId(postId);
+    return comments.map((comment) => new CommentResponseDTO(comment));
+  }
 }

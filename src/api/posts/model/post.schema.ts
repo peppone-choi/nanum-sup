@@ -23,6 +23,12 @@ const postSchema = new mongoose.Schema<IPost>({
     ref: "Category",
     required: true,
   },
+  shortUrl: {
+    type: String,
+    required: true,
+    trim: true,
+    unique: true,
+  },
   // createdAt: {
   //   type: Date,
   //   default: Date.now,

@@ -89,3 +89,19 @@ declare type adminDeleteCommentRequest = {
 
 /** 댓글 삭제 (관리자) 응답 */
 declare type adminDeleteCommentResponse = void;
+
+declare type adminGetCommentsRequestPath = {
+  postId: string;
+};
+
+declare type adminGetCommentsRequestBody = {};
+
+declare type adminGetCommentsRequestParams = {};
+
+declare type adminGetCommentsRequest = {
+  params?: adminGetCommentsRequestParams;
+  path: adminGetCommentsRequestPath;
+  body?: adminGetCommentsRequestBody;
+};
+
+declare type adminGetCommentsResponse = Array<ICommentResponseDTO>;

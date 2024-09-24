@@ -7,7 +7,8 @@ interface IPost {
   content: string;
   // /** 작성자 */
   author: IUser;
-  // author: string;
   /** 카테고리 */
   category: ICategory;
+  /** 단축 URL */
+  shortUrl: string;
 }

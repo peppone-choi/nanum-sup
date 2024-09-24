@@ -84,4 +84,11 @@ export class PostsServiceImpl implements PostsService {
   async deletePost(postId: string): Promise<void> {
     await this._postRepository.delete(postId);
   }
+  async findByShortUrl(shortUrl: string): Promise<PostResponseDTO | null> {
+    const post = await this._postRepository.findByShortUrl(shortUrl);
+    if (!post) {
+      throw new HttpException(404, "게시글을 찾을 수 없습니다.");
+    }
+    return new PostResponseDTO(post);
+  }
 }
