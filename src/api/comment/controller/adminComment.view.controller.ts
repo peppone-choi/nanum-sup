@@ -7,12 +7,12 @@ export default class AdminCommentViewController {
         this.commentEditPage = this.commentEditPage.bind(this);
     }
 
-    /** 카테고리 생성 페이지 */
+    /** 댓글 생성 페이지 */
     async commentWritePage(req: Request, res: Response, next: NextFunction) {
         res.render("admin/comment/commentWrite");
     }
 
-    /** 카테고리 수정 페이지 */
+    /** 댓글 수정 페이지 */
     async commentEditPage(req: Request, res: Response, next: NextFunction) {
         res.render("admin/comment/commentEdit");
     }

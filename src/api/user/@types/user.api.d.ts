@@ -33,6 +33,7 @@ declare type createUserRequestBody = {
   accountId: string;
   password: string;
   email: string;
+  profile: IProfile;
 };
 declare type createUserRequestParams = {};
 declare type createUserRequest = {
@@ -50,7 +51,8 @@ declare type updateUserRequestPath = {
 declare type updateUserRequestBody = {
   email: string;
   password?: string;
-  role: string;
+  role: RoleType;
+  profile: IProfile;
 };
 declare type updateUserRequestParams = {};
 declare type updateUserRequest = {

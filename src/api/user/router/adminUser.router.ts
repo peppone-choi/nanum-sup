@@ -12,25 +12,26 @@ import {
   adminGetUserDetailValidator,
   adminUpdateUserValidator,
 } from "../dto/validation/adminUser.validation";
+import MongooseUserRepository from "../repository/mongooseUser.repository";
 
 const adminUserRouter = express.Router();
 
 /** 문영자 API 객체 */
 const USER_ROUTES = {
   /** [운영자] 유저 전체 리스트 확인 */
-  GET_USERS: `/api/users`,
+  GET_USERS: `/admin-api/users`,
   /** [운영자] 유저 상세 정보 확인 */
-  GET_USER_DETAIL: `/api/users/:userId`,
+  GET_USER_DETAIL: `/admin-api/users/:userId`,
   /** [운영자] 회원추가 */
-  CREATE_USER: `/api/users`,
+  CREATE_USER: `/admin-api/users`,
   /** [운영자] 유저 정보 수정 */
-  UPDATE_USER: `/api/users/:userId`,
+  UPDATE_USER: `/admin-api/users/:userId`,
   /** [운영자] 유저 삭제 */
-  DELETE_USER: `/api/users/:userId`,
+  DELETE_USER: `/admin-api/users/:userId`,
 } as const;
 
 const adminUserController = new AdminUserController(
-  new UserServiceImpl(new MemoryUserRepository())
+  new UserServiceImpl(new MongooseUserRepository())
 );
 
 adminUserRouter.get(

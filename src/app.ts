@@ -1,8 +1,6 @@
 import express from "express";
 import path from "node:path";
 import morgan from "morgan";
-import appRouter from "./routers/app.router";
-import userRouter from "./routers/users.router";
 import viewRouter from "./routers/views/view.router";
 import adminViewRouter from "./routers/views/adminView.router";
 import cookieParser from "cookie-parser";
@@ -17,28 +15,24 @@ import adminPostViewRouter from "./api/posts/router/adminPosts.view.router";
 import postViewRouter from "./api/posts/router/posts.view.router";
 import adminCategoryViewRouter from "./api/category/router/adminCategory.view.router";
 import categoryViewRouter from "./api/category/router/category.view.router";
-
-
-
-
+import userRouter from "./api/user/router/user.router";
+import adminUserRouter from "./api/user/router/adminUser.router";
+import authRouter from "./api/auth/router/auth.router";
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(appRouter);
-app.use(userRouter);
-app.use(viewRouter);
+
+app.use(ROUTES_INDEX.AUTH_API, authRouter);
+
 app.use(adminViewRouter);
-app.use(categoryRouter);
-app.use(adminCategoryRouter);
 
 /** -------- category ---------  */
 app.use(ROUTES_INDEX.CATEGORY_API, categoryRouter);
+app.use(ROUTES_INDEX.CATEGORY_VIEW, categoryViewRouter);
 app.use(ROUTES_INDEX.ADMIN_CATEGORY_API, adminCategoryRouter);
 app.use(ROUTES_INDEX.ADMIN_CATEGORY_VIEW, adminCategoryViewRouter);
-app.use(ROUTES_INDEX.CATEGORY_VIEW, categoryViewRouter);
-
 
 /** -------- posts ---------  */
 app.use(ROUTES_INDEX.POSTS_API, postRouter);
@@ -46,8 +40,10 @@ app.use(ROUTES_INDEX.ADMIN_POSTS_API, adminPostRouter);
 app.use(ROUTES_INDEX.ADMIN_POST_VIEW, adminPostViewRouter);
 app.use(ROUTES_INDEX.POST_VIEW, postViewRouter);
 
+app.use(ROUTES_INDEX.USER_API, userRouter);
+app.use(ROUTES_INDEX.ADMIN_USER_API, adminUserRouter);
 
-
+app.use(viewRouter);
 const PORT = process.env.PORT || 4000;
 // view 파일들 모아놓는 위치 설정
 app.set("views", path.join(__dirname, "views"));
@@ -60,5 +56,5 @@ app.use("/static", express.static(path.join(__dirname, "../public"))); // 정적
 app.use(errorHandler);
 
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });

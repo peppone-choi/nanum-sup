@@ -52,12 +52,13 @@ export default class UserController {
     res: Response,
     next: NextFunction
   ) {
-    const { accountId, password, email } = req.body;
+    const { accountId, password, email, profile } = req.body;
     const user = await this._userService.signIn({
       accountId,
       password,
       email,
       role: "user",
+      profile,
     });
     res.status(201).send(new UserResponseDto(user));
   }
@@ -73,11 +74,11 @@ export default class UserController {
   ) {
     req.user;
     const { userId } = req.params;
-    const { email, password, role } = req.body;
+    const { email, password, role, profile } = req.body;
     await this._userService.updateUser(
       req.user,
       userId,
-      { email, role },
+      { email, role, profile },
       password
     );
     res.status(204).send();

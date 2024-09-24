@@ -1,5 +1,3 @@
-import HttpException from "@/api/common/exceptions/http.exception";
-import IComment from "../@types/comment.type";
 import { CommentResponseDTO } from "@/api/comment/dto/commentResponse.dto";
 import { CommentRepository } from "@/api/comment/repository/comment.repository";
 import { CommentService } from "@/api/comment/service/comment.service.type";
@@ -25,7 +23,6 @@ export default class CommentServiceImpl implements CommentService {
     //       }
     const newComment = await this._commentRepository.save({
       ...comment,
-      author: undefined,
     });
     return new CommentResponseDTO(newComment);
   }
@@ -35,12 +32,22 @@ export default class CommentServiceImpl implements CommentService {
     return comments.map((comment) => new CommentResponseDTO(comment));
   }
 
-  async editComment(commentId: string, updatedComment: Omit<IComment, "id">): Promise<void> {
+  async editComment(
+    commentId: string,
+    updatedComment: Omit<IComment, "id">
+  ): Promise<void> {
     await this._commentRepository.update(commentId, updatedComment);
 
     return;
   }
   async deleteComment(commentId: string): Promise<void> {
     await this._commentRepository.delete(commentId);
+  }
+
+  async createCommentReply(
+    parent: string,
+    comment: Omit<IComment, "id">
+  ): Promise<void> {
+    await this._commentRepository.saveReply(parent, comment);
   }
 }

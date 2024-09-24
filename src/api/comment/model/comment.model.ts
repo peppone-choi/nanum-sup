@@ -1,13 +1,17 @@
-import { IPost } from "@/api/posts/@types/post.type";
-import IComment from "../@types/comment.type";
-
 export class Comment implements IComment {
   id!: string;
-  author: IUser;
+  content: string;
+  author!: IUser;
   post: IPost;
+  parent?: IComment | undefined;
+  depth!: number;
 
   constructor(params: IComment) {
     this.id = params.id;
+    this.content = params.content;
+    this.author = params.author;
     this.post = params.post;
+    this.parent = params.parent;
+    this.depth = params.depth;
   }
 }
