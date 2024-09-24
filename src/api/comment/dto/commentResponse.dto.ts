@@ -1,19 +1,13 @@
-import IComment from "../@types/comment.type";
+import UserResponseDto from "@/api/user/dto/userResponse.dto";
+import { PostResponseDTO } from "@/api/posts/dto/postResponse.dto";
 export class CommentResponseDTO {
   id!: string;
-  author: {
-    id: string;
-    userName: string;
-  };
-  post!: {
-    id: string;
-  };
+  author: UserResponseDto;
+  post!: PostResponseDTO;
 
   constructor(params: IComment) {
     this.id = params.id;
-    this.author = {
-      id: params.author.id,
-      userName: params.author.profile.firstName,
-    };
+    this.author = new UserResponseDto(params.author);
+    this.post = new PostResponseDTO(params.post);
   }
 }

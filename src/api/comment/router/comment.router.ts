@@ -8,38 +8,43 @@ import { ROUTES_INDEX } from "@/routers";
 const commentRouter = express.Router();
 
 const COMMENT_ROUTES = {
+  CREATE_COMMENT: "/api/comment",
+  CREATE_COMMENT_REPLY: "/api/comment/:commentId",
 
-    CREATE_COMMENT: '/api/comment',
+  GET_COMMENT: "/api/comment/:commentId",
 
-    GET_COMMENT: '/api/comment',
+  EDIT_COMMENT: "/api/comment/:commentId",
 
-    EDIT_COMMENT: '/api/comment/:commentId',
-
-    DELETE_COMMENT: '/api/comment/:commentId',
+  DELETE_COMMENT: "/api/comment/:commentId",
 } as const;
 
 const commentController = new CommentController(
-    new CommentServiceImpl(new MemoryCommentRepository())
+  new CommentServiceImpl(new MemoryCommentRepository())
 );
 
 commentRouter.post(
-    extractPath(COMMENT_ROUTES.CREATE_COMMENT, ROUTES_INDEX.COMMENT_API),
-    commentController.createComment
+  extractPath(COMMENT_ROUTES.CREATE_COMMENT, ROUTES_INDEX.COMMENT_API),
+  commentController.createComment
+);
+
+commentRouter.post(
+  extractPath(COMMENT_ROUTES.CREATE_COMMENT_REPLY, ROUTES_INDEX.COMMENT_API),
+  commentController.createCommentReply
 );
 
 commentRouter.get(
-    extractPath(COMMENT_ROUTES.GET_COMMENT, ROUTES_INDEX.COMMENT_API),
-    commentController.getComment
+  extractPath(COMMENT_ROUTES.GET_COMMENT, ROUTES_INDEX.COMMENT_API),
+  commentController.getComment
 );
 
 commentRouter.put(
-    extractPath(COMMENT_ROUTES.EDIT_COMMENT, ROUTES_INDEX.COMMENT_API),
-    commentController.editComment
+  extractPath(COMMENT_ROUTES.EDIT_COMMENT, ROUTES_INDEX.COMMENT_API),
+  commentController.editComment
 );
 
 commentRouter.delete(
-    extractPath(COMMENT_ROUTES.DELETE_COMMENT, ROUTES_INDEX.COMMENT_API),
-    commentController.deleteComment
+  extractPath(COMMENT_ROUTES.DELETE_COMMENT, ROUTES_INDEX.COMMENT_API),
+  commentController.deleteComment
 );
 
 export default commentRouter;

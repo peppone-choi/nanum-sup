@@ -5,12 +5,14 @@ export class User implements IUser {
   password: string;
   salt: string;
   role: RoleType;
-  constructor({ id, accountId, email, password, salt, role }: IUser) {
+  profile: IProfile;
+  constructor({ id, accountId, email, password, salt, role, profile }: IUser) {
     this.id = id;
     this.accountId = accountId;
     this.email = email;
     this.password = password;
     this.salt = salt;
     this.role = role;
+    this.profile = profile;
   }
 }

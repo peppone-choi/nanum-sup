@@ -4,9 +4,9 @@ interface ICategory {
     /** 카테고리명 */
     title: string;
     /** 게시글 */
-    post: IPost[];
-    /** 작성자 (운영자,부운영자) */
-    author: IUser;
+    // /** 작성자 (운영자,부운영자) */
+    admin: IUser;
+    subAdmin: IUser[];
 }
 
 interface ICategoryResponseDTO {
@@ -14,7 +14,6 @@ interface ICategoryResponseDTO {
     categoryId: string;
     /** 게시글 제목 */
     title: string;
-    /** 게시글 */
-    post: { id: string };
-    author: { id: string };
+    admin: UserResponseDto;
+    subAdmin: UserResponseDto[];
 }
