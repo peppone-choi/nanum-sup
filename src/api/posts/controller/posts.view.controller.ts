@@ -10,6 +10,7 @@ import { PostsService } from "@/api/posts/service/posts.service.type";
 
 export default class PostsViewController {
   private readonly _postsService: PostsService;
+  // static postListPage: RequestHandler<ParamsDictionary, any, any, ParsedQs, Record<string, any>>;
   constructor(_postsService: PostsService) {
     this._postsService = _postsService;
 

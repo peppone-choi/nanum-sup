@@ -14,6 +14,7 @@ const ADMIN_POST_VIEW_ROUTES = {
 } as const;
 
 
+/** 게시글 목록 조회 */
 adminPostViewRouter.get(
   extractPath(ADMIN_POST_VIEW_ROUTES.POST_LIST, ROUTES_INDEX.ADMIN_POST_VIEW),
   (req, res, next) => {
@@ -21,6 +22,7 @@ adminPostViewRouter.get(
   }
 );
 
+/** 게시글 상세 조회 | 수정 */
 adminPostViewRouter.get(
   extractPath(ADMIN_POST_VIEW_ROUTES.POST_DETAIL, ROUTES_INDEX.ADMIN_POST_VIEW),
   (req, res, next) => {

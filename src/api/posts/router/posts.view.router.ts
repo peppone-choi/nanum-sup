@@ -15,6 +15,8 @@ const POST_VIEW_ROUTES = {
   POST_EDIT: "/posts/:postId/edit",
 } as const;
 
+
+/** 게시글 목록 조회 */
 postViewRouter.get(
   extractPath(POST_VIEW_ROUTES.POST_LIST, ROUTES_INDEX.POST_VIEW),
   (req, res, next) => {
@@ -22,6 +24,7 @@ postViewRouter.get(
   }
 );
 
+/** 게시글 작성 */
 postViewRouter.get(
   extractPath(POST_VIEW_ROUTES.POST_WRITE, ROUTES_INDEX.POST_VIEW),
   (req, res, next) => {
@@ -29,6 +32,7 @@ postViewRouter.get(
   }
 );
 
+/** 게시글 상세 조회 */
 postViewRouter.get(
   extractPath(POST_VIEW_ROUTES.POST_DETAIL, ROUTES_INDEX.POST_VIEW),
   (req, res, next) => {
@@ -41,7 +45,7 @@ postViewRouter.get(
 
   
 
-
+/** 게시글 수정 */
 postViewRouter.get(
   extractPath(POST_VIEW_ROUTES.POST_EDIT, ROUTES_INDEX.POST_VIEW),
   (req, res, next) => {
