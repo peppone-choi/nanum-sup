@@ -93,4 +93,23 @@ export default class AdminCommentController {
       next(error);
     }
   }
+
+  async getComments(
+    req: Request<
+      adminGetCommentsRequest["path"],
+      adminGetCommentsResponse,
+      adminGetCommentsRequest["body"],
+      adminGetCommentsRequest["params"]
+    >,
+    res: Response,
+    next: NextFunction
+  ) {
+    const { postId } = req.params;
+    try {
+      const comments = await this._adminCommentService.getComments(postId);
+      res.send(comments);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
