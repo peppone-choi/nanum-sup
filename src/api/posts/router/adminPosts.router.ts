@@ -42,32 +42,32 @@ const adminPostsController = new AdminPostsController(
     )
 );
 
-// adminPostRouter.get(
-//   extractPath(ADMIN_POST_ROUTES.GET_POSTS, ROUTES_INDEX.ADMIN_POSTS_API),
-//   validate(adminGetPostsValidator),
-//   adminPostsController.getPosts
-// );
-// adminPostRouter.get(
-//   extractPath(ADMIN_POST_ROUTES.GET_POST_DETAIL, ROUTES_INDEX.ADMIN_POSTS_API),
-//   validate(adminGetPostDetailValidator),
-//   authUserMiddleware,
-//   adminPostsController.getPostDetail
-// );
-// adminPostRouter.post(
-//   extractPath(ADMIN_POST_ROUTES.CREATE_POST, ROUTES_INDEX.ADMIN_POSTS_API),
-//   validate(adminCreatePostValidator),
-//   authUserMiddleware,
-//   adminPostsController.createPost
-// );
-// adminPostRouter.put(
-//   extractPath(ADMIN_POST_ROUTES.UPDATE_POST, ROUTES_INDEX.ADMIN_POSTS_API),
-//   validate(adminUpdatePostValidator),
-//   adminPostsController.updatePost
-// );
-// adminPostRouter.delete(
-//   extractPath(ADMIN_POST_ROUTES.DELETE_POST, ROUTES_INDEX.ADMIN_POSTS_API),
-//   validate(adminDeletePostValidator),
-//   adminPostsController.deletePost
-// );
+adminPostRouter.get(
+  extractPath(ADMIN_POST_ROUTES.GET_POSTS, ROUTES_INDEX.ADMIN_POSTS_API),
+  validate(adminGetPostsValidator),
+  adminPostsController.getPosts
+);
+adminPostRouter.get(
+  extractPath(ADMIN_POST_ROUTES.GET_POST_DETAIL, ROUTES_INDEX.ADMIN_POSTS_API),
+  validate(adminGetPostDetailValidator),
+  authUserMiddleware,
+  adminPostsController.getPostDetail
+);
+adminPostRouter.post(
+  extractPath(ADMIN_POST_ROUTES.CREATE_POST, ROUTES_INDEX.ADMIN_POSTS_API),
+  validate(adminCreatePostValidator),
+  authUserMiddleware,
+  adminPostsController.createPost
+);
+adminPostRouter.put(
+  extractPath(ADMIN_POST_ROUTES.UPDATE_POST, ROUTES_INDEX.ADMIN_POSTS_API),
+  validate(adminUpdatePostValidator),
+  adminPostsController.updatePost
+);
+adminPostRouter.delete(
+  extractPath(ADMIN_POST_ROUTES.DELETE_POST, ROUTES_INDEX.ADMIN_POSTS_API),
+  validate(adminDeletePostValidator),
+  adminPostsController.deletePost
+);
 
 export default adminPostRouter;
