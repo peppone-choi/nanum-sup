@@ -6,11 +6,6 @@ export const db = mongoose.createConnection(mongodbUri).asPromise();
 
 (async () => {
   try {
-    console.log(
-      process.env.MONGODB_USER,
-      process.env.MONGODB_PASSWORD,
-      process.env.MONGODB_CLUSTER
-    );
     await mongoose.connect(
       `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_CLUSTER}`
     );
