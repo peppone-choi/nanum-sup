@@ -5,6 +5,9 @@ import CategoryViewController from "../controller/category.view.controller";
 import { MongooseCategoryRepository } from "../repository/mongooseCategory.repository";
 import { CategoryServiceImpl } from "../service/category.service";
 
+// import { MongooseUserRepository } from "@/api/user/repository/mongooseUser.repository";
+import { MongoosePostRepository } from "@/api/posts/repository/mongoosePost.repository";
+
 const categoryViewRouter = express.Router();
 
 const CATEGORY_VIEW_ROUTES = {
@@ -15,7 +18,10 @@ const CATEGORY_VIEW_ROUTES = {
 } as const;
 
 const categoryViewController = new CategoryViewController(
-    new CategoryServiceImpl(new MongooseCategoryRepository())
+    new CategoryServiceImpl(
+        new MongooseCategoryRepository()
+        // new MongoosePostRepository()
+    )
 );
 
 categoryViewRouter.get(
