@@ -7,6 +7,7 @@ export default class UserViewController {
     this._userService = userService;
     this.myPage = this.myPage.bind(this);
     this.userDetailPage = this.userDetailPage.bind(this);
+    this.userEditPage = this.userEditPage.bind(this);
     this.withDrawPage = this.withDrawPage.bind(this);
   }
 
@@ -17,6 +18,14 @@ export default class UserViewController {
       res.render("client/users/myPage", {
         user: myInfo,
       });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async userEditPage(req: Request, res: Response, next: NextFunction) {
+    try {
+      res.render("client/users/userEdit");
     } catch (error) {
       next(error);
     }

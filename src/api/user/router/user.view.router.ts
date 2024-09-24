@@ -14,6 +14,8 @@ const USER_VIEW_ROUTES = {
   MY_PAGE: "/users/me",
   /** 유저 상세 */
   USER_DETAIL: "/users/:userId",
+  /** 유저 수정 */
+  USER_EDIT: "/users/:userId/edit",
   /** 회원 탈퇴 */
   USER_DELETE: "/users/withdrawal",
 } as const;
@@ -29,6 +31,11 @@ userViewRouter.get(
   extractPath(USER_VIEW_ROUTES.MY_PAGE, ROUTES_INDEX.USER_VIEW),
   // authCookieViewMiddleware(true),
   usersViewController.myPage
+);
+
+userViewRouter.get(
+  extractPath(USER_VIEW_ROUTES.USER_EDIT, ROUTES_INDEX.USER_VIEW),
+  usersViewController.userEditPage
 );
 
 userViewRouter.get(
