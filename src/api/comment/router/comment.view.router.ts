@@ -1,7 +1,7 @@
 import { ROUTES_INDEX } from "@/routers";
 import { extractPath } from "@/utils/path.util";
 import express from "express";
-import CommentViewController from "../controller/adminComment.view.controller";
+import CommentViewController from "../controller/comment.view.controller";
 import { MongooseCommentRepository } from "../repository/mongooseComment.repository";
 import CommentServiceImpl from "../service/comment.service";
 
