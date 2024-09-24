@@ -65,16 +65,22 @@
                 <div class="category-list-wrapper" id="category-list">
                     <% category.forEach(function(category) { %>
                     <div class="category-list">
-                        <a href="/admin/category/<%= category.categoryId %>">
-                            <p class="category-title">
-                                <%= category.title %>
-                            </p></a
-                        >
+                        <input
+                            value="<%= category.title %>"
+                            name="change-category"
+                            type="text"
+                            href="/admin/category/<%= category.categoryId %>"
+                        />
                         <div class="category-edit-icons">
                             <a href=""><i class="fa-solid fa-pen"></i></a>
                             <a href=""
-                                ><i class="fa-solid fa-check hidden"></i
+                                ><i
+                                    name="check"
+                                    id="<%= category.categoryId %>"
+                                    class="fa-solid fa-check hidden"
+                                ></i
                             ></a>
+                            <a href=""><i class="fa-solid fa-x"></i></a>
                         </div>
                     </div>
                     <% }) %>
@@ -101,6 +107,11 @@
                     window.location.href = "/login";
                 });
             });
+        </script>
+        <script>
+            const changeCategory =
+                document.getElementsByName("change-category");
+            console.log(changeCategory);
         </script>
     </body>
 </html>
