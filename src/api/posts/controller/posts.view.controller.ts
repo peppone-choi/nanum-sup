@@ -24,19 +24,12 @@ export default class PostsViewController {
   async postListPage(req: Request, res: Response, next: NextFunction) {
     res.render("client/posts/postList");
 
-    // const posts = await this._postsService.getPosts({
-    //   offset,
-    //   limit,
-    // });
+    const posts = await this._postsService.getPosts();
 
-    // res.render("client/posts/postList", {
-    //   posts: posts.results,
-    //   count: posts.totalCount,
-    //   prev: posts.prev,
-    //   next: posts.next,
-    //   limit,
-    //   offset,
-    // });
+    res.render("client/posts/postList", {
+      posts
+      
+    });
   }
 
   /** 게시글 상세 페이지 */

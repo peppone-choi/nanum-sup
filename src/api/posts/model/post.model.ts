@@ -9,6 +9,8 @@ export class Post implements IPost {
   author: IUser;
   /** 카테고리 */
   category: ICategory;
+  /** 작성일 */
+  createdAt: Date;
 
   constructor(params: IPost) {
     this.id = params.id;
@@ -16,5 +18,6 @@ export class Post implements IPost {
     this.content = params.content;
     this.author = params.author;
     this.category = params.category;
+    this.createdAt = params.createdAt;
   }
 }
