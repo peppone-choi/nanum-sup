@@ -40,6 +40,7 @@ app.use(ROUTES_INDEX.ADMIN_POSTS_API, adminPostRouter);
 app.use(ROUTES_INDEX.ADMIN_POST_VIEW, adminPostViewRouter);
 app.use(ROUTES_INDEX.POST_VIEW, postViewRouter);
 
+/** -------- users ---------  */
 app.use(ROUTES_INDEX.USER_API, userRouter);
 app.use(ROUTES_INDEX.ADMIN_USER_API, adminUserRouter);
 

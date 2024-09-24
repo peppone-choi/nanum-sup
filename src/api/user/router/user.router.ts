@@ -25,7 +25,7 @@ const USER_ROUTES = {
   SIGN_IN: `/api/users`,
   /** [사용자] 유저 정보 수정 */
   UPDATE_USER: `/api/users/:userId`,
-  /** [사용자] 유저 삭제 */
+  /** [사용자] 유저 탈퇴 */
   DELETE_USER: `/api/users/:userId`,
 } as const;
 
