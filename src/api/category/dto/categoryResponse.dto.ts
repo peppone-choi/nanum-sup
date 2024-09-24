@@ -1,21 +1,17 @@
-export class CategoryResponseDTO {
-    categoryId: string;
-    title: string;
-    // author: {
-    //     id: string;
-    //     userName: string;
-    // };
-    post: {
-        id: string;
-    }[];
+import UserResponseDto from "@/api/user/dto/userResponse.dto";
 
-    constructor(params: ICategory) {
-        this.categoryId = params.id;
-        this.title = params.title;
-        // this.author = {
-        //     id: params.author.id,
-        //     userName: params.author.profile.firstName,
-        // };
-        this.post = params.post?.map((post) => ({ id: post.id })) || [];
-    }
+export class CategoryResponseDTO {
+  categoryId: string;
+  title: string;
+  admin?: UserResponseDto;
+  subAdmin?: UserResponseDto[];
+
+  constructor(params: ICategory) {
+    this.categoryId = params.id;
+    this.title = params.title;
+    this.admin = params.admin ? new UserResponseDto(params.admin) : undefined;
+    this.subAdmin = params.subAdmin
+      ? params.subAdmin.map((user) => new UserResponseDto(user))
+      : undefined;
+  }
 }

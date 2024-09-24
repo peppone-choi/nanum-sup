@@ -43,4 +43,11 @@ export default class CommentServiceImpl implements CommentService {
   async deleteComment(commentId: string): Promise<void> {
     await this._commentRepository.delete(commentId);
   }
+
+  async createCommentReply(
+    parent: string,
+    comment: Omit<IComment, "id">
+  ): Promise<void> {
+    await this._commentRepository.saveReply(parent, comment);
+  }
 }

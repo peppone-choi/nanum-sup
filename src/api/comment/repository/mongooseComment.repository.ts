@@ -45,4 +45,19 @@ export class MongooseCommentRepository implements CommentRepository {
 
     return;
   }
+
+  async saveReply(
+    parent: string,
+    comment: Omit<IComment, "id">
+  ): Promise<IComment> {
+    const parentComment = await MongooseComment.findById(parent);
+    if (!parentComment) {
+      throw new HttpException(404, "부모 댓글을 찾을 수 없습니다.");
+    }
+    const newComment = new MongooseComment(comment);
+    newComment.parent = parentComment;
+    newComment.depth = parentComment.depth + 1;
+    await newComment.save();
+    return newComment;
+  }
 }

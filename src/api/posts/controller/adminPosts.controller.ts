@@ -82,7 +82,7 @@ export default class AdminPostsController {
           content,
         }
       );
-      res.send(createdPost);
+      res.status(201).send(createdPost);
     } catch (error) {
       next(error);
     }

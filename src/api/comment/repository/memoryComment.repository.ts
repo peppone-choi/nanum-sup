@@ -50,4 +50,21 @@ export class MemoryCommentRepository implements CommentRepository {
     }
     MemoryCommentRepository.store.delete(id);
   }
+  async saveReply(
+    parent: string,
+    comment: Omit<IComment, "id">
+  ): Promise<IComment> {
+    const parentComment = MemoryCommentRepository.store.get(parent);
+    if (!parentComment) {
+      throw new HttpException(404, "부모 댓글을 찾을 수 없습니다.");
+    }
+    const newComment = new Comment({
+      ...comment,
+      parent: parentComment,
+      depth: parentComment.depth + 1,
+      id: `comment-${MemoryCommentRepository.index++}`,
+    });
+    MemoryCommentRepository.store.set(newComment.id, newComment);
+    return newComment;
+  }
 }

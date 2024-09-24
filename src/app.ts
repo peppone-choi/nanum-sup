@@ -1,7 +1,6 @@
 import express from "express";
 import path from "node:path";
 import morgan from "morgan";
-import appRouter from "./routers/app.router";
 import viewRouter from "./routers/views/view.router";
 import adminViewRouter from "./routers/views/adminView.router";
 import cookieParser from "cookie-parser";
@@ -24,7 +23,6 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(appRouter);
 
 app.use(ROUTES_INDEX.AUTH_API, authRouter);
 
