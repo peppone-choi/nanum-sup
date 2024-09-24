@@ -20,6 +20,7 @@ export default class PostsController {
     this.deletePost = this.deletePost.bind(this);
   }
 
+    /** 게시글 목록 조회 */
   async getPosts(
     req: Request<
     getPostsRequest["path"], 
@@ -38,6 +39,9 @@ export default class PostsController {
       next(error);
     }
   }
+
+
+    /** 게시글 상세 조회 */
   async getPostDetail(
     req: Request<
     getPostDetailRequest["path"], 
@@ -56,6 +60,8 @@ export default class PostsController {
       next(error);
     }
   }
+
+    /** 게시글 생성 */
   async createPost(
     req: Request<
     createPostRequest["path"], 
@@ -78,6 +84,8 @@ export default class PostsController {
       next(error);
      }
   }
+
+  /** 게시글 수정 */
   async updatePost(req: Request<updatePostRequest["path"], updatePostResponse, updatePostRequest["body"], updatePostRequest["params"]>, res: Response, next: NextFunction) {
     const { postId } = req.params;
 
@@ -90,6 +98,7 @@ export default class PostsController {
     }
   }
 
+  /** 게시글 삭제 */
   async deletePost(req: Request<deletePostRequest["path"], deletePostResponse, deletePostRequest["body"], deletePostRequest["params"]>, res: Response, next: NextFunction) {
     const { postId } = req.params;
     try {
