@@ -19,12 +19,16 @@
       <main class="main">
         <div class="profile-edit">
           <img
-            src="images/profile.webp"
+            src="profile.webp"
             alt="profile image"
-            class="profile-image"
+            class="profile-thumbnail"
+            width="100"
+            height="100"
           />
-          <button class="edit-button">
-            <i class="fa-solid fa-pencil"></i>
+          <button class="edit-button" id="editbutton">
+            <i class="fa-solid fa-pencil">
+              <input type="file" id="filename" name="filename" hidden />
+            </i>
           </button>
           <p>50MB 제한</p>
         </div>
@@ -41,5 +45,26 @@
         <button type="submit">수정 완료</button>
       </main>
     </div>
+    <script>
+      const $form = document.querySelector("#form");
+      const $filename = document.querySelector("#filename");
+      const $editbutton = document.getElementById("profile-thumbnail");
+
+      // 업로드 버튼이 사라짐 -> 이미지를 클릭했을때, 파일 선택을 띄워준다
+      $editbutton.addEventListener("click", () => {
+        $filename.click();
+      });
+
+      // input file이 바뀌는걸 감지한다.
+      $filename.addEventListener("change", (e) => {
+        const file = e.target.files[0];
+
+        // 업로드되어있는 이미지로 src를 교체한다.
+        $editbutton.src = URL.createObjectURL(file);
+        $editbutton.onload = function () {
+          URL.revokeObjectURL($profileThumbnail.src);
+        };
+      });
+    </script>
   </body>
 </html>

@@ -35,6 +35,7 @@ body {
   height: 35px;
   font-size: 15px;
   border-radius: 50%;
+  cursor: pointer;
 }
 
 .profile-textform {
