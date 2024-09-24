@@ -26,9 +26,9 @@
 }
 
 body {
-    font-family: "Noto Sans KR", sans-serif;
-    background-color: var(--body-bg);
-    color: var(--mono-500);
+  font-family: 'Noto Sans KR', sans-serif;
+  background-color: var(--body-bg);
+  color: var(--mono-500);
 }
 
 /* 헤더 */
@@ -83,7 +83,8 @@ body {
 /* 레이아웃 */
 
 #wrap {
-    height: 100vh;
+  height: calc(100vh - 55px);
+  /* height: 100vh; */
 }
 
 .inner {

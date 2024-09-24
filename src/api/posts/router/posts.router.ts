@@ -57,7 +57,7 @@ postRouter.get(
 postRouter.post(
   extractPath(POST_ROUTES.CREATE_POST, ROUTES_INDEX.POSTS_API),
   validate(createPostValidator),
-  authUserMiddleware,
+  // authUserMiddleware,
   postsController.createPost
 );
 postRouter.put(

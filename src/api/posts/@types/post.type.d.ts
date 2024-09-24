@@ -5,9 +5,10 @@ interface IPost {
   title: string;
   /** 게시글 내용 */
   content: string;
-  // /** 작성자 */
+  /** 작성자 */
   author: IUser;
-  // author: string;
   /** 카테고리 */
   category: ICategory;
+  /** 작성일 */
+  createdAt: Date;
 }
