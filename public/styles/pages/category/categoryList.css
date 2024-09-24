@@ -30,7 +30,7 @@
     position: absolute;
     right: 0px;
     top: 5px;
-    color: black;
+    color: var(--mono-500);
     font-size: 16px;
     padding: 15px;
     border-radius: 50%;
@@ -85,7 +85,7 @@
 .category-list {
     font-weight: bold;
     margin: 10px 0;
-    color: black;
+    color: var(--mono-500);
 }
 
 .category-footer {
@@ -97,7 +97,7 @@
 }
 
 .admin-setup i {
-    color: black;
+    color: var(--mono-500);
     font-size: 16px;
 }
 
@@ -116,7 +116,7 @@
 }
 
 .fa-right-from-bracket {
-    color: black;
+    color: var(--mono-500);
 }
 
 /* 로그아웃 창 */
@@ -128,7 +128,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #ffffff;
+    background-color: var(--mono-000);
     width: 250px;
     height: 100px;
     border-radius: 10px;
@@ -152,7 +152,7 @@
 }
 
 .btn-cancel {
-    background-color: #ff8d8d;
+    background-color: var(--sub-color-5);
     border: none;
     padding: 5px 10px;
     border-radius: 10px;
@@ -161,7 +161,7 @@
 }
 
 .btn-confirm {
-    background-color: #9ccaff;
+    background-color: var(--sub-color-4);
     border: none;
     border-radius: 10px;
     padding: 5px 10px;
