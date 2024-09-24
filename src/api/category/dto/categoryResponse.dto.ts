@@ -12,6 +12,6 @@ export class CategoryResponseDTO {
     this.admin = params.admin ? new UserResponseDto(params.admin) : undefined;
     this.subAdmin = params.subAdmin
       ? params.subAdmin.map((user) => new UserResponseDto(user))
-      : undefined;
+      : [];
   }
 }

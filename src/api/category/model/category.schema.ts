@@ -6,7 +6,7 @@ const categorySchema = new mongoose.Schema<ICategory>({
     required: true,
     length: 20,
   },
-  admin: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  admin: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   subAdmin: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
 });
 
