@@ -64,6 +64,7 @@ export class PostsServiceImpl implements PostsService {
 
   /** 게시글 상세 조회 */
   async getPostDetail(postId: string): Promise<PostResponseDTO | null> {
+    console.log(postId);
     const post = await this._postRepository.findById(postId);
     if (!post) {
       throw new HttpException(404, "게시글을 찾을 수 없습니다.");

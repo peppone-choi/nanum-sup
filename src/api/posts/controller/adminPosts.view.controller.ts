@@ -22,6 +22,18 @@ export default class AdminPostsViewController {
     const posts = await this._postsService.getPosts();
     res.render("admin/posts/postList", {
       posts,
+      // posts: [
+      //   {
+      //     postId: "11",
+      //     title: "게시글 제목 1",
+      //     content: "게시글 내용 1"
+      //   },
+      //   {
+      //     postId: "22",
+      //     title: "게시글 제목 2",
+      //     content: "게시글 내용 2"
+      //   },
+      // ],
     });
   }
 

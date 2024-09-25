@@ -7,5 +7,67 @@
 </head>
 <body>
   관리자 페이지 게시글 상세 보기
+  <h1>관리자 게시글 상세</h1>
+  <form id="form">
+    <label for="title">
+      <span>제목</span>
+      <input type="text" id="title" name="title" value="<%= post.title %>" />
+    </label>
+    <label for="content">
+      <span>내용</span>
+      <textarea id="content" name="content"><%= post.content %></textarea>
+    </label>
+  </form>
+  <button id="edit-button">수정</button>
+  <button id="delete-button">삭제</button>
+  <a href="/admin/posts">목록</a>
+  <script>
+    const $form = document.querySelector("#form");
+    const $editButton = document.querySelector("#edit-button");
+    const $deleteButton = document.querySelector("#delete-button");
+
+    const handleEdit = async () => {
+      try {
+        const res = await fetch("/admin-api/posts/<%= post.postId %>", {
+          method: "put",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            title: $form.title.value,
+            content: $form.content.value,
+          }),
+        });
+
+        if (!res.ok) {
+          throw new Error("서버 오류");
+        }
+
+        location.href = "/admin/posts";
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    $form.addEventListener("submit", handleEdit);
+
+    $editButton.addEventListener("click", handleEdit);
+
+    $deleteButton.addEventListener("click", async () => {
+      try {
+        const res = await fetch("/admin-api/posts/<%= post.postId %>", {
+          method: "delete",
+        });
+
+        if (!res.ok) {
+          throw new Error("서버 오류");
+        }
+
+        location.href = "/admin/posts";
+      } catch (error) {
+        console.error(error);
+      }
+    });
+  </script>
 </body>
 </html>

@@ -43,9 +43,12 @@
       </div>
     </div>
     <script>
+      const urlParams = window.location.search;
+      const redirect = new URLSearchParams(urlParams).get("redirect");
       const form = document.querySelector("form");
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
+
         const id = document.querySelector("#id").value;
         const password = document.querySelector("#password").value;
         const data = { id, password };
@@ -59,7 +62,12 @@
         const responseData = await response.json();
         if (response.ok) {
           alert("로그인 성공");
-          document.cookie = `Authentication=Bearer ${await responseData.accessToken}; path=/; domain=localhost;`;
+          document.cookie = `accessToken=Bearer ${await responseData.accessToken}; path=/; domain=localhost;`;
+          if (redirect) {
+            window.location.href = redirect;
+            return;
+          }
+          location.href = "/";
         } else {
           alert("로그인 실패");
         }
