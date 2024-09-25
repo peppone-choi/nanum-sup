@@ -2,6 +2,7 @@ import { validate } from "@/api/common/middlewares/validation.middleware";
 import { ROUTES_INDEX } from "@/routers";
 import { extractPath } from "@/utils/path.util";
 import express from "express";
+import LikeController from "../controller/like.controller";
 
 const likeRouter = express.Router();
 
@@ -16,6 +17,8 @@ const LIKE_ROUTES = {
   /** [사용자] 좋아요 삭제 */
   DELETE_LIKE: `/api/likes/:likeId`,
 } as const;
+
+const likeController = new LikeController();
 
 likeRouter.get(extractPath(LIKE_ROUTES.GET_LIKES_POST, ROUTES_INDEX.LIKE_API));
 

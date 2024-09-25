@@ -1,6 +1,7 @@
 import { ROUTES_INDEX } from "@/routers";
 import { extractPath } from "@/utils/path.util";
 import express from "express";
+import AdminLikeController from "../controller/adminLikeController";
 
 const adminLikeRouter = express.Router();
 
@@ -11,6 +12,8 @@ const LIKE_ROUTES = {
   /** [사용자] 좋아요 삭제 */
   DELETE_LIKE: `/api/likes/:likeId`,
 } as const;
+
+const adminLikeController = new AdminLikeController();
 
 adminLikeRouter.get(
   extractPath(LIKE_ROUTES.GET_LIKES, ROUTES_INDEX.ADMIN_LIKE_API)
