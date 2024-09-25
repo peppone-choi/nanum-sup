@@ -74,3 +74,30 @@ main {
 /* 유저 프로필 소개 부분 */
 
 /* 내 게시글 / 좋아요한 게시글 버튼 부분 */
+.post-filter {
+  margin-top: 20px;
+  width: 310px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  background-color: #ffffff;
+  border-radius: 30px;
+  border: 1px solid var(--sub-color-3);
+}
+
+.post-filter button {
+  width: 120px;
+  background-color: #ffffff;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.post-filter p {
+  margin-top: 10px;
+  color: #bcbbbb;
+}
+
+.post {
+  margin-top: 20px;
+}
