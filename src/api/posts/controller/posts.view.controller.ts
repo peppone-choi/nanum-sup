@@ -22,20 +22,18 @@ export default class PostsViewController {
 
   /** 게시글 목록 페이지 */
   async postListPage(req: Request, res: Response, next: NextFunction) {
-    res.render("client/posts/postList");
+    // res.render("client/posts/postList");
 
     const posts = await this._postsService.getPosts();
 
     res.render("client/posts/postList", {
-      posts
-      
+      posts,
     });
   }
 
   /** 게시글 상세 페이지 */
   async postDetailPage(req: Request, res: Response, next: NextFunction) {
     const post = await this._postsService.getPostDetail(req.params.postId);
-
     const authorId = post?.author.accountId;
 
     res.render("client/posts/postDetail", {
@@ -55,15 +53,16 @@ export default class PostsViewController {
 
     const userId = req.user.userId;
 
+
     const post = await this._postsService.getPostDetail(postId);
 
-    const isMe = userId === post?.author.accountId;
+    const isMe = userId === post?.author.id;
 
-    if (!isMe) {
-      res.send(`<script>
-          alert("권한이 없습니다."); location.href="/posts/${postId}";
-        </script>`);
-    }
+    // if (!isMe) {
+    //   res.send(`<script>
+    //       alert("권한이 없습니다."); location.href="/posts/${postId}";
+    //     </script>`);
+    // }
 
     res.render("client/posts/postEdit", { post });
   }

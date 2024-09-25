@@ -59,7 +59,7 @@ postRouter.get(
 postRouter.get(
   extractPath(POST_ROUTES.GET_POST_DETAIL, ROUTES_INDEX.POSTS_API),
   validate(getPostDetailValidator),
-  authUserMiddleware,
+  // authUserMiddleware,
   postsController.getPostDetail
 );
 postRouter.post(
