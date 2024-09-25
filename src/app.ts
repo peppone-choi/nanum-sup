@@ -18,6 +18,8 @@ import categoryViewRouter from "./api/category/router/category.view.router";
 import userRouter from "./api/user/router/user.router";
 import adminUserRouter from "./api/user/router/adminUser.router";
 import authRouter from "./api/auth/router/auth.router";
+import adminUserViewRouter from "./api/user/router/adminUser.view.router";
+import userViewRouter from "./api/user/router/user.view.router";
 
 const app = express();
 app.use(express.json());
@@ -43,6 +45,8 @@ app.use(ROUTES_INDEX.POST_VIEW, postViewRouter);
 /** -------- users ---------  */
 app.use(ROUTES_INDEX.USER_API, userRouter);
 app.use(ROUTES_INDEX.ADMIN_USER_API, adminUserRouter);
+app.use(ROUTES_INDEX.USER_VIEW, userViewRouter);
+app.use(ROUTES_INDEX.ADMIN_USER_VIEW, adminUserViewRouter);
 
 app.use(viewRouter);
 const PORT = process.env.PORT || 4000;

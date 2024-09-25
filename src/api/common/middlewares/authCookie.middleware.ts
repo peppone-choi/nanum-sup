@@ -34,7 +34,9 @@ export const authCookieViewMiddleware = (authRedirect: boolean = true) => {
       next();
     } catch (error: any) {
       // next(new HttpException(401, `인증 실패 ${error.message}`));
-      res.status(302).redirect(`/auth/login?redirect=${req.originalUrl || ""}`);
+      res
+        .status(302)
+        .redirect(`/views/login?redirect=${req.originalUrl || ""}`);
     }
   };
 };

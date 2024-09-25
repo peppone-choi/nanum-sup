@@ -33,10 +33,12 @@ declare type adminGetPostDetailRequest = {
 declare type adminGetPostDetailResponse = PostResponseDTO;
 
 declare type adminCreatePostRequestBody = {
+  /** 작성자 ID */
+  userId: string;
+  /** 카테고리 ID */
+  categoryId: string;
   title: string;
   content: string;
-  categoryId: string;
-  userId: string;
 };
 
 declare type adminCreatePostRequestPath = {};
