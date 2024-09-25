@@ -29,6 +29,10 @@ img {
   gap: 5px;
 }
 
+label {
+  font-weight: bold;
+}
+
 .form-group.b {
   margin-top: 20px;
 }
@@ -43,4 +47,32 @@ img {
 input[type="password"] {
   border: none;
   outline: none;
+}
+
+.footer {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  font-size: 13px;
+}
+
+.footer a {
+  text-decoration: none;
+}
+
+.footer p {
+  margin: 0 10px;
+  color: var(--mono-300);
+}
+
+.find {
+  color: var(--mono-300);
+}
+
+/* .find::after {
+  content: "ㅣ";
+} */
+
+.signup {
+  color: var(--sub-color-1);
 }
