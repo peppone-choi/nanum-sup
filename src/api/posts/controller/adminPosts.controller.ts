@@ -44,7 +44,7 @@ export default class AdminPostsController {
         });
       }
 
-      res.status(204).json();
+      res.status(201).json();
     } catch (error) {
       next(error);
     }
