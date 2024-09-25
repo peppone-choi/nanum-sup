@@ -4,35 +4,13 @@ import LikeService from "./like.service.type";
 export default class LikeServiceImpl implements LikeService {
   constructor() {}
 
-  getLikesPost(req: Request, res: Response, next: NextFunction) {
-    try {
-      res.send("getLikesPost");
-    } catch (error) {
-      next(error);
-    }
-  }
+  async getLikes() {}
 
-  getLikesComment(req: Request, res: Response, next: NextFunction) {
-    try {
-      res.send("getLikesComment");
-    } catch (error) {
-      next(error);
-    }
-  }
+  async getLikesPost(postId: string) {}
 
-  createLike(req: Request, res: Response, next: NextFunction) {
-    try {
-      res.send("createLike");
-    } catch (error) {
-      next(error);
-    }
-  }
+  async getLikesComment(commentId: string) {}
 
-  deleteLike(req: Request, res: Response, next: NextFunction) {
-    try {
-      res.send("deleteLike");
-    } catch (error) {
-      next(error);
-    }
-  }
+  async createLike() {}
+
+  async deleteLike(likeId: string) {}
 }

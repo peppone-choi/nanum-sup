@@ -7,9 +7,20 @@ export default class LikeController {
     this._likeService = _likeService;
   }
 
+  async getLikes(req: Request, res: Response, next: NextFunction) {
+    try {
+      const likes = await this._likeService.getLikes();
+      res.send(likes);
+    } catch (error) {
+      next(error);
+    }
+  }
+
   async getLikesPost(req: Request, res: Response, next: NextFunction) {
     try {
-      res.send("getLikes");
+      const postId = req.params.id;
+      const likes = await this._likeService.getLikesPost(postId);
+      res.send(likes);
     } catch (error) {
       next(error);
     }
@@ -17,7 +28,9 @@ export default class LikeController {
 
   async getLikesComment(req: Request, res: Response, next: NextFunction) {
     try {
-      res.send("getLikesComment");
+      const commentId = req.params.id;
+      const likes = await this._likeService.getLikesComment(commentId);
+      res.send(likes);
     } catch (error) {
       next(error);
     }
@@ -25,7 +38,8 @@ export default class LikeController {
 
   async createLike(req: Request, res: Response, next: NextFunction) {
     try {
-      res.send("createLike");
+      const like = this._likeService.createLike();
+      res.send(like);
     } catch (error) {
       next(error);
     }
@@ -33,7 +47,9 @@ export default class LikeController {
 
   async deleteLike(req: Request, res: Response, next: NextFunction) {
     try {
-      res.send("deleteLike");
+      const likeId = req.params.id;
+      const like = await this._likeService.deleteLike(likeId);
+      res.send(like);
     } catch (error) {
       next(error);
     }

@@ -9,7 +9,7 @@ export default class AdminLikeController {
 
   async getLikes(req: Request, res: Response, next: NextFunction) {
     try {
-      res.send("getLikes");
+      const likes = await this._likeService.getLikes();
     } catch (error) {
       next(error);
     }
@@ -17,7 +17,8 @@ export default class AdminLikeController {
 
   async deleteLike(req: Request, res: Response, next: NextFunction) {
     try {
-      res.send("deleteLike");
+      const likeId = req.params.id;
+      const like = await this._likeService.deleteLike(likeId);
     } catch (error) {
       next(error);
     }
