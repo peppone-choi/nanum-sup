@@ -2,11 +2,6 @@ body {
     background-color: var(--sub-color-3) !important;
 }
 
-.signup-container {
-    outline: 1px solid red;
-    /* position: relative; */
-}
-
 .signup-form {
     display: flex;
     flex-direction: column;
