@@ -3,6 +3,7 @@ import { extractPath } from "@/utils/path.util";
 import express from "express";
 import AdminLikeController from "../controller/adminLikeController";
 import LikeServiceImpl from "../service/like.service";
+import MongooseLikeRepository from "../repository/mongooseLike.repository";
 
 const adminLikeRouter = express.Router();
 
@@ -14,7 +15,9 @@ const LIKE_ROUTES = {
   DELETE_LIKE: `/api/likes/:likeId`,
 } as const;
 
-const adminLikeController = new AdminLikeController(new LikeServiceImpl());
+const adminLikeController = new AdminLikeController(
+  new LikeServiceImpl(new MongooseLikeRepository())
+);
 
 adminLikeRouter.get(
   extractPath(LIKE_ROUTES.GET_LIKES, ROUTES_INDEX.ADMIN_LIKE_API),

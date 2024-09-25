@@ -26,6 +26,16 @@ export default class LikeController {
     }
   }
 
+  async countLikesPostCount(req: Request, res: Response, next: NextFunction) {
+    try {
+      const postId = req.params.id;
+      const count = await this._likeService.countLikesPost(postId);
+      res.send(count);
+    } catch (error) {
+      next(error);
+    }
+  }
+
   async getLikesComment(req: Request, res: Response, next: NextFunction) {
     try {
       const commentId = req.params.id;
@@ -36,9 +46,29 @@ export default class LikeController {
     }
   }
 
+  async countLikesCommentCount(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
+    try {
+      const commentId = req.params.id;
+      const count = await this._likeService.countLikesComment(commentId);
+      res.send(count);
+    } catch (error) {
+      next(error);
+    }
+  }
+
   async createLike(req: Request, res: Response, next: NextFunction) {
     try {
-      const like = this._likeService.createLike();
+      const { type, user, post, comment } = req.body.comment;
+      const like = await this._likeService.createLike(
+        type,
+        user,
+        post,
+        comment
+      );
       res.send(like);
     } catch (error) {
       next(error);
