@@ -151,7 +151,7 @@ body {
 }
 
 .signup-information {
-    padding-top: 10px;
+    padding-top: 7px;
     color: var(--mono-000);
     font-size: 13px;
 }
@@ -169,14 +169,22 @@ body {
     justify-content: center;
     align-items: center;
     width: 250px;
-    height: 100px;
+    height: 110px;
     border-radius: 10px;
+    z-index: 100;
 }
 
 .availability-popup-available.hidden,
 .availability-popup-unavailable.hidden,
 .signup-confirm-popup.hidden {
-    /* display: none; */
+    display: none;
+}
+
+.availability-popup-available img,
+.availability-popup-unavailable img,
+.signup-confirm-popup img {
+    width: 16px;
+    height: 16px;
 }
 
 .available-popup-content,
@@ -185,6 +193,7 @@ body {
     display: flex;
     flex-direction: column;
     text-align: center;
+    position: relative;
 }
 
 .available-popup-content p,
@@ -192,7 +201,22 @@ body {
 .signup-popup-content p {
     padding-bottom: 15px;
     font-weight: 700;
+    display: inline-flex;
+    align-items: center;
     color: var(--mono-000);
+    gap: 8px;
+}
+
+.available-popup-content p:after,
+.unavailable-popup-content p:after,
+.signup-popup-content p:after {
+    content: "";
+    position: absolute;
+    left: 0px;
+    top: 33px;
+    height: 0.5px;
+    width: 100%;
+    background: #d9d9d9;
 }
 
 .unavailable-confirm-btn,
@@ -201,14 +225,13 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px;
 }
 .available-confirm,
 .unavailable-confirm,
 .signup-confirm {
     border: none;
-    border-radius: 10px;
-    padding: 5px 10px;
     cursor: pointer;
     font-weight: bold;
+    background-color: transparent;
+    color: var(--mono-000);
 }

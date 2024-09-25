@@ -154,8 +154,9 @@
                         <textarea
                             type="text"
                             maxlength="200"
-                            placeholder="자유롭게 소개글을 입력해주세요."
+                            placeholder="자유롭게 소개글을 입력해주세요.(200자내)"
                             class="introduce"
+                            id="introduce"
                         ></textarea>
                         <p class="signup-information">
                             *프로필 사진과 소개글은 선택 입력 사항입니다.
@@ -174,26 +175,26 @@
             class="availability-popup-available hidden"
         >
             <div class="available-popup-content">
-                <img src="/static/images/information.svg" alt="알림" />
-                <p>사용 가능합니다.</p>
-                <div class="available-confirm-btn">
-                    <button
-                        class="available-confirm"
-                        id="available-confirm-btn"
-                    >
-                        확인
-                    </button>
-                </div>
+                <p>
+                    <img src="/static/images/information.svg" alt="알림" />사용
+                    가능합니다.
+                </p>
+                <div class="available-confirm-btn"></div>
+                <button class="available-confirm" id="available-confirm-btn">
+                    확인
+                </button>
             </div>
         </div>
-        <!-- 중복확인 팝업 [사용불가]
+        <!-- 중복확인 팝업 [사용불가] -->
         <div
             id="availability-popup-unavailable"
             class="availability-popup-unavailable hidden"
         >
             <div class="unavailable-popup-content">
-                <img src="/static/images/information.svg" alt="알림" />
-                <p>이미 사용중입니다.</p>
+                <p>
+                    <img src="/static/images/information.svg" alt="알림" />이미
+                    사용중입니다.
+                </p>
                 <div class="unavailable-confirm-btn">
                     <button
                         class="unavailable-confirm"
@@ -204,24 +205,35 @@
                 </div>
             </div>
         </div>
-        회원가입 입력 사항 누락 시
+        <!-- 회원가입 입력 사항 누락 시 -->
         <div id="signup-confirm-popup" class="signup-confirm-popup hidden">
             <div class="signup-popup-content">
-                <img src="/static/images/information.svg" alt="알림" />
-                <p>입력 사항을 확인하세요</p>
+                <p>
+                    <img src="/static/images/information.svg" alt="알림" />입력
+                    사항을 확인하세요
+                </p>
                 <div class="signup-confirm-btn">
                     <button class="signup-confirm" id="signup-confirm-btn">
                         확인
                     </button>
                 </div>
             </div>
-        </div> -->
+        </div>
         <script>
             document
                 .getElementById("profile-pen-icon")
                 .addEventListener("click", function () {
                     document.getElementById("profile-image").click();
                 });
+        </script>
+        <script>
+            const textarea = document.getElementById("introduce");
+            const charCount = document.getElementById("char-count");
+
+            textarea.addEventListener("input", () => {
+                const currentLength = textarea.value.length;
+                charCount.textContent = `${currentLength}/200`;
+            });
         </script>
         <script>
             const form = document.querySelector("form");
