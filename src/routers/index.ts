@@ -51,7 +51,7 @@ const USER_ROUTES = {
   /** 유저 뷰 */
   USER_VIEW: "/users",
   /** 관리자 유저 뷰 */
-  ADMIN_USER_VIEW: "/admin-api/users",
+  ADMIN_USER_VIEW: "/admin/users",
 } as const;
 
 export const ROUTES_INDEX = {
