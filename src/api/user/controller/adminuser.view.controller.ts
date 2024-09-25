@@ -13,11 +13,7 @@ export default class AdminUserViewController {
 
   async userListPage(req: Request, res: Response, next: NextFunction) {
     try {
-      const myInfo = await this._userService.getUsers();
-
-      res.render("admin/users/userList", {
-        user: myInfo,
-      });
+      res.render("admin/users/userList");
     } catch (error) {
       next(error);
     }

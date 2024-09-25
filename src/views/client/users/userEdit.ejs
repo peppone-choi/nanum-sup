@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/styles/reset.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/static/styles/pages/users/userEdit.css" />
+    <title>유저 수정 페이지</title>
+  </head>
+  <body>
+    <div id="wrap">
+      <header>
+        <div class="header-inner"><%- include('../../_layouts/header') %></div>
+      </header>
+      <main class="main">
+        <div class="profile-edit">
+          <img
+            src="/static/images/profile.webp"
+            alt="profile image"
+            class="profile-thumbnail"
+            width="100"
+            height="100"
+          />
+          <button class="edit-button" id="editbutton">
+            <i class="fa-solid fa-pencil">
+              <input type="file" id="filename" name="filename" hidden />
+            </i>
+          </button>
+          <p>50MB 제한</p>
+        </div>
+        <form id="profiletextform" class="profile-textform">
+          <div class="nickName-edit">
+            <label for="nickname">닉네임</label>
+            <input type="text" id="nickname" name="nickname" required />
+          </div>
+          <div class="bio-edit">
+            <label for="bio">소개글</label>
+            <input type="text" id="bio" name="bio" />
+          </div>
+        </form>
+        <button type="submit">수정 완료</button>
+      </main>
+    </div>
+    <script>
+      const $form = document.querySelector("#form");
+      const $filename = document.querySelector("#filename");
+      const $editbutton = document.getElementById("profile-thumbnail");
+
+      // 업로드 버튼이 사라짐 -> 이미지를 클릭했을때, 파일 선택을 띄워준다
+      $editbutton.addEventListener("click", () => {
+        $filename.click();
+      });
+
+      // input file이 바뀌는걸 감지한다.
+      $filename.addEventListener("change", (e) => {
+        const file = e.target.files[0];
+
+        // 업로드되어있는 이미지로 src를 교체한다.
+        $editbutton.src = URL.createObjectURL(file);
+        $editbutton.onload = function () {
+          URL.revokeObjectURL($profileThumbnail.src);
+        };
+      });
+    </script>
+  </body>
+</html>

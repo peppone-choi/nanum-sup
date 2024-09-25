@@ -25,7 +25,7 @@ const USER_ROUTES = {
   SIGN_IN: `/api/users`,
   /** [사용자] 유저 정보 수정 */
   UPDATE_USER: `/api/users/:userId`,
-  /** [사용자] 유저 탈퇴 */
+  /** [사용자] 회원 탈퇴 */
   DELETE_USER: `/api/users/:userId`,
 } as const;
 
@@ -35,13 +35,13 @@ const userController = new UserController(
 
 userRouter.get(
   extractPath(USER_ROUTES.GET_USERS, ROUTES_INDEX.USER_API),
-  authUserMiddleware,
+  // authUserMiddleware,
   userController.getUsers
 );
 
 userRouter.get(
   extractPath(USER_ROUTES.GET_USER_DETAIL, ROUTES_INDEX.USER_API),
-  authUserMiddleware,
+  // authUserMiddleware,
   validate(getUserDetailValidator),
   userController.getUserDetail
 );
@@ -54,14 +54,14 @@ userRouter.post(
 
 userRouter.put(
   extractPath(USER_ROUTES.UPDATE_USER, ROUTES_INDEX.USER_API),
-  authUserMiddleware,
+  // authUserMiddleware,
   validate(updateUserValidator),
   userController.updateUser
 );
 
 userRouter.delete(
   extractPath(USER_ROUTES.DELETE_USER, ROUTES_INDEX.USER_API),
-  authUserMiddleware,
+  // authUserMiddleware,
   validate(deleteUserValidator),
   userController.deleteUser
 );
