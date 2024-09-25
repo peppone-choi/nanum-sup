@@ -11,4 +11,6 @@ export interface PostRepository {
   update(postId: string, updatePostInfo: Partial<IPost>): Promise<IPost>;
   /** 게시글 삭제 */
   delete(postId: string): Promise<void>;
+  /** 단축 URL로 게시글 조회 */
+  findByShortUrl(shortUrl: string): Promise<IPost | null>;
 }

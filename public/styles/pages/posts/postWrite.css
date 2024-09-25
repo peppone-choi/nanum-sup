@@ -8,13 +8,18 @@ body {
 
 
 #wrap {
-  overflow-x: hidden;
+  /* overflow: hidden; */
+  /* height: calc(100vh - ); */
 }
 
+/* #wrap::-webkit-scrollbar {
+  display: none;
+} */
 
-#wrap > .inner {
-  padding: 20% 15px;
-  /* max-width: 100%; */
+
+#wrap > .container {
+  padding: 10% 15px 10px 15px;
+ 
 }
 
 
@@ -24,22 +29,29 @@ body {
   flex-wrap: wrap;
   border-radius: 10px;
   gap: 10px;
-  /* width: 100%; */
+  width: 100%;
+
+}
+
+
+input, .contentArea {
+  box-sizing: border-box;
 }
 
 /* 카테고리 선택 */
 .category, #category {
-  width: 60%;
-  height: 40px;
+  width: 65%;
+  height: 45px;
   border-radius: 10px;
-  color: var(--mono-500);
+  color: var(--mono-400);
+  /* padding: 0 10px; */
 }
 
 /* 카테고리 select 박스 */
-select.category::-ms-expand {
+select::-ms-expand {
   display: none;
 }
-select.category {
+select {
   background-image: url('/static/images/arrow-down.svg'); 
   background-repeat: no-repeat;
   background-position: right 10px top 30%;
@@ -55,7 +67,7 @@ select.category {
 select.category option {
   cursor: pointer;
   font-weight: 500;
-  width: 100%;
+  /* width: 100%; */
 }
 
 
@@ -63,22 +75,83 @@ select.category option {
 /* 제목 */
 .title, #title {
   width: 100%;
-  height: 40px;
+  height: 45px;
   border-radius: 10px;
+ 
 }
 
-/* 내용 */
-#content {
-  max-width: 100%;
-  max-height: 100%;
+/* 제목, 카테고리선택 부분 왼쪽 여백주기 */
+#title, #category {
+  padding-left: 10px;
+  font-size: 15px;
+}
+
+
+
+/* 내용 입력 */
+
+.contentArea {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
   border-radius: 10px;
-  padding: 10px;
-  border: none;
-  outline: none;
+
+  background-color: var(--mono-000);
+  padding: 15px;
+}
+
+#content {
+  width: 100%;
+  height: 100%;
+  min-height: 350px;
   font-family: "noto Sans KR";
   font-size: 15px;
   color: var(--mono-400);
+  border: none;
+  outline: none;
+ 
   resize: none;
-
+  /* display: flex;
+  flex-direction: column;
+  justify-content: flex-end; */
 }
+
+.upload::before {
+  content: "";
+  width: 100%;
+  height: 1px;
+  background-color: var(--mono-100);
+  display: block;
+  margin-bottom: 15px;
+}
+
+.upload {
+  /* position: absolute;
+  bottom: 15px;
+  left: 15px; */
+}
+
+/* 파일업로드 */
+#file {
+  display: none;
+}
+
+.upload img {
+  width: 100%;
+  max-width: 30px;
+}
+
+/* [contenteditable="true"]:empty:before {
+  content: attr(placeholder);
+  display: block;
+  color: var(--mono-300);
+} */
+
+
+/* 작성완료버튼 */
+button[type="submit"] {
+  margin-top: 0;
+}
+
 

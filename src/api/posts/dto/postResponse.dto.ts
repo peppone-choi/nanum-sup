@@ -7,6 +7,8 @@ export class PostResponseDTO {
   content: string;
   author: UserResponseDto;
   category: CategoryResponseDTO;
+  shortUrl: string;
+  createdAt: Date;
 
   constructor(params: IPost) {
     this.postId = params.id;
@@ -14,5 +16,7 @@ export class PostResponseDTO {
     this.content = params.content;
     this.author = new UserResponseDto(params.author);
     this.category = new CategoryResponseDTO(params.category);
+    this.shortUrl = params.shortUrl;
+    this.createdAt = params.createdAt;
   }
 }

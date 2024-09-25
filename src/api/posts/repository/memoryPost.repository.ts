@@ -11,7 +11,6 @@ export class MemoryPostRepository implements PostRepository {
     const newPost = new Post({
       ...post,
       id: `post-${MemoryPostRepository.index++}`,
-
     });
     MemoryPostRepository.store.set(newPost.id, newPost);
     return newPost;
@@ -49,5 +48,11 @@ export class MemoryPostRepository implements PostRepository {
     MemoryPostRepository.store.delete(postId);
 
     return;
+  }
+  async findByShortUrl(shortUrl: string): Promise<IPost | null> {
+    const findPost = Array.from(MemoryPostRepository.store.values()).find(
+      (post) => post.shortUrl === shortUrl
+    );
+    return findPost ?? null;
   }
 }

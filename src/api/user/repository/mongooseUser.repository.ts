@@ -11,6 +11,7 @@ export default class MongooseUserRepository implements UserRepository {
       nickname: user.profile.nickname,
       thumbnail: user.profile.thumbnail,
       bio: user.profile.bio,
+      
     });
     newUser.profile = newProfile;
     await newUser.save();
