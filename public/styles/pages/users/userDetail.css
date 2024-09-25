@@ -4,7 +4,6 @@
 body {
   background-color: var(--body-bg);
   width: 428px;
-  height: 926px;
   border: 2px solid red;
 }
 
@@ -31,6 +30,7 @@ main {
   height: 251px;
 }
 
+/* 유저 프로필 소개 부분 */
 .profile-area {
   width: 393px;
   height: 135px;
@@ -65,8 +65,12 @@ main {
   height: 80px;
   border-radius: 50%;
   margin-left: 20px;
+  border: 1px solid var(--mono-100);
 }
 
 .biotext {
   margin-top: 20px;
 }
+/* 유저 프로필 소개 부분 */
+
+/* 내 게시글 / 좋아요한 게시글 버튼 부분 */

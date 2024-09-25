@@ -4,7 +4,7 @@
 body {
   background-color: var(--mono-000);
   width: 428px;
-  height: 926px;
+  /* height: 926px; */
   border: 2px solid red;
 }
 
@@ -23,8 +23,17 @@ body {
 .profile-edit {
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
   height: 170px;
-  margin: 20px auto;
+  margin: 30px auto;
+  position: relative;
+}
+
+.profile-thumbnail {
+  border-radius: 50%;
+  width: 135px;
+  height: 135px;
 }
 
 .edit-button {
@@ -36,6 +45,14 @@ body {
   font-size: 15px;
   border-radius: 50%;
   cursor: pointer;
+  position: absolute;
+  bottom: 30px;
+  right: 10px;
+}
+
+.profile-edit p {
+  color: var(--sub-color-3);
+  margin-top: 10px;
 }
 
 .profile-textform {
