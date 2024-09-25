@@ -56,7 +56,7 @@ export default class PostsViewController {
 
     const post = await this._postsService.getPostDetail(postId);
 
-    const isMe = userId === post?.author.accountId;
+    const isMe = userId === post?.author.id;
 
     // if (!isMe) {
     //   res.send(`<script>
