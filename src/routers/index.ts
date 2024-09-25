@@ -54,10 +54,16 @@ const USER_ROUTES = {
   ADMIN_USER_VIEW: "/admin-api/users",
 } as const;
 
+const LIKE_ROUTES = {
+  LIKE_API: "/api/likes",
+  ADMIN_LIKE_API: "/admin-api/likes",
+} as const;
+
 export const ROUTES_INDEX = {
   ...CATEGORY_ROUTES,
   ...POST_ROUTES,
   ...AUTH_ROUTES,
   ...COMMENT_ROUTES,
   ...USER_ROUTES,
+  ...LIKE_ROUTES,
 } as const;
