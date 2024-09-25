@@ -34,11 +34,12 @@
       </div>
     </div>
     <script>
+      const urlParams = window.location.search;
+      const redirect = new URLSearchParams(urlParams).get("redirect");
       const form = document.querySelector("form");
       form.addEventListener("submit", async (e) => {
-        const urlParams = window.location.href.searchParams;
-        const redirect = urlParams.get("redirect");
         e.preventDefault();
+
         const id = document.querySelector("#id").value;
         const password = document.querySelector("#password").value;
         const data = { id, password };

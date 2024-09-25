@@ -18,7 +18,7 @@ export class MongoosePostRepository implements PostRepository {
     return values;
   }
   async findById(id: string): Promise<IPost | null> {
-    const post = await MongoosePost.findById(id)
+    const post = await MongoosePost.findOne({ _id: id })
       .populate("author")
       .populate("category");
     return post;
