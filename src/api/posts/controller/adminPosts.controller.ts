@@ -37,7 +37,7 @@ export default class AdminPostsController {
 
       for (const post of list) {
         await this._postsService.createPost(
-          "66f21f237f04e1cf576046fc",   // userId
+          "66f286b8a8d779a20c63cda3",   // userId
           "66f247f68d1dffeca42e1a10",   // categoryId
         {
           ...post,
