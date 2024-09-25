@@ -37,7 +37,7 @@ export default class AdminPostsController {
 
       for (const post of list) {
         await this._postsService.createPost(
-          "66ea6c2d0fe9f2e4ef8996fe",   // userId
+          "66f21f237f04e1cf576046fc",   // userId
           "66f247f68d1dffeca42e1a10",   // categoryId
         {
           ...post,
@@ -105,12 +105,12 @@ export default class AdminPostsController {
     res: Response,
     next: NextFunction
   ) {
-    const { title, content, categoryId, userId } = req.body;
+    const { userId, categoryId, title, content } = req.body;
 
     try {
       const createdPost = await this._postsService.createPost(
-        categoryId,
         userId,
+        categoryId,
         {
           title,
           content,
