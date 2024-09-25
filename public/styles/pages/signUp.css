@@ -1,0 +1,214 @@
+body {
+    background-color: var(--sub-color-3) !important;
+}
+
+.signup-container {
+    outline: 1px solid red;
+    /* position: relative; */
+}
+
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.header-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.arrow-left-button {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    border: 0;
+    background-repeat: no-repeat;
+    width: 18px;
+    height: 18px;
+    color: var(--mono-000);
+}
+
+.profile-image {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+.profile {
+    position: relative;
+    padding-top: 30px;
+}
+
+.profile-edit {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    padding: 10px;
+    border-radius: 50%;
+    background-color: var(--sub-color-1);
+}
+
+.profile-pen {
+    width: 13px;
+    height: 13px;
+}
+
+.signup-input-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0;
+}
+
+.signup-input-form input {
+    display: flex;
+    margin: 0 auto;
+    width: 80%;
+    height: 60px;
+    border: none;
+    border-radius: 10px;
+}
+
+.form-group {
+    width: 400px;
+    height: 60px;
+    margin: 1px 0;
+    background-color: var(--mono-000);
+    border-radius: 10px;
+}
+
+.nickname-input-container,
+.id-input-container,
+.email-input-container,
+.password-input-container,
+.confirm-password-input-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.nickname-input-container img,
+.id-input-container img,
+.password-input-container img,
+.confirm-password-input-container img {
+    padding-left: 20px;
+}
+
+.email-input-container img {
+    padding-left: 17px;
+}
+
+.nickname-double-check,
+.id-double-check,
+.email-double-check {
+    z-index: 1;
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    border-radius: 10px;
+    border: none;
+    padding: 5px 13px;
+    background-color: #b6b6b6;
+    color: var(--mono-000);
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.form-group input::placeholder {
+    font-size: 14px;
+}
+
+.introduce {
+    width: 100%;
+    height: 60px;
+    margin: 1px 0;
+    border: none;
+    border-radius: 10px;
+    resize: none;
+}
+
+.introduce::placeholder {
+    padding-left: 10px;
+    font-size: 14px;
+}
+.introduce::-webkit-scrollbar {
+    width: 3px;
+}
+
+.introduce::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+
+.introduce::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.6);
+}
+
+.signup-information {
+    padding-top: 10px;
+    color: var(--mono-000);
+    font-size: 13px;
+}
+
+/* 팝업 */
+.availability-popup-available,
+.availability-popup-unavailable,
+.signup-confirm-popup {
+    background-color: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    height: 100px;
+    border-radius: 10px;
+}
+
+.availability-popup-available.hidden,
+.availability-popup-unavailable.hidden,
+.signup-confirm-popup.hidden {
+    /* display: none; */
+}
+
+.available-popup-content,
+.unavailable-popup-content,
+.signup-popup-content {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.available-popup-content p,
+.unavailable-popup-content p,
+.signup-popup-content p {
+    padding-bottom: 15px;
+    font-weight: 700;
+    color: var(--mono-000);
+}
+
+.unavailable-confirm-btn,
+.available-confirm-btn,
+.signup-confirm-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+.available-confirm,
+.unavailable-confirm,
+.signup-confirm {
+    border: none;
+    border-radius: 10px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
