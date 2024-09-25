@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { PostsService } from "@/api/posts/service/posts.service.type";
+import { faker } from "@faker-js/faker";
 
 // [관리자]
 // 글 목록 조회 - getPosts
@@ -18,7 +19,40 @@ export default class AdminPostsController {
     this.createPost = this.createPost.bind(this);
     this.updatePost = this.updatePost.bind(this);
     this.deletePost = this.deletePost.bind(this);
+    this.createDummy = this.createDummy.bind(this);
   }
+
+  
+  /** 더미 데이터 */
+  async createDummy(req: Request, res: Response, next: NextFunction) {
+    try {
+      const list = new Array(parseInt(req.query.count?.toString() ?? "100"))
+        .fill(0)
+        .map((_) => {
+          return {
+            title: faker.lorem.words({ min: 3, max: 5 }),
+            content: faker.lorem.sentence({ min: 5, max: 10 }),
+          };
+        });
+
+      for (const post of list) {
+        await this._postsService.createPost(
+          "66f286b8a8d779a20c63cda3",   // userId
+          "66f247f68d1dffeca42e1a10",   // categoryId
+        {
+          ...post,
+        });
+      }
+
+      res.status(201).json();
+    } catch (error) {
+      next(error);
+    }
+  }
+
+
+
+
   /** [관리자] 글 목록 조회 */
   async getPosts(
     req: Request<
@@ -71,12 +105,12 @@ export default class AdminPostsController {
     res: Response,
     next: NextFunction
   ) {
-    const { title, content, categoryId, userId } = req.body;
+    const { userId, categoryId, title, content } = req.body;
 
     try {
       const createdPost = await this._postsService.createPost(
-        categoryId,
         userId,
+        categoryId,
         {
           title,
           content,
