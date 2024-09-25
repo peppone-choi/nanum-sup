@@ -25,7 +25,10 @@ const adminUserViewController = new AdminUserViewController(
 
 adminUserViewRouter.get(
   extractPath(ADMIN_USER_VIEW_ROUTES.USER_LIST, ROUTES_INDEX.ADMIN_USER_VIEW),
-  adminUserViewController.userListPage
+  adminUserViewController.userListPage,
+  () => {
+    console.log(45);
+  }
 );
 
 adminUserViewRouter.get(
