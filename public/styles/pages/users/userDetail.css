@@ -1,0 +1,72 @@
+@charset "utf-8";
+@import "../../common.css";
+
+body {
+  background-color: var(--body-bg);
+  width: 428px;
+  height: 926px;
+  border: 2px solid red;
+}
+
+#header {
+  margin: 0 auto;
+  width: 390px;
+}
+
+#wrap {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.profile-headerimage {
+  width: 428px;
+  height: 251px;
+}
+
+.profile-area {
+  width: 393px;
+  height: 135px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: -100px;
+  gap: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  /* border: 1px solid blue; */
+  position: relative;
+}
+
+.edit {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: var(--mono-300);
+}
+
+.profile-user {
+  font-size: 14px;
+}
+
+.nickName {
+  font-weight: bold;
+}
+
+.profile-thumbnail {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-left: 20px;
+}
+
+.biotext {
+  margin-top: 20px;
+}
