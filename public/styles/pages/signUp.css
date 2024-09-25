@@ -63,8 +63,8 @@ body {
 
 .signup-input-form input {
     display: flex;
-    margin: 0 auto;
-    width: 80%;
+    margin: 0 100px 0 10px;
+    width: 70%;
     height: 60px;
     border: none;
     border-radius: 10px;
@@ -76,6 +76,7 @@ body {
     margin: 1px 0;
     background-color: var(--mono-000);
     border-radius: 10px;
+    padding: 0 5px;
 }
 
 .nickname-input-container,
@@ -90,13 +91,12 @@ body {
 
 .nickname-input-container img,
 .id-input-container img,
+.confirm-password-input-container img,
 .password-input-container img,
-.confirm-password-input-container img {
-    padding-left: 20px;
-}
-
 .email-input-container img {
-    padding-left: 17px;
+    width: 40px;
+    height: 40px;
+    padding-left: 20px;
 }
 
 .nickname-double-check,
