@@ -22,13 +22,12 @@ export default class PostsViewController {
 
   /** 게시글 목록 페이지 */
   async postListPage(req: Request, res: Response, next: NextFunction) {
-    res.render("client/posts/postList");
+    // res.render("client/posts/postList");
 
     const posts = await this._postsService.getPosts();
 
     res.render("client/posts/postList", {
       posts
-      
     });
   }
 

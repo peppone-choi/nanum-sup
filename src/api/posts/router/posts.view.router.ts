@@ -41,14 +41,14 @@ postViewRouter.get(
 /** 게시글 작성 */
 postViewRouter.get(
   extractPath(POST_VIEW_ROUTES.POST_WRITE, ROUTES_INDEX.POST_VIEW),
-  authCookieViewMiddleware(true),
+  // authCookieViewMiddleware(true),
   postsViewController.postWritePage
 );
 
 /** 게시글 상세 조회 */
 postViewRouter.get(
   extractPath(POST_VIEW_ROUTES.POST_DETAIL, ROUTES_INDEX.POST_VIEW),
-  authCookieViewMiddleware(false),
+  // authCookieViewMiddleware(false),
   postsViewController.postDetailPage
 );
 
@@ -60,7 +60,7 @@ postViewRouter.get(
 /** 게시글 수정 */
 postViewRouter.get(
   extractPath(POST_VIEW_ROUTES.POST_EDIT, ROUTES_INDEX.POST_VIEW),
-  authCookieViewMiddleware(true),
+  // authCookieViewMiddleware(true),
   postsViewController.postEditPage
 );
 

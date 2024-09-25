@@ -8,8 +8,56 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-  <h1>테스트테스트</h1>
+ 
   클라이언트 페이지 게시글 상세 조회
-  <i class="fa-solid fa-user"></i>
+  <br>
+  <div>
+    <p>
+      작성자
+      <a href="/users/<%= post.author.id %>"> <%= post.author.userName %> </a>
+    </p>
+  </div>
+  <!-- 문자열 화면에 렌더하는 법 %= -->
+  <h1><%= post.title %></h1>
+  <!-- HTML 형식 화면에 렌더하는법 %- -->
+  <p><%- post.content %></p>
+
+  <% if (isMe) { %>
+  <a href="/posts/<%= post.postId %>/edit">수정</a>
+  <button id="delete-button">삭제</button>
+  <% } %>
+  <a href="/posts">목록으로</a>
+
+  <script>
+    const $deleteButton = document.getElementById("delete-button");
+
+    const cookies = document.cookie.split(";").reduce((acc, cookie) => {
+      const [key, value] = cookie.split("=");
+      acc[key.trim()] = decodeURIComponent(value);
+      return acc;
+    }, {});
+
+    const token = `${cookies.accessToken}`;
+
+    $deleteButton?.addEventListener("click", async () => {
+      try {
+        const res = await fetch("/api/posts/<%= post.postId %>", {
+          method: "delete",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: token,
+          },
+        });
+
+        if (!res.ok) {
+          throw new Error("게시글 삭제에 실패했습니다.");
+        }
+
+        location.href = "/posts";
+      } catch (error) {
+        console.error("게시글 작성에 실패했습니다.");
+      }
+    });
+  </script>
 </body>
 </html>

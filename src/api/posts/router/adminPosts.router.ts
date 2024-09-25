@@ -31,6 +31,8 @@ const ADMIN_POST_ROUTES = {
     UPDATE_POST: `/admin-api/posts/:postId`,
     /** [관리자] 게시글 삭제 */
     DELETE_POST: `/admin-api/posts/:postId`,
+    /** 더미데이터 생성 */
+    CREATE_DUMMY: `/admin-api/posts/dummy`,
 } as const;
 
 const adminPostsController = new AdminPostsController(
@@ -50,13 +52,17 @@ adminPostRouter.get(
 adminPostRouter.get(
   extractPath(ADMIN_POST_ROUTES.GET_POST_DETAIL, ROUTES_INDEX.ADMIN_POSTS_API),
   validate(adminGetPostDetailValidator),
-  authUserMiddleware,
+  // authUserMiddleware,
   adminPostsController.getPostDetail
+);
+adminPostRouter.post(
+  extractPath(ADMIN_POST_ROUTES.CREATE_DUMMY, ROUTES_INDEX.ADMIN_POSTS_API),
+  adminPostsController.createDummy
 );
 adminPostRouter.post(
   extractPath(ADMIN_POST_ROUTES.CREATE_POST, ROUTES_INDEX.ADMIN_POSTS_API),
   validate(adminCreatePostValidator),
-  authUserMiddleware,
+  // authUserMiddleware,
   adminPostsController.createPost
 );
 adminPostRouter.put(
