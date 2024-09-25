@@ -6,6 +6,7 @@ import { PostResponseDTO } from "@/api/posts/dto/postResponse.dto";
 import { PostsService } from "@/api/posts/service/posts.service.type";
 import { CommentRepository } from "@/api/comment/repository/comment.repository";
 import { UserRepository } from "@/api/user/repository/user.repository";
+import { nanoid } from "nanoid";
 
 // userRepository 가져오기
 // commentRepository 가져오기
@@ -32,11 +33,11 @@ export class PostsServiceImpl implements PostsService {
   async createPost(
     userId: string,
     categoryId: string,
-    post: Omit<IPost, "id" | "author" | "comment">
+    post: Omit<IPost, "id" | "author" | "comment" | "shortUrl">
   ): Promise<PostResponseDTO> {
     const author = await this._userRepository.findByAccountId(userId);
     const category = await this._categoryRepository.findById(categoryId);
-
+    const shortUrl = nanoid(10);
     // if (!author) {
     //   throw new HttpException(404, "작성자를 찾을 수 없습니다.");
     // }
@@ -49,6 +50,7 @@ export class PostsServiceImpl implements PostsService {
       ...post,
       author,
       category,
+      shortUrl,
     });
 
     return new PostResponseDTO(newPost);
@@ -83,5 +85,12 @@ export class PostsServiceImpl implements PostsService {
   /** 게시글 삭제 */
   async deletePost(postId: string): Promise<void> {
     await this._postRepository.delete(postId);
+  }
+  async findByShortUrl(shortUrl: string): Promise<PostResponseDTO | null> {
+    const post = await this._postRepository.findByShortUrl(shortUrl);
+    if (!post) {
+      throw new HttpException(404, "게시글을 찾을 수 없습니다.");
+    }
+    return new PostResponseDTO(post);
   }
 }

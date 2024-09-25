@@ -13,12 +13,14 @@
         />
         <link rel="stylesheet" href="/static/styles/reset.css" />
         <link rel="stylesheet" href="/static/styles/init.css" />
-        <title>Document</title>
+        <title>카테고리 목록</title>
     </head>
     <body>
-        <section class="category-menu-bar">
+        <section class="category-menu-bar" id="categoryMenu">
             <div class="category-menu-bar-header">
-                <a href=""><i class="fa-solid fa-x"></i></a>
+                <a href="javascript:void(0)" onclick="closeMenu()"
+                    ><i class="fa-solid fa-x"></i
+                ></a>
                 <a href="">
                     <i class="fa-solid fa-gear"></i>
                 </a>
@@ -84,6 +86,13 @@
                     window.location.href = "/login";
                 });
             });
+        </script>
+        <script>
+            function closeMenu() {
+                const menu = document.getElementById("categoryMenu");
+                menu.style.display = "none";
+                window.location.href = "/admin/category/:categoryId/posts";
+            }
         </script>
     </body>
 </html>

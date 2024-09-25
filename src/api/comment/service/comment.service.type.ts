@@ -17,4 +17,5 @@ export interface CommentService {
     parent: string,
     comment: Omit<IComment, "id">
   ): Promise<void>;
+  getComments(postId: string): Promise<CommentResponseDTO[]>;
 }

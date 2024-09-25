@@ -13,7 +13,7 @@ const ADMIN_CATEGORY_VIEW_ROUTES = {
     /** 카테고리 목록 */
     CATEGORY_LIST: "/admin/category",
     /** 카테고리 상세  */
-    CATEGORY_DETAIL: "/admin/category/:categoryId",
+    CATEGORY_DETAIL: "/admin/category/:categoryId/posts",
     /**카테고리 등록 */
     CATEGORY_WRITE: "/admin/category/write",
     /** 카테고리 수정 */

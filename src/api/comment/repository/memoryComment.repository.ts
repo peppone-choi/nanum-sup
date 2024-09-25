@@ -26,6 +26,11 @@ export class MemoryCommentRepository implements CommentRepository {
     return findComment ?? null;
   }
 
+  async findByPostId(postId: string): Promise<IComment[]> {
+    const comments = Array.from(MemoryCommentRepository.store.values());
+    return comments.filter((comment) => comment.post.id === postId);
+  }
+
   async update(
     id: string,
     updateCommentInfo: Partial<IComment>
