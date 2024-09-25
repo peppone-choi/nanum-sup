@@ -16,7 +16,7 @@ const POST_VIEW_ROUTES = {
   POST_LIST: "/posts",
   /** 게시글 작성 */
   POST_WRITE: "/posts/write",
-  POST_SHORT_URL: "/posts/:shortUrl",
+  POST_SHORT_URL: "/posts/s/:shortUrl",
   /** 게시글 상세 */
   POST_DETAIL: "/posts/:postId",
   /** 게시글 수정 */
@@ -56,7 +56,7 @@ postViewRouter.get(
 
 postViewRouter.get(
   extractPath(POST_VIEW_ROUTES.POST_DETAIL, ROUTES_INDEX.POST_VIEW),
-  // authCookieViewMiddleware(false),
+  authCookieViewMiddleware(false),
   postsViewController.postDetailPage
 );
 

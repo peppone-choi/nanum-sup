@@ -36,6 +36,8 @@
     <script>
       const form = document.querySelector("form");
       form.addEventListener("submit", async (e) => {
+        const urlParams = window.location.href.searchParams;
+        const redirect = urlParams.get("redirect");
         e.preventDefault();
         const id = document.querySelector("#id").value;
         const password = document.querySelector("#password").value;
@@ -49,6 +51,10 @@
         });
         if (response.ok) {
           alert("로그인 성공");
+          if (redirect) {
+            window.location.href = redirect;
+            return;
+          }
           location.href = "/";
         } else {
           alert("로그인 실패");

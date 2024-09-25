@@ -27,16 +27,14 @@ export default class PostsViewController {
     const posts = await this._postsService.getPosts();
 
     res.render("client/posts/postList", {
-      posts
+      posts,
     });
   }
 
   /** 게시글 상세 페이지 */
   async postDetailPage(req: Request, res: Response, next: NextFunction) {
     const post = await this._postsService.getPostDetail(req.params.postId);
-
     const authorId = post?.author.accountId;
-
     res.render("client/posts/postDetail", {
       post,
       isMe: authorId === req.user.userId,
