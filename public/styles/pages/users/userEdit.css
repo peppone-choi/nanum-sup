@@ -1,0 +1,80 @@
+@charset "utf-8";
+@import "../../common.css";
+
+body {
+  background-color: var(--mono-000);
+  width: 428px;
+  height: 926px;
+  border: 2px solid red;
+}
+
+#header {
+  margin: 0 auto;
+  width: 390px;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.profile-edit {
+  display: flex;
+  justify-content: center;
+  height: 170px;
+  margin: 20px auto;
+}
+
+.edit-button {
+  background-color: var(--sub-color-1);
+  color: var(--mono-000);
+  border: 0;
+  width: 35px;
+  height: 35px;
+  font-size: 15px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.profile-textform {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 350px;
+  gap: 20px;
+}
+
+.nickName-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bio-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#lable {
+  color: red;
+}
+
+#nickname {
+  border: 1px solid var(--sub-color-3);
+  border-radius: 10px;
+  height: 50px;
+}
+
+#bio {
+  border: 1px solid var(--sub-color-3);
+  border-radius: 10px;
+  height: 212px;
+}
+
+button[type="submit"] {
+  width: 350px;
+}

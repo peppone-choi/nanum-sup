@@ -49,8 +49,10 @@
           },
           body: JSON.stringify(data),
         });
+        const responseData = await response.json();
         if (response.ok) {
           alert("로그인 성공");
+          document.cookie = `accessToken=Bearer ${await responseData.accessToken}; path=/; domain=localhost;`;
           if (redirect) {
             window.location.href = redirect;
             return;
