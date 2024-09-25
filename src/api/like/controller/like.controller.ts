@@ -1,7 +1,11 @@
 import { NextFunction, Request, Response } from "express";
+import LikeService from "../service/like.service.type";
 
 export default class LikeController {
-  constructor() {}
+  private readonly _likeService: LikeService;
+  constructor(_likeService: LikeService) {
+    this._likeService = _likeService;
+  }
 
   async getLikesPost(req: Request, res: Response, next: NextFunction) {
     try {
