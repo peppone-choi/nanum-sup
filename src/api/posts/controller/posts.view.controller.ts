@@ -34,7 +34,8 @@ export default class PostsViewController {
   /** 게시글 상세 페이지 */
   async postDetailPage(req: Request, res: Response, next: NextFunction) {
     const post = await this._postsService.getPostDetail(req.params.postId);
-    const authorId = post?.author.id;
+    const authorId = post?.author.accountId;
+
     res.render("client/posts/postDetail", {
       post,
       isMe: authorId === req.user.userId,
@@ -52,15 +53,16 @@ export default class PostsViewController {
 
     const userId = req.user.userId;
 
+
     const post = await this._postsService.getPostDetail(postId);
 
     const isMe = userId === post?.author.accountId;
 
-    if (!isMe) {
-      res.send(`<script>
-          alert("권한이 없습니다."); location.href="/posts/${postId}";
-        </script>`);
-    }
+    // if (!isMe) {
+    //   res.send(`<script>
+    //       alert("권한이 없습니다."); location.href="/posts/${postId}";
+    //     </script>`);
+    // }
 
     res.render("client/posts/postEdit", { post });
   }

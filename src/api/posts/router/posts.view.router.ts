@@ -66,7 +66,7 @@ postViewRouter.get(
 /** 게시글 수정 */
 postViewRouter.get(
   extractPath(POST_VIEW_ROUTES.POST_EDIT, ROUTES_INDEX.POST_VIEW),
-  // authCookieViewMiddleware(true),
+  authCookieViewMiddleware(true),
   postsViewController.postEditPage
 );
 
