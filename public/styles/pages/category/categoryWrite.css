@@ -112,9 +112,8 @@
     display: flex;
     flex-direction: row;
     margin: 0 auto;
-    /* gap: 100px; */
     padding: 0 30px;
-    background-color: rgba(255, 255, 255, 0.8);
+    /* background-color: rgba(255, 255, 255, 0.8); */
 }
 
 .create-category {
@@ -127,7 +126,7 @@
     text-align: center;
     font-size: 16px;
     font-weight: bold;
-    padding-bottom: 20px;
+    padding-bottom: 40px;
 }
 
 .create-category input {
@@ -137,6 +136,10 @@
     padding: 10px;
     border-radius: 10px;
     background-color: var(--sub-color-3);
+}
+
+#create-button {
+    margin-top: 20px !important;
 }
 
 .create-category input::placeholder {
@@ -151,7 +154,7 @@
 }
 
 .category-list-wrapper p {
-    padding: 20px 0;
+    padding: 27px 0;
     font-weight: bold;
 }
 
@@ -166,7 +169,6 @@
 .category-list input {
     width: 150px;
     height: 30px;
-    padding: 5px;
     font-size: 14px;
     border-radius: 4px;
     background-color: var(--sub-color-3);
