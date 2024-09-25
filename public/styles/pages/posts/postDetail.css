@@ -2,3 +2,6 @@
 @import "../../common.css";
 
 
+.post {
+  background-color: var(--mono-000);
+}

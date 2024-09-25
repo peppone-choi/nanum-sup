@@ -9,25 +9,25 @@
 </head>
 <body>
  
-  클라이언트 페이지 게시글 상세 조회
-  <br>
-  <div>
-    <p>
-      작성자
-      <a href="/users/<%= post.author.id %>"> <%= post.author.userName %> </a>
-    </p>
+ <div id="wrap">
+  <div class="inner">
+    <%- include('../../_layouts/header-menu') %>
+    <div class="post">
+      <div class="postTop">
+        <!-- 유저 닉네임 받아오기 -->
+        <span>다영다영</span>
+       
+      </div>
+      
+    </div>
+
+   
+
   </div>
-  <!-- 문자열 화면에 렌더하는 법 %= -->
-  <h1><%= post.title %></h1>
-  <!-- HTML 형식 화면에 렌더하는법 %- -->
-  <p><%- post.content %></p>
+ </div>
 
-  <% if (isMe) { %>
-  <a href="/posts/<%= post.postId %>/edit">수정</a>
-  <button id="delete-button">삭제</button>
-  <% } %>
-  <a href="/posts">목록으로</a>
 
+  
   <script>
     const $deleteButton = document.getElementById("delete-button");
 
