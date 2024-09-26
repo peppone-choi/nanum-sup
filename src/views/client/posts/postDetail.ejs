@@ -92,8 +92,10 @@
             <img src="/static/images/profile.webp" alt="프로필 이미지" class="profileImg">
             <div class="commentUser">
               <!-- 유저 닉네임 받아오기 -->
+              <%= post.author.profile.nickname %>
               <span class="nickname">다영다영</span>
               <!-- 유저 아이디 -->
+              <%= post.author.id %>
               <span class="userId">@dayoungh</span>
               
               <!-- 글 작성시간 -->

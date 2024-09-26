@@ -41,7 +41,7 @@ postViewRouter.get(
 /** 게시글 작성 */
 postViewRouter.get(
   extractPath(POST_VIEW_ROUTES.POST_WRITE, ROUTES_INDEX.POST_VIEW),
-  // authCookieViewMiddleware(true),
+  authCookieViewMiddleware(true),
   postsViewController.postWritePage
 );
 
@@ -56,7 +56,7 @@ postViewRouter.get(
 
 postViewRouter.get(
   extractPath(POST_VIEW_ROUTES.POST_DETAIL, ROUTES_INDEX.POST_VIEW),
-  authCookieViewMiddleware(false),
+  // authCookieViewMiddleware(false),
   postsViewController.postDetailPage
 );
 
