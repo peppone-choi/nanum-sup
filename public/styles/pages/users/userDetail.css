@@ -118,12 +118,21 @@ main {
   border-radius: 20px;
 }
 
+/* (유저 정보) */
 .post-profile {
   margin-bottom: 10px;
-  padding-top: 15px;
+  margin-top: 15px;
   display: flex;
   align-items: center;
   gap: 10px;
+  position: relative;
+  /* border: 1px solid blue; */
+}
+
+#listButton {
+  position: absolute;
+  top: 0px;
+  right: 10px;
 }
 
 .post-profile-thumbnail {
@@ -136,6 +145,7 @@ main {
 .profile-user.b p {
   font-size: 12px;
 }
+/* (유저 정보) */
 
 .post-content-text {
   padding-left: 15px;
