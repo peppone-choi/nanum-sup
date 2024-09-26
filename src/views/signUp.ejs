@@ -226,15 +226,7 @@
                     document.getElementById("profile-image").click();
                 });
         </script>
-        <script>
-            const textarea = document.getElementById("introduce");
-            const charCount = document.getElementById("char-count");
 
-            textarea.addEventListener("input", () => {
-                const currentLength = textarea.value.length;
-                charCount.textContent = `${currentLength}/200`;
-            });
-        </script>
         <script>
             const form = document.querySelector("form");
             form.addEventListener("submit", async (e) => {
