@@ -19,10 +19,6 @@ export default class UserServiceImpl implements UserService {
     return await this._userRepository.getById(id);
   }
   async signIn(user: Omit<IUser, "id" | "salt">): Promise<IUser> {
-    const findUser = await this._userRepository.findByAccountId(user.accountId);
-    if (findUser) {
-      throw new HttpException(409, "이미 존재하는 아이디입니다.");
-    }
     const newProfile = await this._profileRepository.save({
       nickname: user.profile.nickname,
       bio: user.profile.bio,
