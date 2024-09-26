@@ -28,7 +28,7 @@ body {
   position: relative;
 }
 
-.profile-thumbnail {
+#profile-thumbnail {
   border-radius: 50%;
   width: 135px;
   height: 135px;
@@ -60,6 +60,61 @@ body {
   color: var(--sub-color-3);
   margin-top: 10px;
 }
+
+/* 파일 초과시 팝업 */
+.popup {
+  width: 262px;
+  height: 112px;
+  color: #ffffff;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 13px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  /* display: none; */
+  z-index: 1000;
+}
+
+.alerttext {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 183px;
+  border-bottom: 1px solid #aaaaaa;
+  padding-bottom: 10px;
+}
+
+.popup span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-Button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#closePopupButton {
+  background-color: transparent;
+  color: white;
+  border: none;
+  cursor: pointer;
+  width: 60px;
+  height: 33px;
+  font-size: 15px;
+}
+
+.hidden {
+  /* display: none; */
+}
+/* 파일 초과시 팝업 */
 
 .profile-textform {
   display: flex;

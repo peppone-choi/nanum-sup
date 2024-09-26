@@ -134,7 +134,8 @@
       document
         .getElementById("editButton")
         .addEventListener("click", function () {
-          alert("수정을 선택했습니다.");
+          const postId = "yourpostIdHere";
+          window.location.href = `/posts/${postId}/edit`; // 페이지 이동
           optionMenu.classList.add("hidden"); // 옵션창 닫기
         });
 
