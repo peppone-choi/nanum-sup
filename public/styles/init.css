@@ -148,6 +148,8 @@ select {
     outline: none;
 }
 
+
+
 /* flex */
 .flex-column-center {
     display: flex;
@@ -164,3 +166,13 @@ select {
     margin: -1px;
     overflow: hidden;
 }
+
+
+a {
+    text-decoration: none;
+}
+
+button {
+    cursor: pointer;
+}
+

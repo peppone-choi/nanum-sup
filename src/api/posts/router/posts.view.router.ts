@@ -56,7 +56,7 @@ postViewRouter.get(
 
 postViewRouter.get(
   extractPath(POST_VIEW_ROUTES.POST_DETAIL, ROUTES_INDEX.POST_VIEW),
-  // authCookieViewMiddleware(false),
+  authCookieViewMiddleware(false),
   postsViewController.postDetailPage
 );
 
