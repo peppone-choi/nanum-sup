@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        />
+        <link
+            rel="stylesheet"
+            href="/static/styles/pages/category/userCategoryList.css"
+        />
+        <link rel="stylesheet" href="/static/styles/reset.css" />
+        <link rel="stylesheet" href="/static/styles/init.css" />
+        <title>카테고리 목록</title>
+    </head>
+    <body>
+        <section class="category-menu-bar" id="categoryMenu">
+            <div class="category-menu-bar-header">
+                <a href="javascript:void(0)" onclick="closeMenu()"
+                    ><i class="fa-solid fa-x"></i
+                ></a>
+                <a href="">
+                    <i class="fa-solid fa-gear"></i>
+                </a>
+                <div class="category-profile">
+                    <img
+                        src="/static/images/profile.webp"
+                        alt="프로필"
+                        class="profile-image"
+                    />
+                    <div class="category-profile-info">
+                        <p class="category-nickName">닉네임</p>
+                        <p class="category-id">@ggaong</p>
+                    </div>
+                </div>
+            </div>
+            <div class="category-menu-bar-main">
+                <div>
+                    <% category.forEach(function(category) { %>
+                    <div class="category-list">
+                        <a href="/category/<%= category.categoryId %>/posts">
+                            <p><%= category.title %></p>
+                        </a>
+                    </div>
+                    <% }) %>
+                </div>
+                <div class="logout">
+                    <a href="#" id="logout-btn">
+                        <p>로그아웃</p>
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 로그아웃 창 -->
+        <div id="logout-popup" class="logout-popup hidden">
+            <div class="popup-content">
+                <p>로그아웃 하시겠습니까?</p>
+                <div class="logout-btn">
+                    <button class="btn-cancel" id="cancel-btn">취소</button>
+                    <button class="btn-confirm" id="confirm-btn">확인</button>
+                </div>
+            </div>
+        </div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const logoutBtn = document.getElementById("logout-btn");
+                const logoutPopup = document.getElementById("logout-popup");
+                const cancelBtn = document.getElementById("cancel-btn");
+                const confirmBtn = document.getElementById("confirm-btn");
+
+                logoutBtn.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    logoutPopup.classList.remove("hidden");
+                });
+
+                cancelBtn.addEventListener("click", function () {
+                    logoutPopup.classList.add("hidden");
+                });
+
+                confirmBtn.addEventListener("click", function () {
+                    window.location.href = "/views/login";
+                });
+            });
+        </script>
+        <script>
+            function closeMenu() {
+                const menu = document.getElementById("categoryMenu");
+                menu.style.display = "none";
+                window.location.href = "/category/:categoryId/posts";
+            }
+        </script>
+    </body>
+</html>

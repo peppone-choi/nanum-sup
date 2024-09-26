@@ -219,6 +219,8 @@
                 </div>
             </div>
         </div>
+
+        <!-- 파일 선택 -->
         <script>
             document
                 .getElementById("profile-pen-icon")
@@ -227,6 +229,61 @@
                 });
         </script>
 
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                // 중복확인 버튼 클릭 시 팝업 열기
+                const doubleCheckBtn = document.getElementById(
+                    "nickname-double-check-btn"
+                );
+                const availablePopup = document.getElementById(
+                    "availability-popup-available"
+                );
+                const unavailablePopup = document.getElementById(
+                    "availability-popup-unavailable"
+                );
+
+                if (doubleCheckBtn) {
+                    doubleCheckBtn.addEventListener("click", function () {
+                        // 사용 가능 팝업 열기 (hidden 클래스 제거)
+                        if (availablePopup) {
+                            availablePopup.classList.remove("hidden");
+                        }
+
+                        // 사용 불가 팝업을 사용하려면 아래 코드 활성화
+                        // if (unavailablePopup) {
+                        //     unavailablePopup.classList.remove("hidden");
+                        // }
+                    });
+                }
+
+                // 팝업 닫기 버튼 클릭 시 팝업 닫기 (hidden 클래스 추가)
+                const availableConfirmBtn = document.getElementById(
+                    "available-confirm-btn"
+                );
+                if (availableConfirmBtn) {
+                    availableConfirmBtn.addEventListener("click", function () {
+                        if (availablePopup) {
+                            availablePopup.classList.add("hidden");
+                        }
+                    });
+                }
+
+                const unavailableConfirmBtn = document.getElementById(
+                    "unavailable-confirm-btn"
+                );
+                if (unavailableConfirmBtn) {
+                    unavailableConfirmBtn.addEventListener(
+                        "click",
+                        function () {
+                            if (unavailablePopup) {
+                                unavailablePopup.classList.add("hidden");
+                            }
+                        }
+                    );
+                }
+            });
+        </script>
+        <!-- 비밀번호 확인 -->
         <script>
             const form = document.querySelector("form");
             form.addEventListener("submit", async (e) => {
