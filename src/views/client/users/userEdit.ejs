@@ -23,11 +23,26 @@
             alt="profile image"
             class="profile-thumbnail"
           />
-          <button class="edit-button" id="editbutton">
+          <a href="" class="profile-edit-button">
+            <img
+              src="/static/images/pen-icon.svg"
+              alt="프로필 수정"
+              class="profile-pen"
+              id="profile-pen-icon"
+            />
+            <label for="profile-image"></label>
+            <input
+              type="file"
+              id="profile-image"
+              name="profile-image"
+              style="display: none"
+            />
+          </a>
+          <!-- <button class="edit-button" id="editbutton">
             <i class="fa-solid fa-pencil">
               <input type="file" id="filename" name="filename" hidden />
             </i>
-          </button>
+          </button> -->
           <p>50MB 제한</p>
         </div>
         <form id="profiletextform" class="profile-textform">
@@ -37,32 +52,23 @@
           </div>
           <div class="bio-edit">
             <label for="bio">소개글</label>
-            <input type="text" id="bio" name="bio" />
+            <textarea
+              type="text"
+              maxlength="200"
+              placeholder="나눔숲에서 사용 할 소개글을 입력해주세요. (200자 이하)"
+              id="bio"
+            ></textarea>
           </div>
         </form>
         <button type="submit">수정 완료</button>
       </main>
     </div>
     <script>
-      const $form = document.querySelector("#form");
-      const $filename = document.querySelector("#filename");
-      const $editbutton = document.getElementById("profile-thumbnail");
-
-      // 업로드 버튼이 사라짐 -> 이미지를 클릭했을때, 파일 선택을 띄워준다
-      $editbutton.addEventListener("click", () => {
-        $filename.click();
-      });
-
-      // input file이 바뀌는걸 감지한다.
-      $filename.addEventListener("change", (e) => {
-        const file = e.target.files[0];
-
-        // 업로드되어있는 이미지로 src를 교체한다.
-        $editbutton.src = URL.createObjectURL(file);
-        $editbutton.onload = function () {
-          URL.revokeObjectURL($profileThumbnail.src);
-        };
-      });
+      document
+        .getElementById("profile-pen-icon")
+        .addEventListener("click", function () {
+          document.getElementById("profile-image").click();
+        });
     </script>
   </body>
 </html>
