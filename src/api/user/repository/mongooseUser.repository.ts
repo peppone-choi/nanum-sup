@@ -6,14 +6,6 @@ import { MongooseProfile } from "@/api/profile/model/profile.schma";
 export default class MongooseUserRepository implements UserRepository {
   async create(user: Omit<IUser, "id">): Promise<IUser> {
     const newUser = new MongooseUser(user);
-    const newProfile = new MongooseProfile({
-      userId: newUser._id,
-      nickname: user.profile.nickname,
-      thumbnail: user.profile.thumbnail,
-      bio: user.profile.bio,
-      
-    });
-    newUser.profile = newProfile;
     await newUser.save();
     return newUser;
   }
@@ -28,21 +20,15 @@ export default class MongooseUserRepository implements UserRepository {
     }
     return user;
   }
-  async update(
-    id: string,
-    updateData: Omit<IUser, "id" | "userId">
-  ): Promise<void> {
-    const updatedUser = await MongooseUser.findByIdAndUpdate(
-      id,
-      updateData
-    ).populate("profile");
+  async update(id: string, updateData: Omit<IUser, "id" | "userId">): Promise<void> {
+    const updatedUser = await MongooseUser.findByIdAndUpdate(id, updateData).populate("profile");
     if (!updatedUser) {
       throw new HttpException(404, "유저가 존재하지 않습니다.");
     }
     return;
   }
   async delete(id: string): Promise<void> {
-    const user = await MongooseUser.findById(id).populate("Profile");
+    const user = await MongooseUser.findById(id).populate("profile");
     if (!user) {
       throw new HttpException(404, "유저가 존재하지 않습니다.");
     }
@@ -50,9 +36,7 @@ export default class MongooseUserRepository implements UserRepository {
     return;
   }
   async findByAccountId(accountId: string): Promise<IUser> {
-    const user = await MongooseUser.findOne({ accountId: accountId }).populate(
-      "profile"
-    );
+    const user = await MongooseUser.findOne({ accountId: accountId }).populate("profile");
     if (!user) {
       throw new HttpException(404, "유저가 존재하지 않습니다.");
     }

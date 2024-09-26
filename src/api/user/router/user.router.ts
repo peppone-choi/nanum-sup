@@ -5,14 +5,10 @@ import { authUserMiddleware } from "@/api/common/middlewares/authUser.middleware
 import UserController from "../controller/user.controller";
 import UserServiceImpl from "../service/user.service";
 import { MemoryUserRepository } from "../repository/memoryUser.repository";
-import {
-  createUserValidator,
-  deleteUserValidator,
-  getUserDetailValidator,
-  updateUserValidator,
-} from "../dto/validation/user.validation";
+import { createUserValidator, deleteUserValidator, getUserDetailValidator, updateUserValidator } from "../dto/validation/user.validation";
 import { validate } from "@/api/common/middlewares/validation.middleware";
 import MongooseUserRepository from "../repository/mongooseUser.repository";
+import { MongooseProfileRepository } from "@/api/profile/repository/mongooseProfile.repository";
 const userRouter = express.Router();
 
 /** 사용자 API 객체 */
@@ -29,9 +25,7 @@ const USER_ROUTES = {
   DELETE_USER: `/api/users/:userId`,
 } as const;
 
-const userController = new UserController(
-  new UserServiceImpl(new MongooseUserRepository())
-);
+const userController = new UserController(new UserServiceImpl(new MongooseUserRepository(), new MongooseProfileRepository()));
 
 userRouter.get(
   extractPath(USER_ROUTES.GET_USERS, ROUTES_INDEX.USER_API),
@@ -46,11 +40,7 @@ userRouter.get(
   userController.getUserDetail
 );
 
-userRouter.post(
-  extractPath(USER_ROUTES.SIGN_IN, ROUTES_INDEX.USER_API),
-  validate(createUserValidator),
-  userController.signIn
-);
+userRouter.post(extractPath(USER_ROUTES.SIGN_IN, ROUTES_INDEX.USER_API), validate(createUserValidator), userController.signIn);
 
 userRouter.put(
   extractPath(USER_ROUTES.UPDATE_USER, ROUTES_INDEX.USER_API),
