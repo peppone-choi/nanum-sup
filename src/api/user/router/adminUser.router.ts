@@ -6,12 +6,7 @@ import UserServiceImpl from "../service/user.service";
 import { MemoryUserRepository } from "../repository/memoryUser.repository";
 import { authRoleMiddleware } from "@/api/common/middlewares/authRole.middleware";
 import { validate } from "@/api/common/middlewares/validation.middleware";
-import {
-  adminCreateUserValidator,
-  adminDeleteUserValidator,
-  adminGetUserDetailValidator,
-  adminUpdateUserValidator,
-} from "../dto/validation/adminUser.validation";
+import { adminCreateUserValidator, adminDeleteUserValidator, adminGetUserDetailValidator, adminUpdateUserValidator } from "../dto/validation/adminUser.validation";
 import MongooseUserRepository from "../repository/mongooseUser.repository";
 import { MongooseProfileRepository } from "@/api/profile/repository/mongooseProfile.repository";
 
@@ -31,12 +26,7 @@ const ADMIN_USER_ROUTES = {
   DELETE_USER: `/admin-api/users/:userId`,
 } as const;
 
-const adminUserController = new AdminUserController(
-  new UserServiceImpl(
-    new MongooseUserRepository()
-    // new MongooseProfileRepository()
-  )
-);
+const adminUserController = new AdminUserController(new UserServiceImpl(new MongooseUserRepository(), new MongooseProfileRepository()));
 
 adminUserRouter.get(
   extractPath(ADMIN_USER_ROUTES.GET_USERS, ROUTES_INDEX.ADMIN_USER_API),

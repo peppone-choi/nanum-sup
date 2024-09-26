@@ -17,12 +17,7 @@ export class PostsServiceImpl implements PostsService {
   private readonly _categoryRepository: CategoryRepository;
   private readonly _commentRepository: CommentRepository;
 
-  constructor(
-    PostRepository: PostRepository,
-    UserRepository: UserRepository,
-    CategoryRepository: CategoryRepository,
-    CommentRepository: CommentRepository
-  ) {
+  constructor(PostRepository: PostRepository, UserRepository: UserRepository, CategoryRepository: CategoryRepository, CommentRepository: CommentRepository) {
     this._postRepository = PostRepository;
     this._userRepository = UserRepository;
     this._categoryRepository = CategoryRepository;
@@ -30,11 +25,7 @@ export class PostsServiceImpl implements PostsService {
   }
 
   /** 게시글 생성 */
-  async createPost(
-    userId: string,
-    categoryId: string,
-    post: Omit<IPost, "id" | "author" | "comment" | "shortUrl">
-  ): Promise<PostResponseDTO> {
+  async createPost(userId: string, categoryId: string, post: Omit<IPost, "id" | "author" | "comment" | "shortUrl">): Promise<PostResponseDTO> {
     const author = await this._userRepository.findByAccountId(userId);
     const category = await this._categoryRepository.findById(categoryId);
     const shortUrl = nanoid(10);
@@ -64,6 +55,7 @@ export class PostsServiceImpl implements PostsService {
 
   /** 게시글 상세 조회 */
   async getPostDetail(postId: string): Promise<PostResponseDTO | null> {
+    console.log(postId);
     const post = await this._postRepository.findById(postId);
     if (!post) {
       throw new HttpException(404, "게시글을 찾을 수 없습니다.");
@@ -74,10 +66,7 @@ export class PostsServiceImpl implements PostsService {
   }
 
   /** 게시글 수정 */
-  async updatePost(
-    postId: string,
-    updatedPost: Pick<IPost, "title" | "content" | "category">
-  ): Promise<void> {
+  async updatePost(postId: string, updatedPost: Pick<IPost, "title" | "content" | "category">): Promise<void> {
     await this._postRepository.update(postId, updatedPost);
     return;
   }

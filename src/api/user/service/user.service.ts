@@ -2,11 +2,15 @@ import { CryptoService } from "@/api/common/services/crypto.service";
 import { UserRepository } from "../repository/user.repository";
 import { UserService } from "./user.service.type";
 import HttpException from "@/api/common/exceptions/http.exception";
+import { ProfileRepository } from "@/api/profile/repository/profile.repository";
+import { fi, th } from "@faker-js/faker/.";
 
 export default class UserServiceImpl implements UserService {
   private readonly _userRepository: UserRepository;
-  constructor(userRepository: UserRepository) {
+  private readonly _profileRepository: ProfileRepository;
+  constructor(userRepository: UserRepository, profileRepository: ProfileRepository) {
     this._userRepository = userRepository;
+    this._profileRepository = profileRepository;
   }
   async getUsers(): Promise<IUser[]> {
     return await this._userRepository.getList();
@@ -15,6 +19,16 @@ export default class UserServiceImpl implements UserService {
     return await this._userRepository.getById(id);
   }
   async signIn(user: Omit<IUser, "id" | "salt">): Promise<IUser> {
+    const newProfile = await this._profileRepository.save({
+      nickname: user.profile.nickname,
+      bio: user.profile.bio,
+      thumbnail: user.profile.thumbnail,
+      headerThumbnail: user.profile.headerThumbnail,
+    });
+    if (!newProfile) {
+      throw new HttpException(500, "프로필 생성에 실패했습니다.");
+    }
+    await this._profileRepository.save(newProfile);
     const newPassword = CryptoService.encryptPassword(user.password);
     if (!newPassword || !newPassword.hashedPassword || !newPassword.salt) {
       throw new HttpException(500, "비밀번호 암호화에 실패했습니다.");
@@ -23,6 +37,7 @@ export default class UserServiceImpl implements UserService {
       ...user,
       password: newPassword.hashedPassword,
       salt: newPassword.salt,
+      profile: newProfile,
     };
     return await this._userRepository.create(newUser);
   }

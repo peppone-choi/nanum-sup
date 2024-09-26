@@ -3,11 +3,178 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>게시글 수정</title>
-  <link rel="stylesheet" href="/static/styles/common.css">
+  <title>게시글 상세</title>
+  <link rel="stylesheet" href="/static/styles/pages/posts/postEdit.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-  클라이언트 페이지 게시글 수정
+ 
+ <div id="wrap">
+  <div class="inner">
+    <%- include('../../_layouts/header-menu') %>
+    <section class="post">
+      <!-- 유저 정보 영역 시작 -->
+      <div class="postTop">
+        <div class="postTopUser">
+          <!-- 유저 프로필 이미지 -->
+          <img src="/static/images/profile.webp" alt="프로필 이미지" class="profileImg">
+          <div class="userInfo">
+            <!-- 유저 닉네임 받아오기 -->
+            <span class="nickname">다영다영</span>
+            <!-- 팔로우 버튼 -->
+            <button type="button"><i class="fa-solid fa-plus"></i> 팔로우</button>
+            <!-- 유저 아이디 -->
+            <span class="userId">@dayoungh</span>
+          </div>
+         
+        </div>
+        <!-- 카테고리 받아오기 -->
+        <!-- <div class="category">카테고리 <%= post.categoryId %></div> -->
+        <span class="category"><i class="fa-solid fa-icons"></i> 영화</span>
+      </div>
+      <!-- 유저 정보 영역 끝 -->
+
+
+      <!-- 글 제목 -->
+      <b class="title"><%= post.title %></b>
+      <!-- 글 내용 -->
+      <p class="content"><%- post.content %></p>
+    
+      <!-- 글 작성시간 -->
+      <em class="createdAt"><%= post.createdAt %></em>
+
+      <!-- 좋아요/댓글/즐겨찾기/공유버튼 시작 -->
+      <div class="postButtons">
+        <a href="">
+          <!-- 좋아요 없을 때 -->
+          <!-- <i class="fa-regular fa-heart"></i> -->
+          <i class="fa-solid fa-heart"></i> 
+          10</a>
+        <a href="">
+          <!-- 코멘트 없을 때 -->
+          <!-- <i class="fa-regular fa-comment"></i> -->
+          <i class="fa-solid fa-comment"></i>
+         1</a>
+        <a href="">
+          <!-- 즐찾 안했을 때 투명별 -->
+          <!-- <i class="fa-regular fa-star"></i> -->
+          <i class="fa-solid fa-star"></i>
+        </a>
+        <a href="">
+          <i class="fa-solid fa-share-from-square"></i>
+        </a>
+      </div>
+       <!-- 좋아요/댓글/즐겨찾기/공유버튼 끝  -->
+
+       <!-- 전체 댓글 영역 시작 (작성 및 수정, 삭제, 대댓글) -->
+       <div class="commentArea">
+        <!-- 댓글 작성 영역 시작 -->
+         <div class="commentWriteWrap">
+          <!-- 유저 프로필 이미지 -->
+          <img src="/static/images/profile.webp" alt="프로필 이미지" class="profileImg">
+          <!-- 댓글 입력 창 -->
+           <div class="commentWrite" contenteditable="true" placeholder="댓글을 입력해 주세요."></div>
+              <!-- 파일 업로드 버튼 -->
+              <div class="upload">
+                <label for="file">
+                    <img src="/static/images/upload-btn-gray.svg" class="formImg" alt="파일업로드버튼" />
+                </label>
+                <input type="file" id="file" />
+              </div>
+           <!-- 등록 버튼 -->
+           <button type="submit">등록</button>
+         </div>
+        <!-- 댓글 작성 영역 끝 -->
+
+        <!-- 댓글 리스트 시작 -->
+          <div class="commentSingle">
+            <!-- 유저 프로필 이미지 -->
+            <img src="/static/images/profile.webp" alt="프로필 이미지" class="profileImg">
+            <div class="commentUser">
+              <!-- 유저 닉네임 받아오기 -->
+              <span class="nickname">다영다영</span>
+              <!-- 유저 아이디 -->
+              <span class="userId">@dayoungh</span>
+              <!-- 글 작성시간 -->
+              <em class="createdAt"><%= post.createdAt %></em>
+              <!-- 댓글 가져오기 -->
+              <p class="comment">우와아아아아아</p>  
+            </div>
+            <div class="like">
+              <i class="fa-solid fa-heart"></i> 
+              12
+            </div>
+            <div class="commentEditBtns">
+              <button type="button"><i class="fa-solid fa-reply"></i> 답글달기</button>
+              <button type="button"><i class="fa-solid fa-pen"></i> 수정</button>
+              <button type="button"><i class="fa-regular fa-trash-can"></i> 삭제</button>
+            </div>
+          </div>
+        <!-- 댓글 리스트 끝 -->
+
+        <!-- 대댓글 작성 영역 시작 -->
+        <div class="commentWriteWrap">
+          <!-- 유저 프로필 이미지 -->
+          <img src="/static/images/profile.webp" alt="프로필 이미지" class="profileImg">
+          <!-- 댓글 입력 창 -->
+           <div class="commentWrite" contenteditable="true" placeholder="답글을 입력해 주세요."></div>
+           <!-- 파일 업로드 버튼 -->
+           <div class="upload">
+            <label for="file">
+                <img src="/static/images/upload-btn-gray.svg" class="formImg" alt="파일업로드버튼" />
+            </label>
+            <input type="file" id="file" />
+          </div>
+           <!-- 등록 버튼 -->
+           <button type="submit">등록</button>
+         </div>
+       </div>
+      <!--  대댓글 작성 영역 끝 -->
+    </section>
+
+    <!-- 카테고리 & 글쓰기 버튼 플로팅 -->
+    <div class="floatingMenu">
+      <!-- 현재 카테고리 플로팅 메뉴 -->
+      <span>&#127916; 영화 나눔숲</span>
+      <!-- 글쓰기 버튼 -->
+      <button type="button"><i class="fa-solid fa-pen"></i></button>
+    </div>
+
+  </div>
+ </div>
+
+
+  
+  <script>
+    const $deleteButton = document.getElementById("delete-button");
+
+    const cookies = document.cookie.split(";").reduce((acc, cookie) => {
+      const [key, value] = cookie.split("=");
+      acc[key.trim()] = decodeURIComponent(value);
+      return acc;
+    }, {});
+
+    const token = `${cookies.accessToken}`;
+
+    $deleteButton?.addEventListener("click", async () => {
+      try {
+        const res = await fetch("/api/posts/<%= post.postId %>", {
+          method: "delete",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: token,
+          },
+        });
+
+        if (!res.ok) {
+          throw new Error("게시글 삭제에 실패했습니다.");
+        }
+
+        location.href = "/posts";
+      } catch (error) {
+        console.error("게시글 작성에 실패했습니다.");
+      }
+    });
+  </script>
 </body>
 </html>

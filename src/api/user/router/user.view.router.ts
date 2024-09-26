@@ -6,6 +6,7 @@ import UserServiceImpl from "../service/user.service";
 import MongooseUserRepository from "../repository/mongooseUser.repository";
 // import { MongooseProfileRepository } from "../repository/profile/mongooseProfile.repository";
 import { authCookieViewMiddleware } from "@/api/common/middlewares/authCookie.middleware";
+import { MongooseProfileRepository } from "@/api/profile/repository/mongooseProfile.repository";
 
 const userViewRouter = express.Router();
 
@@ -20,12 +21,7 @@ const USER_VIEW_ROUTES = {
   USER_DELETE: "/users/withdrawal",
 } as const;
 
-const usersViewController = new UsersViewController(
-  new UserServiceImpl(
-    new MongooseUserRepository()
-    // new MongooseProfileRepository()
-  )
-);
+const usersViewController = new UsersViewController(new UserServiceImpl(new MongooseUserRepository(), new MongooseProfileRepository()));
 
 userViewRouter.get(
   extractPath(USER_VIEW_ROUTES.MY_PAGE, ROUTES_INDEX.USER_VIEW),
@@ -33,19 +29,10 @@ userViewRouter.get(
   usersViewController.myPage
 );
 
-userViewRouter.get(
-  extractPath(USER_VIEW_ROUTES.USER_EDIT, ROUTES_INDEX.USER_VIEW),
-  usersViewController.userEditPage
-);
+userViewRouter.get(extractPath(USER_VIEW_ROUTES.USER_EDIT, ROUTES_INDEX.USER_VIEW), usersViewController.userEditPage);
 
-userViewRouter.get(
-  extractPath(USER_VIEW_ROUTES.USER_DELETE, ROUTES_INDEX.USER_VIEW),
-  usersViewController.withDrawPage
-);
+userViewRouter.get(extractPath(USER_VIEW_ROUTES.USER_DELETE, ROUTES_INDEX.USER_VIEW), usersViewController.withDrawPage);
 
-userViewRouter.get(
-  extractPath(USER_VIEW_ROUTES.USER_DETAIL, ROUTES_INDEX.USER_VIEW),
-  usersViewController.userDetailPage
-);
+userViewRouter.get(extractPath(USER_VIEW_ROUTES.USER_DETAIL, ROUTES_INDEX.USER_VIEW), usersViewController.userDetailPage);
 
 export default userViewRouter;

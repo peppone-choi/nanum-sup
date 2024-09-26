@@ -1,0 +1,156 @@
+@charset "utf-8";
+@import "../../common.css";
+
+body {
+  background-color: var(--body-bg);
+  width: 428px;
+  border: 2px solid red;
+}
+
+#header {
+  margin: 0 auto;
+  width: 390px;
+}
+
+#wrap {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.profile-headerimage {
+  width: 428px;
+  height: 251px;
+}
+
+/* 유저 프로필 소개 부분 */
+.profile-area {
+  width: 393px;
+  height: 135px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: -100px;
+  gap: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  /* border: 1px solid blue; */
+  position: relative;
+}
+
+.edit {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: var(--mono-300);
+}
+
+.profile-user {
+  font-size: 14px;
+}
+
+.nickName {
+  font-weight: bold;
+}
+
+.profile-thumbnail {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-left: 20px;
+  border: 1px solid var(--mono-100);
+}
+
+.biotext {
+  margin-top: 20px;
+}
+/* 유저 프로필 소개 부분 */
+
+/* 내 게시글 / 좋아요한 게시글 버튼 부분 */
+.post-area {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.post-filter {
+  margin: 10px auto;
+  width: 310px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  background-color: #ffffff;
+  border-radius: 30px;
+  border: 1px solid var(--sub-color-3);
+}
+
+.post-filter button {
+  width: 120px;
+  background-color: #ffffff;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.post-filter button:hover {
+  color: var(--primary);
+}
+
+.post-filter p {
+  margin-top: 10px;
+  color: #bcbbbb;
+}
+/* 내 게시글 / 좋아요한 게시글 버튼 부분 */
+
+/* 게시글 부분 */
+.post {
+  width: 389px;
+  height: 356px;
+  background-color: #ffffff;
+  border-radius: 20px;
+}
+
+.post-profile {
+  margin-bottom: 10px;
+  padding-top: 15px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.post-profile-thumbnail {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  margin-left: 10px;
+}
+
+/* .post-content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+} */
+
+.post-content-text {
+  padding-left: 15px;
+  height: 22px;
+  width: 350px;
+}
+
+.post-image {
+  width: 360px;
+  height: 165px;
+  margin-top: 12px;
+  margin-left: 15px;
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid #e9e8e8;
+}
