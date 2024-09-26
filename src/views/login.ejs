@@ -3,19 +3,21 @@
   <head>
     <%-include('./_layouts/meta.ejs') %>
     <link rel="stylesheet" href="/static/styles/style.scss" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="stylesheet" href="/static/styles/pages/users/login.css" />
   </head>
   <body>
+<<<<<<< HEAD
     <div id="wrap">
       <img
         src="/static/images/nanum-logo.png"
         alt="logoimage"
         class="logoimage"
       />
+=======
+    <div class="wrap">
+      <img src="/static/images/nanum-logo.png" alt="logoimage" class="logoimage" />
+>>>>>>> develop
       <div class="container">
         <form method="post">
           <div class="form-group">
@@ -24,12 +26,7 @@
           </div>
           <div class="form-group b">
             <label for="password">비밀번호</label>
-            <input
-              type="password"
-              class="form-control"
-              id="password"
-              name="password"
-            />
+            <input type="password" class="form-control" id="password" name="password" />
           </div>
           <button type="submit" class="btn btn-primary">로그인</button>
         </form>
@@ -67,7 +64,7 @@
             window.location.href = redirect;
             return;
           }
-          location.href = "/";
+          location.href = "/posts";
         } else {
           alert("로그인 실패");
         }
