@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,7 +41,7 @@
       <p class="content"><%- post.content %></p>
     
       <!-- 글 작성시간 -->
-      <em class="createdAt"><%= post.createdAt %></em>
+      <em class="createdAt" data-created-at="<%= post.createdAt.toISOString() %>"></em>
 
       <!-- 좋아요/댓글/즐겨찾기/공유버튼 시작 -->
       <div class="postButtons">
@@ -95,8 +95,9 @@
               <span class="nickname">다영다영</span>
               <!-- 유저 아이디 -->
               <span class="userId">@dayoungh</span>
+              
               <!-- 글 작성시간 -->
-              <em class="createdAt"><%= post.createdAt %></em>
+              <em class="createdAt" data-created-at="<%= post.createdAt.toISOString() %>"></em>
               <!-- 댓글 가져오기 -->
               <p class="comment">우와아아아아아</p>  
             </div>
@@ -175,6 +176,27 @@
         console.error("게시글 작성에 실패했습니다.");
       }
     });
+  </script>
+  <script>
+    const $createdAt = document.querySelectorAll(".createdAt");
+    
+
+    const options = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      timeZone: "Asia/Seoul"
+    }
+
+    $createdAt.forEach(e => {
+      const createdAt = new Date(e.dataset.createdAt);
+      const formattedDate = createdAt.toLocaleString('ko-KR', options);
+      e.textContent = formattedDate;
+    })
+    
+
   </script>
 </body>
 </html>
