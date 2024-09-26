@@ -164,3 +164,8 @@ select {
     margin: -1px;
     overflow: hidden;
 }
+
+
+a {
+    text-decoration: none;
+}

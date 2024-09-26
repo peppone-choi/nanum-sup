@@ -2,6 +2,10 @@
 @import "../../common.css";
 
 
+a {
+  color: var(--mono-500);
+}
+
 .post {
   background-color: var(--mono-000);
   padding: 15px;
@@ -36,7 +40,7 @@
 }
 
 /* 닉네임 */
-.nickname {
+.nickName {
   font-weight: 500;
 }
 
@@ -55,7 +59,6 @@
 .userId {
   font-size: var(--text-description);
   color: var(--mono-400);
-
 
 }
 /* 카테고리 */
@@ -79,6 +82,7 @@
 
 .content {
   margin: 0;
+  padding: 10px 0;
 }
 
 .createdAt {
@@ -126,7 +130,7 @@
 
 /* 댓글 프로필사진 */
 .commentArea .profileImg {
-  max-width: 30px;
+  max-width: 25px;
 
 }
 
@@ -171,12 +175,12 @@
 }
 
 .commentSingle img {
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
 
 }
 
-.commentSingle span {
+.commentSingle a {
   font-size: 13px;
 }
 
@@ -313,3 +317,21 @@
   left: 50%;
   transform: translate(-50%,-50%);
 }
+
+
+/* 태블릿 */
+@media (min-width: 768px) { 
+  .userInfo {
+    position: relative;
+  }
+
+  .userId {
+    position: absolute;
+    bottom: -75%;
+  }
+} 
+
+/* PC */
+@media (min-width: 992px) { 
+  
+ } 
