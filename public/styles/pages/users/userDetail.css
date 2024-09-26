@@ -186,6 +186,7 @@ main {
   border: none;
   outline: none;
   cursor: pointer;
+  color: var(--mono-300);
 }
 
 .icon-button i {
