@@ -3,7 +3,6 @@
 
 body {
   background-color: var(--body-bg);
-  width: 428px;
   border: 2px solid red;
 }
 
@@ -105,7 +104,7 @@ main {
 }
 
 .post-filter p {
-  margin-top: 10px;
+  margin-top: 12px;
   color: #bcbbbb;
 }
 /* 내 게시글 / 좋아요한 게시글 버튼 부분 */
@@ -133,6 +132,26 @@ main {
   position: absolute;
   top: 0px;
   right: 10px;
+}
+
+.category {
+  font-size: 10px;
+  color: var(--primary);
+  width: 57px;
+  height: 19px;
+  border: 1px solid var(--primary);
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+  position: absolute;
+  top: 3px;
+  right: 38px;
+}
+
+.category i {
+  margin-top: 1px;
 }
 
 .post-profile-thumbnail {
