@@ -45,24 +45,24 @@
 
       <!-- 좋아요/댓글/즐겨찾기/공유버튼 시작 -->
       <div class="postButtons">
-        <a href="">
+        <div class="like">
           <!-- 좋아요 없을 때 -->
-          <!-- <i class="fa-regular fa-heart"></i> -->
-          <i class="fa-solid fa-heart"></i> 
-          10</a>
-        <a href="">
+          <i class="fa-regular fa-heart"></i>
+          <!-- <i class="fa-solid fa-heart"></i>  -->
+          10</div>
+        <div>
           <!-- 코멘트 없을 때 -->
           <!-- <i class="fa-regular fa-comment"></i> -->
           <i class="fa-solid fa-comment"></i>
-         1</a>
-        <a href="">
+         1</div>
+        <div>
           <!-- 즐찾 안했을 때 투명별 -->
           <!-- <i class="fa-regular fa-star"></i> -->
           <i class="fa-solid fa-star"></i>
-        </a>
-        <a href="">
+        </div>
+        <div>
           <i class="fa-solid fa-share-from-square"></i>
-        </a>
+        </div>
       </div>
        <!-- 좋아요/댓글/즐겨찾기/공유버튼 끝  -->
 
@@ -102,10 +102,12 @@
               <!-- 댓글 가져오기 -->
               <p class="comment">우와아아아아아ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</p>  
             </div>
+            <!-- 좋아요 -->
             <div class="like">
-              <i class="fa-solid fa-heart"></i> 
+              <i class="fa-regular fa-heart"></i>
               12
             </div>
+            <!-- 답글, 수정, 삭제, 공유 버튼 -->
             <div class="commentEditBtns">
               <button type="button"><i class="fa-solid fa-reply"></i> 답글달기</button>
               <button type="button"><i class="fa-solid fa-pen"></i> 수정</button>
@@ -200,6 +202,16 @@
     })
     
 
+    // 좋아요 아이콘
+    const $like = document.querySelectorAll(".like");
+    $like.forEach(like => {
+      like.addEventListener('click', function() {
+        const heartIcon = this.querySelector("i");
+
+        heartIcon.classList.toggle('fa-regular');
+        heartIcon.classList.toggle('fa-solid');
+      })
+    })
   </script>
 </body>
 </html>

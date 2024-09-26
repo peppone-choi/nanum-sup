@@ -148,6 +148,8 @@ select {
     outline: none;
 }
 
+
+
 /* flex */
 .flex-column-center {
     display: flex;
@@ -169,3 +171,8 @@ select {
 a {
     text-decoration: none;
 }
+
+button {
+    cursor: pointer;
+}
+
