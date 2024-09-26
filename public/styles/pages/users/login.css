@@ -3,20 +3,19 @@
 
 body {
   background-color: var(--mono-000);
-  width: 428px;
-  height: 926px;
-  border: 2px solid red;
 }
 
-.wrap {
+#wrap {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  /* height: 100vh; */
+  /* border: 2px solid red; */
 }
 
 img {
-  margin-top: 170px;
+  /* margin-top: 170px; */
   margin-bottom: 70px;
   width: 208px;
   height: 70px;

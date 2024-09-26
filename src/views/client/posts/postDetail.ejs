@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,7 +41,7 @@
       <p class="content"><%- post.content %></p>
     
       <!-- 글 작성시간 -->
-      <em class="createdAt"><%= post.createdAt %></em>
+      <em class="createdAt" data-created-at="<%= post.createdAt.toISOString() %>"></em>
 
       <!-- 좋아요/댓글/즐겨찾기/공유버튼 시작 -->
       <div class="postButtons">
@@ -92,13 +92,16 @@
             <img src="/static/images/profile.webp" alt="프로필 이미지" class="profileImg">
             <div class="commentUser">
               <!-- 유저 닉네임 받아오기 -->
+              <%= post.author.profile.nickname %>
               <span class="nickname">다영다영</span>
               <!-- 유저 아이디 -->
+              <%= post.author.id %>
               <span class="userId">@dayoungh</span>
+              
               <!-- 글 작성시간 -->
-              <em class="createdAt"><%= post.createdAt %></em>
+              <em class="createdAt" data-created-at="<%= post.createdAt.toISOString() %>"></em>
               <!-- 댓글 가져오기 -->
-              <p class="comment">우와아아아아아</p>  
+              <p class="comment">우와아아아아아ㅇㅇㅇㅇㅇㅇㅇㅇㅇ우와아아아아아ㅇㅇㅇㅇㅇㅇㅇㅇㅇ우와아아아아아ㅇㅇㅇㅇㅇㅇㅇㅇㅇ우와아아아아아ㅇㅇㅇㅇㅇㅇㅇㅇㅇ우와아아아아아ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</p>  
             </div>
             <div class="like">
               <i class="fa-solid fa-heart"></i> 
@@ -137,7 +140,8 @@
       <!-- 현재 카테고리 플로팅 메뉴 -->
       <span>&#127916; 영화 나눔숲</span>
       <!-- 글쓰기 버튼 -->
-      <button type="button"><i class="fa-solid fa-pen"></i></button>
+      <a href="/posts/write"><i class="fa-solid fa-pen"></i></a>
+      <!-- <button type="button"><i class="fa-solid fa-pen"></i></button> -->
     </div>
 
   </div>
@@ -175,6 +179,28 @@
         console.error("게시글 작성에 실패했습니다.");
       }
     });
+  </script>
+  <!-- 작성시간 한글 변환 -->
+  <script>
+    const $createdAt = document.querySelectorAll(".createdAt");
+    
+
+    const options = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      timeZone: "Asia/Seoul"
+    }
+
+    $createdAt.forEach(e => {
+      const createdAt = new Date(e.dataset.createdAt);
+      const formattedDate = createdAt.toLocaleString('ko-KR', options);
+      e.textContent = formattedDate;
+    })
+    
+
   </script>
 </body>
 </html>
