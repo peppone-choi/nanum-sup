@@ -118,12 +118,21 @@ main {
   border-radius: 20px;
 }
 
+/* (유저 정보) */
 .post-profile {
   margin-bottom: 10px;
-  padding-top: 15px;
+  margin-top: 15px;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 10px;
+  position: relative;
+  /* border: 1px solid blue; */
+}
+
+#listButton {
+  position: absolute;
+  top: 0px;
+  right: 10px;
 }
 
 .post-profile-thumbnail {
@@ -133,11 +142,10 @@ main {
   margin-left: 10px;
 }
 
-/* .post-content {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-} */
+.profile-user.b p {
+  font-size: 12px;
+}
+/* (유저 정보) */
 
 .post-content-text {
   padding-left: 15px;
@@ -148,9 +156,38 @@ main {
 .post-image {
   width: 360px;
   height: 165px;
-  margin-top: 12px;
-  margin-left: 15px;
+  margin: 12px auto 20px;
   display: flex;
   justify-content: center;
+}
+
+.post-time-text {
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 15px;
+  margin-top: 30px;
+  height: 22px;
+  width: 350px;
+  font-size: 13px;
+  color: #cccccc;
   border-bottom: 1px solid #e9e8e8;
+}
+
+/* 게시글 아이콘 부분 */
+.icon-container {
+  gap: 15px;
+  margin-left: 10px;
+  margin-top: 2px;
+}
+
+.icon-button {
+  width: 28px;
+  background-color: #ffffff;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.icon-button i {
+  width: 18px;
 }
