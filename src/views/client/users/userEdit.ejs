@@ -78,27 +78,27 @@
         });
 
       // // 파일 입력 요소와 팝업 요소 가져오기
-      // const profileImage = document.getElementById("profile-image");
-      // const alertPopup = document.getElementById("alertPopup");
-      // const closePopupButton = document.getElementById("closePopupButton");
+      const profileImage = document.getElementById("profile-image");
+      const alertPopup = document.getElementById("alertPopup");
+      const closePopupButton = document.getElementById("closePopupButton");
 
       // // 50MB = 50 * 1024 * 1024 bytes
-      // const MAX_FILE_SIZE = 3 * 1024 * 1024;
+      const MAX_FILE_SIZE = 50 * 1024 * 1024;
 
       // // 파일 첨부 시 파일 크기 확인
-      // profileImage.addEventListener("change", function (event) {
-      //   const file = event.target.files[0]; // 첨부된 파일 가져오기
+      profileImage.addEventListener("change", function (event) {
+        const file = event.target.files[0]; // 첨부된 파일 가져오기
 
-      //   if (file && file.size > MAX_FILE_SIZE) {
-      //     // 파일 크기가 50MB를 초과하면 팝업 표시
-      //     alertPopup.classList.remove("hidden");
-      //   }
-      // });
+        if (file && file.size > MAX_FILE_SIZE) {
+          // 파일 크기가 50MB를 초과하면 팝업 표시
+          alertPopup.classList.remove("hidden");
+        }
+      });
 
-      // // 팝업 닫기 버튼 클릭 시 팝업 숨기기
-      // closePopupButton.addEventListener("click", function () {
-      //   alertPopup.classList.add("hidden");
-      // });
+      // 팝업 닫기 버튼 클릭 시 팝업 숨기기
+      closePopupButton.addEventListener("click", function () {
+        alertPopup.classList.add("hidden");
+      });
     </script>
   </body>
 </html>
