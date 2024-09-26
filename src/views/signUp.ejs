@@ -1,81 +1,53 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>회원가입</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    <link rel="stylesheet" href="/static/styles/pages/signUp.css" />
-    <link rel="stylesheet" href="/static/styles/reset.css" />
-    <link rel="stylesheet" href="/static/styles/init.css" />
-  </head>
-  <body>
-    <div class="signup-container">
-      <div class="signup-form">
-        <div class="header-image" id="header">
-          <a href="/views/login" class="arrow-left-button">
-            <img src="/static/images/arrow-left-w.svg" alt="뒤로가기" />
-          </a>
-          <img src="/static/images/nanum-logo-w.png" alt="나눔숲" />
-        </div>
-        <form method="POST">
-          <div class="profile">
-            <img src="/static/images/profile.webp" alt="프로필사진" class="profile-image" />
-            <a href="" class="profile-edit">
-              <img src="/static/images/pen-icon.svg" alt="프로필 수정" class="profile-pen" id="profile-pen-icon" />
-              <label for="profile-image"></label>
-              <input type="file" id="profile-image" name="profile-image" style="display: none" />
-            </a>
-          </div>
-        </form>
-
-        <div class="input-wrapper">
-          <form method="post" class="signup-input-form">
-            <div class="form-group">
-              <div class="nickname-input-container">
-                <label for="nickname"></label>
-                <img src="/static/images/nickname.svg" alt="닉네임" class="nickname" />
-                <input placeholder="닉네임" type="text" id="nickname" name="nickname" required />
-                <button type="button" class="nickname-double-check">중복확인</button>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="id-input-container">
-                <label for="username"></label>
-                <img src="/static/images/id.svg" alt="아이디" class="id" />
-                <input placeholder="아이디" type="text" id="username" name="username" required />
-                <button type="button" class="id-double-check">중복확인</button>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="email-input-container">
-                <label for="email"></label>
-                <img src="/static/images/email.svg" alt="이메일" class="email" />
-                <input placeholder="이메일" type="email" id="email" name="email" required />
-                <button type="button" class="email-double-check">중복확인</button>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="password-input-container">
-                <label for="password"></label>
-                <img src="/static/images/password.svg" alt="비밀번호" class="password" />
-                <input placeholder="비밀번호" type="password" id="password" name="password" required />
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="confirm-password-input-container">
-                <label for="confirm-password"></label>
-                <img src="/static/images/check.svg" alt="비밀번호 확인" class="confirm-password" />
-                <input placeholder="비밀번호 확인" type="password" id="confirm-password" name="confirm-password" required />
-              </div>
-            </div>
-            <textarea type="text" maxlength="200" placeholder="자유롭게 소개글을 입력해주세요." class="introduce"></textarea>
-            <p class="signup-information">*프로필 사진과 소개글은 선택 입력 사항입니다.</p>
-            <button type="submit" class="sumbit-signup">가입하기</button>
-          </form>
-        </div>
-      </div>
-    </div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>회원가입</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        />
+        <link rel="stylesheet" href="/static/styles/pages/signUp.css" />
+        <link rel="stylesheet" href="/static/styles/reset.css" />
+        <link rel="stylesheet" href="/static/styles/init.css" />
+    </head>
+    <body>
+        <div class="signup-container">
+            <div class="signup-form">
+                <div class="header-image" id="header">
+                    <a href="/views/login" class="arrow-left-button">
+                        <img
+                            src="/static/images/arrow-left-w.svg"
+                            alt="뒤로가기"
+                        />
+                    </a>
+                    <img src="/static/images/nanum-logo-w.png" alt="나눔숲" />
+                </div>
+                <form method="POST">
+                    <div class="profile">
+                        <img
+                            src="/static/images/profile.webp"
+                            alt="프로필사진"
+                            class="profile-image"
+                        />
+                        <a href="" class="profile-edit">
+                            <img
+                                src="/static/images/pen-icon.svg"
+                                alt="프로필 수정"
+                                class="profile-pen"
+                                id="profile-pen-icon"
+                            />
+                            <label for="profile-image"></label>
+                            <input
+                                type="file"
+                                id="profile-image"
+                                name="profile-image"
+                                style="display: none"
+                            />
+                        </a>
+                    </div>
+                </form>
                 <div class="input-wrapper">
                     <form method="POST" class="signup-input-form">
                         <div class="form-group">
@@ -256,60 +228,6 @@
                 });
         </script>
 
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                // 중복확인 버튼 클릭 시 팝업 열기
-                const doubleCheckBtn = document.getElementById(
-                    "nickname-double-check-btn"
-                );
-                const availablePopup = document.getElementById(
-                    "availability-popup-available"
-                );
-                const unavailablePopup = document.getElementById(
-                    "availability-popup-unavailable"
-                );
-
-                if (doubleCheckBtn) {
-                    doubleCheckBtn.addEventListener("click", function () {
-                        // 사용 가능 팝업 열기 (hidden 클래스 제거)
-                        if (availablePopup) {
-                            availablePopup.classList.remove("hidden");
-                        }
-
-                        // 사용 불가 팝업을 사용하려면 아래 코드 활성화
-                        // if (unavailablePopup) {
-                        //     unavailablePopup.classList.remove("hidden");
-                        // }
-                    });
-                }
-
-                // 팝업 닫기 버튼 클릭 시 팝업 닫기 (hidden 클래스 추가)
-                const availableConfirmBtn = document.getElementById(
-                    "available-confirm-btn"
-                );
-                if (availableConfirmBtn) {
-                    availableConfirmBtn.addEventListener("click", function () {
-                        if (availablePopup) {
-                            availablePopup.classList.add("hidden");
-                        }
-                    });
-                }
-
-                const unavailableConfirmBtn = document.getElementById(
-                    "unavailable-confirm-btn"
-                );
-                if (unavailableConfirmBtn) {
-                    unavailableConfirmBtn.addEventListener(
-                        "click",
-                        function () {
-                            if (unavailablePopup) {
-                                unavailablePopup.classList.add("hidden");
-                            }
-                        }
-                    );
-                }
-            });
-        </script>
         <!-- 비밀번호 확인 -->
         <script>
             const form = document.querySelector("form");
