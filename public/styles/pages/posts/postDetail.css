@@ -196,7 +196,7 @@
 
 .commentUser {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   flex-wrap: wrap;
   width: calc(100% - 60px);
   /* justify-content: space-between; */
