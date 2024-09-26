@@ -62,6 +62,12 @@
               >
                 <i class="fa-solid fa-ellipsis-vertical"></i>
               </button>
+              <div id="optionMenu" class="option-menu hidden">
+                <ul>
+                  <li><button id="editButton">수정</button></li>
+                  <li><button id="deleteButton">삭제</button></li>
+                </ul>
+              </div>
               <div class="category">
                 <i class="fa-solid fa-icons"></i>
                 <span>음식</span>
@@ -115,5 +121,40 @@
         </div>
       </main>
     </div>
+    <script>
+      const listIconButton = document.getElementById("listButton");
+      const optionMenu = document.getElementById("optionMenu");
+
+      // 리스트 아이콘 클릭 시 옵션창 열기/닫기
+      listIconButton.addEventListener("click", function () {
+        optionMenu.classList.toggle("hidden");
+      });
+
+      // 수정 버튼 클릭 시 동작
+      document
+        .getElementById("editButton")
+        .addEventListener("click", function () {
+          alert("수정을 선택했습니다.");
+          optionMenu.classList.add("hidden"); // 옵션창 닫기
+        });
+
+      // 삭제 버튼 클릭 시 동작
+      document
+        .getElementById("deleteButton")
+        .addEventListener("click", function () {
+          alert("삭제를 선택했습니다.");
+          optionMenu.classList.add("hidden"); // 옵션창 닫기
+        });
+
+      // 옵션창 외부를 클릭하면 닫기
+      window.addEventListener("click", function (event) {
+        if (
+          !listIconButton.contains(event.target) &&
+          !optionMenu.contains(event.target)
+        ) {
+          optionMenu.classList.add("hidden");
+        }
+      });
+    </script>
   </body>
 </html>

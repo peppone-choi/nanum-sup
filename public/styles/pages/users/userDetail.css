@@ -166,6 +166,55 @@ main {
 }
 /* (유저 정보) */
 
+/* (수정/삭제 팝업) */
+.option-menu {
+  position: absolute;
+  top: 30px;
+  right: 10px;
+  background-color: var(--sub-color-3);
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  width: 74px;
+  z-index: 1000;
+  /* display: none; 기본적으로 옵션창은 숨김 상태 */
+}
+
+.option-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.option-menu li {
+  /* padding: 10px; */
+  height: 30px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.option-menu li button {
+  font-size: 14px;
+  color: #ffffff;
+  border: none;
+  outline: none;
+  background: none;
+  cursor: pointer;
+}
+
+.option-menu li button:hover {
+  color: #8a8a8a;
+}
+
+.hidden {
+  display: none;
+}
+
+/* (수정/삭제 팝업) */
+
+/* (포스트 내용) */
 .post-content-text {
   padding-left: 15px;
   height: 22px;
@@ -191,6 +240,7 @@ main {
   color: #cccccc;
   border-bottom: 1px solid #e9e8e8;
 }
+/* (포스트 내용) */
 
 /* 게시글 아이콘 부분 */
 .icon-container {
