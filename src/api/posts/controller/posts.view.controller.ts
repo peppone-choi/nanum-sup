@@ -53,16 +53,17 @@ export default class PostsViewController {
 
     const userId = req.user.userId;
 
-
     const post = await this._postsService.getPostDetail(postId);
 
     const isMe = userId === post?.author.id;
 
-    // if (!isMe) {
-    //   res.send(`<script>
-    //       alert("권한이 없습니다."); location.href="/posts/${postId}";
-    //     </script>`);
-    // }
+    console.log(userId, post?.author);
+
+    if (!isMe) {
+      res.send(`<script>
+          alert("권한이 없습니다."); location.href="/posts/${postId}";
+        </script>`);
+    }
 
     res.render("client/posts/postEdit", { post });
   }
