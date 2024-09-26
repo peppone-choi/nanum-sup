@@ -74,8 +74,15 @@ main {
 /* 유저 프로필 소개 부분 */
 
 /* 내 게시글 / 좋아요한 게시글 버튼 부분 */
+.post-area {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
 .post-filter {
-  margin-top: 20px;
+  margin: 10px auto;
   width: 310px;
   height: 50px;
   display: flex;
@@ -93,11 +100,57 @@ main {
   cursor: pointer;
 }
 
+.post-filter button:hover {
+  color: var(--primary);
+}
+
 .post-filter p {
   margin-top: 10px;
   color: #bcbbbb;
 }
+/* 내 게시글 / 좋아요한 게시글 버튼 부분 */
 
+/* 게시글 부분 */
 .post {
-  margin-top: 20px;
+  width: 389px;
+  height: 356px;
+  background-color: #ffffff;
+  border-radius: 20px;
+}
+
+.post-profile {
+  margin-bottom: 10px;
+  padding-top: 15px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.post-profile-thumbnail {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  margin-left: 10px;
+}
+
+/* .post-content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+} */
+
+.post-content-text {
+  padding-left: 15px;
+  height: 22px;
+  width: 350px;
+}
+
+.post-image {
+  width: 360px;
+  height: 165px;
+  margin-top: 12px;
+  margin-left: 15px;
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid #e9e8e8;
 }
