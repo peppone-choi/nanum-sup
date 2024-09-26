@@ -154,7 +154,7 @@
   margin-top: 0;
   width: auto;
   height: auto;
-  font-size: var(--text-description);
+  font-size: 14px;
   padding: 2px 10px;
   border-radius: 50px;
   background-color: var(--sub-color-3);
@@ -182,12 +182,7 @@
 
 .commentSingle em {
   font-size: 9px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  word-break: break-all;
-  width: 120px;
-  display: inline-block;
+  padding-left: 5px;
 }
 
 .commentSingle .createdAt::after {
@@ -202,9 +197,18 @@
   /* justify-content: space-between; */
 }
 
+
 /* 달려있는 댓글 */
 .commentArea p {
   margin: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  width: 250px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
   
 }
 /* 좋아요 */
@@ -288,16 +292,24 @@
   
 }
 
-.floatingMenu button {
+.floatingMenu a {
+  position: relative;
+  text-align: center;
   width: 60px;
   height: 60px;
   /* padding: 0px; */
   border-radius: 50%;
   background-color: var(--sub-color-1);
   font-size: 25px;
-  border: none;
   color: var(--mono-000);
   /* text-shadow: 1px 1px 1px rgba(0,0,0,0.2); */
   box-shadow: 2px 3px 3px rgba(0,0,0,0.2);
 }
 
+
+.floatingMenu i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}

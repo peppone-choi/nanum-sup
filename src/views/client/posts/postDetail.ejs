@@ -99,7 +99,7 @@
               <!-- 글 작성시간 -->
               <em class="createdAt" data-created-at="<%= post.createdAt.toISOString() %>"></em>
               <!-- 댓글 가져오기 -->
-              <p class="comment">우와아아아아아</p>  
+              <p class="comment">우와아아아아아ㅇㅇㅇㅇㅇㅇㅇㅇㅇ우와아아아아아ㅇㅇㅇㅇㅇㅇㅇㅇㅇ우와아아아아아ㅇㅇㅇㅇㅇㅇㅇㅇㅇ우와아아아아아ㅇㅇㅇㅇㅇㅇㅇㅇㅇ우와아아아아아ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</p>  
             </div>
             <div class="like">
               <i class="fa-solid fa-heart"></i> 
@@ -138,7 +138,8 @@
       <!-- 현재 카테고리 플로팅 메뉴 -->
       <span>&#127916; 영화 나눔숲</span>
       <!-- 글쓰기 버튼 -->
-      <button type="button"><i class="fa-solid fa-pen"></i></button>
+      <a href="/posts/write"><i class="fa-solid fa-pen"></i></a>
+      <!-- <button type="button"><i class="fa-solid fa-pen"></i></button> -->
     </div>
 
   </div>
@@ -177,6 +178,7 @@
       }
     });
   </script>
+  <!-- 작성시간 한글 변환 -->
   <script>
     const $createdAt = document.querySelectorAll(".createdAt");
     
