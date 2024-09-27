@@ -7,6 +7,10 @@ import { CategoryServiceImpl } from "../service/category.service";
 
 // import { MongooseUserRepository } from "@/api/user/repository/mongooseUser.repository";
 import { MongoosePostRepository } from "@/api/posts/repository/mongoosePost.repository";
+import { Post } from "@/api/posts/model/post.model";
+import { PostsServiceImpl } from "@/api/posts/service/posts.service";
+import MongooseUserRepository from "@/api/user/repository/mongooseUser.repository";
+import { MongooseCommentRepository } from "@/api/comment/repository/mongooseComment.repository";
 
 const categoryViewRouter = express.Router();
 

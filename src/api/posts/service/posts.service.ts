@@ -82,4 +82,13 @@ export class PostsServiceImpl implements PostsService {
     }
     return new PostResponseDTO(post);
   }
+
+  async findByCategoryId(categoryId: string): Promise<PostResponseDTO[]> {
+    const posts = await this._postRepository.findByCategoryId(categoryId);
+    return await Promise.all(posts.map((post) => new PostResponseDTO(post)));
+  }
+  async findByUserId(userId: string): Promise<PostResponseDTO[]> {
+    const posts = await this._postRepository.findByUserId(userId);
+    return await Promise.all(posts.map((post) => new PostResponseDTO(post)));
+  }
 }
