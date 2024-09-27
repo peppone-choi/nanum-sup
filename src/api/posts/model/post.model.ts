@@ -18,6 +18,7 @@ export class Post implements IPost {
   // /** 수정일 */
   // updatedAt: Date;
 
+
   constructor(params: IPost) {
     this.id = params.id;
     this.title = params.title;
