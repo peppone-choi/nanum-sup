@@ -1,4 +1,5 @@
 export class Post implements IPost {
+
   /** 게시글 ID */
   id: string;
   /** 게시글 제목 */
