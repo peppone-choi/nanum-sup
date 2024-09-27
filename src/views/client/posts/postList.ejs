@@ -8,15 +8,163 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-  클라이언트 페이지 게시글 리스트
-  <br>
-  <% posts.forEach(function(post) { %>
-    <div>
-      <a href="/posts/<%= post.postId %>">
-        <h2><%= post.title %></h2>
-      </a>
-    </div>
-    <% }); %>
+  <div id="wrap">
+    <div class="inner">
+      <!-- 헤더 -->
+      <%- include('../../_layouts/header-menu') %>
 
+    
+        <!-- 반복 시작 -->
+        <% posts.forEach(function(post) { %>
+          <section class="post">
+           <!-- 유저 정보 영역 시작 -->
+           <div class="postTop">
+            <div class="postTopUser">
+              <!-- 유저 프로필 이미지 -->
+              <img src="/static/images/profile.webp" alt="프로필 이미지" class="profileImg">
+              <div class="userInfo">
+                <!-- 유저 닉네임 받아오기 -->
+                 <!-- <%= post.author.profile.nickname %> -->
+                <a href="" class="nickName">다영다영</a>
+                <!-- 팔로우 버튼 -->
+                <button type="button"><i class="fa-solid fa-plus"></i> 팔로우</button>
+                <!-- 유저 아이디 -->
+                <a href="" class="userId">&#64;<%= post.author.accountId %></a>
+              </div>
+               
+                  <!-- 카테고리 받아오기 -->
+                <span class="category"><%= post.category.title %></span>
+                <!-- 더 보기 버튼 -->
+                <div class="viewMore" onclick="toggleEditDelete()">
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                  <div class="postEditDelete flex-column-center">
+                  
+                    <a href="/posts/<%= post.postId %>/edit">
+                      <i class="fa-solid fa-pen"></i> 수정
+                    </a>
+                    <a id="deleteButton">
+                      <i class="fa-solid fa-trash"></i> 삭제
+                    </a>
+       
+                  </div>
+                </div>
+    
+               
+            </div>
+          
+          </div>
+          <!-- 유저 정보 영역 끝 -->
+    
+    
+          <!-- 글 제목 -->
+          <b class="title"><%= post.title %></b>
+          <!-- 글 내용 -->
+          <p class="content"><%- post.content %></p>
+        
+          <!-- 글 작성시간 -->
+          <em class="createdAt" data-created-at="<%= post.createdAt.toISOString() %>"></em>
+    
+          <!-- 좋아요/댓글/즐겨찾기/공유버튼 시작 -->
+          <div class="postButtons">
+            <div class="like">
+              <!-- 좋아요 없을 때 -->
+              <i class="fa-regular fa-heart"></i>
+              <!-- <i class="fa-solid fa-heart"></i>  -->
+              10</div>
+            <div>
+              <!-- 코멘트 없을 때 -->
+              <!-- <i class="fa-regular fa-comment"></i> -->
+              <i class="fa-solid fa-comment"></i>
+             1</div>
+            <div>
+              <!-- 즐찾 안했을 때 투명별 -->
+              <!-- <i class="fa-regular fa-star"></i> -->
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <div>
+              <i class="fa-solid fa-share-from-square"></i>
+            </div>
+          </div>
+           <!-- 좋아요/댓글/즐겨찾기/공유버튼 끝  -->
+    
+           <!-- 전체 댓글 영역 시작 (작성 및 수정, 삭제, 대댓글) -->
+           <div class="commentArea">
+            <!-- 댓글 작성 영역 시작 -->
+             <div class="commentWriteWrap">
+              <!-- 유저 프로필 이미지 -->
+              <img src="/static/images/profile.webp" alt="프로필 이미지" class="profileImg">
+              <!-- 댓글 입력 창 -->
+               <div class="commentWrite" contenteditable="true" placeholder="댓글을 입력해 주세요."></div>
+                  <!-- 파일 업로드 버튼 -->
+                  <div class="upload">
+                    <label for="file">
+                        <img src="/static/images/upload-btn-gray.svg" class="formImg" alt="파일업로드버튼" />
+                    </label>
+                    <input type="file" id="file" />
+                  </div>
+               <!-- 등록 버튼 -->
+               <button type="submit">등록</button>
+             </div>
+            <!-- 댓글 작성 영역 끝 -->
+    
+            <!-- 댓글 리스트 시작 -->
+              <div class="commentSingle">
+                <!-- 유저 프로필 이미지 -->
+                <img src="/static/images/profile.webp" alt="프로필 이미지" class="profileImg">
+                <div class="commentUser">
+                  <!-- 유저 닉네임 받아오기 -->
+                  <!-- <%= post.author.profile.nickname %> -->
+                  <a href="" class="nickName">다영다영</a>
+                  <!-- 유저 아이디 -->
+                  <a href="" class="userId">&#64;<%= post.author.accountId %></a>
+                  
+                  <!-- 글 작성시간 -->
+                  <em class="createdAt" data-created-at="<%= post.createdAt.toISOString() %>"></em>
+                  <!-- 댓글 가져오기 -->
+                  <p class="comment">우와아아아아아ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</p>  
+                </div>
+                <!-- 좋아요 -->
+                <div class="like">
+                  <i class="fa-regular fa-heart"></i>
+                  12
+                </div>
+                <!-- 답글, 수정, 삭제, 공유 버튼 -->
+                <div class="commentEditBtns">
+                  <button type="button"><i class="fa-solid fa-reply"></i> 답글달기</button>
+                  <button type="button"><i class="fa-solid fa-pen"></i> 수정</button>
+                  <button type="button"><i class="fa-regular fa-trash-can"></i> 삭제</button>
+                </div>
+              </div>
+            <!-- 댓글 리스트 끝 -->
+    
+            <!-- 대댓글 작성 영역 시작 -->
+            <div class="commentWriteWrap">
+              <!-- 유저 프로필 이미지 -->
+              <img src="/static/images/profile.webp" alt="프로필 이미지" class="profileImg">
+              <!-- 댓글 입력 창 -->
+               <div class="commentWrite" contenteditable="true" placeholder="답글을 입력해 주세요."></div>
+               <!-- 파일 업로드 버튼 -->
+               <div class="upload">
+                <label for="file">
+                    <img src="/static/images/upload-btn-gray.svg" class="formImg" alt="파일업로드버튼" />
+                </label>
+                <input type="file" id="file" />
+              </div>
+               <!-- 등록 버튼 -->
+               <button type="submit">등록</button>
+             </div>
+           </div>
+          <!--  대댓글 작성 영역 끝 -->
+        </section>
+       
+      <% }); %>
+      <!-- 반복 끝 -->
+    
+     
+    
+    </div>
+  </div>
+
+ 
 </body>
 </html>

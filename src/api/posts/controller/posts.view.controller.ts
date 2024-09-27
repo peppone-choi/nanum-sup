@@ -66,11 +66,11 @@ export default class PostsViewController {
 
     // console.log(userId, post?.author);
 
-    // if (!isMe) {
-    //   res.send(`<script>
-    //       alert("권한이 없습니다."); location.href="/posts/${postId}";
-    //     </script>`);
-    // }
+    if (!isMe) {
+      res.send(`<script>
+          alert("권한이 없습니다."); location.href="/posts/${postId}";
+        </script>`);
+    }
 
     res.render("client/posts/postEdit", { post });
   }
