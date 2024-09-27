@@ -21,13 +21,35 @@
           <img
             src="/static/images/profile.webp"
             alt="profile image"
-            class="profile-thumbnail"
+            id="profile-thumbnail"
           />
-          <button class="edit-button" id="editbutton">
-            <i class="fa-solid fa-pencil">
-              <input type="file" id="filename" name="filename" hidden />
-            </i>
-          </button>
+          <a href="" class="profile-edit-button">
+            <img
+              src="/static/images/pen-icon.svg"
+              alt="프로필 수정"
+              class="profile-pen"
+              id="profile-pen-icon"
+            />
+            <label for="profile-image"></label>
+            <input
+              type="file"
+              id="profile-image"
+              name="profile-image"
+              style="display: none"
+              accept="image/*"
+            />
+          </a>
+          <!-- 용량 초과시 알림 팝업 -->
+          <div id="alertPopup" class="popup hidden">
+            <div class="alerttext">
+              <span>용량은 50MB를</span>
+              <span>초과할 수 없습니다.</span>
+            </div>
+            <div class="close-Button">
+              <button id="closePopupButton">확인</button>
+            </div>
+          </div>
+          <!-- 용량 초과시 알림 팝업 -->
           <p>50MB 제한</p>
         </div>
         <form id="profiletextform" class="profile-textform">
@@ -37,31 +59,45 @@
           </div>
           <div class="bio-edit">
             <label for="bio">소개글</label>
-            <input type="text" id="bio" name="bio" />
+            <textarea
+              type="text"
+              maxlength="200"
+              placeholder="나눔숲에서 사용 할 소개글을 입력해주세요. (200자 이하)"
+              id="bio"
+            ></textarea>
           </div>
         </form>
         <button type="submit">수정 완료</button>
       </main>
     </div>
     <script>
-      const $form = document.querySelector("#form");
-      const $filename = document.querySelector("#filename");
-      const $editbutton = document.getElementById("profile-thumbnail");
+      document
+        .getElementById("profile-pen-icon")
+        .addEventListener("click", function () {
+          document.getElementById("profile-image").click();
+        });
 
-      // 업로드 버튼이 사라짐 -> 이미지를 클릭했을때, 파일 선택을 띄워준다
-      $editbutton.addEventListener("click", () => {
-        $filename.click();
+      // // 파일 입력 요소와 팝업 요소 가져오기
+      const profileImage = document.getElementById("profile-image");
+      const alertPopup = document.getElementById("alertPopup");
+      const closePopupButton = document.getElementById("closePopupButton");
+
+      // // 50MB = 50 * 1024 * 1024 bytes
+      const MAX_FILE_SIZE = 50 * 1024 * 1024;
+
+      // // 파일 첨부 시 파일 크기 확인
+      profileImage.addEventListener("change", function (event) {
+        const file = event.target.files[0]; // 첨부된 파일 가져오기
+
+        if (file && file.size > MAX_FILE_SIZE) {
+          // 파일 크기가 50MB를 초과하면 팝업 표시
+          alertPopup.classList.remove("hidden");
+        }
       });
 
-      // input file이 바뀌는걸 감지한다.
-      $filename.addEventListener("change", (e) => {
-        const file = e.target.files[0];
-
-        // 업로드되어있는 이미지로 src를 교체한다.
-        $editbutton.src = URL.createObjectURL(file);
-        $editbutton.onload = function () {
-          URL.revokeObjectURL($profileThumbnail.src);
-        };
+      // 팝업 닫기 버튼 클릭 시 팝업 숨기기
+      closePopupButton.addEventListener("click", function () {
+        alertPopup.classList.add("hidden");
       });
     </script>
   </body>

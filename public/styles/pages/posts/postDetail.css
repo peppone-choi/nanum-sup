@@ -2,6 +2,15 @@
 @import "../../common.css";
 
 
+a {
+  color: var(--mono-500);
+}
+
+
+/* .inner {
+  max-width: 900px;
+} */
+
 .post {
   background-color: var(--mono-000);
   padding: 15px;
@@ -36,7 +45,7 @@
 }
 
 /* 닉네임 */
-.nickname {
+.nickName {
   font-weight: 500;
 }
 
@@ -55,7 +64,6 @@
 .userId {
   font-size: var(--text-description);
   color: var(--mono-400);
-
 
 }
 /* 카테고리 */
@@ -79,6 +87,7 @@
 
 .content {
   margin: 0;
+  padding: 10px 0;
 }
 
 .createdAt {
@@ -102,11 +111,20 @@
   justify-content: flex-start;
   gap: 15px;
   padding-bottom: 15px;
+  cursor: pointer;
+  
 }
 
-.postButtons  a {
+.postButtons i {
   text-decoration: none;
   color: var(--primary);
+}
+
+.postButtons .like {
+  flex-direction: row;
+  font-size: var(--text-default);
+  align-items: center;
+  gap: 3px;
 }
 
 
@@ -126,7 +144,7 @@
 
 /* 댓글 프로필사진 */
 .commentArea .profileImg {
-  max-width: 30px;
+  max-width: 25px;
 
 }
 
@@ -171,12 +189,12 @@
 }
 
 .commentSingle img {
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
 
 }
 
-.commentSingle span {
+.commentSingle a {
   font-size: 13px;
 }
 
@@ -221,6 +239,7 @@
 
 .like i {
   font-size: var(--text-default);
+  cursor: pointer;
 }
 
 /* 댓글 수정 삭제 대댓글 버튼 */
@@ -313,3 +332,74 @@
   left: 50%;
   transform: translate(-50%,-50%);
 }
+
+
+/* 태블릿 */
+@media (min-width: 768px) { 
+  .post {
+    padding: 20px;
+  }
+  .postTopUser {
+    gap: 10px;
+  }
+
+  .userInfo {
+    position: relative;
+  }
+
+  .userInfo .userId {
+    position: absolute;
+    bottom: -75%;
+  }
+
+  .commentUser {
+    width: calc(100% - 100px);
+
+  }
+
+  .nickName {
+    font-size: var(--text-default);
+  }
+
+
+
+  .commentWriteWrap, .commentSingle {
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
+
+
+  .commentArea p, .commentWrite {
+    width: 85%;
+  }
+
+  .commentArea .profileImg {
+    max-width: 40px;
+  }
+  .commentArea .profileImg {
+    width: 40px;
+    height: 40px;
+  }
+
+  .floatingMenu {
+    bottom: 10%;
+    right: 10%;
+  }
+
+  .floatingMenu span {
+    font-size: 20px;
+  }
+
+  .floatingMenu a {
+    width: 70px;
+    height: 70px;
+    font-size: 30px;
+  }
+
+} 
+
+/* PC */
+@media (min-width: 992px) { 
+  
+ } 
