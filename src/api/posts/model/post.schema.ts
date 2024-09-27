@@ -37,10 +37,10 @@ const postSchema = new mongoose.Schema<IPost>({
     type: Date,
     default: Date.now,
   },
-  updatedAt: {
-    type: Date,
-    default: Date.now,
-  },
+  // updatedAt: {
+  //   type: Date,
+  //   default: Date.now,
+  // },
 
   // createdAt: {
   //   type: Date,
