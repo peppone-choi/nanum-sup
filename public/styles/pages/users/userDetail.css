@@ -73,7 +73,7 @@ main {
 /* 유저 프로필 소개 부분 */
 
 /* 내 게시글 / 좋아요한 게시글 버튼 부분 */
-.post-area {
+.postContainer {
   display: flex;
   justify-content: center;
   flex-direction: column;
