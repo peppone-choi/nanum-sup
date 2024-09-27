@@ -43,8 +43,15 @@ export default class PostsViewController {
   }
 
   /** 게시글 작성 페이지 */
-  async postWritePage(req: Request, res: Response, next: NextFunction) {
-    res.render("client/posts/postWrite");
+  async postWritePage(req: Request, res: Response, next: NextFunction) {  
+    const post = {
+      category: {
+        id: "",
+        title: ""
+      }
+
+    }
+    res.render("client/posts/postWrite", { post });
   }
 
   /** 게시글 수정 페이지 */
@@ -59,11 +66,11 @@ export default class PostsViewController {
 
     // console.log(userId, post?.author);
 
-    if (!isMe) {
-      res.send(`<script>
-          alert("권한이 없습니다."); location.href="/posts/${postId}";
-        </script>`);
-    }
+    // if (!isMe) {
+    //   res.send(`<script>
+    //       alert("권한이 없습니다."); location.href="/posts/${postId}";
+    //     </script>`);
+    // }
 
     res.render("client/posts/postEdit", { post });
   }

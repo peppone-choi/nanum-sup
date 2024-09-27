@@ -25,12 +25,9 @@
             <!-- <span>카테고리 선택</span> -->
             <select name="category" id="category" class="category" required>
               <option disabled selected>카테고리 선택</option>
-              <option value="movie">&#127916; 영화 나눔숲</option>
-              <option value="exercise">&#128170; 운동 나눔숲</option>
-              <option value="develop">&#128187; 개발 나눔숲</option>
-              <option value="food">&#127836; 맛집 나눔숲</option>
-              <!-- <option value="food"> 나눔숲</option>
-              <option value="food"> 나눔숲</option> -->
+              <% if (post.category.id && post.category.title) { %>
+                <option value="<%= post.category.id %>"><%= post.category.title %></option>
+              <% } %>
             </select>
           </label>
         <!-- 카테고리 선택 끝 -->
@@ -107,6 +104,28 @@
       } catch (error) {
         alert("게시글 작성에 실패했습니다.", error.message);
       }
+    });
+
+
+    // 카테고리 데이터 가져오기
+    const categories = [
+        { "categoryId": "66f247f68d1dffeca42e1a10", "title": "👨‍💻 개발 나눔숲" },
+        { "categoryId": "66f24da1aa8f0092f375865a", "title": "🎬 영화 나눔숲" },
+        { "categoryId": "66f264b40d793036e28637e8", "title": "🍜 맛집 나눔숲" },
+        { "categoryId": "66f28957453960e94559ae7d", "title": "💭 잡담 나눔숲" },
+        { "categoryId": "66f28a54453960e94559ae80", "title": "💪 운동 나눔숲" },
+    ];
+
+    // select 요소 가져오기
+    const $category = document.getElementById('category');
+
+    // 옵션 추가 하기
+    categories.forEach(category => {
+     
+        const option = document.createElement('option');
+        option.value = category.categoryId; // value 속성에 categoryId 할당해주기
+        option.textContent = category.title; // 표시할 텍스트에 title 할당해주기
+        $category.appendChild(option); // select 요소에 옵션 추가
     });
   </script>
 </body>

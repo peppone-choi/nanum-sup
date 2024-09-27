@@ -15,7 +15,7 @@ export class Post implements IPost {
     attachmentsUrl?: string[];
     /** 작성일 */
     createdAt: Date;
-    /** 수정일 */
+    // /** 수정일 */
     // updatedAt: Date;
 
     constructor(params: IPost) {
