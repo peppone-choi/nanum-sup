@@ -26,6 +26,12 @@ const categoryViewController = new CategoryViewController(
         new MongooseCategoryRepository()
         // new MongoosePostRepository(),
         // new MongooseUserRepository()
+    ),
+    new PostsServiceImpl(
+        new MongoosePostRepository(),
+        new MongooseUserRepository(),
+        new MongooseCategoryRepository(),
+        new MongooseCommentRepository()
     )
 );
 

@@ -6,6 +6,9 @@ import { CategoryServiceImpl } from "../service/category.service";
 import { MongooseCategoryRepository } from "../repository/mongooseCategory.repository";
 // import { MongooseUserRepository } from "@/api/user/repository/mongooseUser.repository";
 import { MongoosePostRepository } from "@/api/posts/repository/mongoosePost.repository";
+import { PostsServiceImpl } from "@/api/posts/service/posts.service";
+import MongooseUserRepository from "@/api/user/repository/mongooseUser.repository";
+import { MongooseCommentRepository } from "@/api/comment/repository/mongooseComment.repository";
 
 const adminCategoryViewRouter = express.Router();
 
@@ -25,6 +28,12 @@ const adminCategoryViewController = new AdminCategoryViewController(
         new MongooseCategoryRepository()
         // new MongoosePostRepository(),
         // new MongooseUserRepository()
+    ),
+    new PostsServiceImpl(
+        new MongoosePostRepository(),
+        new MongooseUserRepository(),
+        new MongooseCategoryRepository(),
+        new MongooseCommentRepository()
     )
 );
 

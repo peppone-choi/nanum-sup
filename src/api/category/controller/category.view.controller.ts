@@ -4,10 +4,10 @@ import { PostsService } from "@/api/posts/service/posts.service.type";
 
 export default class CategoryViewController {
     private readonly _categoryService: CategoryService;
-    // private readonly _postService: PostsService;
-    constructor(_categoryService: CategoryService) {
+    private readonly _postService: PostsService;
+    constructor(_categoryService: CategoryService, _postService: PostsService) {
         this._categoryService = _categoryService;
-        // this._postService = _postService;
+        this._postService = _postService;
         this.userCategoryListPage = this.userCategoryListPage.bind(this);
         this.userCategoryDetailPage = this.userCategoryDetailPage.bind(this);
     }
@@ -32,7 +32,7 @@ export default class CategoryViewController {
         next: NextFunction
     ) {
         const category = await this._categoryService.getCategory();
-        const categoryId = req.params.categoryId;
-        res.render("client/category/userCategoryDetail", { category });
+        const posts = await this._postService.getPosts();
+        res.render("client/category/userCategoryDetail", { category, posts });
     }
 }

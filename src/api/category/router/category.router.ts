@@ -13,6 +13,9 @@ import {
 import { MongooseCategoryRepository } from "../repository/mongooseCategory.repository";
 // import { MongooseUserRepository } from "@/api/user/repository/mongooseUser.repository";
 import { MongoosePostRepository } from "@/api/posts/repository/mongoosePost.repository";
+import { PostsServiceImpl } from "@/api/posts/service/posts.service";
+import MongooseUserRepository from "@/api/user/repository/mongooseUser.repository";
+import { MongooseCommentRepository } from "@/api/comment/repository/mongooseComment.repository";
 
 const categoryRouter = express.Router();
 
@@ -28,19 +31,25 @@ const categoryController = new CategoryController(
         new MongooseCategoryRepository()
         // new MongoosePostRepository(),
         // new MongooseUserRepository()
+    ),
+    new PostsServiceImpl(
+        new MongoosePostRepository(),
+        new MongooseUserRepository(),
+        new MongooseCategoryRepository(),
+        new MongooseCommentRepository()
     )
 );
 
 categoryRouter.get(
     extractPath(CATEGORY_ROUTES.GET_CATEGORY, ROUTES_INDEX.CATEGORY_API),
-    // authUserMiddleware,
+    authUserMiddleware,
     validate(getCategoryValidator),
     categoryController.getCategory
 );
 
 categoryRouter.get(
     extractPath(CATEGORY_ROUTES.GET_CATEGORY_DETAIL, ROUTES_INDEX.CATEGORY_API),
-    // authUserMiddleware,
+    authUserMiddleware,
     validate(getCategoryDetailValidator),
     categoryController.getCategoryDetail
 );
