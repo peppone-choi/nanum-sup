@@ -30,17 +30,18 @@
            
               <!-- 카테고리 받아오기 -->
             <span class="category"><i class="fa-solid fa-icons"></i> <%= post.category.title %></span>
+            <!-- 더 보기 버튼 -->
             <div class="viewMore" onclick="toggleEditDelete()">
               <i class="fa-solid fa-ellipsis-vertical"></i>
               <div class="postEditDelete flex-column-center">
-                <% if (isMe) { %>
+                <!-- <% if (isMe) { %> -->
                 <a href="/posts/<%= post.postId %>/edit">
                   <i class="fa-solid fa-pen"></i> 수정
                 </a>
                 <a id="deleteButton">
                   <i class="fa-solid fa-trash"></i> 삭제
                 </a>
-                <% } %>
+                <!-- <% } %> -->
               </div>
             </div>
 
@@ -155,7 +156,7 @@
     <!-- 카테고리 & 글쓰기 버튼 플로팅 -->
     <div class="floatingMenu">
       <!-- 현재 카테고리 플로팅 메뉴 -->
-      <span>&#127916; <%= post.category.title %></span>
+      <span><%= post.category.title %></span>
       <!-- 글쓰기 버튼 -->
       <a href="/posts/write"><i class="fa-solid fa-pen"></i></a>
       <!-- <button type="button"><i class="fa-solid fa-pen"></i></button> -->
