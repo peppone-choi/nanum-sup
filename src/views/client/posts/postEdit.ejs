@@ -92,7 +92,7 @@
     });
 
 
-    // // 카테고리 데이터 가져오기
+    // 카테고리 데이터 가져오기
     const categories = [
         { "categoryId": "66f247f68d1dffeca42e1a10", "title": "👨‍💻 개발 나눔숲" },
         { "categoryId": "66f24da1aa8f0092f375865a", "title": "🎬 영화 나눔숲" },
@@ -103,8 +103,6 @@
 
     // select 요소 가져오기
     const $category = document.getElementById('category');
-    const selectedCategoryId = "<%= post.category.id %>";
-   
 
     // 옵션 추가 하기
     categories.forEach(category => {

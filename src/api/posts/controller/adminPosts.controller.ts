@@ -105,6 +105,7 @@ export default class AdminPostsController {
     res: Response,
     next: NextFunction
   ) {
+   
     const { userId, categoryId, title, content } = req.body;
 
     try {
