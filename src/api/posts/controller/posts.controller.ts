@@ -80,6 +80,7 @@ export default class PostsController {
         {
           title,
           content,
+         
         }
       );
       res.send(createdPost);

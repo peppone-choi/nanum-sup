@@ -63,51 +63,51 @@
           <button type="submit">작성 완료</button>
         </form>
     </div>
-  
-    
-    <script>
-      const $form = document.getElementById("postWriteForm");
-
-      $form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        try {
-          const title = $form.title.value;
-          const content = $form.content.value;
-
-          // console.log({
-          //   title,
-          //   content,
-          // });
-
-          const cookies = document.cookie.split(";").reduce((acc, cookie) => {
-            const [key, value] = cookie.split("=");
-            acc[key.trim()] = decodeURIComponent(value);
-            return acc;
-          }, {});
-
-          const token = `${cookies.accessToken}`;
-
-          const res = await fetch("/api/posts", {
-            method: "post",
-            headers: {
-              "Content-Type": "application/json",
-              authorization: token,
-            },
-            body: JSON.stringify({ title, content }),
-          });
-
-          const data = await res.json();
-
-          if (!res.ok) {
-            throw new Error(data.details);
-          }
-
-          location.href = `/posts/${data.postId}`;
-        } catch (error) {
-          alert("게시글 작성에 실패했습니다.", error.message);
-        }
-      });
-    </script>
+ 
   </div>
+
+  <script>
+    const $form = document.getElementById("postWriteForm");
+
+    $form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      try {
+        const title = $form.title.value;
+        const content = $form.content.value;
+
+        // console.log({
+        //   title,
+        //   content,
+        // });
+
+        const cookies = document.cookie.split(";").reduce((acc, cookie) => {
+          const [key, value] = cookie.split("=");
+          acc[key.trim()] = decodeURIComponent(value);
+          return acc;
+        }, {});
+
+        const token = `${cookies.accessToken}`;
+
+        const res = await fetch("/api/posts", {
+          method: "post",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: token,
+          },
+          body: JSON.stringify({ title, content }),
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error(data.details);
+        }
+
+        location.href = `/posts/${data.postId}`;
+      } catch (error) {
+        alert("게시글 작성에 실패했습니다.", error.message);
+      }
+    });
+  </script>
 </body>
 </html>
