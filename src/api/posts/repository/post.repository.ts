@@ -13,4 +13,8 @@ export interface PostRepository {
   delete(postId: string): Promise<void>;
   /** 단축 URL로 게시글 조회 */
   findByShortUrl(shortUrl: string): Promise<IPost | null>;
+  /** 카테고리 ID로 게시글 조회 */
+  findByCategoryId(categoryId: string): Promise<IPost[]>;
+  /** 사용자 ID로 게시글 조회 */
+  findByUserId(userId: string): Promise<IPost[]>;
 }

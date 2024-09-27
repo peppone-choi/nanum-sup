@@ -29,8 +29,15 @@ const postSchema = new mongoose.Schema<IPost>({
     trim: true,
     unique: true,
   },
-
+  attachmentsUrl: {
+    type: [String],
+    default: [],
+  },
   createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+  updatedAt: {
     type: Date,
     default: Date.now,
   },

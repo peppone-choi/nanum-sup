@@ -12,22 +12,15 @@ export class MongoosePostRepository implements PostRepository {
     return newPost;
   }
   async findAll(): Promise<IPost[]> {
-    const values = await MongoosePost.find()
-      .populate("author")
-      .populate("category");
+    const values = await MongoosePost.find().populate("author").populate("category");
     return values;
   }
   async findById(id: string): Promise<IPost | null> {
-    const post = await MongoosePost.findOne({ _id: id })
-      .populate("author")
-      .populate("category");
+    const post = await MongoosePost.findOne({ _id: id }).populate("author").populate("category");
     return post;
   }
   async update(postId: string, updatePostInfo: Partial<IPost>): Promise<IPost> {
-    const results = await MongoosePost.findByIdAndUpdate(
-      postId,
-      updatePostInfo
-    );
+    const results = await MongoosePost.findByIdAndUpdate(postId, updatePostInfo);
 
     if (!results) {
       throw new HttpException(404, "게시글을 찾을 수 없습니다.");
@@ -39,9 +32,15 @@ export class MongoosePostRepository implements PostRepository {
     return;
   }
   async findByShortUrl(shortUrl: string): Promise<IPost | null> {
-    const post = await MongoosePost.findOne({ shortUrl })
-      .populate("author")
-      .populate("category");
+    const post = await MongoosePost.findOne({ shortUrl }).populate("author").populate("category");
     return post;
+  }
+  async findByCategoryId(categoryId: string): Promise<IPost[]> {
+    const posts = await MongoosePost.find({ category: categoryId }).populate("author").populate("category");
+    return posts;
+  }
+  async findByUserId(userId: string): Promise<IPost[]> {
+    const posts = await MongoosePost.find({ author: userId }).populate("author").populate("category");
+    return posts;
   }
 }

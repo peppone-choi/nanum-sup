@@ -20,6 +20,7 @@ import adminUserRouter from "./api/user/router/adminUser.router";
 import authRouter from "./api/auth/router/auth.router";
 import adminUserViewRouter from "./api/user/router/adminUser.view.router";
 import userViewRouter from "./api/user/router/user.view.router";
+import uploadRouter from "./api/upload/router/upload.router";
 
 const app = express();
 app.use(express.json());
@@ -47,6 +48,9 @@ app.use(ROUTES_INDEX.USER_API, userRouter);
 app.use(ROUTES_INDEX.ADMIN_USER_API, adminUserRouter);
 app.use(ROUTES_INDEX.USER_VIEW, userViewRouter);
 app.use(ROUTES_INDEX.ADMIN_USER_VIEW, adminUserViewRouter);
+
+/** -------- upload ---------  */
+app.use(ROUTES_INDEX.UPLOAD_API, uploadRouter);
 
 app.use(viewRouter);
 const PORT = process.env.PORT || 4000;
