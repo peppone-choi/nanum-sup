@@ -21,8 +21,9 @@
           <!-- <span>카테고리 선택</span> -->
           <select name="category" id="category" class="category" required>
             <option disabled selected>카테고리 선택</option>
-            <option value="<%= post.category.id %>"><%= post.category.title %></option>
-          
+              <!-- <% if (post.category.id && post.category.title) { %> -->
+                <option value="<%= post.category.id %>"><%= post.category.title %></option>
+              <!-- <% } %> -->
           </select>
         </label>
       <!-- 카테고리 선택 끝 -->
@@ -106,13 +107,12 @@
 
     // 옵션 추가 하기
     categories.forEach(category => {
-     
+    
         const option = document.createElement('option');
         option.value = category.categoryId; // value 속성에 categoryId 할당해주기
         option.textContent = category.title; // 표시할 텍스트에 title 할당해주기
         $category.appendChild(option); // select 요소에 옵션 추가
-   
-        
+
     });
   </script>
 </body>

@@ -25,15 +25,9 @@
             <!-- <span>카테고리 선택</span> -->
             <select name="category" id="category" class="category" required>
               <option disabled selected>카테고리 선택</option>
-            
-                <!-- <option value="<%= post.category.id %>"><%= post.category.title %></option> -->
-             
-              <!-- <option value="66f24da1aa8f0092f375865a">&#127916; 영화 나눔숲</option>
-              <option value="66f28a54453960e94559ae80">&#128170; 운동 나눔숲</option>
-              <option value="66f247f68d1dffeca42e1a10">&#128187; 개발 나눔숲</option>
-              <option value="66f264b40d793036e28637e8">&#127836; 맛집 나눔숲</option>
-              <option value="66f28957453960e94559ae7d">&#128173; 잡담 나눔숲</option> -->
-
+              <% if (post.category.id && post.category.title) { %>
+                <option value="<%= post.category.id %>"><%= post.category.title %></option>
+              <% } %>
             </select>
           </label>
         <!-- 카테고리 선택 끝 -->
