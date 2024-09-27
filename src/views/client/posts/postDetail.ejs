@@ -27,10 +27,26 @@
             <!-- 유저 아이디 -->
             <a href="" class="userId">&#64;<%= post.author.accountId %></a>
           </div>
-         
+           
+              <!-- 카테고리 받아오기 -->
+            <span class="category"><i class="fa-solid fa-icons"></i> <%= post.category.title %></span>
+            <div class="viewMore" onclick="toggleEditDelete()">
+              <i class="fa-solid fa-ellipsis-vertical"></i>
+              <div class="postEditDelete flex-column-center">
+                <% if (isMe) { %>
+                <a href="/posts/<%= post.postId %>/edit">
+                  <i class="fa-solid fa-pen"></i> 수정
+                </a>
+                <a id="deleteButton">
+                  <i class="fa-solid fa-trash"></i> 삭제
+                </a>
+                <% } %>
+              </div>
+            </div>
+
+           
         </div>
-        <!-- 카테고리 받아오기 -->
-        <span class="category"><i class="fa-solid fa-icons"></i> <%= post.category.title %></span>
+      
       </div>
       <!-- 유저 정보 영역 끝 -->
 
@@ -151,7 +167,8 @@
 
   
   <script>
-    const $deleteButton = document.getElementById("delete-button");
+    // 게시글 삭제
+    const $deleteButton = document.getElementById("deleteButton");
 
     const cookies = document.cookie.split(";").reduce((acc, cookie) => {
       const [key, value] = cookie.split("=");
@@ -211,7 +228,20 @@
         heartIcon.classList.toggle('fa-regular');
         heartIcon.classList.toggle('fa-solid');
       })
-    })
+    });
+
+    // 수정, 삭제 더 보기 버튼 보이기
+    function toggleEditDelete() {
+            const editDeleteArea = document.querySelector('.postEditDelete');
+            if (editDeleteArea.style.display === 'none' || editDeleteArea.style.display === '') {
+                editDeleteArea.style.display = 'flex'; 
+            } else {
+                editDeleteArea.style.display = 'none'; 
+            }
+        };
+
+
+
   </script>
 </body>
 </html>

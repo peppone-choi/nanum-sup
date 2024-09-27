@@ -76,12 +76,11 @@ export default class PostsController {
         try {
             const createdPost = await this._postsService.createPost(
                 userId,
-                categoryId
-
-                // {
-                //   title,
-                //   content,
-                // }
+                categoryId,
+                {
+                    title,
+                    content,
+                }
             );
             res.send(createdPost);
         } catch (error) {

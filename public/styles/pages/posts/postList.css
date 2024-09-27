@@ -1,2 +1,3 @@
-@import "_reset";
-@import "style";
+@charset "utf-8";
+@import "../../common.css";
+@import "../../../styles/pages/posts/postDetail.css";
