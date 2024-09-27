@@ -6,7 +6,7 @@ import { imageUpload, videoUpload } from "@/vendors/multer";
 const uploadRouter = express.Router();
 
 const UPLOAD_ROUTES = {
-  UPLOAD_IMAGE: "api/upload/image",
+  UPLOAD_IMAGE: "/api/upload/image",
   UPLOAD_IMAGES: "/api/upload/images",
   UPLOAD_VIDEO: "/api/upload/video",
 };
