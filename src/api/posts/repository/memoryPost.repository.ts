@@ -50,9 +50,15 @@ export class MemoryPostRepository implements PostRepository {
     return;
   }
   async findByShortUrl(shortUrl: string): Promise<IPost | null> {
-    const findPost = Array.from(MemoryPostRepository.store.values()).find(
-      (post) => post.shortUrl === shortUrl
-    );
+    const findPost = Array.from(MemoryPostRepository.store.values()).find((post) => post.shortUrl === shortUrl);
     return findPost ?? null;
+  }
+  async findByCategoryId(categoryId: string): Promise<IPost[]> {
+    const posts = Array.from(MemoryPostRepository.store.values()).filter((post) => post.category.id === categoryId);
+    return posts;
+  }
+  async findByUserId(userId: string): Promise<IPost[]> {
+    const posts = Array.from(MemoryPostRepository.store.values()).filter((post) => post.author.id === userId);
+    return posts;
   }
 }
