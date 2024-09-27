@@ -33,12 +33,14 @@
             <div class="viewMore" onclick="toggleEditDelete()">
               <i class="fa-solid fa-ellipsis-vertical"></i>
               <div class="postEditDelete flex-column-center">
+                <% if (isMe) { %>
                 <a href="/posts/<%= post.postId %>/edit">
                   <i class="fa-solid fa-pen"></i> 수정
                 </a>
-                <a>
+                <a id="deleteButton">
                   <i class="fa-solid fa-trash"></i> 삭제
                 </a>
+                <% } %>
               </div>
             </div>
 
@@ -165,7 +167,8 @@
 
   
   <script>
-    const $deleteButton = document.getElementById("delete-button");
+    // 게시글 삭제
+    const $deleteButton = document.getElementById("deleteButton");
 
     const cookies = document.cookie.split(";").reduce((acc, cookie) => {
       const [key, value] = cookie.split("=");
@@ -227,7 +230,7 @@
       })
     });
 
-    // 수정, 삭제 더 보기 버튼
+    // 수정, 삭제 더 보기 버튼 보이기
     function toggleEditDelete() {
             const editDeleteArea = document.querySelector('.postEditDelete');
             if (editDeleteArea.style.display === 'none' || editDeleteArea.style.display === '') {
@@ -235,7 +238,10 @@
             } else {
                 editDeleteArea.style.display = 'none'; 
             }
-        }
+        };
+
+
+
   </script>
 </body>
 </html>

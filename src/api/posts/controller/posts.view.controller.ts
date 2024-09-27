@@ -57,7 +57,7 @@ export default class PostsViewController {
 
     const isMe = userId === post?.author.id;
 
-    console.log(userId, post?.author);
+    // console.log(userId, post?.author);
 
     if (!isMe) {
       res.send(`<script>
