@@ -35,8 +35,8 @@ const ADMIN_CATEGORY_ROUTES = {
 
 const adminCategoryController = new AdminCategoryController(
     new CategoryServiceImpl(
-        new MongooseCategoryRepository()
-        // new MongoosePostRepository(),
+        new MongooseCategoryRepository(),
+        new MongoosePostRepository()
         // new MongooseUserRepository()
     )
 );
