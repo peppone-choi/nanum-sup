@@ -11,10 +11,10 @@ import { PostsService } from "../../posts/service/posts.service.type";
 
 export default class AdminCategoryViewController {
     private readonly _categoryService: CategoryService;
-    private readonly _postService: PostsService;
-    constructor(_categoryService: CategoryService, _postService: PostsService) {
+    // private readonly _postService: PostsService;
+    constructor(_categoryService: CategoryService) {
         this._categoryService = _categoryService;
-        this._postService = _postService;
+        // this._postService = _postService;
 
         this.getCategory = this.getCategory.bind(this);
         this.getCategoryDetail = this.getCategoryDetail.bind(this);

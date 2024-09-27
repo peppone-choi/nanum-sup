@@ -5,10 +5,10 @@ import { Category } from "../model/category.model";
 
 export default class AdminCategoryViewController {
     private readonly _categoryService: CategoryService;
-    private readonly _postsService: PostsService;
-    constructor(_categoryService: CategoryService, _postService: PostsService) {
+    // private readonly _postsService: PostsService;
+    constructor(_categoryService: CategoryService) {
         this._categoryService = _categoryService;
-        this._postsService = _postService;
+        // this._postsService = _postService;
 
         this.categoryListPage = this.categoryListPage.bind(this);
         this.categoryDetailPage = this.categoryDetailPage.bind(this);
@@ -27,8 +27,8 @@ export default class AdminCategoryViewController {
         const category = await this._categoryService.getCategoryDetail(
             req.params.categoryId
         );
-        const posts = await this._postsService.getPosts();
-        res.render("admin/category/categoryDetail", { category, posts });
+        // const posts = await this._postsService.getPosts();
+        res.render("admin/category/categoryDetail", { category });
     }
 
     /** 카테고리 생성 페이지 */
