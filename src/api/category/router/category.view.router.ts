@@ -15,19 +15,37 @@ import { MongooseCommentRepository } from "@/api/comment/repository/mongooseComm
 const categoryViewRouter = express.Router();
 
 const CATEGORY_VIEW_ROUTES = {
-  /** 카테고리 목록 */
-  CATEGORY_LIST: "/client/category",
-  /** 카테고리 상세  */
-  CATEGORY_DETAIL: "/client/category/:categoryId/posts",
+    /** 카테고리 목록 */
+    CATEGORY_LIST: "/category",
+    /** 카테고리 상세  */
+    CATEGORY_DETAIL: "/category/:categoryId/posts",
 } as const;
 
 const categoryViewController = new CategoryViewController(
-  new CategoryServiceImpl(new MongooseCategoryRepository()),
-  new PostsServiceImpl(new MongoosePostRepository(), new MongooseUserRepository(), new MongooseCategoryRepository(), new MongooseCommentRepository())
+    new CategoryServiceImpl(
+        new MongooseCategoryRepository()
+        // new MongoosePostRepository(),
+        // new MongooseUserRepository()
+    ),
+    new PostsServiceImpl(
+        new MongoosePostRepository(),
+        new MongooseUserRepository(),
+        new MongooseCategoryRepository(),
+        new MongooseCommentRepository()
+    )
 );
 
-categoryViewRouter.get(extractPath(CATEGORY_VIEW_ROUTES.CATEGORY_LIST, ROUTES_INDEX.CATEGORY_VIEW), categoryViewController.userCategoryListPage);
+categoryViewRouter.get(
+    extractPath(CATEGORY_VIEW_ROUTES.CATEGORY_LIST, ROUTES_INDEX.CATEGORY_VIEW),
+    categoryViewController.userCategoryListPage
+);
 
-categoryViewRouter.get(extractPath(CATEGORY_VIEW_ROUTES.CATEGORY_DETAIL, ROUTES_INDEX.CATEGORY_VIEW), categoryViewController.userCategoryDetailPage);
+categoryViewRouter.get(
+    extractPath(
+        CATEGORY_VIEW_ROUTES.CATEGORY_DETAIL,
+        ROUTES_INDEX.CATEGORY_VIEW
+    ),
+    categoryViewController.userCategoryDetailPage
+);
 
 export default categoryViewRouter;

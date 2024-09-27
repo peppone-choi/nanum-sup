@@ -16,6 +16,9 @@ import { authUserMiddleware } from "@/api/common/middlewares/authUser.middleware
 import { MongooseCategoryRepository } from "@/api/category/repository/mongooseCategory.repository";
 // import { MongooseUserRepository } from "@/api/user/repository/mongooseUser.repository";
 import { MongoosePostRepository } from "@/api/posts/repository/mongoosePost.repository";
+import { PostsServiceImpl } from "@/api/posts/service/posts.service";
+import MongooseUserRepository from "@/api/user/repository/mongooseUser.repository";
+import { MongooseCommentRepository } from "@/api/comment/repository/mongooseComment.repository";
 
 const adminCategoryRouter = express.Router();
 
@@ -36,7 +39,14 @@ const ADMIN_CATEGORY_ROUTES = {
 const adminCategoryController = new AdminCategoryController(
     new CategoryServiceImpl(
         new MongooseCategoryRepository()
-        // new MongoosePostRepository()
+        // new MongoosePostRepository(),
+        // new MongooseUserRepository()
+    ),
+    new PostsServiceImpl(
+        new MongoosePostRepository(),
+        new MongooseUserRepository(),
+        new MongooseCategoryRepository(),
+        new MongooseCommentRepository()
     )
 );
 
@@ -45,7 +55,7 @@ adminCategoryRouter.get(
         ADMIN_CATEGORY_ROUTES.GET_CATEGORY,
         ROUTES_INDEX.ADMIN_CATEGORY_API
     ),
-    // authUserMiddleware,
+    authUserMiddleware,
     validate(adminGetCategoryValidator),
     adminCategoryController.getCategory
 );
@@ -55,7 +65,7 @@ adminCategoryRouter.get(
         ADMIN_CATEGORY_ROUTES.GET_CATEGORY_DETAIL,
         ROUTES_INDEX.ADMIN_CATEGORY_API
     ),
-    // authUserMiddleware,
+    authUserMiddleware,
     validate(adminGetCategoryDetailValidator),
     adminCategoryController.getCategoryDetail
 );
@@ -65,7 +75,7 @@ adminCategoryRouter.post(
         ADMIN_CATEGORY_ROUTES.CREATE_CATEGORY,
         ROUTES_INDEX.ADMIN_CATEGORY_API
     ),
-    // authUserMiddleware,
+    authUserMiddleware,
     validate(adminCreateCategoryValidator),
     adminCategoryController.createCategory
 );
@@ -75,7 +85,7 @@ adminCategoryRouter.put(
         ADMIN_CATEGORY_ROUTES.UPDATE_CATEGORY,
         ROUTES_INDEX.ADMIN_CATEGORY_API
     ),
-    // authUserMiddleware,
+    authUserMiddleware,
     validate(adminUpdateCategoryValidator),
     adminCategoryController.updateCategory
 );
@@ -85,7 +95,7 @@ adminCategoryRouter.delete(
         ADMIN_CATEGORY_ROUTES.DELETE_CATEGORY,
         ROUTES_INDEX.ADMIN_CATEGORY_API
     ),
-    // authUserMiddleware,
+    authUserMiddleware,
     validate(adminDeleteCategoryValidator),
     adminCategoryController.deleteCategory
 );
