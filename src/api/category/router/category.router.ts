@@ -25,7 +25,9 @@ const CATEGORY_ROUTES = {
 
 const categoryController = new CategoryController(
     new CategoryServiceImpl(
-        new MongooseCategoryRepository() // new MongoosePostRepository()
+        new MongooseCategoryRepository()
+        // new MongoosePostRepository(),
+        // new MongooseUserRepository()
     )
 );
 

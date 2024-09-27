@@ -23,7 +23,8 @@ const ADMIN_CATEGORY_VIEW_ROUTES = {
 const adminCategoryViewController = new AdminCategoryViewController(
     new CategoryServiceImpl(
         new MongooseCategoryRepository()
-        // new MongoosePostRepository()
+        // new MongoosePostRepository(),
+        // new MongooseUserRepository()
     )
 );
 

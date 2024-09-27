@@ -12,15 +12,16 @@ const categoryViewRouter = express.Router();
 
 const CATEGORY_VIEW_ROUTES = {
     /** 카테고리 목록 */
-    CATEGORY_LIST: "/client/category",
+    CATEGORY_LIST: "/category",
     /** 카테고리 상세  */
-    CATEGORY_DETAIL: "/client/category/:categoryId/posts",
+    CATEGORY_DETAIL: "/category/:categoryId/posts",
 } as const;
 
 const categoryViewController = new CategoryViewController(
     new CategoryServiceImpl(
         new MongooseCategoryRepository()
-        // new MongoosePostRepository()
+        // new MongoosePostRepository(),
+        // new MongooseUserRepository()
     )
 );
 
