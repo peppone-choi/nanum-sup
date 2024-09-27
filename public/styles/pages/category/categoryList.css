@@ -2,7 +2,7 @@
 .category-menu-bar {
     background-color: rgba(255, 255, 255, 0.8);
     padding: 15px;
-    width: 280px;
+    width: 20%;
     height: 100vh;
     position: relative;
     overflow-y: auto;
@@ -38,33 +38,74 @@
 
 .category-profile {
     display: flex;
-    gap: 15px;
+    /* gap: 10px; */
     align-items: center;
     padding-bottom: 10px;
     position: relative;
+    @media (max-width: 1000px) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: 10px;
+        margin: 0 auto;
+    }
 }
 
-.fa-user {
+.profile-image {
     display: flex;
     align-items: center;
     font-size: 25px;
-    padding: 14px;
-    width: 50px;
-    height: 50px;
-    background-color: #d9d9d9;
+    padding: 10px;
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
+    @media (max-width: 670px) {
+        transition: all 0.4s ease-in-out;
+        width: 70px;
+        height: 70px;
+    }
+    @media (max-width: 550px) {
+        transition: all 0.4s ease-in-out;
+        width: 50px;
+        height: 50px;
+    }
 }
 
 .category-nickName {
     padding: 10px 0 0;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 700;
+    margin: 0 auto;
+    @media (max-width: 1000px) {
+        font-size: 14px;
+        padding: 0;
+        font-weight: 700;
+    }
+    @media (max-width: 670px) {
+        padding: 0;
+        font-size: 14px;
+        font-weight: 700;
+    }
+    @media (max-width: 550px) {
+        padding: 0;
+        font-size: 11px;
+        font-weight: 700;
+    }
 }
 
 .category-id {
-    font-size: 11px;
+    font-size: 13px;
     padding: 0 0 15px 0;
     font-weight: 500;
+    @media (max-width: 1000px) {
+        font-size: 11px;
+    }
+    @media (max-width: 670px) {
+        font-size: 11px;
+    }
+    @media (max-width: 550px) {
+        font-size: 8px;
+    }
 }
 
 .category-id:after {
@@ -82,7 +123,7 @@
     flex-direction: column;
     justify-content: space-between;
     padding-top: 10px;
-    height: calc(100% - 100px);
+    height: calc(100% - 120px);
 }
 
 .category-list {
