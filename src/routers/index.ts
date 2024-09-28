@@ -69,6 +69,11 @@ const FOLLOW_ROUTES = {
   ADMIN_FOLLOW_API: "/admin-api/follows",
 } as const;
 
+const REPORT_ROUTES = {
+  REPORT_API: "/api/reports",
+  ADMIN_REPORT_API: "/admin-api/reports",
+} as const;
+
 export const ROUTES_INDEX = {
   ...CATEGORY_ROUTES,
   ...POST_ROUTES,
@@ -78,4 +83,5 @@ export const ROUTES_INDEX = {
   ...LIKE_ROUTES,
   ...UPLOAD_ROUTES,
   ...FOLLOW_ROUTES,
+  ...REPORT_ROUTES,
 } as const;
