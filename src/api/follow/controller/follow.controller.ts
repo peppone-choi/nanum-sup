@@ -1,6 +1,15 @@
 import { NextFunction, Request, Response } from "express";
+import { FollowService } from "../service/follow.service.type";
 
 export default class FollowController {
+  private readonly _followService: FollowService;
+  constructor(_followService: FollowService) {
+    this._followService = _followService;
+    this.getFollowingByUserId = this.getFollowingByUserId.bind(this);
+    this.getFollowerByUserId = this.getFollowerByUserId.bind(this);
+    this.createFollow = this.createFollow.bind(this);
+    this.deleteFollow = this.deleteFollow.bind(this);
+  }
   async getFollowingByUserId(req: Request, res: Response, next: NextFunction) {
     try {
       res.send("getFollowingByUserId");

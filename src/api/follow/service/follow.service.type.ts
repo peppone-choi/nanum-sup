@@ -1,9 +1,10 @@
-import { IFollow } from "../@types/follow.type";
+import FollowResponseDto from "../dto/follow.dto";
+import { FollowsResponseDto } from "../dto/follows.dto";
 
 export interface FollowService {
-  getFollows(): Promise<IFollow[]>;
-  getFollowingByUserId(userId: string): Promise<IFollow[]>;
-  getFollowerByUserId(userId: string): Promise<IFollow[]>;
-  createFollow(from: string, to: string): Promise<IFollow>;
+  getFollows(): Promise<FollowResponseDto[]>;
+  getFollowingByUserId(userId: string): Promise<FollowsResponseDto>;
+  getFollowerByUserId(userId: string): Promise<FollowsResponseDto>;
+  createFollow(from: string, to: string): Promise<FollowResponseDto>;
   deleteFollow(followId: string): Promise<void>;
 }

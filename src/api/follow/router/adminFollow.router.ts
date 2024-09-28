@@ -3,6 +3,9 @@ import { ROUTES_INDEX } from "@/routers";
 import { extractPath } from "@/utils/path.util";
 import AdminFollowController from "../controller/adminFollow.controller";
 import { authRoleMiddleware } from "@/api/common/middlewares/authRole.middleware";
+import FollowServiceImpl from "../service/follow.service";
+import MongooseFollowRepository from "../repository/mongooseFollow.repository";
+import MongooseUserRepository from "@/api/user/repository/mongooseUser.repository";
 
 const adminFollowRouter = express.Router();
 
@@ -20,7 +23,7 @@ const ADMIN_FOLLOW_ROUTES = {
   DELETE_FOLLOW: `/admin-api/follows/:followId`,
 } as const;
 
-const adminFollowController = new AdminFollowController();
+const adminFollowController = new AdminFollowController(new FollowServiceImpl(new MongooseFollowRepository(), new MongooseUserRepository()));
 
 adminFollowRouter.get(extractPath(ADMIN_FOLLOW_ROUTES.GET_FOLLOWS, ROUTES_INDEX.ADMIN_FOLLOW_API), authRoleMiddleware(["admin"]), adminFollowController.getFollows);
 
