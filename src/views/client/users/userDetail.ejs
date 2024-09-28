@@ -4,10 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/static/styles/reset.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="stylesheet" href="/static/styles/pages/users/userDetail.css" />
     <title>유저 상세 페이지</title>
   </head>
@@ -18,21 +15,14 @@
       </header>
       <main class="main">
         <div class="profile-headerimage">
-          <img
-            src="/static/images/pofile-header.webp"
-            alt="profile header image"
-          />
+          <img src="/static/images/pofile-header.webp" alt="profile header image" />
         </div>
         <div class="profile-area">
-          <img
-            src="/static/images/profile.webp"
-            alt="profile image"
-            class="profile-thumbnail"
-          />
+          <img src="/static/images/profile.webp" alt="profile image" class="profile-thumbnail" />
           <div class="profile-user">
-            <p class="nickName">가나다짱짱</p>
-            <p class="userid">@gasadabb</p>
-            <p class="biotext">소개글 영역입니다~ 안녕~</p>
+            <p class="nickName"><%= user.profile.nickname %></p>
+            <p class="userid">@<%= user.accountId %></p>
+            <p class="biotext"><%= user.profile.bio %></p>
           </div>
           <a href="/users/:userId/edit" class="edit">
             <i class="fa-solid fa-gear"></i>
@@ -46,20 +36,12 @@
           </div>
           <div class="post">
             <div class="post-profile">
-              <img
-                src="/static/images/profile.webp"
-                alt="profile image"
-                class="post-profile-thumbnail"
-              />
+              <img src="/static/images/profile.webp" alt="profile image" class="post-profile-thumbnail" />
               <div class="profile-user b">
                 <p class="nickName">가나다짱짱</p>
                 <p class="userid">@gasadabb</p>
               </div>
-              <button
-                id="listButton"
-                class="icon-button"
-                aria-label="list Icon"
-              >
+              <button id="listButton" class="icon-button" aria-label="list Icon">
                 <i class="fa-solid fa-ellipsis-vertical"></i>
               </button>
               <div id="optionMenu" class="option-menu hidden">
@@ -81,39 +63,19 @@
               <p class="post-time-text">2024년 9월 12일 오후 4시 31분</p>
             </div>
             <div class="icon-container">
-              <button
-                id="likeButton"
-                class="icon-button"
-                aria-label="like Button"
-              >
+              <button id="likeButton" class="icon-button" aria-label="like Button">
                 <i class="fa-regular fa-heart"></i>
               </button>
-              <button
-                id="commentButton"
-                class="icon-button"
-                aria-label="comment Icon"
-              >
+              <button id="commentButton" class="icon-button" aria-label="comment Icon">
                 <i class="fa-regular fa-message"></i>
               </button>
-              <button
-                id="favoriteButton"
-                class="icon-button"
-                aria-label="favorite Icon"
-              >
+              <button id="favoriteButton" class="icon-button" aria-label="favorite Icon">
                 <i class="fa-regular fa-star"></i>
               </button>
-              <button
-                id="reportButton"
-                class="icon-button"
-                aria-label="report Icon"
-              >
+              <button id="reportButton" class="icon-button" aria-label="report Icon">
                 <i class="fa-solid fa-circle-exclamation"></i>
               </button>
-              <button
-                id="shareButton"
-                class="icon-button"
-                aria-label="share Icon"
-              >
+              <button id="shareButton" class="icon-button" aria-label="share Icon">
                 <i class="fa-regular fa-share-from-square"></i>
               </button>
             </div>
@@ -131,28 +93,21 @@
       });
 
       // 수정 버튼 클릭 시 동작
-      document
-        .getElementById("editButton")
-        .addEventListener("click", function () {
-          const postId = "yourpostIdHere";
-          window.location.href = `/posts/${postId}/edit`; // 페이지 이동
-          optionMenu.classList.add("hidden"); // 옵션창 닫기
-        });
+      document.getElementById("editButton").addEventListener("click", function () {
+        const postId = "yourpostIdHere";
+        window.location.href = `/posts/${postId}/edit`; // 페이지 이동
+        optionMenu.classList.add("hidden"); // 옵션창 닫기
+      });
 
       // 삭제 버튼 클릭 시 동작
-      document
-        .getElementById("deleteButton")
-        .addEventListener("click", function () {
-          alert("삭제를 선택했습니다.");
-          optionMenu.classList.add("hidden"); // 옵션창 닫기
-        });
+      document.getElementById("deleteButton").addEventListener("click", function () {
+        alert("삭제를 선택했습니다.");
+        optionMenu.classList.add("hidden"); // 옵션창 닫기
+      });
 
       // 옵션창 외부를 클릭하면 닫기
       window.addEventListener("click", function (event) {
-        if (
-          !listIconButton.contains(event.target) &&
-          !optionMenu.contains(event.target)
-        ) {
+        if (!listIconButton.contains(event.target) && !optionMenu.contains(event.target)) {
           optionMenu.classList.add("hidden");
         }
       });
