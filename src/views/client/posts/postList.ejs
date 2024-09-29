@@ -32,17 +32,17 @@
                 <a href="" class="userId">&#64;<%= post.author.accountId %></a>
               </div>
                
-                  <!-- 카테고리 받아오기 -->
+                <!-- 카테고리 받아오기 -->
                 <span class="category"><%= post.category.title %></span>
                 <!-- 더 보기 버튼 -->
-                <div class="viewMore" onclick="toggleEditDelete()">
+                <div class="viewMore" onclick="toggleEditDelete('<%= post.postId %>', event)">
                   <i class="fa-solid fa-ellipsis-vertical"></i>
-                  <div class="postEditDelete flex-column-center">
+                  <div class="postEditDelete flex-column-center" id="<%= post.postId %>">
                   
                     <a href="/posts/<%= post.postId %>/edit">
                       <i class="fa-solid fa-pen"></i> 수정
                     </a>
-                    <a id="deleteButton">
+                    <a id="deleteButton" onclick="deletePost('<%= post.postId %>')">
                       <i class="fa-solid fa-trash"></i> 삭제
                     </a>
        
@@ -186,7 +186,7 @@
     })
     
 
-    // 좋아요 아이콘
+    // 좋아요 아이콘 클릭 시 빈하트 -> 하트 
     const $like = document.querySelectorAll(".like");
     $like.forEach(like => {
       like.addEventListener('click', function() {
@@ -197,11 +197,28 @@
       })
     });
 
+
     // 수정, 삭제 더 보기 버튼 보이기
-    // function toggleEditDelete(postId, e) {
-    //   // 수정, 삭제 버튼 숨기기 (전체)
-    //   const allEditDeleteBtns = 
-    // }
+    function toggleEditDelete(postId, event) {
+      // 수정, 삭제 버튼 숨기기 (전체)
+      const allEditDeleteBtns = document.querySelectorAll(".postEditDelete");
+      allEditDeleteBtns.forEach(btn => {
+        btn.style.display = "none";
+      });
+
+      // 클릭한 게시글의 수정/삭제 버튼 선택
+      const editDeleteBtn = document.getElementById(`${postId}`);
+
+      // 현재 상태에 따라 표시 또는 숨김
+      if (editDeleteBtn.style.display === "none" || editDeleteBtn.style.display === "") {
+        editDeleteBtn.style.display = "flex";
+      } else {
+        editDeleteBtn.style.display = "none";
+      }
+
+      // 이벤트 버블링 방지
+      event.stopPropagation();
+    }
 
   </script>
 </body>
