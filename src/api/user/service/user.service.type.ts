@@ -1,10 +1,12 @@
+import UserResponseDto from "../dto/userResponse.dto";
+
 export interface UserService {
   /** 유저 전체 리스트 확인 */
-  getUsers(): Promise<IUser[]>;
+  getUsers(): Promise<UserResponseDto[]>;
   /** 유저 상세 정보 확인 */
-  getUserDetail(id: string): Promise<IUser>;
+  getUserDetail(id: string): Promise<UserResponseDto>;
   /** 회원가입 */
-  signIn(user: Omit<IUser, "id" | "salt">): Promise<IUser>;
+  signIn(user: Omit<IUser, "id" | "salt">): Promise<UserResponseDto>;
   /** 유저 정보 수정 */
   updateUser(
     _tokenInfo: {
