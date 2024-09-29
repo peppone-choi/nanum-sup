@@ -1,4 +1,5 @@
 export class Post implements IPost {
+
   /** 게시글 ID */
   id: string;
   /** 게시글 제목 */
@@ -15,8 +16,9 @@ export class Post implements IPost {
   attachmentsUrl?: string[];
   /** 작성일 */
   createdAt: Date;
-  /** 수정일 */
-  updatedAt: Date;
+  // /** 수정일 */
+  // updatedAt: Date;
+
 
   constructor(params: IPost) {
     this.id = params.id;
@@ -27,6 +29,6 @@ export class Post implements IPost {
     this.shortUrl = params.shortUrl;
     this.attachmentsUrl = params.attachmentsUrl;
     this.createdAt = params.createdAt;
-    this.updatedAt = params.updatedAt;
+    // this.updatedAt = params.updatedAt;
   }
 }

@@ -43,8 +43,15 @@ export default class PostsViewController {
   }
 
   /** 게시글 작성 페이지 */
-  async postWritePage(req: Request, res: Response, next: NextFunction) {
-    res.render("client/posts/postWrite");
+  async postWritePage(req: Request, res: Response, next: NextFunction) {  
+    const post = {
+      category: {
+        id: "",
+        title: ""
+      }
+
+    }
+    res.render("client/posts/postWrite", { post });
   }
 
   /** 게시글 수정 페이지 */

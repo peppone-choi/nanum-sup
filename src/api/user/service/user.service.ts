@@ -4,6 +4,7 @@ import { UserService } from "./user.service.type";
 import HttpException from "@/api/common/exceptions/http.exception";
 import { ProfileRepository } from "@/api/profile/repository/profile.repository";
 import { fi, th } from "@faker-js/faker/.";
+import UserResponseDto from "../dto/userResponse.dto";
 
 export default class UserServiceImpl implements UserService {
   private readonly _userRepository: UserRepository;
@@ -12,13 +13,15 @@ export default class UserServiceImpl implements UserService {
     this._userRepository = userRepository;
     this._profileRepository = profileRepository;
   }
-  async getUsers(): Promise<IUser[]> {
-    return await this._userRepository.getList();
+  async getUsers(): Promise<UserResponseDto[]> {
+    return (await this._userRepository.getList()).map((user) => {
+      return new UserResponseDto(user);
+    });
   }
-  async getUserDetail(id: string): Promise<IUser> {
-    return await this._userRepository.getById(id);
+  async getUserDetail(id: string): Promise<UserResponseDto> {
+    return new UserResponseDto(await this._userRepository.getById(id));
   }
-  async signIn(user: Omit<IUser, "id" | "salt">): Promise<IUser> {
+  async signIn(user: Omit<IUser, "id" | "salt">): Promise<UserResponseDto> {
     const newProfile = await this._profileRepository.save({
       nickname: user.profile.nickname,
       bio: user.profile.bio,
@@ -39,7 +42,7 @@ export default class UserServiceImpl implements UserService {
       salt: newPassword.salt,
       profile: newProfile,
     };
-    return await this._userRepository.create(newUser);
+    return new UserResponseDto(await this._userRepository.create(newUser));
   }
   async updateUser(
     _tokenInfo: {
@@ -62,18 +65,19 @@ export default class UserServiceImpl implements UserService {
       if (!newPassword || !newPassword.hashedPassword || !newPassword.salt) {
         throw new HttpException(500, "비밀번호 암호화에 실패했습니다.");
       }
-      return await this._userRepository.update(id, {
+      await this._userRepository.update(id, {
         ...updateData,
         salt: newPassword.salt,
         password: newPassword.hashedPassword,
       });
     }
 
-    return await this._userRepository.update(id, {
+    await this._userRepository.update(id, {
       ...updateData,
       password: user.password,
       salt: user.salt,
     });
+    return;
   }
   async deleteUser(
     _tokenInfo: {
@@ -86,6 +90,7 @@ export default class UserServiceImpl implements UserService {
     if (_tokenInfo["userId"] !== user.id && _tokenInfo["role"] !== "admin") {
       throw new HttpException(403, "권한이 없습니다.");
     }
-    return this._userRepository.delete(id);
+    await this._userRepository.delete(id);
+    return;
   }
 }
