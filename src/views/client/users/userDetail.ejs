@@ -38,8 +38,8 @@
             <div class="post-profile">
               <img src="/static/images/profile.webp" alt="profile image" class="post-profile-thumbnail" />
               <div class="profile-user b">
-                <p class="nickName">가나다짱짱</p>
-                <p class="userid">@gasadabb</p>
+                <p class="nickName"><%= user.profile.nickname %></p>
+                <p class="userid">@<%= user.accountId %></p>
               </div>
               <button id="listButton" class="icon-button" aria-label="list Icon">
                 <i class="fa-solid fa-ellipsis-vertical"></i>
