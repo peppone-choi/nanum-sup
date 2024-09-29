@@ -1,3 +1,4 @@
+import path from "path";
 import { MongooseLike } from "../model/like.schema";
 import { LikeRepository } from "./like.repository";
 
@@ -11,7 +12,12 @@ export default class MongooseLikeRepository implements LikeRepository {
       "post.id": postId,
     })
       .populate("post")
-      .populate("user");
+      .populate({
+        path: "user",
+        populate: {
+          path: "profile",
+        },
+      });
     return likes;
   }
   async getLikesComment(commentId: string): Promise<ILike[]> {
@@ -19,15 +25,15 @@ export default class MongooseLikeRepository implements LikeRepository {
       "comment.id": commentId,
     })
       .populate("comment")
-      .populate("user");
+      .populate({
+        path: "user",
+        populate: {
+          path: "profile",
+        },
+      });
     return likes;
   }
-  async createLike(
-    type: "post" | "comment",
-    user: IUser,
-    post?: IPost,
-    comment?: IComment
-  ): Promise<ILike> {
+  async createLike(type: "post" | "comment", user: IUser, post?: IPost, comment?: IComment): Promise<ILike> {
     const like = new MongooseLike({
       type,
       user,
@@ -43,13 +49,27 @@ export default class MongooseLikeRepository implements LikeRepository {
   async countLikesPost(postId: string): Promise<number> {
     const likes = await MongooseLike.find({
       "post.id": postId,
-    });
+    })
+      .populate("post")
+      .populate({
+        path: "user",
+        populate: {
+          path: "profile",
+        },
+      });
     return likes.length;
   }
   async countLikesComment(commentId: string): Promise<number> {
     const likes = await MongooseLike.find({
       "comment.id": commentId,
-    });
+    })
+      .populate("comment")
+      .populate({
+        path: "user",
+        populate: {
+          path: "profile",
+        },
+      });
     return likes.length;
   }
 }
