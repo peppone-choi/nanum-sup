@@ -44,7 +44,7 @@
         <!-- 게시글 -->
         <div class="postContainer">
           <!-- 내 게시글/좋아요한 게시글 필터 -->
-          <div class="post-filter">
+          <div id="post-filter">
             <button id="mypost-button">게시글</button>
             <p>ㅣ</p>
             <button id="likepost-button">좋아요</button>
@@ -169,6 +169,55 @@
       });
 
       const postContainer = document.getElementById("postContainer");
+      const filterGroup = document.getElementById("post-filter");
+
+      renderInitTodoList();
+      // 게시글 필터 부분
+      (() => {
+        $.filterGroup.addEventListener("click", (e) => {
+          const $target = e.target;
+
+          const button = $target.closest("button");
+
+          if (button) {
+            e.currentTarget.querySelectorAll("button")?.forEach((button) => {
+              if (button.classList.contains("active")) {
+                button?.classList?.remove("active");
+              }
+            });
+
+            button?.classList.add("active");
+          }
+
+          const action = button?.dataset.action;
+
+          switch (action) {
+            case "completed":
+              return renderFilterList();
+            case "created":
+              return renderInitTodoList();
+            case "uncompleted":
+              return renderFilterunList();
+          }
+        });
+      })();
+
+      function renderFilterList() {
+        $.todos.innerHTML = "";
+
+        const isEmpty =
+          state.todos.filter((todo) => !!todo.completed).length === 0;
+
+        if (isEmpty) {
+          $.todos.innerHTML = `<li class="empty-item">
+            <i class="fa-regular fa-note-sticky"></i>
+            <h2>아직 완료된 할일이 없습니다. :D</h2>
+          </li>`;
+          return;
+        }
+
+        renderTodoList(state.todos.filter((todo) => !!todo.completed));
+      }
 
       // 게시글 데이터가 비어있다고 가정
       const posts = []; // 이 배열에 게시글 데이터가 추가될 수 있음

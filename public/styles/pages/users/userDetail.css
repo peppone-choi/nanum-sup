@@ -80,7 +80,7 @@ main {
   align-items: center;
 }
 
-.post-filter {
+#post-filter {
   margin: 10px auto;
   width: 310px;
   height: 50px;
