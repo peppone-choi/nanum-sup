@@ -35,10 +35,10 @@ const categoryViewController = new CategoryViewController(
     )
 );
 
-categoryViewRouter.get(
-    extractPath(CATEGORY_VIEW_ROUTES.CATEGORY_LIST, ROUTES_INDEX.CATEGORY_VIEW),
-    categoryViewController.userCategoryListPage
-);
+// categoryViewRouter.get(
+//     extractPath(CATEGORY_VIEW_ROUTES.CATEGORY_LIST, ROUTES_INDEX.CATEGORY_VIEW),
+//     categoryViewController.userCategoryListPage
+// );
 
 categoryViewRouter.get(
     extractPath(
