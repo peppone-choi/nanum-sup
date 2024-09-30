@@ -43,10 +43,12 @@ export default class PostsViewController {
     async postDetailPage(req: Request, res: Response, next: NextFunction) {
         const post = await this._postsService.getPostDetail(req.params.postId);
         const authorId = post?.author.accountId;
+        const category = await this._categoryService.getCategory();
 
         res.render("client/posts/postDetail", {
             post,
             isMe: authorId === req.user.userId,
+            category,
         });
     }
 

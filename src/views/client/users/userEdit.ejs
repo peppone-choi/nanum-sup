@@ -1,123 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/static/styles/reset.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
-    <link rel="stylesheet" href="/static/styles/pages/users/userEdit.css" />
-    <title>유저 수정 페이지</title>
-  </head>
-  <body>
-    <div id="wrap">
-      <header id="header">
-        <!-- 뒤로가기 -->
-        <button
-          type="button"
-          class="backButton"
-          onclick="location.href='/users/:userId'"
-        ></button>
-        <!-- 로고 -->
-        <a href="#">
-          <img src="/static/images/nanum-logo.png" alt="나눔숲" />
-        </a>
-        <button type="button" class="searchButton"></button>
-        <!-- search -->
-      </header>
-      <main class="main">
-        <div class="profile-edit">
-          <img
-            src="/static/images/profile.webp"
-            alt="profile image"
-            id="profile-thumbnail"
-          />
-          <a href="" class="profile-edit-button">
-            <img
-              src="/static/images/pen-icon.svg"
-              alt="프로필 수정"
-              class="profile-pen"
-              id="profile-pen-icon"
-            />
-            <label for="profile-image"></label>
-            <input
-              type="file"
-              id="profile-image"
-              name="profile-image"
-              style="display: none"
-              accept="image/*"
-            />
-          </a>
-          <!-- 용량 초과시 알림 팝업 -->
-          <div id="alertPopup" class="popup hidden">
-            <div class="alerttext">
-              <span>용량은 50MB를</span>
-              <span>초과할 수 없습니다.</span>
-            </div>
-            <div class="close-Button">
-              <button id="closePopupButton">확인</button>
-            </div>
-          </div>
-          <!-- 용량 초과시 알림 팝업 -->
-          <p>50MB 제한</p>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/static/styles/reset.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        />
+        <link rel="stylesheet" href="/static/styles/pages/users/userEdit.css" />
+        <title>유저 수정 페이지</title>
+    </head>
+    <body>
+        <div id="wrap">
+            <header id="header">
+                <!-- 뒤로가기 -->
+                <button
+                    type="button"
+                    class="backButton"
+                    onclick="location.href='/users/:userId'"
+                ></button>
+                <!-- 로고 -->
+                <a href="#">
+                    <img src="/static/images/nanum-logo.png" alt="나눔숲" />
+                </a>
+                <button type="button" class="searchButton"></button>
+                <!-- search -->
+            </header>
+            <main class="main">
+                <div class="profile-edit">
+                    <img
+                        src="/static/images/profile.webp"
+                        alt="profile image"
+                        id="profile-thumbnail"
+                    />
+                    <a
+                        href="javascript:void(0);"
+                        class="profile-edit-button"
+                        id="profile-edit-button"
+                        onclick="openEditPopup()"
+                    >
+                        <img
+                            src="/static/images/pen-icon.svg"
+                            alt="프로필 수정"
+                            class="profile-pen"
+                            id="profile-pen-icon"
+                        />
+                        <label for="profile-image"></label>
+                        <input
+                            type="file"
+                            id="profile-image"
+                            name="profile-image"
+                            style="display: none"
+                            accept="image/*"
+                        />
+                    </a>
+                    <!-- 용량 초과시 알림 팝업 -->
+                    <div id="alertPopup" class="popup hidden">
+                        <div class="alerttext">
+                            <span>용량은 50MB를</span>
+                            <span>초과할 수 없습니다.</span>
+                        </div>
+                        <div class="close-Button">
+                            <button id="closePopupButton">확인</button>
+                        </div>
+                    </div>
+                    <!-- 이미지 수정 및 삭제 팝업 -->
+                    <div class="edit-popup hidden">
+                        <div class="edit-popup-content">
+                            <button
+                                class="upload-image-btn"
+                                id="upload-image-btn"
+                            >
+                                등록
+                            </button>
+                            <button
+                                class="delete-image-btn"
+                                id="delete-image-btn"
+                                onclick="deleteProfileImage(); return false;"
+                            >
+                                삭제
+                            </button>
+                            <button
+                                class="cancel-image-upload-btn"
+                                id="cancel-image-upload-btn"
+                                onclick="closeEditPopup(); return false;"
+                            >
+                                취소
+                            </button>
+                        </div>
+                    </div>
+                    <!-- 용량 초과시 알림 팝업 -->
+                    <p>50MB 제한</p>
+                </div>
+                <form id="profiletextform" class="profile-textform">
+                    <div class="nickName-edit">
+                        <label for="nickname">닉네임</label>
+                        <input
+                            type="text"
+                            id="nickname"
+                            name="nickname"
+                            placeholder="<%= user.profile.nickname %>"
+                            required
+                        />
+                    </div>
+                    <div class="bio-edit">
+                        <label for="bio">소개글</label>
+                        <textarea
+                            type="text"
+                            maxlength="200"
+                            placeholder="나눔숲에서 사용 할 소개글을 입력해주세요. (200자 이하)"
+                            id="bio"
+                        ></textarea>
+                    </div>
+                </form>
+                <button type="submit">
+                    <a href="/users/<%= user.accountId %>" class="edit"
+                        >수정 완료</a
+                    >
+                </button>
+            </main>
         </div>
-        <form id="profiletextform" class="profile-textform">
-          <div class="nickName-edit">
-            <label for="nickname">닉네임</label>
-            <input
-              type="text"
-              id="nickname"
-              name="nickname"
-              placeholder="<%= user.profile.nickname %>"
-              required
-            />
-          </div>
-          <div class="bio-edit">
-            <label for="bio">소개글</label>
-            <textarea
-              type="text"
-              maxlength="200"
-              placeholder="나눔숲에서 사용 할 소개글을 입력해주세요. (200자 이하)"
-              id="bio"
-            ></textarea>
-          </div>
-        </form>
-        <button type="submit">
-          <a href="/users/<%= user.accountId %>" class="edit">수정 완료</a>
-        </button>
-      </main>
-    </div>
-    <script>
-      document
-        .getElementById("profile-pen-icon")
-        .addEventListener("click", function () {
-          document.getElementById("profile-image").click();
-        });
+        <script>
+            document
+                .getElementById("upload-image-btn")
+                .addEventListener("click", function () {
+                    document.getElementById("profile-image").click();
+                });
 
-      // // 파일 입력 요소와 팝업 요소 가져오기
-      const profileImage = document.getElementById("profile-image");
-      const alertPopup = document.getElementById("alertPopup");
-      const closePopupButton = document.getElementById("closePopupButton");
+            // // 파일 입력 요소와 팝업 요소 가져오기
+            const profileImage = document.getElementById("profile-image");
+            const alertPopup = document.getElementById("alertPopup");
+            const closePopupButton =
+                document.getElementById("closePopupButton");
 
-      // // 50MB = 50 * 1024 * 1024 bytes
-      const MAX_FILE_SIZE = 50 * 1024 * 1024;
+            // // 50MB = 50 * 1024 * 1024 bytes
+            const MAX_FILE_SIZE = 50 * 1024 * 1024;
 
-      // // 파일 첨부 시 파일 크기 확인
-      profileImage.addEventListener("change", function (event) {
-        const file = event.target.files[0]; // 첨부된 파일 가져오기
+            // // 파일 첨부 시 파일 크기 확인
+            profileImage.addEventListener("change", function (event) {
+                const file = event.target.files[0]; // 첨부된 파일 가져오기
 
-        if (file && file.size > MAX_FILE_SIZE) {
-          // 파일 크기가 50MB를 초과하면 팝업 표시
-          alertPopup.classList.remove("hidden");
-        }
-      });
+                if (file && file.size > MAX_FILE_SIZE) {
+                    // 파일 크기가 50MB를 초과하면 팝업 표시
+                    alertPopup.classList.remove("hidden");
+                }
+            });
 
-      // 팝업 닫기 버튼 클릭 시 팝업 숨기기
-      closePopupButton.addEventListener("click", function () {
-        alertPopup.classList.add("hidden");
-      });
-    </script>
-  </body>
+            // 팝업 닫기 버튼 클릭 시 팝업 숨기기
+            closePopupButton.addEventListener("click", function () {
+                alertPopup.classList.add("hidden");
+            });
+        </script>
+        <!--프로필사진 수정-->
+        <script>
+            function openEditPopup() {
+                const editPopup = document.querySelector(".edit-popup");
+                editPopup.classList.remove("hidden");
+            }
+
+            function closeEditPopup() {
+                const editPopup = document.querySelector(".edit-popup");
+                editPopup.classList.add("hidden");
+            }
+            function deleteProfileImage() {
+                const profileImage = document.querySelector(".profile-image");
+
+                profileImage.src = "/static/images/profile.webp";
+                closeEditPopup();
+            }
+        </script>
+    </body>
 </html>
