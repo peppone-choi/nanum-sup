@@ -13,26 +13,22 @@ export class MongooseCommentRepository implements CommentRepository {
   }
 
   async findAll(): Promise<IComment[]> {
-    const values = await MongooseComment.find()
-      .populate({
-        path: "author",
-        populate: {
-          path: "profile",
-        },
-      })
-      .populate("post");
+    const values = await MongooseComment.find().populate({
+      path: "author",
+      populate: {
+        path: "profile",
+      },
+    });
 
     return values;
   }
   async findById(id: string): Promise<IComment | null> {
-    const comment = await MongooseComment.findById(id)
-      .populate({
-        path: "author",
-        populate: {
-          path: "profile",
-        },
-      })
-      .populate("post");
+    const comment = await MongooseComment.findById(id).populate({
+      path: "author",
+      populate: {
+        path: "profile",
+      },
+    });
     return comment;
   }
 
@@ -60,17 +56,5 @@ export class MongooseCommentRepository implements CommentRepository {
     newComment.depth = parentComment.depth + 1;
     await newComment.save();
     return newComment;
-  }
-  async findByPostId(postId: string): Promise<IComment[]> {
-    const comments = await MongooseComment.find({ post: postId })
-      .populate({
-        path: "author",
-        populate: {
-          path: "profile",
-        },
-      })
-      .populate("post");
-
-    return comments;
   }
 }

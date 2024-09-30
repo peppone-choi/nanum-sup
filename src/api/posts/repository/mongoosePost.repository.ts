@@ -24,6 +24,12 @@ export class MongoosePostRepository implements PostRepository {
       .populate("category")
       .populate({
         path: "comments",
+        populate: {
+          path: "author",
+          populate: {
+            path: "profile",
+          },
+        },
       });
 
     return values;
@@ -39,6 +45,12 @@ export class MongoosePostRepository implements PostRepository {
       .populate("category")
       .populate({
         path: "comments",
+        populate: {
+          path: "author",
+          populate: {
+            path: "profile",
+          },
+        },
       });
 
     return post;
@@ -64,8 +76,15 @@ export class MongoosePostRepository implements PostRepository {
         },
       })
       .populate("category")
+
       .populate({
         path: "comments",
+        populate: {
+          path: "author",
+          populate: {
+            path: "profile",
+          },
+        },
       });
     return post;
   }
@@ -78,8 +97,15 @@ export class MongoosePostRepository implements PostRepository {
         },
       })
       .populate("category")
+
       .populate({
         path: "comments",
+        populate: {
+          path: "author",
+          populate: {
+            path: "profile",
+          },
+        },
       });
     return posts;
   }
@@ -92,9 +118,25 @@ export class MongoosePostRepository implements PostRepository {
         },
       })
       .populate("category")
+
       .populate({
         path: "comments",
+        populate: {
+          path: "author",
+          populate: {
+            path: "profile",
+          },
+        },
       });
     return posts;
+  }
+  async addComment(postId: string, comment: IComment): Promise<IPost> {
+    const post = await MongoosePost.findOne({ _id: postId });
+    if (!post) {
+      throw new HttpException(404, "게시글을 찾을 수 없습니다.");
+    }
+    post.comments.push(comment);
+    await post.save();
+    return post;
   }
 }

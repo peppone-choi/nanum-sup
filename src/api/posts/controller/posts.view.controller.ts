@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { PostsService } from "@/api/posts/service/posts.service.type";
 import { CategoryService } from "@/api/category/service/category.service.type";
+import { CommentService } from "@/api/comment/service/comment.service.type";
 
 // [사용자]
 // 글 목록 조회 - getPosts
@@ -12,11 +13,12 @@ import { CategoryService } from "@/api/category/service/category.service.type";
 export default class PostsViewController {
   private readonly _postsService: PostsService;
   private readonly _categoryService: CategoryService;
+  private readonly _commentService: CommentService;
   // static postListPage: RequestHandler<ParamsDictionary, any, any, ParsedQs, Record<string, any>>;
-  constructor(_postsService: PostsService, _categoryService: CategoryService) {
+  constructor(_postsService: PostsService, _categoryService: CategoryService, _commentService: CommentService) {
     this._categoryService = _categoryService;
     this._postsService = _postsService;
-
+    this._commentService = _commentService;
     this.postListPage = this.postListPage.bind(this);
     this.postDetailPage = this.postDetailPage.bind(this);
     this.postWritePage = this.postWritePage.bind(this);
@@ -29,7 +31,6 @@ export default class PostsViewController {
 
     const posts = await this._postsService.getPosts();
     const category = await this._categoryService.getCategory();
-
     res.render("client/posts/postList", {
       posts,
       category,
@@ -41,7 +42,7 @@ export default class PostsViewController {
     const post = await this._postsService.getPostDetail(req.params.postId);
     const authorId = post?.author.accountId;
     const category = await this._categoryService.getCategory();
-
+    console.log(post);
     res.render("client/posts/postDetail", {
       post,
       isMe: authorId === req.user.userId,
