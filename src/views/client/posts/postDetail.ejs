@@ -147,6 +147,7 @@
                         <!-- 댓글 작성 영역 끝 -->
 
                         <!-- 댓글 리스트 시작 -->
+                        <!-- <% post.comments.forEach((comment) => { %> -->
                         <div class="commentSingle">
                             <!-- 유저 프로필 이미지 -->
                             <img
@@ -158,21 +159,21 @@
                                 <!-- 유저 닉네임 받아오기 -->
                                 <!-- <%= post.author.profile.nickname %> -->
                                 <a href="" class="nickName"
-                                    ><%= post.author.profile.nickname %></a
+                                    ><%= comment.author.profile.nickname %></a
                                 >
                                 <!-- 유저 아이디 -->
                                 <a href="" class="userId"
-                                    >&#64;<%= post.author.accountId %></a
+                                    >&#64;<%= comment.author.accountId %></a
                                 >
 
                                 <!-- 글 작성시간 -->
                                 <em
                                     class="createdAt"
-                                    data-created-at="<%= post.createdAt.toISOString() %>"
+                                    data-created-at="<%= comment.createdAt.toISOString() %>"
                                 ></em>
                                 <!-- 댓글 가져오기 -->
                                 <p class="comment">
-                                    우와아아아아아ㅇㅇㅇㅇㅇㅇㅇㅇㅇ
+                                    <%= comment.content %>
                                 </p>
                             </div>
                             <!-- 좋아요 -->
@@ -197,6 +198,7 @@
                                 </button>
                             </div>
                         </div>
+                        <!-- <% }); %> -->
                         <!-- 댓글 리스트 끝 -->
 
                         <!-- 대댓글 작성 영역 시작 -->
@@ -268,9 +270,12 @@
                         throw new Error("게시글 삭제에 실패했습니다.");
                     }
 
+                    alert("게시글이 삭제되었습니다.");
+
                     location.href = "/posts";
                 } catch (error) {
                     console.error("게시글 작성에 실패했습니다.");
+                    alert(error.message);
                 }
             });
         </script>
@@ -334,6 +339,9 @@
                 event.stopPropagation();
             }
 
+
+
+            
             // 답글달기 버튼 클릭 시 작성영역 보이기
             function toggleReplyArea(button) {
                 const replyArea =
