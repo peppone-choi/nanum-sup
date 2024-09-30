@@ -112,7 +112,7 @@ body {
 }
 
 .hidden {
-  /* display: none; */
+  display: none;
 }
 /* 파일 초과시 팝업 */
 
