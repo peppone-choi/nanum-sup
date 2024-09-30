@@ -1,5 +1,5 @@
-body {
-    background-color: var(--mono-300) !important;
+.search-popup.hidden {
+    display: none;
 }
 
 .search-popup {
@@ -7,12 +7,14 @@ body {
     top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 50%;
+    width: 45%;
     height: 45%;
     padding: 20px;
     background-color: var(--body-bg);
     border-radius: 10px;
     overflow: auto;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .search-popup::-webkit-scrollbar {
