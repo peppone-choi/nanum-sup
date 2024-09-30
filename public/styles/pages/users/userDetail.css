@@ -91,7 +91,7 @@ main {
   border: 1px solid var(--sub-color-3);
 }
 
-.post-filter button {
+#post-filter button {
   width: 120px;
   background-color: #ffffff;
   border: none;
@@ -99,11 +99,11 @@ main {
   cursor: pointer;
 }
 
-.post-filter button:hover {
+#post-filter button:hover {
   color: var(--primary);
 }
 
-.post-filter p {
+#post-filter p {
   margin-top: 12px;
   color: #bcbbbb;
 }

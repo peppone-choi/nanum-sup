@@ -55,7 +55,13 @@
         <form id="profiletextform" class="profile-textform">
           <div class="nickName-edit">
             <label for="nickname">닉네임</label>
-            <input type="text" id="nickname" name="nickname" required />
+            <input
+              type="text"
+              id="nickname"
+              name="nickname"
+              placeholder="<%= user.profile.nickname %>"
+              required
+            />
           </div>
           <div class="bio-edit">
             <label for="bio">소개글</label>
@@ -67,7 +73,9 @@
             ></textarea>
           </div>
         </form>
-        <button type="submit">수정 완료</button>
+        <button type="submit">
+          <a href="/users/<%= user.accountId %>" class="edit">수정 완료</a>
+        </button>
       </main>
     </div>
     <script>
