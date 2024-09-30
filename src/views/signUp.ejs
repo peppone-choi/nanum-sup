@@ -13,7 +13,7 @@
     <div class="signup-container">
       <div class="signup-form">
         <div class="header-image" id="header">
-          <a href="/views/login" class="arrow-left-button">
+          <a href="/login" class="arrow-left-button">
             <img src="/static/images/arrow-left-w.svg" alt="뒤로가기" />
           </a>
           <img src="/static/images/nanum-logo-w.png" alt="나눔숲" />
@@ -143,7 +143,7 @@
         console.log(data);
         if (data.status === 201) {
           alert("회원가입 성공");
-          location.href = "/views/login";
+          location.href = "/login";
         } else {
           alert("회원가입 실패");
         }
