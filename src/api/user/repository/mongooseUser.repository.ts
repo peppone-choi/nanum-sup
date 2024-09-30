@@ -20,8 +20,26 @@ export default class MongooseUserRepository implements UserRepository {
     }
     return user;
   }
-  async update(id: string, updateData: Omit<IUser, "id" | "userId">): Promise<void> {
-    const updatedUser = await MongooseUser.findByIdAndUpdate(id, updateData).populate("profile");
+  async getByNickname(nickname: string): Promise<IUser> {
+    const profile = await MongooseProfile.findOne({
+      nickname: nickname,
+    });
+    const user = await MongooseUser.findOne({
+      profile: profile,
+    }).populate("profile");
+    if (!user) {
+      throw new HttpException(404, "유저가 존재하지 않습니다.");
+    }
+    return user;
+  }
+  async update(
+    id: string,
+    updateData: Omit<IUser, "id" | "userId">
+  ): Promise<void> {
+    const updatedUser = await MongooseUser.findByIdAndUpdate(
+      id,
+      updateData
+    ).populate("profile");
     if (!updatedUser) {
       throw new HttpException(404, "유저가 존재하지 않습니다.");
     }
@@ -36,10 +54,45 @@ export default class MongooseUserRepository implements UserRepository {
     return;
   }
   async findByAccountId(accountId: string): Promise<IUser> {
-    const user = await MongooseUser.findOne({ accountId: accountId }).populate("profile");
+    const user = await MongooseUser.findOne({ accountId: accountId }).populate(
+      "profile"
+    );
     if (!user) {
       throw new HttpException(404, "유저가 존재하지 않습니다.");
     }
     return user;
+  }
+  async existsByAccountId(accountId: string): Promise<boolean> {
+    const user = await MongooseUser.findOne({ accountId: accountId });
+    return !!user;
+  }
+  async existsByEmail(email: string): Promise<boolean> {
+    const user = await MongooseUser.findOne({
+      email: email,
+    });
+    return !!user;
+  }
+
+  async existsByNickname(nickname: string): Promise<boolean> {
+    const users = await MongooseUser.find().populate("profile");
+
+    const user = users?.find((user) => user?.profile?.nickname === nickname);
+
+    // console.log({ nickname });
+    // const user = await MongooseUser.findOne({
+    //   where: { profile: { nickname } },
+    // }).populate("profile");
+
+    // console.log(user);
+
+    // const profile = await MongooseProfile.findOne({
+    //   nickname: nickname,
+    // });
+    // console.log({ profile });
+    // const user = await MongooseUser.findOne({
+    //   profile: profile?._id,
+    // });
+    // console.log(user);
+    return !!user;
   }
 }

@@ -16,6 +16,9 @@ export default class UserController {
     this.signIn = this.signIn.bind(this);
     this.updateUser = this.updateUser.bind(this);
     this.deleteUser = this.deleteUser.bind(this);
+    this.existsByNickname = this.existsByNickname.bind(this);
+    this.existsByEmail = this.existsByEmail.bind(this);
+    this.existsByAccountId = this.existsByAccountId.bind(this);
   }
 
   async getUsers(req: Request<getUsersRequest["path"], getUsersResponse, getUsersRequest["body"], getUsersRequest["params"]>, res: Response, next: NextFunction) {
@@ -49,5 +52,21 @@ export default class UserController {
     const { userId } = req.params;
     await this._userService.deleteUser(req.user, userId);
     res.status(204).send();
+  }
+  async existsByNickname(req: Request, res: Response, next: NextFunction) {
+    const { nickname } = req.params;
+    const decodedNickname = decodeURIComponent(nickname);
+    const user = await this._userService.existsByNickname(decodedNickname);
+    res.send(user);
+  }
+  async existsByEmail(req: Request, res: Response, next: NextFunction) {
+    const { email } = req.params;
+    const user = await this._userService.existsByEmail(email);
+    res.send(user);
+  }
+  async existsByAccountId(req: Request, res: Response, next: NextFunction) {
+    const { accountId } = req.params;
+    const user = await this._userService.existsByAccountId(accountId);
+    res.send(user);
   }
 }

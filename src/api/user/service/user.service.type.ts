@@ -1,3 +1,4 @@
+import { P } from "@faker-js/faker/dist/airline-C5Qwd7_q";
 import UserResponseDto from "../dto/userResponse.dto";
 
 export interface UserService {
@@ -25,4 +26,7 @@ export interface UserService {
     },
     id: string
   ): Promise<void>;
+  existsByAccountId(accountId: string): Promise<boolean>;
+  existsByEmail(email: string): Promise<boolean>;
+  existsByNickname(nickname: string): Promise<boolean>;
 }

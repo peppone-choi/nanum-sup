@@ -1,17 +1,191 @@
-<header id="header">
-    <!-- 메뉴 -->
-    <button
-        type="button"
-        class="menuButton"
-        onclick="location.href='/category'"
-    ></button>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        />
+        <link
+            rel="stylesheet"
+            href="/static/styles/pages/category/userCategoryList.css"
+        />
+        <link rel="stylesheet" href="/static/styles/pages/searchPopup.css" />
 
-    <!-- 로고 -->
-    <a href="http://localhost:4000/posts/">
-        <img src="/static/images/nanum-logo.png" alt="나눔숲" />
-    </a>
+        <title>카테고리 목록</title>
+    </head>
+    <body>
+        <header id="header">
+            <!-- 뒤로가기 -->
+            <button
+                type="button"
+                class="menuButton"
+                onclick="openCategoryMenu()"
+            ></button>
+            <!-- 로고 -->
+            <a href="#">
+                <img src="/static/images/nanum-logo.png" alt="나눔숲" />
+            </a>
+            <button
+                type="button"
+                class="searchButton"
+                onclick="openSearchPopup()"
+            ></button>
+            <!-- search -->
+        </header>
+        <section class="category-popup hidden">
+            <div class="category-menu-bar" id="categoryMenu">
+                <div class="category-menu-bar-header">
+                    <a href="javascript:void(0)" onclick="closeCategoryMenu()"
+                        ><i class="fa-solid fa-x"></i
+                    ></a>
+                    <a href="/users/:userId/edit">
+                        <i class="fa-solid fa-gear"></i>
+                    </a>
+                    <div class="category-profile">
+                        <img
+                            src="/static/images/profile.webp"
+                            alt="프로필"
+                            class="profile-image"
+                        />
+                        <div class="category-profile-info">
+                            <p class="category-nickName">닉네임</p>
+                            <p class="category-id">@ggaong</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="category-menu-bar-main">
+                    <div>
+                        <% category.forEach(function(category) { %>
+                        <div class="category-list">
+                            <a
+                                href="/category/<%= category.categoryId %>/posts"
+                            >
+                                <p><%= category.title %></p>
+                            </a>
+                        </div>
+                        <% }) %>
+                    </div>
+                    <div class="logout">
+                        <a href="/view/login" id="logout-btn">
+                            <p>로그아웃</p>
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                        </a>
+                    </div>
+                </div>
+            </section>
 
-    <button type="button" class="searchButton"></button>
-    <!-- search -->
-</header>
+            <!-- 로그아웃 창 -->
+            <div id="logout-popup" class="logout-popup hidden">
+                <div class="popup-content">
+                    <p>로그아웃 하시겠습니까?</p>
+                    <div class="logout-btn">
+                        <button class="btn-cancel" id="cancel-btn">취소</button>
+                        <button class="btn-confirm" id="confirm-btn">
+                            확인
+                        </button>
+                    </div>
+                </div>
+            </div>
+      
+        <!-- 검색팝업 -->
+        <div class="search-wrapper">
+            <div class="search-popup hidden">
+                    <a href="javascript:void(0);" class="search-wrapper-close" onclick="closeSearchPopup()">
+                        <i class="fa-solid fa-x"></i>
+                    </a>
+                    <div class="search-input-header">
+                        <input
+                            type="text"
+                            class="search-input"
+                            placeholder="검색어를 입력해주세요."
+                        />
+                        <a href="">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </a>
+                    </div>
+                    <div class="search-input-main">
+                        <div class="search-history">
+                            검색기록
+                            <a href="" class="search-history-list">운동</a>
+                            <a href="" class="search-history-list">@ggaong</a>
+                            <a href="" class="search-history-list">peppone-choi</a>
+                        </div>
+                        <div class="autocomplete-suggestions">
+                            추천검색
+                            <div class="search-suggestion-container">
+                                <a href="" class="search-suggestion-list"
+                                    >#unityhub</a
+                                >
+                                <a href="" class="search-suggestion-list"
+                                    >#unityhub</a
+                                >
+                                <a href="" class="search-suggestion-list"
+                                    >#unityhub</a
+                                >
+                                <a href="" class="search-suggestion-list"
+                                    >#unityhub</a
+                                >
+                                <a href="" class="search-suggestion-list"
+                                    >#unityhub</a
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <script>
+            function openCategoryMenu() {
+                const popup = document.querySelector(".category-popup");
+                popup.classList.remove("hidden"); 
+            }
+        
+            function closeCategoryMenu() {
+                const popup = document.querySelector(".category-popup");
+                popup.classList.add("hidden"); 
+            }
+        </script>
+        
+        <script>
+            function openSearchPopup() {
+                const popup = document.querySelector(".search-popup");
+                popup.classList.remove("hidden");
+            }
+            function closeSearchPopup() {
+                const popup = document.querySelector(".search-popup");
+                popup.classList.add("hidden");
+            }
+        </script>
 
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const logoutBtn = document.getElementById("logout-btn");
+                const logoutPopup = document.getElementById("logout-popup");
+                const cancelBtn = document.getElementById("cancel-btn");
+                const confirmBtn = document.getElementById("confirm-btn");
+
+                logoutBtn.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    logoutPopup.classList.remove("hidden");
+                });
+
+                cancelBtn.addEventListener("click", function () {
+                    logoutPopup.classList.add("hidden");
+                });
+
+                confirmBtn.addEventListener("click", function () {
+                    window.location.href = "/views/login";
+                });
+            });
+        </script>
+        <script>
+            function closeMenu() {
+                const menu = document.getElementById("categoryMenu");
+                menu.style.display = "none";
+                window.location.href = "/category/:categoryId/posts";
+            }
+        </script>
+    </body>
+</html>

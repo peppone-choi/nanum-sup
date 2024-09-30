@@ -15,6 +15,12 @@ const userRouter = express.Router();
 const USER_ROUTES = {
   /** [사용자] 유저 전체 리스트 확인 */
   GET_USERS: `/api/users`,
+  /** [사용자] 유저 존재 여부 확인 (유저 id) */
+  EXISTS_BY_ACCOUNT_ID: `/api/users/exists/accountId/:accountId`,
+  /** [사용자] 유저 존재 여부 확인 (이메일) */
+  EXISTS_BY_EMAIL: `/api/users/exists/email/:email`,
+  /** [사용자] 유저 존재 여부 확인 (닉네임) */
+  EXISTS_BY_NICKNAME: `/api/users/exists/nickname/:nickname`,
   /** [사용자] 유저 상세 정보 확인 */
   GET_USER_DETAIL: `/api/users/:userId`,
   /** [사용자] 회원가입 */
@@ -31,6 +37,24 @@ userRouter.get(
   extractPath(USER_ROUTES.GET_USERS, ROUTES_INDEX.USER_API),
   // authUserMiddleware,
   userController.getUsers
+);
+
+userRouter.get(
+  extractPath(USER_ROUTES.EXISTS_BY_ACCOUNT_ID, ROUTES_INDEX.USER_API),
+  // authUserMiddleware,
+  userController.existsByAccountId
+);
+
+userRouter.get(
+  extractPath(USER_ROUTES.EXISTS_BY_EMAIL, ROUTES_INDEX.USER_API),
+  // authUserMiddleware,
+  userController.existsByEmail
+);
+
+userRouter.get(
+  extractPath(USER_ROUTES.EXISTS_BY_NICKNAME, ROUTES_INDEX.USER_API),
+  // authUserMiddleware,
+  userController.existsByNickname
 );
 
 userRouter.get(
