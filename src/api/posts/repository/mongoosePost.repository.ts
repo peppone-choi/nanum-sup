@@ -1,6 +1,7 @@
 import HttpException from "@/api/common/exceptions/http.exception";
 import { MongoosePost } from "@/api/posts/model/post.schema";
 import { PostRepository } from "@/api/posts/repository/post.repository";
+import path from "path";
 // import { IPost } from "../@types/post.type";
 
 export class MongoosePostRepository implements PostRepository {
@@ -13,6 +14,7 @@ export class MongoosePostRepository implements PostRepository {
   }
   async findAll(): Promise<IPost[]> {
     const values = await MongoosePost.find()
+
     .populate({
       path: "author",
       populate: {
@@ -20,6 +22,7 @@ export class MongoosePostRepository implements PostRepository {
       },
     })
     .populate("category");
+
     return values;
   }
   async findById(id: string): Promise<IPost | null> {
@@ -31,6 +34,7 @@ export class MongoosePostRepository implements PostRepository {
       },
     })
     .populate("category");
+
     return post;
   }
   async update(postId: string, updatePostInfo: Partial<IPost>): Promise<IPost> {
@@ -46,15 +50,36 @@ export class MongoosePostRepository implements PostRepository {
     return;
   }
   async findByShortUrl(shortUrl: string): Promise<IPost | null> {
-    const post = await MongoosePost.findOne({ shortUrl }).populate("author").populate("category");
+    const post = await MongoosePost.findOne({ shortUrl })
+      .populate({
+        path: "author",
+        populate: {
+          path: "profile",
+        },
+      })
+      .populate("category");
     return post;
   }
   async findByCategoryId(categoryId: string): Promise<IPost[]> {
-    const posts = await MongoosePost.find({ category: categoryId }).populate("author").populate("category");
+    const posts = await MongoosePost.find({ category: categoryId })
+      .populate({
+        path: "author",
+        populate: {
+          path: "profile",
+        },
+      })
+      .populate("category");
     return posts;
   }
   async findByUserId(userId: string): Promise<IPost[]> {
-    const posts = await MongoosePost.find({ author: userId }).populate("author").populate("category");
+    const posts = await MongoosePost.find({ author: userId })
+      .populate({
+        path: "author",
+        populate: {
+          path: "profile",
+        },
+      })
+      .populate("category");
     return posts;
   }
 }
