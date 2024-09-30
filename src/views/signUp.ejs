@@ -220,19 +220,20 @@
         const confirmPassword = document.querySelector("#confirm-password").value;
         const introduce = document.querySelector("#introduce").value;
         const profileImage = document.querySelector("#profile-image-input").files[0];
-        console.log(profileImage);
         const formData = new FormData();
-        formData.append("profileImage", profileImage);
+        formData.append("filename", profileImage);
         const image = await fetch("/api/upload/image", {
           method: "POST",
           body: formData,
         });
-        const profileImageData = image.json();
+
+        const profileImageData = await image.json();
         const imageUrl = profileImageData.url;
         if (password !== confirmPassword) {
           alert("비밀번호가 일치하지 않습니다.");
           return;
         }
+        console.log(imageUrl);
         const data = await fetch("/api/users", {
           method: "POST",
           headers: {
@@ -249,7 +250,6 @@
             },
           }),
         });
-        console.log(data);
         if (data.status === 201) {
           alert("회원가입 성공");
           location.href = "/login";
