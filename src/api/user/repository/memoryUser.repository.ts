@@ -25,10 +25,14 @@ export class MemoryUserRepository implements UserRepository {
     }
     return Promise.resolve(user);
   }
-  async update(
-    id: string,
-    updateData: Omit<IUser, "id" | "userId">
-  ): Promise<void> {
+  async getByNickname(nickname: string): Promise<IUser> {
+    const user = Array.from(MemoryUserRepository.store.values()).find((user) => user.profile?.nickname === nickname);
+    if (!user) {
+      throw new HttpException(404, "유저가 존재하지 않습니다.");
+    }
+    return Promise.resolve(user);
+  }
+  async update(id: string, updateData: Omit<IUser, "id" | "userId">): Promise<void> {
     const user = MemoryUserRepository.store.get(id);
     if (!user) {
       throw new HttpException(404, "유저가 존재하지 않습니다.");
@@ -45,12 +49,23 @@ export class MemoryUserRepository implements UserRepository {
     return;
   }
   async findByAccountId(accountId: string): Promise<IUser> {
-    const user = Array.from(MemoryUserRepository.store.values()).find(
-      (user) => user.accountId === accountId
-    );
+    const user = Array.from(MemoryUserRepository.store.values()).find((user) => user.accountId === accountId);
     if (!user) {
       throw new HttpException(404, "유저가 존재하지 않습니다.");
     }
     return Promise.resolve(user);
+  }
+
+  async existsByAccountId(accountId: string): Promise<boolean> {
+    const user = Array.from(MemoryUserRepository.store.values()).find((user) => user.accountId === accountId);
+    return !!user;
+  }
+  async existsByEmail(email: string): Promise<boolean> {
+    const user = Array.from(MemoryUserRepository.store.values()).find((user) => user.email === email);
+    return !!user;
+  }
+  async existsByNickname(nickname: string): Promise<boolean> {
+    const user = Array.from(MemoryUserRepository.store.values()).find((user) => user.profile?.nickname === nickname);
+    return !!user;
   }
 }

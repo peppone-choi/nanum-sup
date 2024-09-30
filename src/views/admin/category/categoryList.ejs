@@ -61,10 +61,10 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> -->
 
-            <!-- 로그아웃 창 -->
-            <div id="logout-popup" class="logout-popup hidden">
+<!-- 로그아웃 창 -->
+<!-- <div id="logout-popup" class="logout-popup hidden">
                 <div class="popup-content">
                     <p>로그아웃 하시겠습니까?</p>
                     <div class="logout-btn">
@@ -104,15 +104,14 @@
                 const cancelBtn = document.getElementById("cancel-btn");
                 const confirmBtn = document.getElementById("confirm-btn");
 
+                logoutBtn.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    logoutPopup.classList.remove("hidden");
+                });
 
-        logoutBtn.addEventListener("click", function (e) {
-          e.preventDefault();
-          logoutPopup.classList.remove("hidden");
-        });
-
-        cancelBtn.addEventListener("click", function () {
-          logoutPopup.classList.add("hidden");
-        });
+                cancelBtn.addEventListener("click", function () {
+                    logoutPopup.classList.add("hidden");
+                });
 
                 confirmBtn.addEventListener("click", function () {
                     window.location.href = "/views/login";
@@ -121,4 +120,3 @@
         </script>
     </body>
 </html> -->
-
