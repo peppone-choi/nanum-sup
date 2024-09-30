@@ -24,7 +24,7 @@
             <a href="" class="profile-edit">
               <img src="/static/images/pen-icon.svg" alt="프로필 수정" class="profile-pen" id="profile-pen-icon" />
               <label for="profile-image"></label>
-              <input type="file" id="profile-image" name="profile-image" style="display: none" />
+              <input type="file" id="profile-image-input" name="profile-image-input" hidden />
             </a>
           </div>
         </form>
@@ -105,8 +105,18 @@
 
     <!-- 파일 선택 -->
     <script>
-      document.getElementById("profile-pen-icon").addEventListener("click", function () {
-        document.getElementById("profile-image").click();
+      const profileImage = document.querySelector(".profile-image");
+      const profileInput = document.querySelector("#profile-image-input");
+      document.querySelector("#profile-pen-icon").addEventListener("click", function (e) {
+        e.preventDefault();
+        profileInput.click();
+      });
+      profileInput.addEventListener("change", function (e) {
+        const file = e.target.files[0];
+        document.querySelector(".profile-image").src = URL.createObjectURL(file);
+        document.querySelector(".profile-image").onload = function (e) {
+          URL.revokeObjectURL(profileImage.src);
+        };
       });
     </script>
 
@@ -121,6 +131,15 @@
         const password = document.querySelector("#password").value;
         const confirmPassword = document.querySelector("#confirm-password").value;
         const introduce = document.querySelector("#introduce").value;
+        const profileImage = document.querySelector("#profile-image-input").files[0];
+        const formData = new FormData();
+        formData.append("profileImage", profileImage);
+        const image = await fetch("/api/upload/image", {
+          method: "POST",
+          body: formData,
+        });
+        const profileImageData = image.json();
+        const imageUrl = profileImageData.url;
         if (password !== confirmPassword) {
           alert("비밀번호가 일치하지 않습니다.");
           return;
@@ -137,6 +156,7 @@
             profile: {
               nickname,
               bio: introduce,
+              thumbnail: imageUrl,
             },
           }),
         });
