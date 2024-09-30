@@ -13,8 +13,19 @@
   </head>
   <body>
     <div id="wrap">
-      <header>
-        <div class="header-inner"><%- include('../../_layouts/header') %></div>
+      <header id="header">
+        <!-- 뒤로가기 -->
+        <button
+          type="button"
+          class="backButton"
+          onclick="location.href='/users/:userId'"
+        ></button>
+        <!-- 로고 -->
+        <a href="#">
+          <img src="/static/images/nanum-logo.png" alt="나눔숲" />
+        </a>
+        <button type="button" class="searchButton"></button>
+        <!-- search -->
       </header>
       <main class="main">
         <div class="profile-edit">
