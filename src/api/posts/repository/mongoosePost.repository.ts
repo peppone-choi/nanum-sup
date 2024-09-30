@@ -14,24 +14,27 @@ export class MongoosePostRepository implements PostRepository {
   }
   async findAll(): Promise<IPost[]> {
     const values = await MongoosePost.find()
-      .populate({
-        path: "author",
-        populate: {
-          path: "profile",
-        },
-      })
-      .populate("category");
+
+    .populate({
+      path: "author",
+      populate: {
+        path: "profile",
+      },
+    })
+    .populate("category");
+
     return values;
   }
   async findById(id: string): Promise<IPost | null> {
     const post = await MongoosePost.findOne({ _id: id })
-      .populate({
-        path: "author",
-        populate: {
-          path: "profile",
-        },
-      })
-      .populate("category");
+    .populate({
+      path: "author",
+      populate: {
+        path: "profile",
+      },
+    })
+    .populate("category");
+
     return post;
   }
   async update(postId: string, updatePostInfo: Partial<IPost>): Promise<IPost> {
