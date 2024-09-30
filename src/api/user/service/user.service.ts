@@ -5,6 +5,7 @@ import HttpException from "@/api/common/exceptions/http.exception";
 import { ProfileRepository } from "@/api/profile/repository/profile.repository";
 import { fi, th } from "@faker-js/faker/.";
 import UserResponseDto from "../dto/userResponse.dto";
+import { r } from "@faker-js/faker/dist/airline-C5Qwd7_q";
 
 export default class UserServiceImpl implements UserService {
   private readonly _userRepository: UserRepository;
@@ -92,5 +93,15 @@ export default class UserServiceImpl implements UserService {
     }
     await this._userRepository.delete(id);
     return;
+  }
+
+  async existsByAccountId(accountId: string): Promise<boolean> {
+    return this._userRepository.existsByAccountId(accountId);
+  }
+  async existsByEmail(email: string): Promise<boolean> {
+    return this._userRepository.existsByEmail(email);
+  }
+  async existsByNickname(nickname: string): Promise<boolean> {
+    return this._userRepository.existsByNickname(nickname);
   }
 }
