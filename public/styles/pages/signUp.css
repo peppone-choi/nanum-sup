@@ -14,11 +14,12 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 .arrow-left-button {
     position: absolute;
-    left: 10px;
+    left: -150px;
     top: 10px;
     border: 0;
     background-repeat: no-repeat;
