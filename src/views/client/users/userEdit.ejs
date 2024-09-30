@@ -13,62 +13,65 @@
   </head>
   <body>
     <div id="wrap">
-      <header>
-        <div class="header-inner"><%- include('../../_layouts/header') %></div>
-      </header>
-      <main class="main">
-        <div class="profile-edit">
-          <img
-            src="/static/images/profile.webp"
-            alt="profile image"
-            id="profile-thumbnail"
-          />
-          <a href="" class="profile-edit-button">
-            <img
-              src="/static/images/pen-icon.svg"
-              alt="프로필 수정"
-              class="profile-pen"
-              id="profile-pen-icon"
-            />
-            <label for="profile-image"></label>
-            <input
-              type="file"
-              id="profile-image"
-              name="profile-image"
-              style="display: none"
-              accept="image/*"
-            />
-          </a>
-          <!-- 용량 초과시 알림 팝업 -->
-          <div id="alertPopup" class="popup hidden">
-            <div class="alerttext">
-              <span>용량은 50MB를</span>
-              <span>초과할 수 없습니다.</span>
+      <div class="inner">
+        <!-- <header> -->
+          <%- include('../../_layouts/header') %>
+          <!-- </header> -->
+          <main class="main">
+            <div class="profile-edit">
+              <img
+                src="/static/images/profile.webp"
+                alt="profile image"
+                id="profile-thumbnail"
+              />
+              <a href="" class="profile-edit-button">
+                <img
+                  src="/static/images/pen-icon.svg"
+                  alt="프로필 수정"
+                  class="profile-pen"
+                  id="profile-pen-icon"
+                />
+                <label for="profile-image"></label>
+                <input
+                  type="file"
+                  id="profile-image"
+                  name="profile-image"
+                  style="display: none"
+                  accept="image/*"
+                />
+              </a>
+              <!-- 용량 초과시 알림 팝업 -->
+              <div id="alertPopup" class="popup hidden">
+                <div class="alerttext">
+                  <span>용량은 50MB를</span>
+                  <span>초과할 수 없습니다.</span>
+                </div>
+                <div class="close-Button">
+                  <button id="closePopupButton">확인</button>
+                </div>
+              </div>
+              <!-- 용량 초과시 알림 팝업 -->
+              <p>50MB 제한</p>
             </div>
-            <div class="close-Button">
-              <button id="closePopupButton">확인</button>
-            </div>
-          </div>
-          <!-- 용량 초과시 알림 팝업 -->
-          <p>50MB 제한</p>
-        </div>
-        <form id="profiletextform" class="profile-textform">
-          <div class="nickName-edit">
-            <label for="nickname">닉네임</label>
-            <input type="text" id="nickname" name="nickname" required />
-          </div>
-          <div class="bio-edit">
-            <label for="bio">소개글</label>
-            <textarea
-              type="text"
-              maxlength="200"
-              placeholder="나눔숲에서 사용 할 소개글을 입력해주세요. (200자 이하)"
-              id="bio"
-            ></textarea>
-          </div>
-        </form>
-        <button type="submit">수정 완료</button>
-      </main>
+            <form id="profiletextform" class="profile-textform">
+              <div class="nickName-edit">
+                <label for="nickname">닉네임</label>
+                <input type="text" id="nickname" name="nickname" required />
+              </div>
+              <div class="bio-edit">
+                <label for="bio">소개글</label>
+                <textarea
+                  type="text"
+                  maxlength="200"
+                  placeholder="나눔숲에서 사용 할 소개글을 입력해주세요. (200자 이하)"
+                  id="bio"
+                ></textarea>
+              </div>
+            </form>
+            <button type="submit">수정 완료</button>
+          </main>
+      </div>
+      
     </div>
     <script>
       document
