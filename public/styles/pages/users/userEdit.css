@@ -112,7 +112,7 @@ body {
 }
 
 .hidden {
-  /* display: none; */
+  display: none;
 }
 /* 파일 초과시 팝업 */
 
@@ -161,4 +161,8 @@ body {
 
 button[type="submit"] {
   width: 350px;
+}
+
+button[type="submit"] a {
+  color: #ffffff;
 }
