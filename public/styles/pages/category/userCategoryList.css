@@ -211,7 +211,6 @@ body.popup-active {
 }
 
 .popup-content p {
-    padding-bottom: 15px;
     font-weight: 700;
 }
 
@@ -220,6 +219,7 @@ body.popup-active {
     justify-content: center;
     align-items: center;
     gap: 20px;
+    padding-bottom: 10px;
 }
 
 .btn-cancel {
