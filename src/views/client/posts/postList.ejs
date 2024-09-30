@@ -114,20 +114,20 @@
               <!-- 댓글 작성 영역 끝 -->
 
               <!-- 댓글 리스트 시작 -->
+              <% post.comments.forEach((comment) => { %>
               <div class="commentSingle">
                 <!-- 유저 프로필 이미지 -->
                 <img src="/static/images/profile.webp" alt="프로필 이미지" class="profileImg" />
                 <div class="commentUser">
                   <!-- 유저 닉네임 받아오기 -->
-                  <!-- <%= post.author.profile.nickname %> -->
-                  <a href="" class="nickName"><%= post.author.profile.nickname %></a>
+                  <a href="" class="nickName"><%= comment.author.profile.nickname %></a>
                   <!-- 유저 아이디 -->
-                  <a href="" class="userId">&#64;<%= post.author.accountId %></a>
-
+                  <a href="" class="userId">&#64;<%= comment.author.accountId %></a>
+  
                   <!-- 글 작성시간 -->
-                  <em class="createdAt" data-created-at="<%= post.createdAt.toISOString() %>"></em>
+                  <em class="createdAt" data-created-at="<%= comment.createdAt.toISOString() %>"></em>
                   <!-- 댓글 가져오기 -->
-                  <p class="comment">우와아아아아아ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</p>
+                  <p class="comment"><%= comment.content %></p>
                 </div>
                 <!-- 좋아요 -->
                 <div class="like">
@@ -162,6 +162,7 @@
             </div>
             <!--  대댓글 작성 영역 끝 -->
           </section>
+          <% }); %>
 
         <% }); %>
         <!-- 반복 끝 -->

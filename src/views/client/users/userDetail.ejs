@@ -4,7 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/static/styles/reset.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
     <link rel="stylesheet" href="/static/styles/pages/users/userDetail.css" />
     <title>유저 상세 페이지</title>
   </head>
@@ -15,33 +18,53 @@
       </header>
       <main class="main">
         <div class="profile-headerimage">
-          <img src="/static/images/pofile-header.webp" alt="profile header image" />
+          <img
+            src="/static/images/pofile-header.webp"
+            alt="profile header image"
+          />
         </div>
+        <!-- 프로필 이미지,닉네임,아이디,소개글 -->
         <div class="profile-area">
-          <img src="/static/images/profile.webp" alt="profile image" class="profile-thumbnail" />
+          <img
+            src="/static/images/profile.webp"
+            alt="profile image"
+            class="profile-thumbnail"
+          />
           <div class="profile-user">
             <p class="nickName"><%= user.profile.nickname %></p>
             <p class="userid">&#64;<%= user.accountId %></p>
             <p class="biotext"><%= user.profile.bio %></p>
           </div>
+          <!-- 프로필 수정 페이지로 이동 -->
           <a href="/users/:userId/edit" class="edit">
             <i class="fa-solid fa-gear"></i>
           </a>
         </div>
-        <div class="post-area">
-          <div class="post-filter">
+        <!-- 게시글 -->
+        <div class="postContainer">
+          <!-- 내 게시글/좋아요한 게시글 필터 -->
+          <div id="post-filter">
             <button id="mypost-button">게시글</button>
             <p>ㅣ</p>
             <button id="likepost-button">좋아요</button>
           </div>
           <div class="post">
+            <!-- 프로필 이미지,닉네임,아이디 -->
             <div class="post-profile">
-              <img src="/static/images/profile.webp" alt="profile image" class="post-profile-thumbnail" />
+              <img
+                src="/static/images/profile.webp"
+                alt="profile image"
+                class="post-profile-thumbnail"
+              />
               <div class="profile-user b">
                 <p class="nickName"><%= user.profile.nickname %></p>
                 <p class="userid">&#64;<%= user.accountId %></p>
               </div>
-              <button id="listButton" class="icon-button" aria-label="list Icon">
+              <button
+                id="listButton"
+                class="icon-button"
+                aria-label="list Icon"
+              >
                 <i class="fa-solid fa-ellipsis-vertical"></i>
               </button>
               <div id="optionMenu" class="option-menu hidden">
@@ -50,32 +73,56 @@
                   <li><button id="deleteButton">삭제</button></li>
                 </ul>
               </div>
+              <!-- 카테고리 표기 -->
               <div class="category">
                 <i class="fa-solid fa-icons"></i>
                 <span>음식</span>
               </div>
             </div>
             <div class="post-content">
+              <!-- 게시글 내용 -->
               <p class="post-content-text">진짜 맨날 배고파요 어이없음 ㅎ</p>
               <div class="post-image">
                 <img src="/static/images/post_food.webp" alt="post image" />
               </div>
+              <!-- 게시글 작성 시간 -->
               <p class="post-time-text">2024년 9월 12일 오후 4시 31분</p>
             </div>
+            <!-- 게시글 반응 아이콘 -->
             <div class="icon-container">
-              <button id="likeButton" class="icon-button" aria-label="like Button">
+              <button
+                id="likeButton"
+                class="icon-button"
+                aria-label="like Button"
+              >
                 <i class="fa-regular fa-heart"></i>
               </button>
-              <button id="commentButton" class="icon-button" aria-label="comment Icon">
+              <button
+                id="commentButton"
+                class="icon-button"
+                aria-label="comment Icon"
+              >
                 <i class="fa-regular fa-message"></i>
               </button>
-              <button id="favoriteButton" class="icon-button" aria-label="favorite Icon">
+              <button
+                id="favoriteButton"
+                class="icon-button"
+                aria-label="favorite Icon"
+              >
                 <i class="fa-regular fa-star"></i>
               </button>
-              <button id="reportButton" class="icon-button" aria-label="report Icon">
+              <button
+                id="reportButton"
+                class="icon-button"
+                aria-label="report Icon"
+              >
                 <i class="fa-solid fa-circle-exclamation"></i>
               </button>
-              <button id="shareButton" class="icon-button" aria-label="share Icon">
+              <button
+                id="shareButton"
+                class="icon-button"
+                aria-label="share Icon"
+              >
                 <i class="fa-regular fa-share-from-square"></i>
               </button>
             </div>
@@ -93,24 +140,111 @@
       });
 
       // 수정 버튼 클릭 시 동작
-      document.getElementById("editButton").addEventListener("click", function () {
-        const postId = "yourpostIdHere";
-        window.location.href = `/posts/${postId}/edit`; // 페이지 이동
-        optionMenu.classList.add("hidden"); // 옵션창 닫기
-      });
+      document
+        .getElementById("editButton")
+        .addEventListener("click", function () {
+          const postId = "yourpostIdHere";
+          window.location.href = `/posts/${postId}/edit`; // 페이지 이동
+          optionMenu.classList.add("hidden"); // 옵션창 닫기
+        });
 
       // 삭제 버튼 클릭 시 동작
-      document.getElementById("deleteButton").addEventListener("click", function () {
-        alert("삭제를 선택했습니다.");
-        optionMenu.classList.add("hidden"); // 옵션창 닫기
-      });
+      document
+        .getElementById("deleteButton")
+        .addEventListener("click", function () {
+          alert("삭제를 선택했습니다.");
+          optionMenu.classList.add("hidden"); // 옵션창 닫기
+        });
 
       // 옵션창 외부를 클릭하면 닫기
       window.addEventListener("click", function (event) {
-        if (!listIconButton.contains(event.target) && !optionMenu.contains(event.target)) {
+        if (
+          !listIconButton.contains(event.target) &&
+          !optionMenu.contains(event.target)
+        ) {
           optionMenu.classList.add("hidden");
         }
       });
+
+      const postContainer = document.getElementById("postContainer");
+      const filterGroup = document.getElementById("post-filter");
+
+      renderInitTodoList();
+      // 게시글 필터 부분
+      (() => {
+        $.filterGroup.addEventListener("click", (e) => {
+          const $target = e.target;
+
+          const button = $target.closest("button");
+
+          if (button) {
+            e.currentTarget.querySelectorAll("button")?.forEach((button) => {
+              if (button.classList.contains("active")) {
+                button?.classList?.remove("active");
+              }
+            });
+
+            button?.classList.add("active");
+          }
+
+          const action = button?.dataset.action;
+
+          switch (action) {
+            case "completed":
+              return renderFilterList();
+            case "created":
+              return renderInitTodoList();
+            case "uncompleted":
+              return renderFilterunList();
+          }
+        });
+      })();
+
+      function renderFilterList() {
+        $.todos.innerHTML = "";
+
+        const isEmpty =
+          state.todos.filter((todo) => !!todo.completed).length === 0;
+
+        if (isEmpty) {
+          $.todos.innerHTML = `<li class="empty-item">
+            <i class="fa-regular fa-note-sticky"></i>
+            <h2>아직 완료된 할일이 없습니다. :D</h2>
+          </li>`;
+          return;
+        }
+
+        renderTodoList(state.todos.filter((todo) => !!todo.completed));
+      }
+
+      // 게시글 데이터가 비어있다고 가정
+      const posts = []; // 이 배열에 게시글 데이터가 추가될 수 있음
+
+      // 게시글이 없을 경우 메시지와 버튼을 추가
+      if (posts.length === 0) {
+        const noPostMessage = document.createElement("p");
+        noPostMessage.classList.add("message");
+        noPostMessage.textContent = "작성된 게시글이 없습니다.";
+
+        const firstPostButton = document.createElement("button");
+        firstPostButton.id = "firstPostButton";
+        firstPostButton.textContent = "첫 게시글 작성하기";
+
+        // 버튼 클릭 시 페이지 이동
+        firstPostButton.addEventListener("click", () => {
+          window.location.href = "/create-post"; // 게시글 작성 페이지로 이동
+        });
+
+        postContainer.appendChild(noPostMessage);
+        postContainer.appendChild(firstPostButton);
+      } else {
+        // 게시글이 있을 경우 게시글 목록을 표시하는 로직을 여기에 추가
+        posts.forEach((post) => {
+          const postElement = document.createElement("div");
+          postElement.textContent = post.title; // 게시글 제목 예시
+          postContainer.appendChild(postElement);
+        });
+      }
     </script>
   </body>
 </html>
