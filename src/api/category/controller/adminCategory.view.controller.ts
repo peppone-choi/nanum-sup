@@ -10,17 +10,17 @@ export default class AdminCategoryViewController {
         this._categoryService = _categoryService;
         this._postsService = _postService;
 
-        this.categoryListPage = this.categoryListPage.bind(this);
+        // this.categoryListPage = this.categoryListPage.bind(this);
         this.categoryDetailPage = this.categoryDetailPage.bind(this);
         this.categoryWritePage = this.categoryWritePage.bind(this);
         this.categoryEditPage = this.categoryEditPage.bind(this);
     }
 
     /** 카테고리 목록 페이지 */
-    async categoryListPage(req: Request, res: Response, next: NextFunction) {
-        const category = await this._categoryService.getCategory();
-        res.render("admin/category/categoryList", { category });
-    }
+    // async categoryListPage(req: Request, res: Response, next: NextFunction) {
+    //     const category = await this._categoryService.getCategory();
+    //     res.render("admin/category/categoryList", { category });
+    // }
 
     /** 카테고리 상세 페이지 */
     async categoryDetailPage(req: Request, res: Response, next: NextFunction) {

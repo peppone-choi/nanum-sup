@@ -37,13 +37,13 @@ const adminCategoryViewController = new AdminCategoryViewController(
     )
 );
 
-adminCategoryViewRouter.get(
-    extractPath(
-        ADMIN_CATEGORY_VIEW_ROUTES.CATEGORY_LIST,
-        ROUTES_INDEX.ADMIN_CATEGORY_VIEW
-    ),
-    adminCategoryViewController.categoryListPage
-);
+// adminCategoryViewRouter.get(
+//     extractPath(
+//         ADMIN_CATEGORY_VIEW_ROUTES.CATEGORY_LIST,
+//         ROUTES_INDEX.ADMIN_CATEGORY_VIEW
+//     ),
+//     adminCategoryViewController.categoryListPage
+// );
 
 adminCategoryViewRouter.get(
     extractPath(
