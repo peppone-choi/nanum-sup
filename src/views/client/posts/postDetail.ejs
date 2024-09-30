@@ -32,15 +32,17 @@
                                 class="profileImg"
                             />
                             <div class="userInfo">
-                                <!-- 유저 닉네임 받아오기 -->
-                                <!-- <%= post.author.profile.nickname %> -->
-                                <a href="" class="nickName"
-                                    ><%= post.author.profile.nickname %></a
-                                >
-                                <!-- 팔로우 버튼 -->
-                                <button type="button">
-                                    <i class="fa-solid fa-plus"></i> 팔로우
-                                </button>
+                             
+                                     <!-- 유저 닉네임 받아오기 -->
+                                    <a href="" class="nickName">
+                                        <%= post.author.profile.nickname %>
+                                    </a>
+                                    <!-- 팔로우 버튼 -->
+                                    <button type="button">
+                                        <i class="fa-solid fa-plus"></i> 팔로우
+                                    </button>
+                               
+                               
                                 <!-- 유저 아이디 -->
                                 <a href="" class="userId"
                                     >&#64;<%= post.author.accountId %></a
@@ -48,9 +50,9 @@
                             </div>
 
                             <!-- 카테고리 받아오기 -->
-                            <span class="category"
-                                ><%= post.category.title %></span
-                            >
+                            <span class="category">
+                                <%= post.category.title.split(' 나눔숲')[0] %>
+                            </span>
                             <!-- 더 보기 버튼 -->
                             <div
                                 class="viewMore"

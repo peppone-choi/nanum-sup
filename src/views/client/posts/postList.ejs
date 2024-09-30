@@ -39,7 +39,7 @@
 
                 
                   <!-- 카테고리 받아오기 -->
-                  <span class="category"><%= post.category.title %></span>
+                  <span class="category"> <%= post.category.title.split(' 나눔숲')[0] %></span>
                   <!-- 더 보기 버튼 -->
                   <div class="viewMore" onclick="toggleEditDelete('<%= post.postId %>', event)">
                     <i class="fa-solid fa-ellipsis-vertical"></i>
