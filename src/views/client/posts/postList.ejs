@@ -120,7 +120,7 @@
                 <div class="commentUser">
                   <!-- 유저 닉네임 받아오기 -->
                   <!-- <%= post.author.profile.nickname %> -->
-                  <a href="" class="nickName">다영다영</a>
+                  <a href="" class="nickName"><%= post.author.profile.nickname %></a>
                   <!-- 유저 아이디 -->
                   <a href="" class="userId">&#64;<%= post.author.accountId %></a>
 
@@ -136,7 +136,7 @@
                 </div>
                 <!-- 답글, 수정, 삭제, 공유 버튼 -->
                 <div class="commentEditBtns">
-                  <button type="button"><i class="fa-solid fa-reply"></i> 답글달기</button>
+                  <button type="button"  onclick="toggleReplyArea(this)"><i class="fa-solid fa-reply"></i> 답글달기</button>
                   <button type="button"><i class="fa-solid fa-pen"></i> 수정</button>
                   <button type="button"><i class="fa-regular fa-trash-can"></i> 삭제</button>
                 </div>
