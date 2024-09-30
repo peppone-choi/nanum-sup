@@ -21,7 +21,7 @@
           <img src="/static/images/profile.webp" alt="profile image" class="profile-thumbnail" />
           <div class="profile-user">
             <p class="nickName"><%= user.profile.nickname %></p>
-            <p class="userid">@<%= user.accountId %></p>
+            <p class="userid">&#64;<%= user.accountId %></p>
             <p class="biotext"><%= user.profile.bio %></p>
           </div>
           <a href="/users/:userId/edit" class="edit">
@@ -39,7 +39,7 @@
               <img src="/static/images/profile.webp" alt="profile image" class="post-profile-thumbnail" />
               <div class="profile-user b">
                 <p class="nickName"><%= user.profile.nickname %></p>
-                <p class="userid">@<%= user.accountId %></p>
+                <p class="userid">&#64;<%= user.accountId %></p>
               </div>
               <button id="listButton" class="icon-button" aria-label="list Icon">
                 <i class="fa-solid fa-ellipsis-vertical"></i>

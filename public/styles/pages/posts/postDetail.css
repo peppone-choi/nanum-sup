@@ -85,6 +85,7 @@ a {
 .viewMore {
   position: relative;
   cursor: pointer;
+  color: var(--mono-300);
 
 }
 .postEditDelete {
