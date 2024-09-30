@@ -26,15 +26,7 @@ export class MemoryCommentRepository implements CommentRepository {
     return findComment ?? null;
   }
 
-  async findByPostId(postId: string): Promise<IComment[]> {
-    const comments = Array.from(MemoryCommentRepository.store.values());
-    return comments.filter((comment) => comment.post.id === postId);
-  }
-
-  async update(
-    id: string,
-    updateCommentInfo: Partial<IComment>
-  ): Promise<IComment> {
+  async update(id: string, updateCommentInfo: Partial<IComment>): Promise<IComment> {
     const findComment = MemoryCommentRepository.store.get(id);
 
     if (!findComment) {
@@ -55,10 +47,7 @@ export class MemoryCommentRepository implements CommentRepository {
     }
     MemoryCommentRepository.store.delete(id);
   }
-  async saveReply(
-    parent: string,
-    comment: Omit<IComment, "id">
-  ): Promise<IComment> {
+  async saveReply(parent: string, comment: Omit<IComment, "id">): Promise<IComment> {
     const parentComment = MemoryCommentRepository.store.get(parent);
     if (!parentComment) {
       throw new HttpException(404, "부모 댓글을 찾을 수 없습니다.");

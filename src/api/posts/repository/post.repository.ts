@@ -17,4 +17,6 @@ export interface PostRepository {
   findByCategoryId(categoryId: string): Promise<IPost[]>;
   /** 사용자 ID로 게시글 조회 */
   findByUserId(userId: string): Promise<IPost[]>;
+  /** 댓글 추가 */
+  addComment(postId: string, comment: IComment): Promise<IPost>;
 }

@@ -18,16 +18,7 @@ export default class AdminCommentController {
     this.deleteComment = this.deleteComment.bind(this);
   }
 
-  async getComment(
-    req: Request<
-      adminGetCommentRequest["path"],
-      adminGetCommentResponse,
-      adminGetCommentRequest["body"],
-      adminGetCommentRequest["params"]
-    >,
-    res: Response,
-    next: NextFunction
-  ) {
+  async getComment(req: Request<adminGetCommentRequest["path"], adminGetCommentResponse, adminGetCommentRequest["body"], adminGetCommentRequest["params"]>, res: Response, next: NextFunction) {
     try {
       const comment = await this._adminCommentService.getComment();
       res.send(comment);
@@ -37,35 +28,21 @@ export default class AdminCommentController {
   }
 
   async createComment(
-    req: Request<
-      adminCreateCommentRequest["path"],
-      adminCreateCommentResponse,
-      adminCreateCommentRequest["body"],
-      adminCreateCommentRequest["params"]
-    >,
+    req: Request<adminCreateCommentRequest["path"], adminCreateCommentResponse, adminCreateCommentRequest["body"], adminCreateCommentRequest["params"]>,
     res: Response,
     next: NextFunction
   ) {
     try {
-      const newComment = await this._adminCommentService.createComment(
-        req.body
-      );
-      res.status(201).send(newComment);
+      const user = req.user.userId;
+      const post = req.params.postId;
+      const comment = await this._adminCommentService.createComment(post, user, req.body);
+      res.status(201).send(comment);
     } catch (error) {
       next(error);
     }
   }
 
-  async editComment(
-    req: Request<
-      adminEditCommentRequest["path"],
-      adminEditCommentResponse,
-      adminEditCommentRequest["body"],
-      adminEditCommentRequest["params"]
-    >,
-    res: Response,
-    next: NextFunction
-  ) {
+  async editComment(req: Request<adminEditCommentRequest["path"], adminEditCommentResponse, adminEditCommentRequest["body"], adminEditCommentRequest["params"]>, res: Response, next: NextFunction) {
     const { commentId } = req.params;
     try {
       await this._adminCommentService.editComment(commentId, req.body);
@@ -76,12 +53,7 @@ export default class AdminCommentController {
   }
 
   async deleteComment(
-    req: Request<
-      adminDeleteCommentRequest["path"],
-      adminDeleteCommentResponse,
-      adminDeleteCommentRequest["body"],
-      adminDeleteCommentRequest["params"]
-    >,
+    req: Request<adminDeleteCommentRequest["path"], adminDeleteCommentResponse, adminDeleteCommentRequest["body"], adminDeleteCommentRequest["params"]>,
     res: Response,
     next: NextFunction
   ) {
@@ -89,25 +61,6 @@ export default class AdminCommentController {
     try {
       await this._adminCommentService.deleteComment(commentId);
       res.status(204).json();
-    } catch (error) {
-      next(error);
-    }
-  }
-
-  async getComments(
-    req: Request<
-      adminGetCommentsRequest["path"],
-      adminGetCommentsResponse,
-      adminGetCommentsRequest["body"],
-      adminGetCommentsRequest["params"]
-    >,
-    res: Response,
-    next: NextFunction
-  ) {
-    const { postId } = req.params;
-    try {
-      const comments = await this._adminCommentService.getComments(postId);
-      res.send(comments);
     } catch (error) {
       next(error);
     }

@@ -21,7 +21,7 @@
 
                 <!-- 반복 시작 -->
                 <% posts.forEach(function(post) { %>
-                <section class="post">
+                <section class="post" data-id="<%= post.postId %>">
                     <!-- 유저 정보 영역 시작 -->
                     <div class="postTop">
                         <div class="postTopUser">
@@ -171,7 +171,7 @@
                                 <!-- 글 작성시간 -->
                                 <em
                                     class="createdAt"
-                                    data-created-at="<%= comment.createdAt.toISOString() %>"
+                                    data-created-at="<%= comment.createdAt %>"
                                 ></em>
                                 <!-- 댓글 가져오기 -->
                                 <p class="comment"><%= comment.content %></p>
@@ -200,7 +200,7 @@
                         <!-- 댓글 리스트 끝 -->
 
                         <!-- 대댓글 작성 영역 시작 -->
-                        <div class="commentWriteWrap">
+                        <div class="commentWriteWrapDouble">
                             <!-- 유저 프로필 이미지 -->
                             <img
                                 src="/static/images/profile.webp"
@@ -337,6 +337,42 @@
                     replyArea.style.display = "none";
                 }
             }
+
+            // 댓글 달기
+            const $commentSubmit = document.querySelectorAll(
+                "button[type=submit]"
+            );
+            $commentSubmit.forEach((button) => {
+                button.addEventListener("click", async () => {
+                    const postId = button.closest(".post").dataset.id;
+                    const comment = button
+                        .closest(".commentWriteWrap")
+                        .querySelector(".commentWrite").textContent;
+                    console.log(comment, postId);
+                    const accessToken = document.cookie.replace(
+                        /(?:(?:^|.*;\s*)accessToken\s*=\s*([^;]*).*$)|^.*$/,
+                        "$1"
+                    );
+                    const response = await fetch(`/api/comment`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            authorization: accessToken,
+                        },
+                        body: JSON.stringify({
+                            postId: postId,
+                            content: comment,
+                        }),
+                    });
+
+                    if (response.ok) {
+                        alert("댓글 작성에 성공했습니다.");
+                        document.location.reload();
+                    } else {
+                        console.error("댓글 작성에 실패했습니다.");
+                    }
+                });
+            });
         </script>
     </body>
 </html>
