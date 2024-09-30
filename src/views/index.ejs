@@ -5,5 +5,21 @@
     <link rel="stylesheet" href="/static/styles/style.scss" />
     <link rel="stylesheet" href="/static/styles/init.css" />
   </head>
-  <body></body>
+  <body>
+    <script>
+      if (document.cookie === "") {
+        window.location.href = "/login";
+      }
+      const accessToken = document.cookie
+        .split(";")
+        .find((cookie) => cookie.includes("accessToken"))
+        .split("=")[1];
+      console.log(document.cookie);
+      if (accessToken !== undefined) {
+        window.location.href = "/posts";
+      } else {
+        window.location.href = "/login";
+      }
+    </script>
+  </body>
 </html>
