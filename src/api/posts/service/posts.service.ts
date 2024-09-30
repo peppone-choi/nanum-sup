@@ -26,7 +26,7 @@ export class PostsServiceImpl implements PostsService {
 
   /** 게시글 생성 */
   async createPost(userId: string, categoryId: string, post: Omit<IPost, "id" | "author" | "comment" | "shortUrl">): Promise<PostResponseDTO> {
-    const author = await this._userRepository.findByAccountId(userId);
+    const author = await this._userRepository.getById(userId);
     const category = await this._categoryRepository.findById(categoryId);
     const shortUrl = nanoid(10);
     // if (!author) {

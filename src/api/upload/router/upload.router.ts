@@ -2,6 +2,7 @@ import express from "express";
 import { extractPath } from "@/utils/path.util";
 import { ROUTES_INDEX } from "@/routers";
 import { imageUpload, videoUpload } from "@/vendors/multer";
+import { r } from "@faker-js/faker/dist/airline-C5Qwd7_q";
 
 const uploadRouter = express.Router();
 
@@ -14,7 +15,6 @@ const UPLOAD_ROUTES = {
 uploadRouter.post(extractPath(UPLOAD_ROUTES.UPLOAD_IMAGE, ROUTES_INDEX.UPLOAD_API), imageUpload.single("filename"), (req, res, next) => {
   const SERVER_URL = process.env.SERVER_URL || "http://localhost:4000";
   const file = req.file as Express.Multer.File;
-
   const imageUrl = `${SERVER_URL}/static/uploads/${file?.filename}`;
 
   res.status(201).json({ url: imageUrl });
@@ -31,7 +31,6 @@ uploadRouter.post(extractPath(UPLOAD_ROUTES.UPLOAD_IMAGES, ROUTES_INDEX.UPLOAD_A
 uploadRouter.post(extractPath(UPLOAD_ROUTES.UPLOAD_VIDEO, ROUTES_INDEX.UPLOAD_API), videoUpload.single("filename"), (req, res, next) => {
   const SERVER_URL = process.env.SERVER_URL || "http://localhost:4000";
   const file = req.file as Express.Multer.File;
-
   const videoUrl = `${SERVER_URL}/static/uploads/${file?.filename}`;
 
   res.status(201).json({ url: videoUrl });
