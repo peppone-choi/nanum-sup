@@ -2,167 +2,212 @@
 @import "../../common.css";
 
 body {
-  background-color: var(--mono-000);
-  /* border: 2px solid red; */
+    background-color: var(--mono-000);
+    /* border: 2px solid red; */
 }
 
 #header {
-  margin: 0 auto;
-  width: 390px;
+    margin: 0 auto;
+    width: 390px;
 }
 
 .main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .profile-edit {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  height: 170px;
-  margin: 30px auto;
-  position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 170px;
+    margin: 30px auto;
+    position: relative;
 }
 
 #profile-thumbnail {
-  border-radius: 50%;
-  width: 135px;
-  height: 135px;
+    border-radius: 50%;
+    width: 135px;
+    height: 135px;
 }
 
 .profile-edit-button {
-  background-color: var(--sub-color-1);
-  color: var(--mono-000);
-  border: 0;
-  width: 35px;
-  height: 35px;
-  font-size: 15px;
-  border-radius: 50%;
-  cursor: pointer;
-  position: absolute;
-  bottom: 30px;
-  right: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    background-color: var(--sub-color-1);
+    color: var(--mono-000);
+    border: 0;
+    width: 35px;
+    height: 35px;
+    font-size: 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    position: absolute;
+    bottom: 30px;
+    right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .profile-pen {
-  width: 17px;
-  height: 17px;
+    width: 17px;
+    height: 17px;
 }
 
 .profile-edit p {
-  color: var(--sub-color-3);
-  margin-top: 10px;
+    color: var(--sub-color-3);
+    margin-top: 10px;
 }
 
 /* 파일 초과시 팝업 */
 .popup {
-  width: 262px;
-  height: 112px;
-  color: #ffffff;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: rgba(0, 0, 0, 0.7);
-  padding: 13px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-  /* display: none; */
-  z-index: 1000;
+    width: 262px;
+    height: 112px;
+    color: #ffffff;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 13px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    /* display: none; */
+    z-index: 1000;
 }
 
 .alerttext {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  margin: 0 auto;
-  width: 183px;
-  border-bottom: 1px solid #aaaaaa;
-  padding-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 183px;
+    border-bottom: 1px solid #aaaaaa;
+    padding-bottom: 10px;
 }
 
 .popup span {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .close-Button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #closePopupButton {
-  background-color: transparent;
-  color: white;
-  border: none;
-  cursor: pointer;
-  width: 60px;
-  height: 33px;
-  font-size: 15px;
+    background-color: transparent;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 60px;
+    height: 33px;
+    font-size: 15px;
 }
 
 .hidden {
-  display: none;
+    display: none;
 }
 /* 파일 초과시 팝업 */
 
 .profile-textform {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  margin: 0 auto;
-  width: 350px;
-  gap: 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 350px;
+    gap: 20px;
 }
 
 .nickName-edit {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .bio-edit {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 #bio {
-  resize: none;
-  padding: 10px;
+    resize: none;
+    padding: 10px;
 }
 
 #bio:focus {
-  outline: none;
+    outline: none;
 }
 
 #nickname {
-  border: 1px solid var(--sub-color-3);
-  border-radius: 10px;
-  height: 50px;
-  padding-left: 10px;
+    border: 1px solid var(--sub-color-3);
+    border-radius: 10px;
+    height: 50px;
+    padding-left: 10px;
 }
 
 #bio {
-  border: 1px solid var(--sub-color-3);
-  border-radius: 10px;
-  height: 212px;
+    border: 1px solid var(--sub-color-3);
+    border-radius: 10px;
+    height: 212px;
 }
 
 button[type="submit"] {
-  width: 350px;
+    width: 350px;
 }
 
 button[type="submit"] a {
-  color: #ffffff;
+    color: #ffffff;
+}
+
+/* 프로필사진 등록 팝업 */
+.edit-popup {
+    position: absolute;
+    top: 90%;
+    left: 150%;
+    transform: translate(-50%, -50%);
+    width: 130px;
+    padding: 5px;
+    background-color: white;
+    border-radius: 10px;
+    z-index: 1000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.edit-popup.hidden {
+    /* display: none; */
+}
+
+.edit-popup-content {
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+}
+
+.upload-image-btn,
+.delete-image-btn,
+.cancel-image-upload-btn {
+    border: none;
+    border-radius: 10px;
+    padding: 5px 0;
+    margin: 2px 0;
+}
+
+.upload-image-btn {
+    background-color: var(--sub-color-5);
+}
+
+.delete-image-btn {
+    background-color: var(--sub-color-4);
+}
+
+.cancel-image-upload-btn {
+    background-color: var(--sub-color-1);
 }
