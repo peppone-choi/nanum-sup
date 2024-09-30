@@ -15,6 +15,8 @@ interface IPost {
   attachmentsUrl?: string[];
   /** 작성일 */
   createdAt: Date;
+  // /** 댓글 */
+  comments: IComment[];
   // /** 수정일 */
   // updatedAt: Date;
 }

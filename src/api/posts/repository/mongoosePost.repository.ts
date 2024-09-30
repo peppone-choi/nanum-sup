@@ -14,13 +14,18 @@ export class MongoosePostRepository implements PostRepository {
   }
   async findAll(): Promise<IPost[]> {
     const values = await MongoosePost.find()
+
       .populate({
         path: "author",
         populate: {
           path: "profile",
         },
       })
-      .populate("category");
+      .populate("category")
+      .populate({
+        path: "comments",
+      });
+
     return values;
   }
   async findById(id: string): Promise<IPost | null> {
@@ -31,7 +36,11 @@ export class MongoosePostRepository implements PostRepository {
           path: "profile",
         },
       })
-      .populate("category");
+      .populate("category")
+      .populate({
+        path: "comments",
+      });
+
     return post;
   }
   async update(postId: string, updatePostInfo: Partial<IPost>): Promise<IPost> {
@@ -54,7 +63,10 @@ export class MongoosePostRepository implements PostRepository {
           path: "profile",
         },
       })
-      .populate("category");
+      .populate("category")
+      .populate({
+        path: "comments",
+      });
     return post;
   }
   async findByCategoryId(categoryId: string): Promise<IPost[]> {
@@ -65,7 +77,10 @@ export class MongoosePostRepository implements PostRepository {
           path: "profile",
         },
       })
-      .populate("category");
+      .populate("category")
+      .populate({
+        path: "comments",
+      });
     return posts;
   }
   async findByUserId(userId: string): Promise<IPost[]> {
@@ -76,7 +91,10 @@ export class MongoosePostRepository implements PostRepository {
           path: "profile",
         },
       })
-      .populate("category");
+      .populate("category")
+      .populate({
+        path: "comments",
+      });
     return posts;
   }
 }

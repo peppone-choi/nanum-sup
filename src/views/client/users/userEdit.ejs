@@ -13,8 +13,19 @@
   </head>
   <body>
     <div id="wrap">
-      <header>
-        <div class="header-inner"><%- include('../../_layouts/header') %></div>
+      <header id="header">
+        <!-- 뒤로가기 -->
+        <button
+          type="button"
+          class="backButton"
+          onclick="location.href='/users/:userId'"
+        ></button>
+        <!-- 로고 -->
+        <a href="#">
+          <img src="/static/images/nanum-logo.png" alt="나눔숲" />
+        </a>
+        <button type="button" class="searchButton"></button>
+        <!-- search -->
       </header>
       <main class="main">
         <div class="profile-edit">
@@ -55,7 +66,13 @@
         <form id="profiletextform" class="profile-textform">
           <div class="nickName-edit">
             <label for="nickname">닉네임</label>
-            <input type="text" id="nickname" name="nickname" required />
+            <input
+              type="text"
+              id="nickname"
+              name="nickname"
+              placeholder="<%= user.profile.nickname %>"
+              required
+            />
           </div>
           <div class="bio-edit">
             <label for="bio">소개글</label>
@@ -67,7 +84,9 @@
             ></textarea>
           </div>
         </form>
-        <button type="submit">수정 완료</button>
+        <button type="submit">
+          <a href="/users/<%= user.accountId %>" class="edit">수정 완료</a>
+        </button>
       </main>
     </div>
     <script>

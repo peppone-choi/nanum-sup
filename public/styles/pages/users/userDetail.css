@@ -39,7 +39,7 @@ main {
   margin-top: -100px;
   gap: 20px;
   background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 10px;
+  border-radius: 10px 10px 0 0;
   /* border: 1px solid blue; */
   position: relative;
 }
@@ -73,14 +73,14 @@ main {
 /* 유저 프로필 소개 부분 */
 
 /* 내 게시글 / 좋아요한 게시글 버튼 부분 */
-.post-area {
+.postContainer {
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
 }
 
-.post-filter {
+#post-filter {
   margin: 10px auto;
   width: 310px;
   height: 50px;
@@ -91,7 +91,7 @@ main {
   border: 1px solid var(--sub-color-3);
 }
 
-.post-filter button {
+#post-filter button {
   width: 120px;
   background-color: #ffffff;
   border: none;
@@ -99,11 +99,11 @@ main {
   cursor: pointer;
 }
 
-.post-filter button:hover {
+#post-filter button:hover {
   color: var(--primary);
 }
 
-.post-filter p {
+#post-filter p {
   margin-top: 12px;
   color: #bcbbbb;
 }

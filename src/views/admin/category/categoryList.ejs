@@ -104,14 +104,15 @@
                 const cancelBtn = document.getElementById("cancel-btn");
                 const confirmBtn = document.getElementById("confirm-btn");
 
-                logoutBtn.addEventListener("click", function (e) {
-                    e.preventDefault();
-                    logoutPopup.classList.remove("hidden");
-                });
 
-                cancelBtn.addEventListener("click", function () {
-                    logoutPopup.classList.add("hidden");
-                });
+        logoutBtn.addEventListener("click", function (e) {
+          e.preventDefault();
+          logoutPopup.classList.remove("hidden");
+        });
+
+        cancelBtn.addEventListener("click", function () {
+          logoutPopup.classList.add("hidden");
+        });
 
                 confirmBtn.addEventListener("click", function () {
                     window.location.href = "/views/login";
@@ -120,3 +121,4 @@
         </script>
     </body>
 </html> -->
+
