@@ -4,10 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/static/styles/reset.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="stylesheet" href="/static/styles/pages/users/userEdit.css" />
     <title>유저 수정 페이지</title>
   </head>
@@ -15,11 +12,7 @@
     <div id="wrap">
       <header id="header">
         <!-- 뒤로가기 -->
-        <button
-          type="button"
-          class="backButton"
-          onclick="location.href='/users/:userId'"
-        ></button>
+        <button type="button" class="backButton" onclick="location.href='/users/:userId'"></button>
         <!-- 로고 -->
         <a href="#">
           <img src="/static/images/nanum-logo.png" alt="나눔숲" />
@@ -29,26 +22,11 @@
       </header>
       <main class="main">
         <div class="profile-edit">
-          <img
-            src="/static/images/profile.webp"
-            alt="profile image"
-            id="profile-thumbnail"
-          />
+          <img src="<%- user.profile.thumbnail ? user.profile.thumbnail : `/static/images/profile.webp` %>" alt="profile image" id="profile-thumbnail" />
           <a href="" class="profile-edit-button">
-            <img
-              src="/static/images/pen-icon.svg"
-              alt="프로필 수정"
-              class="profile-pen"
-              id="profile-pen-icon"
-            />
+            <img src="/static/images/pen-icon.svg" alt="프로필 수정" class="profile-pen" id="profile-pen-icon" />
             <label for="profile-image"></label>
-            <input
-              type="file"
-              id="profile-image"
-              name="profile-image"
-              style="display: none"
-              accept="image/*"
-            />
+            <input type="file" id="profile-image" name="profile-image" style="display: none" accept="image/*" />
           </a>
           <!-- 용량 초과시 알림 팝업 -->
           <div id="alertPopup" class="popup hidden">
@@ -66,38 +44,34 @@
         <form id="profiletextform" class="profile-textform">
           <div class="nickName-edit">
             <label for="nickname">닉네임</label>
-            <input
-              type="text"
-              id="nickname"
-              name="nickname"
-              placeholder="<%= user.profile.nickname %>"
-              required
-            />
+            <input type="text" id="nickname" name="nickname" placeholder="<%= user.profile.nickname %>" value="<%= user.profile.nickname %>" required />
           </div>
           <div class="bio-edit">
             <label for="bio">소개글</label>
-            <textarea
-              type="text"
-              maxlength="200"
-              placeholder="나눔숲에서 사용 할 소개글을 입력해주세요. (200자 이하)"
-              id="bio"
-            ></textarea>
+            <textarea type="text" maxlength="200" placeholder="나눔숲에서 사용 할 소개글을 입력해주세요. (200자 이하)" value="<%= user.profile.bio %>" id="bio"></textarea>
           </div>
+          <button type="submit">수정 완료</button>
         </form>
-        <button type="submit">
-          <a href="/users/<%= user.accountId %>" class="edit">수정 완료</a>
-        </button>
       </main>
     </div>
+
     <script>
-      document
-        .getElementById("profile-pen-icon")
-        .addEventListener("click", function () {
-          document.getElementById("profile-image").click();
-        });
+      document.getElementById("profile-pen-icon").addEventListener("click", function (e) {
+        e.preventDefault();
+        document.getElementById("profile-image").click();
+      });
+
+      document.getElementById("profile-image").addEventListener("change", function (e) {
+        e.preventDefault();
+        const file = e.target.files[0];
+        document.querySelector("#profile-thumbnail").src = URL.createObjectURL(file);
+        document.querySelector("#profile-thumbnail").onload = function (e) {
+          URL.revokeObjectURL(profileImage.src);
+        };
+      });
 
       // // 파일 입력 요소와 팝업 요소 가져오기
-      const profileImage = document.getElementById("profile-image");
+      const profileImage = document.getElementById("profile-thumbnail");
       const alertPopup = document.getElementById("alertPopup");
       const closePopupButton = document.getElementById("closePopupButton");
 
@@ -117,6 +91,56 @@
       // 팝업 닫기 버튼 클릭 시 팝업 숨기기
       closePopupButton.addEventListener("click", function () {
         alertPopup.classList.add("hidden");
+      });
+    </script>
+    <script>
+      const form = document.getElementById("profiletextform");
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const nickname = document.getElementById("nickname").value;
+        const bio = document.getElementById("bio").value;
+        const profileImage = document.getElementById("profile-image").files[0];
+        const formData = new FormData();
+        formData.append("filename", encodeURIComponent(profileImage));
+        const image = await fetch("/api/upload/image", {
+          method: "POST",
+          body: formData,
+        });
+
+        const profileImageData = await image.json();
+        const imageUrl = profileImageData.url;
+
+        if (!nickname) {
+          alert("닉네임을 입력해주세요.");
+          return;
+        }
+        console.log(imageUrl);
+        const cookies = document.cookie.split(";").reduce((acc, cookie) => {
+          const [key, value] = cookie.split("=");
+          acc[key.trim()] = decodeURIComponent(value);
+          return acc;
+        }, {});
+        const data = {
+          nickname,
+          bio,
+          thumbnail: encodeURIComponent(imageUrl),
+        };
+        const token = `${cookies.accessToken}`;
+        const response = await fetch(`/api/users/<%= user.id %>`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: token,
+          },
+          body: JSON.stringify(data),
+        });
+
+        if (response.status === 204) {
+          alert("수정이 완료되었습니다.");
+          location.href = `/users/<%= user.id %>`;
+        } else {
+          alert("수정에 실패했습니다.");
+        }
       });
     </script>
   </body>
