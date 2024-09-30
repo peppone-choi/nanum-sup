@@ -160,9 +160,10 @@
                 <button type="submit">등록</button>
               </div>
             </div>
+            <% }); %>
             <!--  대댓글 작성 영역 끝 -->
           </section>
-          <% }); %>
+         
 
         <% }); %>
         <!-- 반복 끝 -->
@@ -251,6 +252,17 @@
       }
     })
    
+    // 답글달기 버튼 클릭 시 작성영역 보이기
+    function toggleReplyArea(button) {
+          const replyArea = button.closest('.commentSingle').nextElementSibling;
+
+          if (replyArea.style.display === "none" || replyArea.style.display === "") {
+            replyArea.style.display = "flex";
+          } else {
+            replyArea.style.display = "none";
+          }
+        }
+
   </script>
 </body>
 </html>
