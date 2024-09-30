@@ -1,6 +1,7 @@
 import HttpException from "@/api/common/exceptions/http.exception";
 import { MongooseReport } from "../model/report.schema";
 import ReportRepository from "./report.repository";
+import path from "path";
 
 export class MongooseReportRepository implements ReportRepository {
   async create(report: Omit<IReport, "id" | "status" | "createdAt">): Promise<IReport> {
@@ -17,11 +18,25 @@ export class MongooseReportRepository implements ReportRepository {
     return reports;
   }
   async getListByUserId(userId: string): Promise<IReport[]> {
-    const reports = await MongooseReport.find({ "reported.id": userId });
+    const reports = await MongooseReport.find({ "reported.id": userId })
+      .populate({
+        path: "reporter",
+        populate: {
+          path: "profile",
+        },
+      })
+      .populate({ path: "reported", populate: { path: "profile" } });
     return reports;
   }
   async getById(reportId: string): Promise<IReport> {
-    const report = await MongooseReport.findById(reportId);
+    const report = await MongooseReport.findById(reportId)
+      .populate({
+        path: "reporter",
+        populate: {
+          path: "profile",
+        },
+      })
+      .populate({ path: "reported", populate: { path: "profile" } });
     if (!report) {
       throw new HttpException(404, "신고 내역을 찾을 수 없습니다.");
     }
