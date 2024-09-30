@@ -43,22 +43,26 @@ export default class PostsViewController {
     async postDetailPage(req: Request, res: Response, next: NextFunction) {
         const post = await this._postsService.getPostDetail(req.params.postId);
         const authorId = post?.author.accountId;
+        const category = await this._categoryService.getCategory();
 
         res.render("client/posts/postDetail", {
             post,
             isMe: authorId === req.user.userId,
+            category,
         });
     }
 
     /** 게시글 작성 페이지 */
     async postWritePage(req: Request, res: Response, next: NextFunction) {
+        const category = await this._categoryService.getCategory();
+
         const post = {
             category: {
                 id: "",
                 title: "",
             },
         };
-        res.render("client/posts/postWrite", { post });
+        res.render("client/posts/postWrite", { post, category });
     }
 
     /** 게시글 수정 페이지 */

@@ -22,8 +22,8 @@
       </header>
       <main class="main">
         <div class="profile-edit">
-          <img src="<%- user.profile.thumbnail ? user.profile.thumbnail : `/static/images/profile.webp` %>" alt="profile image" id="profile-thumbnail" />
-          <a href="" class="profile-edit-button">
+          <img src="/static/images/profile.webp" alt="profile image" id="profile-thumbnail" />
+          <a href="javascript:void(0);" class="profile-edit-button" id="profile-edit-button" onclick="openEditPopup()">
             <img src="/static/images/pen-icon.svg" alt="프로필 수정" class="profile-pen" id="profile-pen-icon" />
             <label for="profile-image"></label>
             <input type="file" id="profile-image" name="profile-image" style="display: none" accept="image/*" />
@@ -38,40 +38,39 @@
               <button id="closePopupButton">확인</button>
             </div>
           </div>
+          <!-- 이미지 수정 및 삭제 팝업 -->
+          <div class="edit-popup hidden">
+            <div class="edit-popup-content">
+              <button class="upload-image-btn" id="upload-image-btn">등록</button>
+              <button class="delete-image-btn" id="delete-image-btn" onclick="deleteProfileImage(); return false;">삭제</button>
+              <button class="cancel-image-upload-btn" id="cancel-image-upload-btn" onclick="closeEditPopup(); return false;">취소</button>
+            </div>
+          </div>
           <!-- 용량 초과시 알림 팝업 -->
           <p>50MB 제한</p>
         </div>
         <form id="profiletextform" class="profile-textform">
           <div class="nickName-edit">
             <label for="nickname">닉네임</label>
-            <input type="text" id="nickname" name="nickname" placeholder="<%= user.profile.nickname %>" value="<%= user.profile.nickname %>" required />
+            <input type="text" id="nickname" name="nickname" placeholder="<%= user.profile.nickname %>" required />
           </div>
           <div class="bio-edit">
             <label for="bio">소개글</label>
-            <textarea type="text" maxlength="200" placeholder="나눔숲에서 사용 할 소개글을 입력해주세요. (200자 이하)" value="<%= user.profile.bio %>" id="bio"></textarea>
+            <textarea type="text" maxlength="200" placeholder="나눔숲에서 사용 할 소개글을 입력해주세요. (200자 이하)" id="bio"></textarea>
           </div>
-          <button type="submit">수정 완료</button>
         </form>
+        <button type="submit">
+          <a href="/users/<%= user.accountId %>" class="edit">수정 완료</a>
+        </button>
       </main>
     </div>
-
     <script>
-      document.getElementById("profile-pen-icon").addEventListener("click", function (e) {
-        e.preventDefault();
+      document.getElementById("upload-image-btn").addEventListener("click", function () {
         document.getElementById("profile-image").click();
       });
 
-      document.getElementById("profile-image").addEventListener("change", function (e) {
-        e.preventDefault();
-        const file = e.target.files[0];
-        document.querySelector("#profile-thumbnail").src = URL.createObjectURL(file);
-        document.querySelector("#profile-thumbnail").onload = function (e) {
-          URL.revokeObjectURL(profileImage.src);
-        };
-      });
-
       // // 파일 입력 요소와 팝업 요소 가져오기
-      const profileImage = document.getElementById("profile-thumbnail");
+      const profileImage = document.getElementById("profile-image");
       const alertPopup = document.getElementById("alertPopup");
       const closePopupButton = document.getElementById("closePopupButton");
 
@@ -93,55 +92,23 @@
         alertPopup.classList.add("hidden");
       });
     </script>
+    <!--프로필사진 수정-->
     <script>
-      const form = document.getElementById("profiletextform");
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const nickname = document.getElementById("nickname").value;
-        const bio = document.getElementById("bio").value;
-        const profileImage = document.getElementById("profile-image").files[0];
-        const formData = new FormData();
-        formData.append("filename", encodeURIComponent(profileImage));
-        const image = await fetch("/api/upload/image", {
-          method: "POST",
-          body: formData,
-        });
+      function openEditPopup() {
+        const editPopup = document.querySelector(".edit-popup");
+        editPopup.classList.remove("hidden");
+      }
 
-        const profileImageData = await image.json();
-        const imageUrl = profileImageData.url;
+      function closeEditPopup() {
+        const editPopup = document.querySelector(".edit-popup");
+        editPopup.classList.add("hidden");
+      }
+      function deleteProfileImage() {
+        const profileImage = document.querySelector(".profile-image");
 
-        if (!nickname) {
-          alert("닉네임을 입력해주세요.");
-          return;
-        }
-        console.log(imageUrl);
-        const cookies = document.cookie.split(";").reduce((acc, cookie) => {
-          const [key, value] = cookie.split("=");
-          acc[key.trim()] = decodeURIComponent(value);
-          return acc;
-        }, {});
-        const data = {
-          nickname,
-          bio,
-          thumbnail: encodeURIComponent(imageUrl),
-        };
-        const token = `${cookies.accessToken}`;
-        const response = await fetch(`/api/users/<%= user.id %>`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            authorization: token,
-          },
-          body: JSON.stringify(data),
-        });
-
-        if (response.status === 204) {
-          alert("수정이 완료되었습니다.");
-          location.href = `/users/<%= user.id %>`;
-        } else {
-          alert("수정에 실패했습니다.");
-        }
-      });
+        profileImage.src = "/static/images/profile.webp";
+        closeEditPopup();
+      }
     </script>
   </body>
 </html>
