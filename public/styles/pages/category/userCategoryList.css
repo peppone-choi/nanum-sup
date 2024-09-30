@@ -85,7 +85,7 @@ body.popup-active {
     display: flex;
     align-items: center;
     font-size: 25px;
-    padding: 10px;
+    padding: 5px;
     width: 90px;
     height: 90px;
     border-radius: 50%;
@@ -101,23 +101,26 @@ body.popup-active {
     }
 }
 
+.category-profile-info {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
 .category-nickName {
-    padding: 10px 0 0;
+    padding: 5px 0 0;
     font-size: 16px;
     font-weight: 700;
     margin: 0 auto;
     @media (max-width: 1000px) {
         font-size: 14px;
-        padding: 0;
         font-weight: 700;
     }
     @media (max-width: 670px) {
-        padding: 0;
         font-size: 14px;
         font-weight: 700;
     }
     @media (max-width: 550px) {
-        padding: 0;
         font-size: 11px;
         font-weight: 700;
     }
@@ -125,7 +128,7 @@ body.popup-active {
 
 .category-id {
     font-size: 13px;
-    padding: 0 0 15px 0;
+    padding: 0 0 5px 0;
     font-weight: 500;
     @media (max-width: 1000px) {
         font-size: 11px;
