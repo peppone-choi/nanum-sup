@@ -280,3 +280,16 @@ body {
 .cancel-image-upload-btn {
     background-color: var(--sub-color-1);
 }
+
+
+
+
+
+
+textarea {
+    padding: 15px;
+}
+
+input:focus {
+    background-color: transparent;
+} 
