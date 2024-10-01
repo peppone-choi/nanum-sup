@@ -65,7 +65,7 @@
             <div class="like">
               <!-- 좋아요 없을 때 -->
               <% if (likedPosts.find((likedPost) => likedPost.postId === post.postId)) { %>
-              <i class="fa-solid fa-heart" data-likeId="<%= post.likes.filter((like) => like.user.userId === userId).id %>"></i>
+              <i class="fa-solid fa-heart" data-like-id="<%= post.likes.filter((like) => like.user.id === userId)[0].id %>"></i>
               <% } else { %>
               <i class="fa-regular fa-heart"></i>
               <% } %>
@@ -185,10 +185,8 @@
       likeDiv.addEventListener("click", async (e) => {
         const likeBtn = e.target.closest(".fa-regular.fa-heart");
         const unlikeBtn = e.target.closest(".fa-solid.fa-heart");
-        console.log(likeBtn, unlikeBtn);
         const postId = likeDiv.closest(".post").dataset.id;
-        const likeId = likeDiv.querySelector("i").dataset.likeId;
-
+        const likeId = unlikeBtn ? unlikeBtn.dataset.likeId : null;
         const accessToken = document.cookie.replace(/(?:(?:^|.*;\s*)accessToken\s*=\s*([^;]*).*$)|^.*$/, "$1");
 
         if (likeBtn) {

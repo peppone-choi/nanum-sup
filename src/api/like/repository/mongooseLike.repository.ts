@@ -5,7 +5,7 @@ import HttpException from "@/api/common/exceptions/http.exception";
 
 export default class MongooseLikeRepository implements LikeRepository {
   async getLike(likeId: string): Promise<ILike> {
-    const like = await MongooseLike.findById(likeId);
+    const like = await MongooseLike.findById(likeId).populate("user");
     if (!like) {
       throw new HttpException(404, "좋아요를 찾을 수 없습니다.");
     }
@@ -22,7 +22,7 @@ export default class MongooseLikeRepository implements LikeRepository {
     return;
   }
   async likedByUser(userId: IUser, likeId: string): Promise<boolean> {
-    const like = await MongooseLike.findById(likeId);
+    const like = await MongooseLike.findById(likeId).populate("user");
     return like?.user === userId;
   }
 }

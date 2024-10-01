@@ -50,13 +50,15 @@ export default class PostsViewController {
     const authorId = post?.author.accountId;
     const category = await this._categoryService.getCategory();
     const userId = req.user.userId;
-    const liked = post?.likes.map((like) => this._likeService.likedByUser(req.user.userId, like.id));
+    const liked = post?.likes ? await Promise.all(post.likes.map(async (like) => await this._likeService.likedByUser(req.user.userId, like.id))) : [];
+    const likeId = post?.likes.find((like) => like.user.id === userId)?.id;
+    console.log(liked);
     res.render("client/posts/postDetail", {
       post,
       isMe: authorId === req.user.userId,
       category,
-      liked,
       userId,
+      likeId,
     });
   }
 

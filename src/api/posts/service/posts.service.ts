@@ -132,6 +132,8 @@ export class PostsServiceImpl implements PostsService {
     if (!like) {
       throw new HttpException(404, "좋아요를 찾을 수 없습니다.");
     }
+    console.log(like.user.accountId, user.accountId);
+
     if (like.user.id !== user.id) {
       throw new HttpException(403, "좋아요를 취소할 수 없습니다.");
     }

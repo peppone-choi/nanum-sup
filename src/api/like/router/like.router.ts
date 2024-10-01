@@ -6,6 +6,7 @@ import LikeController from "../controller/like.controller";
 import LikeServiceImpl from "../service/like.service";
 import MongooseLikeRepository from "../repository/mongooseLike.repository";
 import MongooseUserRepository from "@/api/user/repository/mongooseUser.repository";
+import { authUserMiddleware } from "@/api/common/middlewares/authUser.middleware";
 
 const likeRouter = express.Router();
 
@@ -27,8 +28,8 @@ const LIKE_ROUTES = {
 
 const likeController = new LikeController(new LikeServiceImpl(new MongooseLikeRepository(), new MongooseUserRepository()));
 
-likeRouter.post(extractPath(LIKE_ROUTES.CREATE_LIKE, ROUTES_INDEX.LIKE_API), likeController.createLike);
+likeRouter.post(extractPath(LIKE_ROUTES.CREATE_LIKE, ROUTES_INDEX.LIKE_API), authUserMiddleware, likeController.createLike);
 
-likeRouter.delete(extractPath(LIKE_ROUTES.DELETE_LIKE, ROUTES_INDEX.LIKE_API), likeController.deleteLike);
+likeRouter.delete(extractPath(LIKE_ROUTES.DELETE_LIKE, ROUTES_INDEX.LIKE_API), authUserMiddleware, likeController.deleteLike);
 
 export default likeRouter;

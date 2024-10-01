@@ -72,8 +72,11 @@
           <!-- 좋아요/댓글/즐겨찾기/공유버튼 시작 -->
           <div class="postButtons">
             <div class="like">
-              <!-- 좋아요 없을 때 -->
+              <% if (likeId) { %>
+              <i class="fa-solid fa-heart"></i>
+              <% } else { %>
               <i class="fa-regular fa-heart"></i>
+              <% } %>
               <!-- <i class="fa-solid fa-heart"></i>  -->
               <%= post.likes.length %>
             </div>
@@ -232,15 +235,51 @@
         e.textContent = formattedDate;
       });
 
-      // 좋아요 아이콘
-      const $like = document.querySelectorAll(".like");
-      $like.forEach((like) => {
-        like.addEventListener("click", function () {
-          const heartIcon = this.querySelector("i");
+      const likeBtn = document.querySelector(".fa-regular.fa-heart");
+      const unlikeBtn = document.querySelector(".fa-solid.fa-heart");
+      const likeId = "<%= likeId %>";
+      const accessToken = document.cookie.replace(/(?:(?:^|.*;\s*)accessToken\s*=\s*([^;]*).*$)|^.*$/, "$1");
+      const postId = "<%= post.postId %>";
+      likeBtn?.addEventListener("click", async (e) => {
+        try {
+          const response = await fetch(`/api/posts/${postId}/like`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              authorization: accessToken,
+            },
+            body: JSON.stringify({ postId: postId }),
+          });
 
-          heartIcon.classList.toggle("fa-regular");
-          heartIcon.classList.toggle("fa-solid");
-        });
+          if (response.ok) {
+            document.location.reload();
+          } else {
+            console.error("좋아요를 누르지 못했습니다.");
+          }
+        } catch (error) {
+          console.error("좋아요를 누르지 못했습니다.");
+        }
+      });
+
+      unlikeBtn?.addEventListener("click", async (e) => {
+        try {
+          const response = await fetch(`/api/posts/${postId}/unlike`, {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              authorization: accessToken,
+            },
+            body: JSON.stringify({ likeId: likeId }),
+          });
+
+          if (response.ok) {
+            document.location.reload();
+          } else {
+            console.error("좋아요를 취소하지 못했습니다.");
+          }
+        } catch (error) {
+          console.error(error);
+        }
       });
 
       // 수정, 삭제 더 보기 버튼 보이기
