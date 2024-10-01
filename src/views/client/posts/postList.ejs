@@ -85,6 +85,7 @@
           </div>
           <!-- 좋아요/댓글/즐겨찾기/공유버튼 끝  -->
 
+          <% post.comments.forEach((comment) => { %>
           <!-- 전체 댓글 영역 시작 (작성 및 수정, 삭제, 대댓글) -->
           <div class="commentArea">
             <!-- 댓글 작성 영역 시작 -->
@@ -106,7 +107,7 @@
             <!-- 댓글 작성 영역 끝 -->
 
             <!-- 댓글 리스트 시작 -->
-            <% post.comments.forEach((comment) => { %>
+           
             <div class="commentSingle">
               <!-- 유저 프로필 이미지 -->
               <img src="/static/images/profile.webp" alt="프로필 이미지" class="profileImg" />
