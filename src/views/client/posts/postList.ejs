@@ -19,6 +19,7 @@
         <!-- 헤더 -->
         <%- include('../../_layouts/header-menu') %>
 
+    
         <!-- 반복 시작 -->
         <% posts.forEach(function(post) { %>
         <section class="post" data-id="<%= post.postId %>">
@@ -156,12 +157,12 @@
           <% }); %>
           <!--  대댓글 작성 영역 끝 -->
         </section>
-
         <% }); %>
         <!-- 반복 끝 -->
-
+      
       </div>
       <!-- inner 끝 -->
+
       <!--  글쓰기 버튼 플로팅 -->
       <div class="floatingMenu">
           <!-- 현재 카테고리 플로팅 메뉴 -->
@@ -230,26 +231,25 @@
      
 
       // 무한 스크롤
-      let page = 1;
-      let loading = false;
-      const $postList = document.getElementById("postList");
+      // let page = 1;
+      // let loading = false;
+      // const $postList = document.getElementById("postList");
 
-      window.addEventListener("scroll", async () => {
-        if (window.innterHeight + window.scrollY >= document.body.offsetHeight && !loading) {
-          loading = true;
-          const response = await fetch(`/posts?page=${page + 1}`);
-          if (response.ok) {
-            const newPosts = await response.text();
-            $postList.insertAdjacentHTML("beforeend", newPosts);
-            page++;
-            loading = false;
-          } else {
-            console.error("게시글 로드에 실패했습니다.");
-            loading = false;
-          }
-        }
-      });
+      // window.addEventListener("scroll", async () => {
+      //   if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100 && !loading) {
+      //     loading = true;
 
+      //     const response = await fetch(`/posts?page=${page + 1}`);
+      //     if (response.ok) {
+      //       const newPosts = await response.text();
+      //       $postList.insertAdjacentHTML("beforeend", newPosts);
+      //       page++;
+      //     } else {
+      //       console.error("게시글 로드에 실패했습니다.");
+      //     }
+      //     loading = false;
+      //   }
+      // });
       // 답글달기 버튼 클릭 시 작성영역 보이기
       function toggleReplyArea(button) {
         const replyArea = button.closest(".commentSingle").nextElementSibling;
