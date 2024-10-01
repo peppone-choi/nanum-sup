@@ -22,15 +22,15 @@
           <div class="postTop">
             <div class="postTopUser">
               <!-- 유저 프로필 이미지 -->
-              <img src="/static/images/profile.webp" alt="프로필 이미지" class="profileImg" />
+              <img src="<%- post.author.profile.thumbnail ? post.author.profile.thumbnail : `/static/images/profile.webp` %>" alt="프로필 이미지" class="profileImg" />
               <div class="userInfo">
                 <!-- 유저 닉네임 받아오기 -->
                 <!-- <%= post.author.profile.nickname %> -->
-                <a href="" class="nickName"><%= post.author.profile.nickname %></a>
+                <a href="/users/<%= post.author.id %>" class="nickName"><%= post.author.profile.nickname %></a>
                 <!-- 팔로우 버튼 -->
                 <button type="button"><i class="fa-solid fa-plus"></i> 팔로우</button>
                 <!-- 유저 아이디 -->
-                <a href="" class="userId">&#64;<%= post.author.accountId %></a>
+                <a href="/users/<%= post.author.id %>" class="userId">&#64;<%= post.author.accountId %></a>
               </div>
 
               <!-- 카테고리 받아오기 -->
@@ -49,6 +49,20 @@
 
           <!-- 글 제목 -->
           <b class="title"><%= post.title %></b>
+          <br />
+          <br />
+          <!-- 동영상 -->
+          <% if (post.video !== "") {%>
+          <video controls>
+            <source src="<%= post.video %>" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <% } %>
+          <!-- 이미지 -->
+          <% post.pictures?.forEach((picture) => {%>
+          <img src="<%= picture %>" alt="게시글 이미지" class="postImg" />
+          <% }); %>
+
           <!-- 글 내용 -->
           <p class="content"><%- post.content %></p>
 
@@ -83,7 +97,6 @@
           <!-- 전체 댓글 영역 시작 (작성 및 수정, 삭제, 대댓글) -->
           <% post.comments.forEach((comment) => { %>
           <div class="commentArea">
-           
             <!-- 댓글 작성 영역 시작 -->
             <div class="commentWriteWrap">
               <!-- 유저 프로필 이미지 -->
@@ -103,53 +116,53 @@
             <!-- 댓글 작성 영역 끝 -->
 
             <!-- 댓글 리스트 시작 -->
- 
-                <div class="commentSingle">
-                <!-- 유저 프로필 이미지 -->
-                <img src="/static/images/profile.webp" alt="프로필 이미지" class="profileImg" />
-                <div class="commentUser">
-                    <!-- 유저 닉네임 받아오기 -->
-                    <a href="" class="nickName"><%= comment.author.profile.nickname %></a>
-                    <!-- 유저 아이디 -->
-                    <a href="" class="userId">&#64;<%= comment.author.accountId %></a>
 
-                    <!-- 글 작성시간 -->
-                    <em class="createdAt" data-created-at="<%= comment.createdAt %>"></em>
-                    <!-- 댓글 가져오기 -->
-                    <p class="comment"><%= comment.content %></p>
-                </div>
-                <!-- 좋아요 -->
-                <div class="like">
-                    <i class="fa-regular fa-heart"></i>
-                    12
-                </div>
-                <!-- 답글, 수정, 삭제, 공유 버튼 -->
-                <div class="commentEditBtns">
-                    <button type="button" onclick="toggleReplyArea(this)"><i class="fa-solid fa-reply"></i> 답글달기</button>
-                    <button type="button"><i class="fa-solid fa-pen"></i> 수정</button>
-                    <button type="button"><i class="fa-regular fa-trash-can"></i> 삭제</button>
-                </div>
-                </div>
-                <!-- 댓글 리스트 끝 -->
+            <div class="commentSingle">
+              <!-- 유저 프로필 이미지 -->
+              <img src="/static/images/profile.webp" alt="프로필 이미지" class="profileImg" />
+              <div class="commentUser">
+                <!-- 유저 닉네임 받아오기 -->
+                <a href="" class="nickName"><%= comment.author.profile.nickname %></a>
+                <!-- 유저 아이디 -->
+                <a href="" class="userId">&#64;<%= comment.author.accountId %></a>
 
-                <!-- 대댓글 작성 영역 시작 -->
-                <div class="commentWriteWrapDouble">
-                <!-- 유저 프로필 이미지 -->
-                <img src="/static/images/profile.webp" alt="프로필 이미지" class="profileImg" />
-                <!-- 댓글 입력 창 -->
-                <div class="commentWrite" contenteditable="true" placeholder="답글을 입력해 주세요."></div>
-                <!-- 파일 업로드 버튼 -->
-                <div class="upload">
-                    <label for="file">
-                    <img src="/static/images/upload-btn-gray.svg" class="formImg" alt="파일업로드버튼" />
-                    </label>
-                    <input type="file" id="file" />
-                </div>
-                <!-- 등록 버튼 -->
-                <button type="submit">등록</button>
-                </div>
+                <!-- 글 작성시간 -->
+                <em class="createdAt" data-created-at="<%= comment.createdAt %>"></em>
+                <!-- 댓글 가져오기 -->
+                <p class="comment"><%= comment.content %></p>
+              </div>
+              <!-- 좋아요 -->
+              <div class="like">
+                <i class="fa-regular fa-heart"></i>
+                12
+              </div>
+              <!-- 답글, 수정, 삭제, 공유 버튼 -->
+              <div class="commentEditBtns">
+                <button type="button" onclick="toggleReplyArea(this)"><i class="fa-solid fa-reply"></i> 답글달기</button>
+                <button type="button"><i class="fa-solid fa-pen"></i> 수정</button>
+                <button type="button"><i class="fa-regular fa-trash-can"></i> 삭제</button>
+              </div>
             </div>
-            <% }); %>
+            <!-- 댓글 리스트 끝 -->
+
+            <!-- 대댓글 작성 영역 시작 -->
+            <div class="commentWriteWrapDouble">
+              <!-- 유저 프로필 이미지 -->
+              <img src="/static/images/profile.webp" alt="프로필 이미지" class="profileImg" />
+              <!-- 댓글 입력 창 -->
+              <div class="commentWrite" contenteditable="true" placeholder="답글을 입력해 주세요."></div>
+              <!-- 파일 업로드 버튼 -->
+              <div class="upload">
+                <label for="file">
+                  <img src="/static/images/upload-btn-gray.svg" class="formImg" alt="파일업로드버튼" />
+                </label>
+                <input type="file" id="file" />
+              </div>
+              <!-- 등록 버튼 -->
+              <button type="submit">등록</button>
+            </div>
+          </div>
+          <% }); %>
           <!--  대댓글 작성 영역 끝 -->
         </section>
 
@@ -249,7 +262,6 @@
         event.stopPropagation();
       }
 
-
       // 답글달기 버튼 클릭 시에만 작성영역 보이기
       function toggleReplyArea(button) {
         const replyArea = button.closest(".commentSingle").nextElementSibling;
@@ -286,7 +298,6 @@
           console.error("댓글 작성에 실패했습니다.");
         }
       });
-
     </script>
   </body>
 </html>
