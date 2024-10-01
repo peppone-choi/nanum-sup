@@ -95,6 +95,10 @@
             }
           }
         }
+        // 파일 추가 시 파일명 표시
+        const fileNames = imageArray.map((file) => file.name).join("<br>");
+        const upload = document.querySelector(".upload");
+        upload.appendChild(document.createElement("div")).innerHTML = fileNames;
       });
 
       $form.addEventListener("submit", async (e) => {
