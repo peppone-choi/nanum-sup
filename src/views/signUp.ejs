@@ -251,6 +251,85 @@
             </div>
         </div>
 
+        <!-- 중복확인 API 연결 -->
+
+        <script>
+            const availabilityPopupAvailable = () => {
+                const availabilityPopupAvailable = document.querySelector(
+                    ".availability-popup-available"
+                );
+                availabilityPopupAvailable.classList.remove("hidden");
+                const availableConfirmBtn = document.querySelector(
+                    "#available-confirm-btn"
+                );
+                availableConfirmBtn.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    availabilityPopupAvailable.classList.add("hidden");
+                });
+            };
+
+            const availabilityPopupUnavailable = () => {
+                const availabilityPopupUnavailable = document.querySelector(
+                    ".availability-popup-unavailable"
+                );
+                availabilityPopupUnavailable.classList.remove("hidden");
+                const unavailableConfirmBtn = document.querySelector(
+                    "#unavailable-confirm-btn"
+                );
+                unavailableConfirmBtn.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    availabilityPopupUnavailable.classList.add("hidden");
+                });
+            };
+
+            const emailDoubleCheck = document.querySelector(
+                ".email-double-check"
+            );
+            const idDoubleCheck = document.querySelector(".id-double-check");
+            const nicknameDoubleCheck = document.querySelector(
+                ".nickname-double-check"
+            );
+            emailDoubleCheck.addEventListener("click", async (e) => {
+                e.preventDefault();
+                const email = document.querySelector("#email").value;
+                const data = await fetch(`/api/users/exists/email/${email}`);
+                const jsonData = await data.json();
+                console.log(jsonData);
+                if (!jsonData) {
+                    availabilityPopupAvailable();
+                } else {
+                    availabilityPopupUnavailable();
+                }
+            });
+
+            idDoubleCheck.addEventListener("click", async (e) => {
+                e.preventDefault();
+                const username = document.querySelector("#username").value;
+                const data = await fetch(
+                    `/api/users/exists/accountId/${username}`
+                );
+                const jsonData = await data.json();
+                if (!jsonData) {
+                    availabilityPopupAvailable();
+                } else {
+                    availabilityPopupUnavailable();
+                }
+            });
+
+            nicknameDoubleCheck.addEventListener("click", async (e) => {
+                e.preventDefault();
+                const nickname = document.querySelector("#nickname").value;
+                const data = await fetch(
+                    `/api/users/exists/nickname/${nickname}`
+                );
+                const jsonData = await data.json();
+                if (!jsonData) {
+                    availabilityPopupAvailable();
+                } else {
+                    availabilityPopupUnavailable();
+                }
+            });
+        </script>
         <!--프로필사진 수정-->
         <script>
             function openEditPopup() {
@@ -264,7 +343,6 @@
             }
             function deleteProfileImage() {
                 const profileImage = document.querySelector(".profile-image");
-
                 profileImage.src = "/static/images/profile.webp";
                 closeEditPopup();
             }
@@ -293,6 +371,7 @@
         <!-- 비밀번호 확인 -->
         <script>
             const form = document.querySelector(".signup-input-form");
+            console.log(profileImage);
             form.addEventListener("submit", async (e) => {
                 e.preventDefault();
                 const nickname = document.querySelector("#nickname").value;
@@ -302,21 +381,22 @@
                 const confirmPassword =
                     document.querySelector("#confirm-password").value;
                 const introduce = document.querySelector("#introduce").value;
-                const profileImage = document.querySelector(
-                    "#profile-image-input"
-                ).files[0];
-                const formData = new FormData();
-                formData.append("profileImage", profileImage);
-                const image = await fetch("/api/upload/image", {
-                    method: "POST",
-                    body: formData,
-                });
-                const profileImageData = image.json();
-                const imageUrl = profileImageData.url;
                 if (password !== confirmPassword) {
                     alert("비밀번호가 일치하지 않습니다.");
                     return;
                 }
+                const profileImage = document.querySelector(
+                    "#profile-image-input"
+                ).files[0];
+                const formData = new FormData();
+                formData.append("filename", profileImage);
+                const image = await fetch("/api/upload/image", {
+                    method: "POST",
+                    body: formData,
+                });
+                const profileImageData = await image.json();
+                console.log(profileImageData);
+                const imageUrl = profileImageData.url;
                 const data = await fetch("/api/users", {
                     method: "POST",
                     headers: {
@@ -335,6 +415,7 @@
                 });
                 console.log(data);
                 if (data.status === 201) {
+                    alert("회원가입 성공");
                     location.href = "/login";
                 } else {
                     alert("회원가입 실패");

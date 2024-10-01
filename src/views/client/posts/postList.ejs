@@ -51,7 +51,8 @@
 
                             <!-- 카테고리 받아오기 -->
                             <span class="category"
-                                ><%= post.category.title %></span
+                                ><%= post.category.title.split(' 나눔숲')[0]
+                                %></span
                             >
                             <!-- 더 보기 버튼 -->
                             <div
@@ -117,6 +118,7 @@
                     </div>
                     <!-- 좋아요/댓글/즐겨찾기/공유버튼 끝  -->
 
+                    <% post.comments.forEach((comment) => { %>
                     <!-- 전체 댓글 영역 시작 (작성 및 수정, 삭제, 대댓글) -->
                     <div class="commentArea">
                         <!-- 댓글 작성 영역 시작 -->
@@ -150,7 +152,7 @@
                         <!-- 댓글 작성 영역 끝 -->
 
                         <!-- 댓글 리스트 시작 -->
-                        <% post.comments.forEach((comment) => { %>
+
                         <div class="commentSingle">
                             <!-- 유저 프로필 이미지 -->
                             <img
@@ -236,6 +238,14 @@
                 <!-- 반복 끝 -->
             </div>
             <!-- inner 끝 -->
+            <!--  글쓰기 버튼 플로팅 -->
+            <div class="floatingMenu">
+                <!-- 현재 카테고리 플로팅 메뉴 -->
+                <span>&#128221; 글 쓰기</span>
+                <!-- 글쓰기 버튼 -->
+                <a href="/posts/write"><i class="fa-solid fa-pen"></i></a>
+                <!-- <button type="button"><i class="fa-solid fa-pen"></i></button> -->
+            </div>
         </div>
         <!-- wrap 끝 -->
 

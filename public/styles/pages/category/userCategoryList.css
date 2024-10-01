@@ -239,3 +239,49 @@ body.popup-active {
     cursor: pointer;
     font-weight: bold;
 }
+
+
+
+
+/* css 부분수정 */
+
+.category-menu-bar {
+    overflow-y: hidden;
+}
+
+.category-menu-bar-main {
+    height: calc(100% - 150px);
+}
+
+.logout-popup {
+    z-index: 1000;
+    padding: 15px;
+}
+
+.logout-btn {
+    gap: 5px;
+}
+
+.logout-btn button {
+    width: 100%;
+    color: var(--mono-000);
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    transition: .3s;
+}
+
+.logout-btn button:first-child:hover {
+    background-color: #f87c7c;
+}
+.logout-btn button:last-child:hover {
+    background-color: #75aeee;
+}
+
+@media all and (max-width:479px) {
+    .category-menu-bar {
+        width: 50%;
+    }
+
+    .category-menu-bar-main {
+        height: calc(100% - 170px);
+    }
+  }

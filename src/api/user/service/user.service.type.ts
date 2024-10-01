@@ -15,8 +15,7 @@ export interface UserService {
       role: string;
     },
     id: string,
-    updateData: Omit<IUser, "id" | "accountId" | "salt" | "password">,
-    password?: string
+    updateProfile: Partial<IProfile>
   ): Promise<void>;
   /** 유저 삭제 */
   deleteUser(

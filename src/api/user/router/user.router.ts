@@ -66,12 +66,7 @@ userRouter.get(
 
 userRouter.post(extractPath(USER_ROUTES.SIGN_IN, ROUTES_INDEX.USER_API), validate(createUserValidator), userController.signIn);
 
-userRouter.put(
-  extractPath(USER_ROUTES.UPDATE_USER, ROUTES_INDEX.USER_API),
-  // authUserMiddleware,
-  validate(updateUserValidator),
-  userController.updateUser
-);
+userRouter.put(extractPath(USER_ROUTES.UPDATE_USER, ROUTES_INDEX.USER_API), authUserMiddleware, validate(updateUserValidator), userController.updateUser);
 
 userRouter.delete(
   extractPath(USER_ROUTES.DELETE_USER, ROUTES_INDEX.USER_API),

@@ -51,8 +51,7 @@ export default class UserServiceImpl implements UserService {
       role: string;
     },
     id: string,
-    updateData: Omit<IUser, "id" | "userId" | "salt" | "password">,
-    password?: string
+    updateProfile: Partial<IProfile>
   ): Promise<void> {
     const user = await this._userRepository.getById(id);
     if (_tokenInfo["userId"] !== user.id && _tokenInfo["role"] !== "admin") {
@@ -61,23 +60,11 @@ export default class UserServiceImpl implements UserService {
     if (!user) {
       throw new HttpException(404, "유저가 존재하지 않습니다.");
     }
-    if (password) {
-      const newPassword = CryptoService.encryptPassword(password);
-      if (!newPassword || !newPassword.hashedPassword || !newPassword.salt) {
-        throw new HttpException(500, "비밀번호 암호화에 실패했습니다.");
-      }
-      await this._userRepository.update(id, {
-        ...updateData,
-        salt: newPassword.salt,
-        password: newPassword.hashedPassword,
-      });
+    const profile = await this._profileRepository.findById(user.profile.id);
+    if (!profile) {
+      throw new HttpException(404, "프로필이 존재하지 않습니다.");
     }
-
-    await this._userRepository.update(id, {
-      ...updateData,
-      password: user.password,
-      salt: user.salt,
-    });
+    await this._profileRepository.update(profile.id, updateProfile);
     return;
   }
   async deleteUser(
