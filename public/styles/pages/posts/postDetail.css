@@ -416,11 +416,24 @@ a {
     gap: 10px;
   }
 
+  .commentWriteWrapDouble::before {
+    content: '\f35a';
+    display: inline-block;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 600;
+    color: #9e9e9e;
+  }
+
   .commentArea p,
   .commentWrite,
   .commentUser p {
     width: 85%;
   }
+
+  .commentWriteWrapDouble .commentWrite {
+    width: 83%;
+  }
+
 
   .commentArea .profileImg {
     
