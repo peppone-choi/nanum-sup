@@ -341,7 +341,7 @@ a {
   font-size: 17px;
   color: var(--mono-000);
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
-  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.2);
 }
 
 .floatingMenu span::after {
@@ -355,6 +355,7 @@ a {
   z-index: 1;
   bottom: -9px;
   right: 0;
+  transform: rotate(351deg);
 }
 
 .floatingMenu a {
@@ -368,7 +369,7 @@ a {
   font-size: 25px;
   color: var(--mono-000);
   /* text-shadow: 1px 1px 1px rgba(0,0,0,0.2); */
-  box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.2);
 }
 
 .floatingMenu i {

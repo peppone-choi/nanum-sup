@@ -52,8 +52,8 @@ export class PostsServiceImpl implements PostsService {
   }
 
   /** 게시글 목록 조회 */
-  async getPosts(): Promise<PostResponseDTO[]> {
-    const posts = await this._postRepository.findAll();
+  async getPosts(page: number =1, limit: number=10): Promise<PostResponseDTO[]> {
+    const posts = await this._postRepository.findAll(page, limit);
     return await Promise.all(posts.map((post) => new PostResponseDTO(post)));
   }
 
