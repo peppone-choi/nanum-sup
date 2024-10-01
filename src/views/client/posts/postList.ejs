@@ -38,7 +38,7 @@
               </div>
 
               <!-- 카테고리 받아오기 -->
-              <span class="category"><%= post.category.title %></span>
+              <span class="category"><%= post.category.title.split(' 나눔숲')[0] %></span>
               <!-- 더 보기 버튼 -->
               <div class="viewMore" onclick="toggleEditDelete('<%= post.postId %>', event)">
                 <i class="fa-solid fa-ellipsis-vertical"></i>
@@ -158,8 +158,17 @@
 
         <% }); %>
         <!-- 반복 끝 -->
+
       </div>
       <!-- inner 끝 -->
+      <!--  글쓰기 버튼 플로팅 -->
+      <div class="floatingMenu">
+          <!-- 현재 카테고리 플로팅 메뉴 -->
+          <span>&#128221; 글 쓰기</span>
+        <!-- 글쓰기 버튼 -->
+        <a href="/posts/write"><i class="fa-solid fa-pen"></i></a>
+        <!-- <button type="button"><i class="fa-solid fa-pen"></i></button> -->
+    </div>
     </div>
     <!-- wrap 끝 -->
 

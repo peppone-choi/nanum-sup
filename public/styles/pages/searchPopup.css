@@ -98,3 +98,12 @@
     font-weight: 400;
     color: var(--mono-300);
 }
+
+
+
+
+@media all and (max-width:479px) {
+    .search-popup {
+        width: 65%;
+    }
+  }

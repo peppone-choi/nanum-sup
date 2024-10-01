@@ -30,7 +30,7 @@ a {
 /* 프로필 이미지*/
 .profileImg {
   width: 100%;
-  max-width: 50px;
+  max-width: 45px;
   border-radius: 50%;
 }
 
@@ -38,7 +38,11 @@ a {
   display: flex;
   flex-wrap: wrap;
   /* justify-content: space-between; */
-  width: 40%;
+  width: 60%;
+}
+
+.area {
+  width: 100%;
 }
 
 /* 닉네임 */
@@ -51,7 +55,7 @@ a {
   border: 0;
   background-color: var(--sub-color-3);
   color: var(--mono-000);
-  font-size: var(--text-description);
+  font-size: 13px;
   padding: 3px 5px;
   border-radius: 50px;
   margin-left: 5px;
@@ -59,7 +63,7 @@ a {
 
 /* 유저 아이디 */
 .userId {
-  font-size: var(--text-description);
+  font-size: 13px;
   color: var(--mono-400);
 }
 /* 카테고리 */
@@ -67,8 +71,8 @@ a {
   color: var(--primary);
   border-radius: 30px;
   outline: 1px solid var(--primary);
-  padding: 2px 7px;
-
+  padding: 2px 5px;
+  
   font-size: var(--text-description);
   /* position: absolute;
   right: 0;
@@ -80,6 +84,7 @@ a {
   position: relative;
   cursor: pointer;
   color: var(--mono-300);
+  padding-left: 2px;
 }
 .postEditDelete {
   display: none;
@@ -124,7 +129,7 @@ a {
 
 .content {
   margin: 0;
-  padding: 10px 0;
+  padding: 5px 0;
 }
 
 .createdAt {
@@ -164,8 +169,6 @@ a {
 
 /* ---------- 댓글 부분-------------- */
 
-.comment {
-}
 
 .commentWriteWrap {
   display: flex;
