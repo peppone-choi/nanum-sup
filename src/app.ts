@@ -23,7 +23,6 @@ import userViewRouter from "./api/user/router/user.view.router";
 import uploadRouter from "./api/upload/router/upload.router";
 import likeRouter from "./api/like/router/like.router";
 import { ad } from "@faker-js/faker/dist/airline-C5Qwd7_q";
-import adminLikeRouter from "./api/like/router/adminLike.router";
 import followRouter from "./api/follow/router/follow.router";
 import adminFollowRouter from "./api/follow/router/adminFollow.router";
 import commentRouter from "./api/comment/router/comment.router";
@@ -67,7 +66,6 @@ app.use(ROUTES_INDEX.UPLOAD_API, uploadRouter);
 
 /** -------- like ---------  */
 app.use(ROUTES_INDEX.LIKE_API, likeRouter);
-app.use(ROUTES_INDEX.ADMIN_LIKE_API, adminLikeRouter);
 
 /** -------- follow ---------  */
 app.use(ROUTES_INDEX.FOLLOW_API, followRouter);

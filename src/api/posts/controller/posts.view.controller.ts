@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { PostsService } from "@/api/posts/service/posts.service.type";
 import { CategoryService } from "@/api/category/service/category.service.type";
 import { CommentService } from "@/api/comment/service/comment.service.type";
+import LikeService from "@/api/like/service/like.service.type";
 
 // [사용자]
 // 글 목록 조회 - getPosts
@@ -14,11 +15,13 @@ export default class PostsViewController {
   private readonly _postsService: PostsService;
   private readonly _categoryService: CategoryService;
   private readonly _commentService: CommentService;
+  private readonly _likeService: LikeService;
   // static postListPage: RequestHandler<ParamsDictionary, any, any, ParsedQs, Record<string, any>>;
-  constructor(_postsService: PostsService, _categoryService: CategoryService, _commentService: CommentService) {
+  constructor(_postsService: PostsService, _categoryService: CategoryService, _commentService: CommentService, _likeService: LikeService) {
     this._categoryService = _categoryService;
     this._postsService = _postsService;
     this._commentService = _commentService;
+    this._likeService = _likeService;
     this.postListPage = this.postListPage.bind(this);
     this.postDetailPage = this.postDetailPage.bind(this);
     this.postWritePage = this.postWritePage.bind(this);
@@ -28,12 +31,16 @@ export default class PostsViewController {
   /** 게시글 목록 페이지 */
   async postListPage(req: Request, res: Response, next: NextFunction) {
     // res.render("client/posts/postList");
-
+    const { userId } = req.user;
     const posts = await this._postsService.getPosts();
     const category = await this._categoryService.getCategory();
+    const likedPosts = posts.filter((post) => post.likes.some((like) => like.user.id === userId));
+    console.log(likedPosts);
     res.render("client/posts/postList", {
       posts,
       category,
+      likedPosts,
+      userId,
     });
   }
 
@@ -42,11 +49,14 @@ export default class PostsViewController {
     const post = await this._postsService.getPostDetail(req.params.postId);
     const authorId = post?.author.accountId;
     const category = await this._categoryService.getCategory();
-    console.log(post);
+    const userId = req.user.userId;
+    const liked = post?.likes.map((like) => this._likeService.likedByUser(req.user.userId, like.id));
     res.render("client/posts/postDetail", {
       post,
       isMe: authorId === req.user.userId,
       category,
+      liked,
+      userId,
     });
   }
 

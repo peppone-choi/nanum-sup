@@ -13,6 +13,7 @@ import { PostsServiceImpl } from "@/api/posts/service/posts.service";
 import { MongoosePostRepository } from "@/api/posts/repository/mongoosePost.repository";
 import { MongooseCategoryRepository } from "@/api/category/repository/mongooseCategory.repository";
 import { MongooseCommentRepository } from "@/api/comment/repository/mongooseComment.repository";
+import MongooseLikeRepository from "@/api/like/repository/mongooseLike.repository";
 
 const userViewRouter = express.Router();
 
@@ -30,7 +31,7 @@ const USER_VIEW_ROUTES = {
 const usersViewController = new UsersViewController(
   new UserServiceImpl(new MongooseUserRepository(), new MongooseProfileRepository()),
   new FollowServiceImpl(new MongooseFollowRepository(), new MongooseUserRepository()),
-  new PostsServiceImpl(new MongoosePostRepository(), new MongooseUserRepository(), new MongooseCategoryRepository(), new MongooseCommentRepository())
+  new PostsServiceImpl(new MongoosePostRepository(), new MongooseUserRepository(), new MongooseCategoryRepository(), new MongooseCommentRepository(), new MongooseLikeRepository())
 );
 
 userViewRouter.get(extractPath(USER_VIEW_ROUTES.MY_PAGE, ROUTES_INDEX.USER_VIEW), authCookieViewMiddleware(true), usersViewController.myPage);

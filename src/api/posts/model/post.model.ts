@@ -18,6 +18,7 @@ export class Post implements IPost {
   comments: IComment[];
   pictures?: string[];
   video?: string;
+  likes: ILike[];
   // /** 수정일 */
   // updatedAt: Date;
 
@@ -33,6 +34,7 @@ export class Post implements IPost {
     this.comments = params.comments;
     this.pictures = params.pictures;
     this.video = params.video;
+    this.likes = params.likes;
     // this.updatedAt = params.updatedAt;
   }
 }

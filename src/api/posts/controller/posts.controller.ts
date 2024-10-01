@@ -1,5 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import { PostsService } from "@/api/posts/service/posts.service.type";
+import { L } from "@faker-js/faker/dist/airline-C5Qwd7_q";
+import LikeService from "@/api/like/service/like.service.type";
+import { th } from "@faker-js/faker/.";
 
 // [사용자]
 // 글 목록 조회 - getPosts
@@ -18,13 +21,15 @@ export default class PostsController {
     this.createPost = this.createPost.bind(this);
     this.updatePost = this.updatePost.bind(this);
     this.deletePost = this.deletePost.bind(this);
+    this.findByShortUrl = this.findByShortUrl.bind(this);
+    this.likePost = this.likePost.bind(this);
+    this.unlikePost = this.unlikePost.bind(this);
   }
 
   /** 게시글 목록 조회 */
   async getPosts(req: Request<getPostsRequest["path"], getPostsResponse, getPostsRequest["body"], getPostsRequest["params"]>, res: Response, next: NextFunction) {
     try {
       const posts = await this._postsService.getPosts();
-
       res.send(posts);
     } catch (error) {
       next(error);
@@ -34,6 +39,7 @@ export default class PostsController {
   /** 게시글 상세 조회 */
   async getPostDetail(req: Request<getPostDetailRequest["path"], getPostDetailResponse, getPostDetailRequest["body"], getPostDetailRequest["params"]>, res: Response, next: NextFunction) {
     const { postId } = req.params;
+
     try {
       const post = await this._postsService.getPostDetail(postId);
       res.send(post);
@@ -46,9 +52,6 @@ export default class PostsController {
   async createPost(req: Request<createPostRequest["path"], createPostResponse, createPostRequest["body"], createPostRequest["params"]>, res: Response, next: NextFunction) {
     const { categoryId, title, content, pictures, video } = req.body;
     const { userId } = req.user;
-    console.log("req.user", req.user);
-    console.log("req.body", req.body);
-    console.log("req.params", req.params);
     try {
       const createdPost = await this._postsService.createPost(userId, categoryId, {
         title,
@@ -90,6 +93,27 @@ export default class PostsController {
     try {
       const post = await this._postsService.findByShortUrl(shortUrl);
       res.send(post);
+    } catch (error) {
+      next(error);
+    }
+  }
+  async likePost(req: Request, res: Response, next: NextFunction) {
+    const { postId } = req.params;
+    const { userId } = req.user;
+    try {
+      await this._postsService.likePost(postId, userId);
+      res.status(204).json();
+    } catch (error) {
+      next(error);
+    }
+  }
+  async unlikePost(req: Request, res: Response, next: NextFunction) {
+    const { postId } = req.params;
+    const { likeId } = req.body;
+    const { userId } = req.user;
+    try {
+      await this._postsService.unlikePost(postId, userId, likeId);
+      res.status(204).json();
     } catch (error) {
       next(error);
     }

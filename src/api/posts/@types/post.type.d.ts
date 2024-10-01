@@ -21,6 +21,8 @@ interface IPost {
   pictures?: string[];
 
   video?: string;
+
+  likes: ILike[];
   // /** 수정일 */
   // updatedAt: Date;
 }

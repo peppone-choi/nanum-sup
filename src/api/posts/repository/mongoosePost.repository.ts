@@ -12,8 +12,11 @@ export class MongoosePostRepository implements PostRepository {
     await newPost.save();
     return newPost;
   }
-  async findAll(): Promise<IPost[]> {
+  async findAll(page: number, limit: number): Promise<IPost[]> {
     const values = await MongoosePost.find()
+      .sort({ createdAt: -1 })
+      .skip((page - 1) * limit) 
+      .limit(limit)
 
       .populate({
         path: "author",
@@ -29,6 +32,12 @@ export class MongoosePostRepository implements PostRepository {
           populate: {
             path: "profile",
           },
+        },
+      })
+      .populate({
+        path: "likes",
+        populate: {
+          path: "user",
         },
       });
 
@@ -50,6 +59,12 @@ export class MongoosePostRepository implements PostRepository {
           populate: {
             path: "profile",
           },
+        },
+      })
+      .populate({
+        path: "likes",
+        populate: {
+          path: "user",
         },
       });
 
@@ -85,6 +100,12 @@ export class MongoosePostRepository implements PostRepository {
             path: "profile",
           },
         },
+      })
+      .populate({
+        path: "likes",
+        populate: {
+          path: "user",
+        },
       });
     return post;
   }
@@ -106,6 +127,12 @@ export class MongoosePostRepository implements PostRepository {
             path: "profile",
           },
         },
+      })
+      .populate({
+        path: "likes",
+        populate: {
+          path: "user",
+        },
       });
     return posts;
   }
@@ -126,6 +153,12 @@ export class MongoosePostRepository implements PostRepository {
           populate: {
             path: "profile",
           },
+        },
+      })
+      .populate({
+        path: "likes",
+        populate: {
+          path: "user",
         },
       });
     return posts;

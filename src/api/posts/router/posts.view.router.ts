@@ -10,6 +10,9 @@ import { MongooseCommentRepository } from "@/api/comment/repository/mongooseComm
 import { authCookieViewMiddleware } from "@/api/common/middlewares/authCookie.middleware";
 import { CategoryServiceImpl } from "@/api/category/service/category.service";
 import CommentServiceImpl from "@/api/comment/service/comment.service";
+import MongooseLikeRepository from "@/api/like/repository/mongooseLike.repository";
+import Like from "@/api/like/model/like.model";
+import LikeServiceImpl from "@/api/like/service/like.service";
 
 const postViewRouter = express.Router();
 
@@ -26,13 +29,14 @@ const POST_VIEW_ROUTES = {
 } as const;
 
 const postsViewController = new PostsViewController(
-  new PostsServiceImpl(new MongoosePostRepository(), new MongooseUserRepository(), new MongooseCategoryRepository(), new MongooseCommentRepository()),
+  new PostsServiceImpl(new MongoosePostRepository(), new MongooseUserRepository(), new MongooseCategoryRepository(), new MongooseCommentRepository(), new MongooseLikeRepository()),
   new CategoryServiceImpl(new MongooseCategoryRepository()),
-  new CommentServiceImpl(new MongooseCommentRepository(), new MongooseUserRepository(), new MongoosePostRepository())
+  new CommentServiceImpl(new MongooseCommentRepository(), new MongooseUserRepository(), new MongoosePostRepository()),
+  new LikeServiceImpl(new MongooseLikeRepository(), new MongooseUserRepository())
 );
 
 /** 게시글 목록 조회 */
-postViewRouter.get(extractPath(POST_VIEW_ROUTES.POST_LIST, ROUTES_INDEX.POST_VIEW), postsViewController.postListPage);
+postViewRouter.get(extractPath(POST_VIEW_ROUTES.POST_LIST, ROUTES_INDEX.POST_VIEW), authCookieViewMiddleware(true), postsViewController.postListPage);
 
 /** 게시글 작성 */
 postViewRouter.get(extractPath(POST_VIEW_ROUTES.POST_WRITE, ROUTES_INDEX.POST_VIEW), authCookieViewMiddleware(true), postsViewController.postWritePage);
