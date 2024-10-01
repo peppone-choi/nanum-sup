@@ -12,8 +12,11 @@ export class MongoosePostRepository implements PostRepository {
     await newPost.save();
     return newPost;
   }
-  async findAll(): Promise<IPost[]> {
+  async findAll(page: number, limit: number): Promise<IPost[]> {
     const values = await MongoosePost.find()
+      .sort({ createdAt: -1 })
+      .skip((page - 1) * limit) 
+      .limit(limit)
 
       .populate({
         path: "author",
