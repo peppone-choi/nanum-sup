@@ -230,25 +230,25 @@
 
     
       // 무한 스크롤
-      let page = 1; // 현재 페이지
-      const limit = 10; // 페이지당 항목 수
-      let loading = false;
+      // let page = 1; // 현재 페이지
+      // const limit = 10; // 페이지당 항목 수
+      // let loading = false;
 
-      window.addEventListener("scroll", async () => {
-        if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100 && !loading) {
-          loading = true;
+      // window.addEventListener("scroll", async () => {
+      //   if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100 && !loading) {
+      //     loading = true;
 
-          const response = await fetch(`/posts?page=${page + 1}&limit=${limit}`);
-          if (response.ok) {
-            const newPosts = await response.text();
-            document.querySelector('.inner').insertAdjacentHTML("beforeend", newPosts); // 게시글 추가
-            page++; // 페이지 증가
-          } else {
-            console.error("게시글 로드에 실패했습니다.");
-          }
-          loading = false;
-        }
-      });
+      //     const response = await fetch(`/posts?page=${page + 1}&limit=${limit}`);
+      //     if (response.ok) {
+      //       const newPosts = await response.text();
+      //       document.querySelector('.inner').insertAdjacentHTML("beforeend", newPosts); // 게시글 추가
+      //       page++; // 페이지 증가
+      //     } else {
+      //       console.error("게시글 로드에 실패했습니다.");
+      //     }
+      //     loading = false;
+      //   }
+      // });
 
 
       // 답글달기 버튼 클릭 시 작성영역 보이기
