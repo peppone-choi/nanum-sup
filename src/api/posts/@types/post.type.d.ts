@@ -17,6 +17,10 @@ interface IPost {
   createdAt: Date;
   // /** 댓글 */
   comments: IComment[];
+
+  pictures?: string[];
+
+  video?: string;
   // /** 수정일 */
   // updatedAt: Date;
 }
