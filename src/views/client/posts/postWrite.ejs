@@ -146,6 +146,9 @@
           const data = await res.json();
           if (!res.ok) throw new Error(data.details);
 
+          alert("게시글 작성에 성공했습니다!");
+          location.href = `/posts/${data.postId}`;
+
           //   location.href = `/posts/${data.postId}`;
         } catch (error) {
           alert("게시글 작성에 실패했습니다.", error.message);
