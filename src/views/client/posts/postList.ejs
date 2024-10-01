@@ -17,7 +17,7 @@
     <div id="wrap">
       <div class="inner">
         <!-- 헤더 -->
-        <%- include('../../_layouts/header-menu') %>
+        <%- include('../../_layouts/header-menu', {userId: userId}) %>
 
         <!-- 반복 시작 -->
         <% posts.forEach(function(post) { %>
