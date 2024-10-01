@@ -22,7 +22,7 @@
       </header>
       <main class="main">
         <div class="profile-edit">
-          <img src="/static/images/profile.webp" alt="profile image" id="profile-thumbnail" />
+          <img src="<%= user.profile.thumbnail %>" alt="profile image" id="profile-thumbnail" />
           <a href="javascript:void(0);" class="profile-edit-button" id="profile-edit-button" onclick="openEditPopup()">
             <img src="/static/images/pen-icon.svg" alt="프로필 수정" class="profile-pen" id="profile-pen-icon" />
             <label for="profile-image"></label>
@@ -52,21 +52,29 @@
         <form id="profiletextform" class="profile-textform">
           <div class="nickName-edit">
             <label for="nickname">닉네임</label>
-            <input type="text" id="nickname" name="nickname" placeholder="<%= user.profile.nickname %>" required />
+            <input type="text" id="nickname" name="nickname" placeholder="<%= user.profile.nickname %>" value="<%= user.profile.nickname %>" required />
           </div>
           <div class="bio-edit">
             <label for="bio">소개글</label>
-            <textarea type="text" maxlength="200" placeholder="나눔숲에서 사용 할 소개글을 입력해주세요. (200자 이하)" id="bio"></textarea>
+            <textarea type="text" maxlength="200" placeholder="나눔숲에서 사용 할 소개글을 입력해주세요. (200자 이하)" id="bio"><%= user.profile.bio %></textarea>
           </div>
+          <button type="submit">수정 완료</button>
         </form>
-        <button type="submit">
-          <a href="/users/<%= user.accountId %>" class="edit">수정 완료</a>
-        </button>
       </main>
     </div>
+    <!-- 파일 선택 -->
     <script>
       document.getElementById("upload-image-btn").addEventListener("click", function () {
         document.getElementById("profile-image").click();
+      });
+
+      document.getElementById("delete-image-btn").addEventListener("click", function () {
+        document.getElementById("profile-thumbnail").src = "/static/images/profile.webp";
+        document.getElementById("profile-image").value = "";
+      });
+
+      document.getElementById("cancel-image-upload-btn").addEventListener("click", function () {
+        document.querySelector(".edit-popup").classList.add("hidden");
       });
 
       // // 파일 입력 요소와 팝업 요소 가져오기
@@ -84,7 +92,13 @@
         if (file && file.size > MAX_FILE_SIZE) {
           // 파일 크기가 50MB를 초과하면 팝업 표시
           alertPopup.classList.remove("hidden");
+          return;
         }
+        document.querySelector("#profile-thumbnail").src = URL.createObjectURL(file);
+        document.querySelector("#profile-thumbnail").onload = function (e) {
+          URL.revokeObjectURL(profileImage.src);
+        };
+        closeEditPopup();
       });
 
       // 팝업 닫기 버튼 클릭 시 팝업 숨기기
@@ -109,6 +123,53 @@
         profileImage.src = "/static/images/profile.webp";
         closeEditPopup();
       }
+    </script>
+    <!-- 수정 완료 버튼 클릭 시 수정 api 연결 -->
+    <script>
+      const profiletextform = document.getElementById("profiletextform");
+      profiletextform.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        const bio = document.getElementById("bio").value;
+        const nickname = document.getElementById("nickname").value;
+        const profileImage = document.getElementById("profile-image").files[0];
+        let profileImageUrl = "<%= user.profile.thumbnail %>";
+        if (profileImage !== undefined) {
+          const imageFormData = new FormData();
+          imageFormData.append("filename", profileImage);
+
+          const image = await fetch("/api/upload/image", {
+            method: "POST",
+            body: imageFormData,
+          });
+          const imageJSON = await image.json();
+          profileImageUrl = await imageJSON.url;
+        }
+        const id = "<%= user.id %>";
+        const user = "<%= user %>";
+        const data = {
+          nickname,
+          bio,
+          thumbnail: profileImageUrl,
+        };
+        const cookies = document.cookie.split(";");
+        const accessToken = cookies.find((cookie) => cookie.includes("accessToken")).split("=")[1];
+        const res = await fetch(`/api/users/${id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `${accessToken}`,
+          },
+          body: JSON.stringify({
+            ...data,
+          }),
+        });
+        if (res.status === 204) {
+          alert("수정이 완료되었습니다.");
+          location.href = `/users/${id}`;
+        } else {
+          alert("수정에 실패했습니다.");
+        }
+      });
     </script>
   </body>
 </html>

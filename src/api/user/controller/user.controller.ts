@@ -44,8 +44,16 @@ export default class UserController {
   async updateUser(req: Request<updateUserRequest["path"], updateUserResponse, updateUserRequest["body"], updateUserRequest["params"]>, res: Response, next: NextFunction) {
     req.user;
     const { userId } = req.params;
-    const { email, password, role, profile } = req.body;
-    await this._userService.updateUser(req.user, userId, { email, role, profile }, password);
+    const { nickname, bio, thumbnail } = req.body;
+    console.log("req.user", req.user);
+    console.log("req.params", req.params);
+    console.log("req.body", req.body);
+
+    await this._userService.updateUser(req.user, userId, {
+      nickname,
+      bio,
+      thumbnail,
+    });
     res.status(204).send();
   }
   async deleteUser(req: Request<deleteUserRequest["path"], deleteUserResponse, deleteUserRequest["body"], deleteUserRequest["params"]>, res: Response, next: NextFunction) {

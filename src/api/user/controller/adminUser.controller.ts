@@ -42,17 +42,13 @@ export default class AdminUserController {
   }
   async updateAdminUser(req: Request<updateAdminUserRequest["path"], updateAdminUserResponse, updateAdminUserRequest["body"], updateAdminUserRequest["params"]>, res: Response, next: NextFunction) {
     const { userId } = req.params;
-    const { email, role, password, profile } = req.body;
-    await this._userService.updateUser(
-      req.user,
-      userId,
-      {
-        email,
-        role,
-        profile,
-      },
-      password
-    );
+    const user = await this._userService.getUserDetail(userId);
+    const { nickname, bio, thumbnail } = req.body;
+    await this._userService.updateUser(req.user, userId, {
+      nickname,
+      bio,
+      thumbnail,
+    });
     res.status(204).send;
   }
   async deleteAdminUser(req: Request<deleteAdminUserRequest["path"], deleteAdminUserResponse, deleteAdminUserRequest["body"], deleteAdminUserRequest["params"]>, res: Response, next: NextFunction) {
