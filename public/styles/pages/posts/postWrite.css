@@ -155,3 +155,12 @@ button[type="submit"] {
 }
 
 
+
+
+
+/* 태블릿 */
+@media (min-width: 768px) {
+  #wrap .container {
+    padding: 5% 15px 10px 15px;
+  }
+}
