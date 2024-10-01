@@ -21,7 +21,7 @@ section {
 }
 
 .viewMore {
-  
+  display: none;
 }
 
 
@@ -33,4 +33,4 @@ section {
   .commentArea p {
     width: 100%;
   }
-} 
+} `
