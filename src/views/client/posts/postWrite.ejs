@@ -95,6 +95,12 @@
             }
           }
         }
+        // 파일 추가 시 파일명 표시
+        const imageFileNames = imageArray.map((file) => file.name).join("<br>");
+        const videoFileNames = videoArray.map((file) => file.name).join("<br>");
+        const fileNames = `${imageFileNames}<br>${videoFileNames}`;
+        const upload = document.querySelector(".upload");
+        upload.appendChild(document.createElement("div")).innerHTML = fileNames;
       });
 
       $form.addEventListener("submit", async (e) => {
@@ -112,39 +118,45 @@
           imageArray.forEach((file) => imageFormData.append("filenames", file));
 
           const videoFormData = new FormData();
-          videoArray.forEach((file) => videoFormData.append("filenames", file));
-
-          const imageFileRes = await fetch("/api/upload/images", {
-            method: "POST",
-            body: imageFormData,
-          });
-          const videoFileRes = await fetch("/api/upload/video", {
-            method: "POST",
-            body: videoFormData,
-          });
-
-          const imageFileData = (await imageFileRes.json()).urls;
-          const videoFileData = (await videoFileRes.json()).url;
-
+          videoArray.forEach((file) => videoFormData.append("filename", file));
+          const imageFormCount = imageFormData.getAll("filenames").length;
+          const videoFormCount = videoFormData.getAll("filename").length;
+          let imageFileUrl = [];
+          let videoFileUrl = null;
+          if (imageFormCount > 0) {
+            const imageFileRes = await fetch("/api/upload/images", {
+              method: "POST",
+              body: imageFormData,
+            });
+            imageFileUrl = (await imageFileRes.json()).urls;
+          }
+          if (videoFormCount > 0) {
+            const videoFileRes = await fetch("/api/upload/video", {
+              method: "POST",
+              body: videoFormData,
+            });
+            videoFileUrl = (await videoFileRes.json()).url;
+          }
           const token = `${cookies.accessToken}`;
           const $category = document.getElementById("category");
-
+          console.log(token);
           const res = await fetch("/api/posts", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              authorization: token,
+              Authorization: token,
             },
             body: JSON.stringify({
               categoryId: $category.value,
               title,
               content,
-              pictures: imageFileData || null,
-              videos: videoFileData || null,
+              pictures: imageArray.length > 0 ? [...imageFileUrl] : [],
+              video: videoArray.length > 0 ? videoFileUrl : "",
             }),
           });
           const data = await res.json();
-          if (!res.ok) throw new Error(data.details);
+
+          if (!res.status === 201) throw new Error(await data.details);
 
           alert("게시글 작성에 성공했습니다!");
           location.href = `/posts/${data.postId}`;
