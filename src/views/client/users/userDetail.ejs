@@ -19,7 +19,7 @@
         </div>
         <!-- 프로필 이미지,닉네임,아이디,소개글 -->
         <div class="profile-area">
-          <img src="<%= user.profile.thumbnail %>" alt="profile image" class="profile-thumbnail" />
+          <img src="<%- user.profile.thumbnail ? user.profile.thumbnail : `/static/images/profile.webp` %>" alt="profile image" class="profile-thumbnail" />
           <div class="profile-user">
             <p class="nickName"><%= user.profile.nickname %></p>
             <p class="userid">&#64;<%= user.accountId %></p>
@@ -41,7 +41,7 @@
           <div class="post">
             <!-- 프로필 이미지,닉네임,아이디 -->
             <div class="post-profile">
-              <img src="/static/images/profile.webp" alt="profile image" class="post-profile-thumbnail" />
+              <img src="<%- user.profile.thumbnail ? user.profile.thumbnail : `/static/images/profile.webp` %>" alt="profile image" class="post-profile-thumbnail" />
               <div class="profile-user b">
                 <p class="nickName"><%= user.profile.nickname %></p>
                 <p class="userid">&#64;<%= user.accountId %></p>

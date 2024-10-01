@@ -46,7 +46,9 @@ export default class PostsController {
   async createPost(req: Request<createPostRequest["path"], createPostResponse, createPostRequest["body"], createPostRequest["params"]>, res: Response, next: NextFunction) {
     const { categoryId, title, content, pictures, video } = req.body;
     const { userId } = req.user;
-    console.log(req.user);
+    console.log("req.user", req.user);
+    console.log("req.body", req.body);
+    console.log("req.params", req.params);
     try {
       const createdPost = await this._postsService.createPost(userId, categoryId, {
         title,

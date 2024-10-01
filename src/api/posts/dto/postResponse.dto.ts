@@ -11,6 +11,8 @@ export class PostResponseDTO {
   category: CategoryResponseDTO;
   shortUrl: string;
   createdAt: Date;
+  pictures: string[];
+  video: string;
   comments: CommentResponseDTO[];
 
   constructor(params: IPost) {
@@ -21,6 +23,8 @@ export class PostResponseDTO {
     this.category = new CategoryResponseDTO(params.category);
     this.shortUrl = params.shortUrl;
     this.createdAt = params.createdAt;
+    this.pictures = params.pictures ? params.pictures : [];
+    this.video = params.video ? params.video : "";
     this.comments = params.comments.map((comment) => new CommentResponseDTO(comment));
   }
 }
