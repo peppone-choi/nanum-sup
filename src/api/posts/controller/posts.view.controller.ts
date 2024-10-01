@@ -83,6 +83,7 @@ export default class PostsViewController {
     const isMe = userId === post?.author.id;
 
     // console.log(userId, post?.author);
+    const category = await this._categoryService.getCategory();
 
     if (!isMe) {
       res.send(`<script>
@@ -90,6 +91,6 @@ export default class PostsViewController {
         </script>`);
     }
 
-    res.render("client/posts/postEdit", { post });
+    res.render("client/posts/postEdit", { post, category });
   }
 }

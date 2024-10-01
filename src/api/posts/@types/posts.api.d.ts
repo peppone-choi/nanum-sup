@@ -57,7 +57,13 @@ declare type createPostRequest = {
 /** 게시글 생성 응답 */
 declare type createPostResponse = IPostResponseDTO;
 
-declare type updatePostRequestBody = Pick<IPost, "title", "content", "category">;
+declare type updatePostRequestBody = {
+  title: string;
+  content: string;
+  category: string;
+  pictures?: string[];
+  video?: string;
+};
 
 declare type updatePostRequestPath = {
   /** 게시글 ID */

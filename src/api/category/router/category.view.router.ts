@@ -12,6 +12,7 @@ import { PostsServiceImpl } from "@/api/posts/service/posts.service";
 import MongooseUserRepository from "@/api/user/repository/mongooseUser.repository";
 import { MongooseCommentRepository } from "@/api/comment/repository/mongooseComment.repository";
 import MongooseLikeRepository from "@/api/like/repository/mongooseLike.repository";
+import { authCookieViewMiddleware } from "@/api/common/middlewares/authCookie.middleware";
 
 const categoryViewRouter = express.Router();
 
@@ -36,6 +37,6 @@ const categoryViewController = new CategoryViewController(
 //     categoryViewController.userCategoryListPage
 // );
 
-categoryViewRouter.get(extractPath(CATEGORY_VIEW_ROUTES.CATEGORY_DETAIL, ROUTES_INDEX.CATEGORY_VIEW), categoryViewController.userCategoryDetailPage);
+categoryViewRouter.get(extractPath(CATEGORY_VIEW_ROUTES.CATEGORY_DETAIL, ROUTES_INDEX.CATEGORY_VIEW), authCookieViewMiddleware(true), categoryViewController.userCategoryDetailPage);
 
 export default categoryViewRouter;

@@ -1,155 +1,260 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>게시글 수정</title>
-        <link rel="stylesheet" href="/static/styles/pages/posts/postEdit.css" />
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-            integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"
-        />
-    </head>
-    <body>
-        <div id="wrap">
-            <div class="inner">
-                <%- include('../../_layouts/header-menu-w',{ category: category
-                }) %>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>게시글 수정</title>
+    <link rel="stylesheet" href="/static/styles/pages/posts/postEdit.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div id="wrap">
+      <div class="inner"><%- include('../../_layouts/header-menu-w',{ category: category }) %></div>
+
+      <div class="inner container">
+        <form id="postWriteForm" class="flex-column-center">
+          <!-- 카테고리 선택 시작 -->
+          <label for="category" class="category">
+            <!-- <span>카테고리 선택</span> -->
+            <select name="category" id="category" class="category" required>
+              <option disabled>카테고리 선택</option>
+              <!-- <% if (post.category.id && post.category.title) { %> -->
+              <option selected value="<%= post.category.id %>"><%= post.category.title %></option>
+              <!-- <% } %> -->
+            </select>
+          </label>
+          <!-- 카테고리 선택 끝 -->
+
+          <!-- 제목 입력 시작 -->
+          <label for="title" class="title">
+            <!-- <span>제목</span> -->
+            <input type="text" name="title" id="title" required placeholder="제목을 작성해 주세요." value="<%= post.title %>" />
+          </label>
+          <!-- 제목 입력 끝 -->
+          <!-- <div id="summernote"></div> -->
+
+          <!-- 내용 입력 시작 -->
+
+          <div class="contentArea">
+            <!-- <div id="content" contenteditable="true" placeholder="게시글 내용을 작성해 주세요."></div> -->
+            <textarea name="content" id="content" maxlength="2000" placeholder="게시글 내용을 작성해 주세요."><%= post.content %></textarea>
+            <div class="upload">
+              <label for="file">
+                <img src="/static/images/upload-btn-gray.svg" class="formImg" alt="파일업로드버튼" />
+              </label>
+              <input type="file" id="file" multiple />
             </div>
+          </div>
 
-            <div class="inner container">
-                <form id="postWriteForm" class="flex-column-center">
-                    <!-- 카테고리 선택 시작 -->
-                    <label for="category" class="category">
-                        <!-- <span>카테고리 선택</span> -->
-                        <select
-                            name="category"
-                            id="category"
-                            class="category"
-                            required
-                        >
-                            <option disabled selected>카테고리 선택</option>
-                            <!-- <% if (post.category.id && post.category.title) { %> -->
-                            <option value="<%= post.category.id %>">
-                                <%= post.category.title %>
-                            </option>
-                            <!-- <% } %> -->
-                        </select>
-                    </label>
-                    <!-- 카테고리 선택 끝 -->
+          <!-- 내용 입력 끝 -->
 
-                    <!-- 제목 입력 시작 -->
-                    <label for="title" class="title">
-                        <!-- <span>제목</span> -->
-                        <input
-                            type="text"
-                            name="title"
-                            id="title"
-                            required
-                            placeholder="제목을 작성해 주세요."
-                        />
-                    </label>
-                    <!-- 제목 입력 끝 -->
-                    <!-- <div id="summernote"></div> -->
+          <!-- 작성 (제출) 버튼 -->
+          <button type="submit">수정 완료</button>
+        </form>
+      </div>
+    </div>
 
-                    <!-- 내용 입력 시작 -->
+    <script>
+      const $form = document.getElementById("postWriteForm");
+      const formImg = document.querySelector(".formImg");
+      const file = document.getElementById("file");
+      // file에 기존의 이미지와 비디오 파일을 담아둘 배열
+      let videoUrl = "";
+      const IMAGE_MAX = 4;
+      const VIDEO_MAX = 1;
+      const imageArray = [];
 
-                    <div class="contentArea">
-                        <!-- <div id="content" contenteditable="true" placeholder="게시글 내용을 작성해 주세요."></div> -->
-                        <textarea
-                            name="content"
-                            id="content"
-                            maxlength="2000"
-                            placeholder="게시글 내용을 작성해 주세요."
-                        ></textarea>
-                        <div class="upload">
-                            <label for="file">
-                                <img
-                                    src="/static/images/upload-btn-gray.svg"
-                                    class="formImg"
-                                    alt="파일업로드버튼"
-                                />
-                            </label>
-                            <input type="file" id="file" />
-                        </div>
-                    </div>
+      // 기존의 이미지와 비디오 파일을 배열에 담아두기
+      const post = `<%- JSON.stringify(post) %>`;
+      const postObj = JSON.parse(post);
+      postObj.pictures?.forEach((image) => {
+        const imageFile = new File([image], image, { type: "image/png" });
+        imageArray.push(imageFile);
+      });
+      const upload = document.querySelector(".upload");
+      const video = postObj.video ? new File([postObj.video], postObj.video, { type: "video/mp4" }) : "";
+      upload.appendChild(document.createElement("div")).innerHTML = imageArray.map((file) => file.name).join("<br>") + "<br>" + videoUrl;
 
-                    <!-- 내용 입력 끝 -->
+      // 파일 업로드 시 파일명 표시
+      file.addEventListener("change", async (e) => {
+        e.preventDefault();
+        const files = e.target.files;
 
-                    <!-- 작성 (제출) 버튼 -->
-                    <button type="submit">수정 완료</button>
-                </form>
-            </div>
-        </div>
+        for (let i = 0; i < files.length; i++) {
+          const file = files[i];
+          const fileType = file.type.split("/")[0];
 
-        <script>
-            const $deleteButton = document.getElementById("delete-button");
+          if (fileType === "image") {
+            if (imageArray.length < IMAGE_MAX) {
+              imageArray.push(file);
+            } else {
+              alert("이미지는 최대 4개까지 업로드 가능합니다.");
+              break;
+            }
+          } else if (fileType === "video") {
+            if (videoUrl === "") {
+              videoUrl = file.name;
+            } else {
+              alert("비디오는 최대 1개까지 업로드 가능합니다.");
+              break;
+            }
+          }
+        }
+        // 파일 추가 시 파일명 표시 및 파일 하나하나 마다 삭제 버튼 생성
+        const imageFileNames = imageArray.map((file) => file.name).join("<br>");
+        const videoFileNames = videoUrl;
+        const fileNames = `${imageFileNames}<br>${videoFileNames}`;
 
-            const cookies = document.cookie.split(";").reduce((acc, cookie) => {
-                const [key, value] = cookie.split("=");
-                acc[key.trim()] = decodeURIComponent(value);
-                return acc;
-            }, {});
+        upload.appendChild(document.createElement("div")).innerHTML = fileNames;
+      });
 
-            const token = `${cookies.accessToken}`;
+      const $postWriteForm = document.getElementById("postWriteForm");
 
-            $deleteButton?.addEventListener("click", async () => {
-                try {
-                    const res = await fetch("/api/posts/<%= post.postId %>", {
-                        method: "delete",
-                        headers: {
-                            "Content-Type": "application/json",
-                            authorization: token,
-                        },
-                    });
+      const $deleteButton = document.getElementById("delete-button");
 
-                    if (!res.ok) {
-                        throw new Error("게시글 삭제에 실패했습니다.");
-                    }
+      const cookies = document.cookie.split(";").reduce((acc, cookie) => {
+        const [key, value] = cookie.split("=");
+        acc[key.trim()] = decodeURIComponent(value);
+        return acc;
+      }, {});
 
-                    location.href = "/posts";
-                } catch (error) {
-                    console.error("게시글 작성에 실패했습니다.");
-                }
-            });
+      const token = `${cookies.accessToken}`;
 
-            // 카테고리 데이터 가져오기
-            const categories = [
-                {
-                    categoryId: "66f247f68d1dffeca42e1a10",
-                    title: "👨‍💻 개발 나눔숲",
-                },
-                {
-                    categoryId: "66f24da1aa8f0092f375865a",
-                    title: "🎬 영화 나눔숲",
-                },
-                {
-                    categoryId: "66f264b40d793036e28637e8",
-                    title: "🍜 맛집 나눔숲",
-                },
-                {
-                    categoryId: "66f28957453960e94559ae7d",
-                    title: "💭 잡담 나눔숲",
-                },
-                {
-                    categoryId: "66f28a54453960e94559ae80",
-                    title: "💪 운동 나눔숲",
-                },
-            ];
+      $postWriteForm?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const images = imageArray;
+        const video = videoUrl;
+        const videoFile = videoUrl ? new File([videoUrl], videoUrl, { type: "video/mp4" }) : "";
+        const imageFormData = new FormData();
+        const fileFormData = new FormData();
+        const imagesUrl = [];
+        post.pictures?.forEach((image) => {
+          imagesUrl.push(image);
+        });
+        images.forEach((image) => {
+          if (image instanceof File) {
+            imageFormData.append("filenames", image);
+          }
+        });
+        if (videoFile instanceof File) {
+          fileFormData.append("filename", videoFile);
+        }
 
-            // select 요소 가져오기
-            const $category = document.getElementById("category");
+        const imageRes = await fetch("/api/upload/images", {
+          method: "post",
+          headers: {
+            authorization: token,
+          },
+          body: imageFormData,
+        });
+        const imageResData = await imageRes.json();
+        const urls = imageResData.urls;
+        urls.forEach((url) => {
+          imagesUrl.push(url);
+        });
 
-            // 옵션 추가 하기
-            categories.forEach((category) => {
-                const option = document.createElement("option");
-                option.value = category.categoryId; // value 속성에 categoryId 할당해주기
-                option.textContent = category.title; // 표시할 텍스트에 title 할당해주기
-                $category.appendChild(option); // select 요소에 옵션 추가
-            });
-        </script>
-    </body>
+        let videoResUrl = "";
+        if (video !== "") {
+          const videoRes = await fetch("/api/upload/video", {
+            method: "post",
+            headers: {
+              authorization: token,
+            },
+            body: fileFormData,
+          });
+          videoResUrl = (await videoRes.json()).url;
+        }
+
+        const title = document.getElementById("title").value;
+        const content = document.getElementById("content").value;
+        const category = document.getElementById("category").value;
+        console.log(title, content, category);
+        try {
+          const res = await fetch("/api/posts/<%= post.postId %>", {
+            method: "put",
+            headers: {
+              "Content-Type": "application/json",
+              authorization: token,
+            },
+            body: JSON.stringify({
+              title,
+              content,
+              category,
+              pictures: imagesUrl,
+              video: videoResUrl,
+            }),
+          });
+
+          if (!res.status === 204) {
+            throw new Error("게시글 수정에 실패했습니다.");
+          }
+
+          location.href = "/posts/<%= post.postId %>";
+        } catch (error) {
+          console.error("게시글 수정에 실패했습니다.");
+        }
+      });
+
+      $deleteButton?.addEventListener("click", async () => {
+        try {
+          const res = await fetch("/api/posts/<%= post.postId %>", {
+            method: "delete",
+            headers: {
+              "Content-Type": "application/json",
+              authorization: token,
+            },
+          });
+
+          if (!res.ok) {
+            throw new Error("게시글 삭제에 실패했습니다.");
+          }
+
+          location.href = "/posts";
+        } catch (error) {
+          console.error("게시글 작성에 실패했습니다.");
+        }
+      });
+
+      // 카테고리 데이터 가져오기
+      const categories = [
+        {
+          categoryId: "66f247f68d1dffeca42e1a10",
+          title: "👨‍💻 개발 나눔숲",
+        },
+        {
+          categoryId: "66f24da1aa8f0092f375865a",
+          title: "🎬 영화 나눔숲",
+        },
+        {
+          categoryId: "66f264b40d793036e28637e8",
+          title: "🍜 맛집 나눔숲",
+        },
+        {
+          categoryId: "66f28957453960e94559ae7d",
+          title: "💭 잡담 나눔숲",
+        },
+        {
+          categoryId: "66f28a54453960e94559ae80",
+          title: "💪 운동 나눔숲",
+        },
+      ];
+
+      // select 요소 가져오기
+      const $category = document.getElementById("category");
+
+      // 옵션 추가 하기
+      categories.forEach((category) => {
+        const option = document.createElement("option");
+        option.value = category.categoryId; // value 속성에 categoryId 할당해주기
+        option.textContent = category.title; // 표시할 텍스트에 title 할당해주기
+        $category.appendChild(option); // select 요소에 옵션 추가
+      });
+    </script>
+  </body>
 </html>

@@ -52,7 +52,7 @@ export class PostsServiceImpl implements PostsService {
   }
 
   /** 게시글 목록 조회 */
-  async getPosts(page: number =1, limit: number=10): Promise<PostResponseDTO[]> {
+  async getPosts(page: number = 1, limit: number = 10): Promise<PostResponseDTO[]> {
     const posts = await this._postRepository.findAll(page, limit);
     return await Promise.all(posts.map((post) => new PostResponseDTO(post)));
   }
@@ -70,8 +70,18 @@ export class PostsServiceImpl implements PostsService {
   }
 
   /** 게시글 수정 */
-  async updatePost(postId: string, updatedPost: Pick<IPost, "title" | "content" | "category">): Promise<void> {
-    await this._postRepository.update(postId, updatedPost);
+  async updatePost(postId: string, title: string, content: string, category: string, pictures: string[], video: string): Promise<void> {
+    const findCategory = await this._categoryRepository.findById(category);
+    if (!findCategory) {
+      throw new HttpException(404, "카테고리를 찾을 수 없습니다.");
+    }
+    await this._postRepository.update(postId, {
+      title,
+      content,
+      category: findCategory,
+      pictures,
+      video,
+    });
     return;
   }
 

@@ -75,7 +75,7 @@
               <!-- 좋아요 없을 때 -->
               <i class="fa-regular fa-heart"></i>
               <!-- <i class="fa-solid fa-heart"></i>  -->
-              10
+              <%= post.likes.length %>
             </div>
             <div class="commentButton">
               <!-- 코멘트 없을 때 -->
@@ -97,7 +97,7 @@
           <!-- 좋아요/댓글/즐겨찾기/공유버튼 끝  -->
 
           <!-- 전체 댓글 영역 시작 (작성 및 수정, 삭제, 대댓글) -->
-          <% post.comments.forEach((comment) => { %>
+
           <div class="commentArea">
             <!-- 댓글 작성 영역 시작 -->
             <div class="commentWriteWrap">
@@ -118,10 +118,11 @@
             <!-- 댓글 작성 영역 끝 -->
 
             <!-- 댓글 리스트 시작 -->
-
+            <% post.comments.forEach((comment) => { %>
             <div class="commentSingle">
               <!-- 유저 프로필 이미지 -->
-              <img src="/static/images/profile.webp" alt="프로필 이미지" class="profileImg" />
+              <img src="<%- comment.author.profile.thumbnail ? comment.author.profile.thumbnail : `/static/images/profile.webp` %>" alt="프로필 이미지" class="profileImg" />
+
               <div class="commentUser">
                 <!-- 유저 닉네임 받아오기 -->
                 <a href="" class="nickName"><%= comment.author.profile.nickname %></a>
