@@ -26,7 +26,7 @@
           <div class="postTop">
             <div class="postTopUser">
               <!-- 유저 프로필 이미지 -->
-              <img src="/static/images/profile.webp" alt="프로필 이미지" class="profileImg" />
+              <img src="<%- post.author.profile.thumbnail ? post.author.profile.thumbnail : "/static/images/profile.webp" %>" alt="프로필 이미지" class="profileImg" />
               <div class="userInfo">
                 <!-- 유저 닉네임 받아오기 -->
 
@@ -64,15 +64,23 @@
           <div class="postButtons">
             <div class="like">
               <!-- 좋아요 없을 때 -->
+              <% if (likedPosts.find((likedPost) => likedPost.postId === post.postId)) { %>
+              <i class="fa-solid fa-heart" data-likeId="<%= post.likes.filter((like) => like.user.userId === userId).id %>"></i>
+              <% } else { %>
               <i class="fa-regular fa-heart"></i>
+              <% } %>
               <!-- <i class="fa-solid fa-heart"></i>  -->
-              10
+              <%= post.likes.length %>
             </div>
             <div>
               <!-- 코멘트 없을 때 -->
               <!-- <i class="fa-regular fa-comment"></i> -->
+              <% if (post.comments.length > 0) { %>
+
               <i class="fa-solid fa-comment"></i>
-              1
+              <%- post.comments.length %> <% } else { %>
+              <i class="fa-regular fa-comment"></i>
+              0 <% } %>
             </div>
             <div>
               <!-- 즐찾 안했을 때 투명별 -->
@@ -107,10 +115,10 @@
             <!-- 댓글 작성 영역 끝 -->
 
             <!-- 댓글 리스트 시작 -->
-           
+
             <div class="commentSingle">
               <!-- 유저 프로필 이미지 -->
-              <img src="/static/images/profile.webp" alt="프로필 이미지" class="profileImg" />
+              <img src="<%- comment.author.profile.thumbnail ? comment.author.profile.thumbnail : "/static/images/profile.webp" %>" alt="프로필 이미지" class="profileImg" />
               <div class="commentUser">
                 <!-- 유저 닉네임 받아오기 -->
                 <a href="" class="nickName"><%= comment.author.profile.nickname %></a>
@@ -159,21 +167,63 @@
 
         <% }); %>
         <!-- 반복 끝 -->
-
       </div>
       <!-- inner 끝 -->
       <!--  글쓰기 버튼 플로팅 -->
       <div class="floatingMenu">
-          <!-- 현재 카테고리 플로팅 메뉴 -->
-          <span>&#128221; 글 쓰기</span>
+        <!-- 현재 카테고리 플로팅 메뉴 -->
+        <span>&#128221; 글 쓰기</span>
         <!-- 글쓰기 버튼 -->
         <a href="/posts/write"><i class="fa-solid fa-pen"></i></a>
         <!-- <button type="button"><i class="fa-solid fa-pen"></i></button> -->
-    </div>
+      </div>
     </div>
     <!-- wrap 끝 -->
 
     <script>
+      const likeDiv = document.querySelector(".like");
+      likeDiv.addEventListener("click", async (e) => {
+        const likeBtn = e.target.closest(".fa-regular.fa-heart");
+        const unlikeBtn = e.target.closest(".fa-solid.fa-heart");
+        console.log(likeBtn, unlikeBtn);
+        const postId = likeDiv.closest(".post").dataset.id;
+        const likeId = likeDiv.querySelector("i").dataset.likeId;
+
+        const accessToken = document.cookie.replace(/(?:(?:^|.*;\s*)accessToken\s*=\s*([^;]*).*$)|^.*$/, "$1");
+
+        if (likeBtn) {
+          const response = await fetch(`/api/posts/${postId}/like`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              authorization: accessToken,
+            },
+          });
+
+          if (response.ok) {
+            document.location.reload();
+          } else {
+            console.error("좋아요 실패");
+          }
+        } else if (unlikeBtn) {
+          console.log(likeId);
+          const response = await fetch(`/api/posts/${postId}/unlike`, {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              authorization: accessToken,
+            },
+            body: JSON.stringify({ likeId: likeId }),
+          });
+
+          if (response.ok) {
+            document.location.reload();
+          } else {
+            console.error("좋아요 취소 실패");
+          }
+        }
+      });
+
       // 작성시간 한글 변환
       const $createdAt = document.querySelectorAll(".createdAt");
 
@@ -191,18 +241,6 @@
         const formattedDate = createdAt.toLocaleString("ko-KR", options);
         e.textContent = formattedDate;
       });
-
-      // 좋아요 아이콘 클릭 시 빈하트 -> 하트
-      const $like = document.querySelectorAll(".like");
-      $like.forEach((like) => {
-        like.addEventListener("click", function () {
-          const heartIcon = this.querySelector("i");
-
-          heartIcon.classList.toggle("fa-regular");
-          heartIcon.classList.toggle("fa-solid");
-        });
-      });
-
       // 수정, 삭제 더 보기 버튼 보이기
       function toggleEditDelete(postId, event) {
         // 수정, 삭제 버튼 숨기기 (전체)

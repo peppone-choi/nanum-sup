@@ -30,6 +30,12 @@ export class MongoosePostRepository implements PostRepository {
             path: "profile",
           },
         },
+      })
+      .populate({
+        path: "likes",
+        populate: {
+          path: "user",
+        },
       });
 
     return values;
@@ -50,6 +56,12 @@ export class MongoosePostRepository implements PostRepository {
           populate: {
             path: "profile",
           },
+        },
+      })
+      .populate({
+        path: "likes",
+        populate: {
+          path: "user",
         },
       });
 
@@ -85,6 +97,12 @@ export class MongoosePostRepository implements PostRepository {
             path: "profile",
           },
         },
+      })
+      .populate({
+        path: "likes",
+        populate: {
+          path: "user",
+        },
       });
     return post;
   }
@@ -106,6 +124,12 @@ export class MongoosePostRepository implements PostRepository {
             path: "profile",
           },
         },
+      })
+      .populate({
+        path: "likes",
+        populate: {
+          path: "user",
+        },
       });
     return posts;
   }
@@ -126,6 +150,12 @@ export class MongoosePostRepository implements PostRepository {
           populate: {
             path: "profile",
           },
+        },
+      })
+      .populate({
+        path: "likes",
+        populate: {
+          path: "user",
         },
       });
     return posts;

@@ -10,6 +10,7 @@ import { ROUTES_INDEX } from "@/routers";
 import { authUserMiddleware } from "@/api/common/middlewares/authUser.middleware";
 import { MongooseCommentRepository } from "@/api/comment/repository/mongooseComment.repository";
 import MongooseUserRepository from "@/api/user/repository/mongooseUser.repository";
+import MongooseLikeRepository from "@/api/like/repository/mongooseLike.repository";
 
 const adminPostRouter = express.Router();
 
@@ -30,7 +31,7 @@ const ADMIN_POST_ROUTES = {
 } as const;
 
 const adminPostsController = new AdminPostsController(
-  new PostsServiceImpl(new MongoosePostRepository(), new MongooseUserRepository(), new MongooseCategoryRepository(), new MongooseCommentRepository())
+  new PostsServiceImpl(new MongoosePostRepository(), new MongooseUserRepository(), new MongooseCategoryRepository(), new MongooseCommentRepository(), new MongooseLikeRepository())
 );
 
 adminPostRouter.get(extractPath(ADMIN_POST_ROUTES.GET_POSTS, ROUTES_INDEX.ADMIN_POSTS_API), validate(adminGetPostsValidator), adminPostsController.getPosts);

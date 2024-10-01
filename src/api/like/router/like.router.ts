@@ -5,6 +5,7 @@ import express from "express";
 import LikeController from "../controller/like.controller";
 import LikeServiceImpl from "../service/like.service";
 import MongooseLikeRepository from "../repository/mongooseLike.repository";
+import MongooseUserRepository from "@/api/user/repository/mongooseUser.repository";
 
 const likeRouter = express.Router();
 
@@ -24,38 +25,10 @@ const LIKE_ROUTES = {
   DELETE_LIKE: `/api/likes/:likeId`,
 } as const;
 
-const likeController = new LikeController(
-  new LikeServiceImpl(new MongooseLikeRepository())
-);
+const likeController = new LikeController(new LikeServiceImpl(new MongooseLikeRepository(), new MongooseUserRepository()));
 
-likeRouter.get(
-  extractPath(LIKE_ROUTES.GET_LIKES_POST, ROUTES_INDEX.LIKE_API),
-  likeController.getLikesPost
-);
+likeRouter.post(extractPath(LIKE_ROUTES.CREATE_LIKE, ROUTES_INDEX.LIKE_API), likeController.createLike);
 
-likeRouter.get(
-  extractPath(LIKE_ROUTES.GET_LIKES_POST_COUNT, ROUTES_INDEX.LIKE_API),
-  likeController.countLikesPostCount
-);
-
-likeRouter.get(
-  extractPath(LIKE_ROUTES.GET_LIKES_COMMENT, ROUTES_INDEX.LIKE_API),
-  likeController.getLikesComment
-);
-
-likeRouter.get(
-  extractPath(LIKE_ROUTES.GET_LIKES_COMMENT_COUNT, ROUTES_INDEX.LIKE_API),
-  likeController.countLikesCommentCount
-);
-
-likeRouter.post(
-  extractPath(LIKE_ROUTES.CREATE_LIKE, ROUTES_INDEX.LIKE_API),
-  likeController.createLike
-);
-
-likeRouter.delete(
-  extractPath(LIKE_ROUTES.DELETE_LIKE, ROUTES_INDEX.LIKE_API),
-  likeController.deleteLike
-);
+likeRouter.delete(extractPath(LIKE_ROUTES.DELETE_LIKE, ROUTES_INDEX.LIKE_API), likeController.deleteLike);
 
 export default likeRouter;
