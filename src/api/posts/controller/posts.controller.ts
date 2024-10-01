@@ -15,7 +15,6 @@ export default class PostsController {
   private readonly _postsService: PostsService;
   constructor(_postsService: PostsService) {
     this._postsService = _postsService;
-
     this.getPosts = this.getPosts.bind(this);
     this.getPostDetail = this.getPostDetail.bind(this);
     this.createPost = this.createPost.bind(this);
@@ -68,9 +67,10 @@ export default class PostsController {
   /** 게시글 수정 */
   async updatePost(req: Request<updatePostRequest["path"], updatePostResponse, updatePostRequest["body"], updatePostRequest["params"]>, res: Response, next: NextFunction) {
     const { postId } = req.params;
-
+    console.log(postId, req.body);
+    const { title, content, category, pictures, video } = req.body;
     try {
-      await this._postsService.updatePost(postId, req.body);
+      await this._postsService.updatePost(postId, title, content, category, pictures ?? [], video ?? "");
 
       res.status(204).json();
     } catch (error) {

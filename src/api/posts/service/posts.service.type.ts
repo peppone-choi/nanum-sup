@@ -9,7 +9,7 @@ export interface PostsService {
   /** 게시글 상세 조회 */
   getPostDetail(id: string): Promise<PostResponseDTO | null>;
   /** 게시글 수정 */
-  updatePost(postId: string, updatedPost: Pick<IPost, "title" | "content" | "category">): Promise<void>;
+  updatePost(postId: string, title: string, content: string, category: string, pictures: string[], video: string): Promise<void>;
   /** 게시글 삭제 */
   deletePost(postId: string): Promise<void>;
   findByShortUrl(shortUrl: string): Promise<PostResponseDTO | null>;

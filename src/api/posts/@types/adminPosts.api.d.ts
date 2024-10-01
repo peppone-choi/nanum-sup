@@ -55,10 +55,13 @@ declare type adminCreatePostRequest = {
 /** [관리자] 게시글 생성 응답 */
 declare type adminCreatePostResponse = IPostResponseDTO;
 
-declare type adminUpdatePostRequestBody = Pick<
-  IPost,
-  "title" | "content" | "category"
->;
+declare type adminUpdatePostRequestBody = {
+  title: string;
+  content: string;
+  category: string;
+  pictures?: string[];
+  video?: string;
+};
 
 declare type adminUpdatePostRequestPath = {
   /** 게시글 ID */
