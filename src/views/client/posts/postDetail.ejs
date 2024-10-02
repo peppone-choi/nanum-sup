@@ -91,13 +91,18 @@
             <!-- <div>
              
               <i class="fa-solid fa-star"></i>
-            </div>
+            </div> -->
             <div>
               <i class="fa-solid fa-share-from-square"></i>
-            </div> -->
+            </div>
           </div>
           <!-- 좋아요/댓글/즐겨찾기/공유버튼 끝  -->
-
+          <div class="short-url" style="display: none">
+            <p>공유하기</p>
+            <p>/posts/s/<%= post.shortUrl %></p>
+            <input type="text" hidden value="/posts/s/<%= post.shortUrl %>" />
+            <button class="copy">복사</button>
+          </div>
           <!-- 전체 댓글 영역 시작 (작성 및 수정, 삭제, 대댓글) -->
 
           <div class="commentArea">
@@ -184,6 +189,24 @@
     </div>
 
     <script>
+      const share = document.querySelector(".fa-solid.fa-share-from-square");
+      share.addEventListener("click", (e) => {
+        e.preventDefault();
+        const shortUrl = document.querySelector(".short-url");
+        shortUrl.style.display = "block";
+        const copy = document.querySelector(".copy");
+        copy.addEventListener("click", (e) => {
+          e.preventDefault();
+          const shortUrl = document.querySelector(".short-url input");
+          shortUrl.select();
+          document.execCommand("copy");
+          alert("복사되었습니다.");
+        });
+        share.addEventListener("click", (e) => {
+          e.preventDefault();
+          shortUrl.style.display = "none";
+        });
+      });
       // 게시글 삭제
       const $deleteButton = document.getElementById("deleteButton");
 

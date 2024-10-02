@@ -94,12 +94,39 @@
                 <i class="fa-regular fa-share-from-square"></i>
               </button>
             </div>
+            <div class="short-url" style="display: none">
+              <p>공유하기</p>
+              <p>/posts/s/<%= post.shortUrl %></p>
+              <input type="text" hidden value="/posts/s/<%= post.shortUrl %>" />
+              <button class="copy">복사</button>
+            </div>
           </div>
           <% }) %>
         </div>
       </main>
     </div>
     <script>
+      const share = document.querySelectorAll(".fa-regular.fa-share-from-square");
+      share.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+          const share = btn.closest(".post").querySelector(".short-url");
+          if (share.style.display === "block") {
+            share.style.display = "none";
+          } else {
+            share.style.display = "block";
+          }
+          const copy = document.querySelector(".copy");
+          copy.addEventListener("click", (e) => {
+            e.preventDefault();
+            const shortUrl = document.querySelector(".short-url input");
+            shortUrl.select();
+            document.execCommand("copy");
+            alert("복사되었습니다.");
+          });
+        });
+      });
+
       // 작성시간 한글 변환
       const $createdAt = document.querySelectorAll(".createdAt");
 
