@@ -6,14 +6,16 @@ a {
   color: var(--mono-500);
 }
 
-/* .inner {
-  max-width: 900px;
-} */
+.inner {
+  padding-bottom: 20px;
+}
 
 .post {
   background-color: var(--mono-000);
+
   padding: 15px;
   border-radius: 10px;
+  box-shadow: #8a8a8a 0px 0px 10px;
 }
 
 .postTop {
@@ -72,7 +74,7 @@ a {
   border-radius: 30px;
   outline: 1px solid var(--primary);
   padding: 2px 5px;
-  
+
   font-size: var(--text-description);
   /* position: absolute;
   right: 0;
@@ -168,7 +170,6 @@ a {
 }
 
 /* ---------- 댓글 부분-------------- */
-
 
 .commentWriteWrap {
   display: flex;
@@ -268,7 +269,8 @@ a {
 }
 
 /* 달려있는 댓글 */
-.commentArea p, .commentUser p {
+.commentArea p,
+.commentUser p {
   margin: 0;
   overflow: hidden;
   white-space: nowrap;
@@ -418,7 +420,7 @@ a {
   }
 
   .commentWriteWrapDouble::before {
-    content: '\f35a';
+    content: "\f35a";
     display: inline-block;
     font-family: "Font Awesome 5 Free";
     font-weight: 600;
@@ -435,11 +437,11 @@ a {
     width: 83%;
   }
 
-
   .commentArea .profileImg {
-    
   }
-  .commentArea .profileImg, .commentSingle .profileImg, .commentWriteWrapDouble .profileImg {
+  .commentArea .profileImg,
+  .commentSingle .profileImg,
+  .commentWriteWrapDouble .profileImg {
     max-width: 30px;
     width: 30px;
     height: 30px;
