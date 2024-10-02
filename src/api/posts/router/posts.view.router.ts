@@ -42,10 +42,7 @@ postViewRouter.get(extractPath(POST_VIEW_ROUTES.POST_LIST, ROUTES_INDEX.POST_VIE
 postViewRouter.get(extractPath(POST_VIEW_ROUTES.POST_WRITE, ROUTES_INDEX.POST_VIEW), authCookieViewMiddleware(true), postsViewController.postWritePage);
 
 /** 게시글 상세 조회 */
-postViewRouter.get(extractPath(POST_VIEW_ROUTES.POST_SHORT_URL, ROUTES_INDEX.POST_VIEW), (req, res, next) => {
-  const { shortUrl } = req.params;
-  res.render("client/posts/postDetail");
-});
+postViewRouter.get(extractPath(POST_VIEW_ROUTES.POST_SHORT_URL, ROUTES_INDEX.POST_VIEW), authCookieViewMiddleware(false), postsViewController.postDetailPageUrl);
 
 postViewRouter.get(extractPath(POST_VIEW_ROUTES.POST_DETAIL, ROUTES_INDEX.POST_VIEW), authCookieViewMiddleware(false), postsViewController.postDetailPage);
 

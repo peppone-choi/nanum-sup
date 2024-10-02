@@ -26,6 +26,7 @@ export default class PostsViewController {
     this.postDetailPage = this.postDetailPage.bind(this);
     this.postWritePage = this.postWritePage.bind(this);
     this.postEditPage = this.postEditPage.bind(this);
+    this.postDetailPageUrl = this.postDetailPageUrl.bind(this);
   }
 
   /** 게시글 목록 페이지 */
@@ -94,5 +95,22 @@ export default class PostsViewController {
     }
 
     res.render("client/posts/postEdit", { post, category });
+  }
+  async postDetailPageUrl(req: Request, res: Response, next: NextFunction) {
+    const { shortUrl } = req.params;
+    const post = await this._postsService.findByShortUrl(shortUrl);
+    const authorId = post?.author.accountId;
+    const category = await this._categoryService.getCategory();
+    const userId = req.user.userId;
+    const liked = post?.likes ? await Promise.all(post.likes.map(async (like) => await this._likeService.likedByUser(req.user.userId, like.id))) : [];
+    const likeId = post?.likes.find((like) => like.user.id === userId)?.id;
+    console.log(liked);
+    res.render("client/posts/postDetail", {
+      post,
+      isMe: authorId === req.user.userId,
+      category,
+      userId,
+      likeId,
+    });
   }
 }
