@@ -87,10 +87,8 @@
               </div>
               <% }) %>
               <!-- 게시글 내용 -->
-              <div class="post-Container">
-                <p class="post-content-title"><%= post.title %></p>
-                <p class="post-content-text"><%= post.content %></p>
-              </div>
+              <p class="post-content-title"><%= post.title %></p>
+              <p class="post-content-text"><%= post.content %></p>
               <!-- 게시글 작성 시간 -->
               <p class="post-time-text"><%= post.createdAt.toISOString() %></p>
             </div>
