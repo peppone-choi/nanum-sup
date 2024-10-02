@@ -4,6 +4,11 @@ import CommentServiceImpl from "@/api/comment/service/comment.service";
 import { MemoryCommentRepository } from "@/api/comment/repository/memoryComment.repository";
 import { extractPath } from "@/utils/path.util";
 import { ROUTES_INDEX } from "@/routers";
+import { Mongoose } from "mongoose";
+import MongooseUserRepository from "@/api/user/repository/mongooseUser.repository";
+import { MongoosePostRepository } from "@/api/posts/repository/mongoosePost.repository";
+import { MongooseCommentRepository } from "../repository/mongooseComment.repository";
+import { authUserMiddleware } from "@/api/common/middlewares/authUser.middleware";
 
 const commentRouter = express.Router();
 
@@ -17,35 +22,16 @@ const COMMENT_ROUTES = {
   DELETE_COMMENT: "/api/comment/:commentId",
 } as const;
 
-const commentController = new CommentController(
-  new CommentServiceImpl(new MemoryCommentRepository())
-);
+const commentController = new CommentController(new CommentServiceImpl(new MongooseCommentRepository(), new MongooseUserRepository(), new MongoosePostRepository()));
 
-commentRouter.post(
-  extractPath(COMMENT_ROUTES.CREATE_COMMENT, ROUTES_INDEX.COMMENT_API),
-  commentController.createComment
-);
+commentRouter.post(extractPath(COMMENT_ROUTES.CREATE_COMMENT, ROUTES_INDEX.COMMENT_API), authUserMiddleware, commentController.createComment);
 
-commentRouter.post(
-  extractPath(COMMENT_ROUTES.CREATE_COMMENT_REPLY, ROUTES_INDEX.COMMENT_API),
-  commentController.createCommentReply
-);
+commentRouter.post(extractPath(COMMENT_ROUTES.CREATE_COMMENT_REPLY, ROUTES_INDEX.COMMENT_API), authUserMiddleware, commentController.createCommentReply);
 
-commentRouter.get(COMMENT_ROUTES.GET_COMMENTS, commentController.getComments);
+commentRouter.get(extractPath(COMMENT_ROUTES.GET_COMMENT, ROUTES_INDEX.COMMENT_API), authUserMiddleware, commentController.getComment);
 
-commentRouter.get(
-  extractPath(COMMENT_ROUTES.GET_COMMENT, ROUTES_INDEX.COMMENT_API),
-  commentController.getComment
-);
+commentRouter.put(extractPath(COMMENT_ROUTES.EDIT_COMMENT, ROUTES_INDEX.COMMENT_API), authUserMiddleware, commentController.editComment);
 
-commentRouter.put(
-  extractPath(COMMENT_ROUTES.EDIT_COMMENT, ROUTES_INDEX.COMMENT_API),
-  commentController.editComment
-);
-
-commentRouter.delete(
-  extractPath(COMMENT_ROUTES.DELETE_COMMENT, ROUTES_INDEX.COMMENT_API),
-  commentController.deleteComment
-);
+commentRouter.delete(extractPath(COMMENT_ROUTES.DELETE_COMMENT, ROUTES_INDEX.COMMENT_API), authUserMiddleware, commentController.deleteComment);
 
 export default commentRouter;

@@ -1,44 +1,19 @@
 import path from "path";
 import { MongooseLike } from "../model/like.schema";
 import { LikeRepository } from "./like.repository";
+import HttpException from "@/api/common/exceptions/http.exception";
 
 export default class MongooseLikeRepository implements LikeRepository {
-  async getLikes(): Promise<ILike[]> {
-    const likes = await MongooseLike.find();
-    return likes;
+  async getLike(likeId: string): Promise<ILike> {
+    const like = await MongooseLike.findById(likeId).populate("user");
+    if (!like) {
+      throw new HttpException(404, "좋아요를 찾을 수 없습니다.");
+    }
+    return like;
   }
-  async getLikesPost(postId: string): Promise<ILike[]> {
-    const likes = await MongooseLike.find({
-      "post.id": postId,
-    })
-      .populate("post")
-      .populate({
-        path: "user",
-        populate: {
-          path: "profile",
-        },
-      });
-    return likes;
-  }
-  async getLikesComment(commentId: string): Promise<ILike[]> {
-    const likes = await MongooseLike.find({
-      "comment.id": commentId,
-    })
-      .populate("comment")
-      .populate({
-        path: "user",
-        populate: {
-          path: "profile",
-        },
-      });
-    return likes;
-  }
-  async createLike(type: "post" | "comment", user: IUser, post?: IPost, comment?: IComment): Promise<ILike> {
+  async createLike(user: IUser): Promise<ILike> {
     const like = new MongooseLike({
-      type,
       user,
-      post,
-      comment,
     });
     return await like.save();
   }
@@ -46,30 +21,8 @@ export default class MongooseLikeRepository implements LikeRepository {
     await MongooseLike.findByIdAndDelete(likeId);
     return;
   }
-  async countLikesPost(postId: string): Promise<number> {
-    const likes = await MongooseLike.find({
-      "post.id": postId,
-    })
-      .populate("post")
-      .populate({
-        path: "user",
-        populate: {
-          path: "profile",
-        },
-      });
-    return likes.length;
-  }
-  async countLikesComment(commentId: string): Promise<number> {
-    const likes = await MongooseLike.find({
-      "comment.id": commentId,
-    })
-      .populate("comment")
-      .populate({
-        path: "user",
-        populate: {
-          path: "profile",
-        },
-      });
-    return likes.length;
+  async likedByUser(userId: IUser, likeId: string): Promise<boolean> {
+    const like = await MongooseLike.findById(likeId).populate("user");
+    return like?.user === userId;
   }
 }

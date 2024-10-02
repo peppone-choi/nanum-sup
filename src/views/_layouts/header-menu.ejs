@@ -24,7 +24,7 @@
                 onclick="openCategoryMenu()"
             ></button>
             <!-- 로고 -->
-            <a href="#">
+            <a href="http://localhost:4000/posts">
                 <img src="/static/images/nanum-logo.png" alt="나눔숲" />
             </a>
             <button
@@ -162,7 +162,7 @@
         </script>
 
         <script>
-            document.addEventListener("DOMContentLoaded", function () {
+            document.addEventListener("DOMContentLoaded", async function () {
                 const logoutBtn = document.getElementById("logout-btn");
                 const logoutPopup = document.getElementById("logout-popup");
                 const cancelBtn = document.getElementById("cancel-btn");
@@ -180,6 +180,20 @@
                 confirmBtn.addEventListener("click", function () {
                     window.location.href = "/views/login";
                 });
+
+                const user = await fetch("/api/users/<%= userId %>", {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                });
+                const userData = await user.json();
+                const profile = userData.profile;
+                const profileImage = document.querySelector(".profile-image");
+                const nickName = document.querySelector(".category-nickName");
+                const id = document.querySelector(".category-id");
+                profileImage.src = profile.thumbnail;
+                nickName.textContent = profile.nickname;
+                id.textContent = `@${userData.accountId}`;
             });
         </script>
         <script>

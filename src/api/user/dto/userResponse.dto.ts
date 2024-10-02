@@ -1,5 +1,6 @@
 import ProfileResponseDto from "@/api/profile/dto/profileResponse.dto";
 import { Profile } from "@/api/profile/model/profile.model";
+import { th } from "@faker-js/faker/.";
 
 export default class UserResponseDto {
   id: string;

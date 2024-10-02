@@ -43,6 +43,20 @@ const postSchema = new mongoose.Schema<IPost>({
       ref: "Comment",
     },
   ],
+  pictures: {
+    type: [String],
+    default: [],
+  },
+  video: {
+    type: String,
+    default: "",
+  },
+  likes: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Like",
+    },
+  ],
   // updatedAt: {
   //   type: Date,
   //   default: Date.now,

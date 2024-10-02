@@ -12,8 +12,11 @@ export class MongoosePostRepository implements PostRepository {
     await newPost.save();
     return newPost;
   }
-  async findAll(): Promise<IPost[]> {
+  async findAll(page: number, limit: number): Promise<IPost[]> {
     const values = await MongoosePost.find()
+      .sort({ createdAt: -1 })
+      .skip((page - 1) * limit) 
+      .limit(limit)
 
       .populate({
         path: "author",
@@ -24,6 +27,18 @@ export class MongoosePostRepository implements PostRepository {
       .populate("category")
       .populate({
         path: "comments",
+        populate: {
+          path: "author",
+          populate: {
+            path: "profile",
+          },
+        },
+      })
+      .populate({
+        path: "likes",
+        populate: {
+          path: "user",
+        },
       });
 
     return values;
@@ -39,6 +54,18 @@ export class MongoosePostRepository implements PostRepository {
       .populate("category")
       .populate({
         path: "comments",
+        populate: {
+          path: "author",
+          populate: {
+            path: "profile",
+          },
+        },
+      })
+      .populate({
+        path: "likes",
+        populate: {
+          path: "user",
+        },
       });
 
     return post;
@@ -64,8 +91,21 @@ export class MongoosePostRepository implements PostRepository {
         },
       })
       .populate("category")
+
       .populate({
         path: "comments",
+        populate: {
+          path: "author",
+          populate: {
+            path: "profile",
+          },
+        },
+      })
+      .populate({
+        path: "likes",
+        populate: {
+          path: "user",
+        },
       });
     return post;
   }
@@ -78,8 +118,21 @@ export class MongoosePostRepository implements PostRepository {
         },
       })
       .populate("category")
+
       .populate({
         path: "comments",
+        populate: {
+          path: "author",
+          populate: {
+            path: "profile",
+          },
+        },
+      })
+      .populate({
+        path: "likes",
+        populate: {
+          path: "user",
+        },
       });
     return posts;
   }
@@ -92,9 +145,31 @@ export class MongoosePostRepository implements PostRepository {
         },
       })
       .populate("category")
+
       .populate({
         path: "comments",
+        populate: {
+          path: "author",
+          populate: {
+            path: "profile",
+          },
+        },
+      })
+      .populate({
+        path: "likes",
+        populate: {
+          path: "user",
+        },
       });
     return posts;
+  }
+  async addComment(postId: string, comment: IComment): Promise<IPost> {
+    const post = await MongoosePost.findOne({ _id: postId });
+    if (!post) {
+      throw new HttpException(404, "게시글을 찾을 수 없습니다.");
+    }
+    post.comments.push(comment);
+    await post.save();
+    return post;
   }
 }

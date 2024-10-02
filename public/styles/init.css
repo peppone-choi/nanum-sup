@@ -82,6 +82,10 @@ body {
     max-width: 110px;
 }
 
+/* 메뉴바 카테고리 섹션 마진 없애기 */
+.category-popup {
+    margin: 0 0;
+}
 
 
 /* 레이아웃 */
@@ -147,6 +151,9 @@ button[type="submit"] {
 }
 
 input[type="text"],
+input[type="password"],
+input[type="email"],
+textarea,
 select {
     border: none;
     outline: none;

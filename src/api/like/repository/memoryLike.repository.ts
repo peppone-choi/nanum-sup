@@ -1,37 +1,20 @@
+import HttpException from "@/api/common/exceptions/http.exception";
 import Like from "../model/like.model";
 import { LikeRepository } from "./like.repository";
 
 export default class MemoryLikeRepository implements LikeRepository {
   static index = 0;
   static readonly store: Map<string, ILike> = new Map();
-
-  async getLikes(): Promise<ILike[]> {
-    const values = Array.from(MemoryLikeRepository.store.values());
-    return values;
+  async getLike(likeId: string): Promise<ILike> {
+    const like = MemoryLikeRepository.store.get(likeId);
+    if (!like) {
+      throw new HttpException(404, "좋아요를 찾을 수 없습니다.");
+    }
+    return like;
   }
-  async getLikesPost(postId: string): Promise<ILike[]> {
-    const values = Array.from(MemoryLikeRepository.store.values()).filter(
-      (like) => like.post?.id === postId
-    );
-    return values;
-  }
-  async getLikesComment(commentId: string): Promise<ILike[]> {
-    const values = Array.from(MemoryLikeRepository.store.values()).filter(
-      (like) => like.comment?.id === commentId
-    );
-    return values;
-  }
-  async createLike(
-    type: "post" | "comment",
-    user: IUser,
-    post?: IPost,
-    comment?: IComment
-  ): Promise<ILike> {
+  async createLike(user: IUser): Promise<ILike> {
     const like: ILike = new Like({
       id: (++MemoryLikeRepository.index).toString(),
-      type,
-      post,
-      comment,
       user,
     });
     MemoryLikeRepository.store.set(like.id, like);
@@ -41,16 +24,11 @@ export default class MemoryLikeRepository implements LikeRepository {
     MemoryLikeRepository.store.delete(likeId);
     return;
   }
-  async countLikesPost(postId: string): Promise<number> {
-    const values = Array.from(MemoryLikeRepository.store.values()).filter(
-      (like) => like.post?.id === postId
-    );
-    return values.length;
-  }
-  async countLikesComment(commentId: string): Promise<number> {
-    const values = Array.from(MemoryLikeRepository.store.values()).filter(
-      (like) => like.comment?.id === commentId
-    );
-    return values.length;
+  async likedByUser(user: IUser, likeId: string): Promise<boolean> {
+    const like = MemoryLikeRepository.store.get(likeId);
+    if (!like) {
+      throw new HttpException(404, "좋아요를 찾을 수 없습니다.");
+    }
+    return like.user.id === user.id;
   }
 }

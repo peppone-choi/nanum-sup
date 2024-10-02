@@ -34,12 +34,12 @@ declare type getPostDetailRequest = {
 declare type getPostDetailResponse = IPostResponseDTO | null;
 
 declare type createPostRequestBody = {
-  /** 작성자 ID */
-  userId: string;
   /** 카테고리 ID */
   categoryId: string;
   title: string;
   content: string;
+  pictures?: string[];
+  video?: string;
   // comments: string[];
 };
 
@@ -57,12 +57,13 @@ declare type createPostRequest = {
 /** 게시글 생성 응답 */
 declare type createPostResponse = IPostResponseDTO;
 
-declare type updatePostRequestBody = Pick<
-  IPost,
-  "title",
-  "content",
-  "category"
->;
+declare type updatePostRequestBody = {
+  title: string;
+  content: string;
+  category: string;
+  pictures?: string[];
+  video?: string;
+};
 
 declare type updatePostRequestPath = {
   /** 게시글 ID */

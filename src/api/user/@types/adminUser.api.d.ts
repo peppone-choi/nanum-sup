@@ -49,10 +49,9 @@ declare type updateAdminUserRequestPath = {
   userId: string;
 };
 declare type updateAdminUserRequestBody = {
-  email: string;
-  password?: string;
-  role: RoleType;
-  profile: IProfile;
+  nickname: string;
+  bio: string;
+  thumbnail: string;
 };
 declare type updateAdminUserRequestParams = {};
 declare type updateAdminUserRequest = {

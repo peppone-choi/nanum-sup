@@ -1,351 +1,345 @@
 <!DOCTYPE html>
 <html lang="ko">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>게시글 상세</title>
-        <link
-            rel="stylesheet"
-            href="/static/styles/pages/posts/postDetail.css"
-        />
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-            integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"
-        />
-    </head>
-    <body>
-        <div id="wrap">
-            <div class="inner">
-                <%- include('../../_layouts/header-menu', { category: category
-                }) %>
-                <section class="post">
-                    <!-- 유저 정보 영역 시작 -->
-                    <div class="postTop">
-                        <div class="postTopUser">
-                            <!-- 유저 프로필 이미지 -->
-                            <img
-                                src="/static/images/profile.webp"
-                                alt="프로필 이미지"
-                                class="profileImg"
-                            />
-                            <div class="userInfo">
-                                <!-- 유저 닉네임 받아오기 -->
-                                <!-- <%= post.author.profile.nickname %> -->
-                                <a href="" class="nickName"
-                                    ><%= post.author.profile.nickname %></a
-                                >
-                                <!-- 팔로우 버튼 -->
-                                <button type="button">
-                                    <i class="fa-solid fa-plus"></i> 팔로우
-                                </button>
-                                <!-- 유저 아이디 -->
-                                <a href="" class="userId"
-                                    >&#64;<%= post.author.accountId %></a
-                                >
-                            </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>게시글 상세</title>
+    <link rel="stylesheet" href="/static/styles/pages/posts/postDetail.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div id="wrap">
+      <div class="inner">
+        <%- include('../../_layouts/header-menu', { category: category, userId: userId}) %>
+        <section class="post">
+          <!-- 유저 정보 영역 시작 -->
+          <div class="postTop">
+            <div class="postTopUser">
+              <!-- 유저 프로필 이미지 -->
+              <img src="<%- post.author.profile.thumbnail ? post.author.profile.thumbnail : `/static/images/profile.webp` %>" alt="프로필 이미지" class="profileImg" />
+              <div class="userInfo">
+                <!-- 유저 닉네임 받아오기 -->
+                <!-- <%= post.author.profile.nickname %> -->
+                <a href="/users/<%= post.author.id %>" class="nickName"><%= post.author.profile.nickname %></a>
+                <!-- 팔로우 버튼 -->
+                <button type="button"><i class="fa-solid fa-plus"></i> 팔로우</button>
+                <!-- 유저 아이디 -->
+                <a href="/users/<%= post.author.id %>" class="userId">&#64;<%= post.author.accountId %></a>
+              </div>
 
-                            <!-- 카테고리 받아오기 -->
-                            <span class="category"
-                                ><%= post.category.title %></span
-                            >
-                            <!-- 더 보기 버튼 -->
-                            <div
-                                class="viewMore"
-                                onclick="toggleEditDelete('<%= post.postId %>', event)"
-                            >
-                                <i class="fa-solid fa-ellipsis-vertical"></i>
-                                <div
-                                    class="postEditDelete flex-column-center"
-                                    id="<%= post.postId %>"
-                                >
-                                    <a href="/posts/<%= post.postId %>/edit">
-                                        <i class="fa-solid fa-pen"></i> 수정
-                                    </a>
-                                    <a
-                                        id="deleteButton"
-                                        onclick="deletePost('<%= post.postId %>')"
-                                    >
-                                        <i class="fa-solid fa-trash"></i> 삭제
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 유저 정보 영역 끝 -->
-
-                    <!-- 글 제목 -->
-                    <b class="title"><%= post.title %></b>
-                    <!-- 글 내용 -->
-                    <p class="content"><%- post.content %></p>
-
-                    <!-- 글 작성시간 -->
-                    <em
-                        class="createdAt"
-                        data-created-at="<%= post.createdAt.toISOString() %>"
-                    ></em>
-
-                    <!-- 좋아요/댓글/즐겨찾기/공유버튼 시작 -->
-                    <div class="postButtons">
-                        <div class="like">
-                            <!-- 좋아요 없을 때 -->
-                            <i class="fa-regular fa-heart"></i>
-                            <!-- <i class="fa-solid fa-heart"></i>  -->
-                            10
-                        </div>
-                        <div>
-                            <!-- 코멘트 없을 때 -->
-                            <!-- <i class="fa-regular fa-comment"></i> -->
-                            <i class="fa-solid fa-comment"></i>
-                            1
-                        </div>
-                        <div>
-                            <!-- 즐찾 안했을 때 투명별 -->
-                            <!-- <i class="fa-regular fa-star"></i> -->
-                            <i class="fa-solid fa-star"></i>
-                        </div>
-                        <div>
-                            <i class="fa-solid fa-share-from-square"></i>
-                        </div>
-                    </div>
-                    <!-- 좋아요/댓글/즐겨찾기/공유버튼 끝  -->
-
-                    <!-- 전체 댓글 영역 시작 (작성 및 수정, 삭제, 대댓글) -->
-                    <div class="commentArea">
-                        <!-- 댓글 작성 영역 시작 -->
-                        <div class="commentWriteWrap">
-                            <!-- 유저 프로필 이미지 -->
-                            <img
-                                src="/static/images/profile.webp"
-                                alt="프로필 이미지"
-                                class="profileImg"
-                            />
-                            <!-- 댓글 입력 창 -->
-                            <div
-                                class="commentWrite"
-                                contenteditable="true"
-                                placeholder="댓글을 입력해 주세요."
-                            ></div>
-                            <!-- 파일 업로드 버튼 -->
-                            <div class="upload">
-                                <label for="file">
-                                    <img
-                                        src="/static/images/upload-btn-gray.svg"
-                                        class="formImg"
-                                        alt="파일업로드버튼"
-                                    />
-                                </label>
-                                <input type="file" id="file" />
-                            </div>
-                            <!-- 등록 버튼 -->
-                            <button type="submit">등록</button>
-                        </div>
-                        <!-- 댓글 작성 영역 끝 -->
-
-                        <!-- 댓글 리스트 시작 -->
-                        <div class="commentSingle">
-                            <!-- 유저 프로필 이미지 -->
-                            <img
-                                src="/static/images/profile.webp"
-                                alt="프로필 이미지"
-                                class="profileImg"
-                            />
-                            <div class="commentUser">
-                                <!-- 유저 닉네임 받아오기 -->
-                                <!-- <%= post.author.profile.nickname %> -->
-                                <a href="" class="nickName"
-                                    ><%= post.author.profile.nickname %></a
-                                >
-                                <!-- 유저 아이디 -->
-                                <a href="" class="userId"
-                                    >&#64;<%= post.author.accountId %></a
-                                >
-
-                                <!-- 글 작성시간 -->
-                                <em
-                                    class="createdAt"
-                                    data-created-at="<%= post.createdAt.toISOString() %>"
-                                ></em>
-                                <!-- 댓글 가져오기 -->
-                                <p class="comment">
-                                    우와아아아아아ㅇㅇㅇㅇㅇㅇㅇㅇㅇ
-                                </p>
-                            </div>
-                            <!-- 좋아요 -->
-                            <div class="like">
-                                <i class="fa-regular fa-heart"></i>
-                                12
-                            </div>
-                            <!-- 답글, 수정, 삭제, 공유 버튼 -->
-                            <div class="commentEditBtns">
-                                <!--  답글달기 버튼 -->
-                                <button
-                                    type="button"
-                                    onclick="toggleReplyArea(this)"
-                                >
-                                    <i class="fa-solid fa-reply"></i> 답글달기
-                                </button>
-                                <button type="button">
-                                    <i class="fa-solid fa-pen"></i> 수정
-                                </button>
-                                <button type="button">
-                                    <i class="fa-regular fa-trash-can"></i> 삭제
-                                </button>
-                            </div>
-                        </div>
-                        <!-- 댓글 리스트 끝 -->
-
-                        <!-- 대댓글 작성 영역 시작 -->
-                        <div class="commentWriteWrap">
-                            <!-- 유저 프로필 이미지 -->
-                            <img
-                                src="/static/images/profile.webp"
-                                alt="프로필 이미지"
-                                class="profileImg"
-                            />
-                            <!-- 댓글 입력 창 -->
-                            <div
-                                class="commentWrite"
-                                contenteditable="true"
-                                placeholder="답글을 입력해 주세요."
-                            ></div>
-                            <!-- 파일 업로드 버튼 -->
-                            <div class="upload">
-                                <label for="file">
-                                    <img
-                                        src="/static/images/upload-btn-gray.svg"
-                                        class="formImg"
-                                        alt="파일업로드버튼"
-                                    />
-                                </label>
-                                <input type="file" id="file" />
-                            </div>
-                            <!-- 등록 버튼 -->
-                            <button type="submit">등록</button>
-                        </div>
-                    </div>
-                    <!--  대댓글 작성 영역 끝 -->
-                </section>
-
-                <!-- 카테고리 & 글쓰기 버튼 플로팅 -->
-                <div class="floatingMenu">
-                    <!-- 현재 카테고리 플로팅 메뉴 -->
-                    <span><%= post.category.title %></span>
-                    <!-- 글쓰기 버튼 -->
-                    <a href="/posts/write"><i class="fa-solid fa-pen"></i></a>
-                    <!-- <button type="button"><i class="fa-solid fa-pen"></i></button> -->
+              <!-- 카테고리 받아오기 -->
+              <span class="category"><%= post.category.title.split(' 나눔숲')[0] %></span>
+              <!-- 더 보기 버튼 -->
+              <div class="viewMore" onclick="toggleEditDelete('<%= post.postId %>', event)">
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+                <div class="postEditDelete flex-column-center" id="<%= post.postId %>">
+                  <a href="/posts/<%= post.postId %>/edit"> <i class="fa-solid fa-pen"></i> 수정 </a>
+                  <a id="deleteButton" onclick="deletePost('<%= post.postId %>')"> <i class="fa-solid fa-trash"></i> 삭제 </a>
                 </div>
+              </div>
             </div>
+          </div>
+          <!-- 유저 정보 영역 끝 -->
+
+          <!-- 글 제목 -->
+          <b class="title"><%= post.title %></b>
+          <br />
+          <br />
+          <!-- 동영상 -->
+          <% if (post.video !== "") {%>
+          <video controls>
+            <source src="<%= post.video %>" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <% } %>
+          <!-- 이미지 -->
+          <% post.pictures?.forEach((picture) => {%>
+          <img src="<%= picture %>" alt="게시글 이미지" class="postImg" />
+          <% }); %>
+
+          <!-- 글 내용 -->
+          <p class="content"><%- post.content %></p>
+
+          <!-- 글 작성시간 -->
+          <em class="createdAt" data-created-at="<%= post.createdAt.toISOString() %>"></em>
+
+          <!-- 좋아요/댓글/즐겨찾기/공유버튼 시작 -->
+          <div class="postButtons">
+            <div class="like">
+              <% if (likeId) { %>
+              <i class="fa-solid fa-heart"></i>
+              <% } else { %>
+              <i class="fa-regular fa-heart"></i>
+              <% } %>
+              <!-- <i class="fa-solid fa-heart"></i>  -->
+              <%= post.likes.length %>
+            </div>
+            <div class="commentButton">
+              <!-- 코멘트 없을 때 -->
+              <% if (post.comments.length > 0) {%>
+              <i class="fa-solid fa-comment"></i>
+              <%= post.comments.length %> <%} else {%>
+              <i class="fa-regular fa-comment"></i>
+              0 <% } %>
+            </div>
+            <div>
+              <!-- 즐찾 안했을 때 투명별 -->
+              <!-- <i class="fa-regular fa-star"></i> -->
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <div>
+              <i class="fa-solid fa-share-from-square"></i>
+            </div>
+          </div>
+          <!-- 좋아요/댓글/즐겨찾기/공유버튼 끝  -->
+
+          <!-- 전체 댓글 영역 시작 (작성 및 수정, 삭제, 대댓글) -->
+
+          <div class="commentArea">
+            <!-- 댓글 작성 영역 시작 -->
+            <div class="commentWriteWrap">
+              <!-- 유저 프로필 이미지 -->
+              <img src="/static/images/profile.webp" alt="프로필 이미지" class="profileImg" />
+              <!-- 댓글 입력 창 -->
+              <div class="commentWrite" contenteditable="true" placeholder="댓글을 입력해 주세요."></div>
+              <!-- 파일 업로드 버튼 -->
+              <div class="upload">
+                <label for="file">
+                  <img src="/static/images/upload-btn-gray.svg" class="formImg" alt="파일업로드버튼" />
+                </label>
+                <input type="file" id="file" />
+              </div>
+              <!-- 등록 버튼 -->
+              <button type="submit">등록</button>
+            </div>
+            <!-- 댓글 작성 영역 끝 -->
+
+            <!-- 댓글 리스트 시작 -->
+            <% post.comments.forEach((comment) => { %>
+            <div class="commentSingle">
+              <!-- 유저 프로필 이미지 -->
+              <img src="<%- comment.author.profile.thumbnail ? comment.author.profile.thumbnail : `/static/images/profile.webp` %>" alt="프로필 이미지" class="profileImg" />
+
+              <div class="commentUser">
+                <!-- 유저 닉네임 받아오기 -->
+                <a href="" class="nickName"><%= comment.author.profile.nickname %></a>
+                <!-- 유저 아이디 -->
+                <a href="" class="userId">&#64;<%= comment.author.accountId %></a>
+
+                <!-- 글 작성시간 -->
+                <em class="createdAt" data-created-at="<%= comment.createdAt %>"></em>
+                <!-- 댓글 가져오기 -->
+                <p class="comment"><%= comment.content %></p>
+              </div>
+              <!-- 좋아요 -->
+              <div class="like">
+                <i class="fa-regular fa-heart"></i>
+                12
+              </div>
+              <!-- 답글, 수정, 삭제, 공유 버튼 -->
+              <div class="commentEditBtns">
+                <button type="button" onclick="toggleReplyArea(this)"><i class="fa-solid fa-reply"></i> 답글달기</button>
+                <button type="button"><i class="fa-solid fa-pen"></i> 수정</button>
+                <button type="button"><i class="fa-regular fa-trash-can"></i> 삭제</button>
+              </div>
+            </div>
+            <!-- 댓글 리스트 끝 -->
+
+            <!-- 대댓글 작성 영역 시작 -->
+            <div class="commentWriteWrapDouble">
+              <!-- 유저 프로필 이미지 -->
+              <img src="/static/images/profile.webp" alt="프로필 이미지" class="profileImg" />
+              <!-- 댓글 입력 창 -->
+              <div class="commentWrite" contenteditable="true" placeholder="답글을 입력해 주세요."></div>
+              <!-- 파일 업로드 버튼 -->
+              <div class="upload">
+                <label for="file">
+                  <img src="/static/images/upload-btn-gray.svg" class="formImg" alt="파일업로드버튼" />
+                </label>
+                <input type="file" id="file" />
+              </div>
+              <!-- 등록 버튼 -->
+              <button type="submit">등록</button>
+            </div>
+          </div>
+          <% }); %>
+          <!--  대댓글 작성 영역 끝 -->
+        </section>
+
+        <!-- 카테고리 & 글쓰기 버튼 플로팅 -->
+        <div class="floatingMenu">
+          <!-- 현재 카테고리 플로팅 메뉴 -->
+          <span><%= post.category.title %></span>
+          <!-- 글쓰기 버튼 -->
+          <a href="/posts/write"><i class="fa-solid fa-pen"></i></a>
+          <!-- <button type="button"><i class="fa-solid fa-pen"></i></button> -->
         </div>
+      </div>
+    </div>
 
-        <script>
-            // 게시글 삭제
-            const $deleteButton = document.getElementById("deleteButton");
+    <script>
+      // 게시글 삭제
+      const $deleteButton = document.getElementById("deleteButton");
 
-            const cookies = document.cookie.split(";").reduce((acc, cookie) => {
-                const [key, value] = cookie.split("=");
-                acc[key.trim()] = decodeURIComponent(value);
-                return acc;
-            }, {});
+      const cookies = document.cookie.split(";").reduce((acc, cookie) => {
+        const [key, value] = cookie.split("=");
+        acc[key.trim()] = decodeURIComponent(value);
+        return acc;
+      }, {});
 
-            const token = `${cookies.accessToken}`;
+      const token = `${cookies.accessToken}`;
 
-            $deleteButton?.addEventListener("click", async () => {
-                try {
-                    const res = await fetch("/api/posts/<%= post.postId %>", {
-                        method: "delete",
-                        headers: {
-                            "Content-Type": "application/json",
-                            authorization: token,
-                        },
-                    });
+      $deleteButton?.addEventListener("click", async () => {
+        try {
+          const res = await fetch("/api/posts/<%= post.postId %>", {
+            method: "delete",
+            headers: {
+              "Content-Type": "application/json",
+              authorization: token,
+            },
+          });
 
-                    if (!res.ok) {
-                        throw new Error("게시글 삭제에 실패했습니다.");
-                    }
+          if (!res.ok) {
+            throw new Error("게시글 삭제에 실패했습니다.");
+          }
 
-                    location.href = "/posts";
-                } catch (error) {
-                    console.error("게시글 작성에 실패했습니다.");
-                }
-            });
-        </script>
+          location.href = "/posts";
+        } catch (error) {
+          console.error("게시글 작성에 실패했습니다.");
+        }
+      });
+    </script>
 
-        <!-- 작성시간 한글 변환 -->
-        <script>
-            const $createdAt = document.querySelectorAll(".createdAt");
+    <!-- 작성시간 한글 변환 -->
+    <script>
+      const $createdAt = document.querySelectorAll(".createdAt");
 
-            const options = {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-                hour: "2-digit",
-                minute: "2-digit",
-                timeZone: "Asia/Seoul",
-            };
+      const options = {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        timeZone: "Asia/Seoul",
+      };
 
-            $createdAt.forEach((e) => {
-                const createdAt = new Date(e.dataset.createdAt);
-                const formattedDate = createdAt.toLocaleString(
-                    "ko-KR",
-                    options
-                );
-                e.textContent = formattedDate;
-            });
+      $createdAt.forEach((e) => {
+        const createdAt = new Date(e.dataset.createdAt);
+        const formattedDate = createdAt.toLocaleString("ko-KR", options);
+        e.textContent = formattedDate;
+      });
 
-            // 좋아요 아이콘
-            const $like = document.querySelectorAll(".like");
-            $like.forEach((like) => {
-                like.addEventListener("click", function () {
-                    const heartIcon = this.querySelector("i");
+      const likeBtn = document.querySelector(".fa-regular.fa-heart");
+      const unlikeBtn = document.querySelector(".fa-solid.fa-heart");
+      const likeId = "<%= likeId %>";
+      const accessToken = document.cookie.replace(/(?:(?:^|.*;\s*)accessToken\s*=\s*([^;]*).*$)|^.*$/, "$1");
+      const postId = "<%= post.postId %>";
+      likeBtn?.addEventListener("click", async (e) => {
+        try {
+          const response = await fetch(`/api/posts/${postId}/like`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              authorization: accessToken,
+            },
+            body: JSON.stringify({ postId: postId }),
+          });
 
-                    heartIcon.classList.toggle("fa-regular");
-                    heartIcon.classList.toggle("fa-solid");
-                });
-            });
+          if (response.ok) {
+            document.location.reload();
+          } else {
+            console.error("좋아요를 누르지 못했습니다.");
+          }
+        } catch (error) {
+          console.error("좋아요를 누르지 못했습니다.");
+        }
+      });
 
-            // 수정, 삭제 더 보기 버튼 보이기
-            function toggleEditDelete(postId, event) {
-                // 수정, 삭제 버튼 숨기기 (전체)
-                const allEditDeleteBtns =
-                    document.querySelectorAll(".postEditDelete");
-                allEditDeleteBtns.forEach((btn) => {
-                    btn.style.display = "none";
-                });
+      unlikeBtn?.addEventListener("click", async (e) => {
+        try {
+          const response = await fetch(`/api/posts/${postId}/unlike`, {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              authorization: accessToken,
+            },
+            body: JSON.stringify({ likeId: likeId }),
+          });
 
-                // 클릭한 게시글의 수정/삭제 버튼 선택
-                const editDeleteBtn = document.getElementById(`${postId}`);
+          if (response.ok) {
+            document.location.reload();
+          } else {
+            console.error("좋아요를 취소하지 못했습니다.");
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      });
 
-                // 현재 상태에 따라 표시 또는 숨김
-                if (
-                    editDeleteBtn.style.display === "none" ||
-                    editDeleteBtn.style.display === ""
-                ) {
-                    editDeleteBtn.style.display = "flex";
-                } else {
-                    editDeleteBtn.style.display = "none";
-                }
+      // 수정, 삭제 더 보기 버튼 보이기
+      function toggleEditDelete(postId, event) {
+        // 수정, 삭제 버튼 숨기기 (전체)
+        const allEditDeleteBtns = document.querySelectorAll(".postEditDelete");
+        allEditDeleteBtns.forEach((btn) => {
+          btn.style.display = "none";
+        });
 
-                // 이벤트 버블링 방지
-                event.stopPropagation();
-            }
+        // 클릭한 게시글의 수정/삭제 버튼 선택
+        const editDeleteBtn = document.getElementById(`${postId}`);
 
-            // 답글달기 버튼 클릭 시 작성영역 보이기
-            function toggleReplyArea(button) {
-                const replyArea =
-                    button.closest(".commentSingle").nextElementSibling;
+        // 현재 상태에 따라 표시 또는 숨김
+        if (editDeleteBtn.style.display === "none" || editDeleteBtn.style.display === "") {
+          editDeleteBtn.style.display = "flex";
+        } else {
+          editDeleteBtn.style.display = "none";
+        }
 
-                if (
-                    replyArea.style.display === "none" ||
-                    replyArea.style.display === ""
-                ) {
-                    replyArea.style.display = "flex";
-                } else {
-                    replyArea.style.display = "none";
-                }
-            }
-        </script>
-    </body>
+        // 이벤트 버블링 방지
+        event.stopPropagation();
+      }
+
+      // 답글달기 버튼 클릭 시에만 작성영역 보이기
+      function toggleReplyArea(button) {
+        const replyArea = button.closest(".commentSingle").nextElementSibling;
+
+        if (replyArea.style.display === "none" || replyArea.style.display === "") {
+          replyArea.style.display = "flex";
+        } else {
+          replyArea.style.display = "none";
+        }
+      }
+
+      // 댓글 달기
+      const commentWrite = document.querySelector(".commentWrite");
+      const commentWriteButton = document.querySelector(".commentWriteWrap button");
+
+      commentWriteButton.addEventListener("click", async () => {
+        const comment = commentWrite.innerHTML;
+        const postId = "<%= post.postId %>";
+
+        const accessToken = document.cookie.replace(/(?:(?:^|.*;\s*)accessToken\s*=\s*([^;]*).*$)|^.*$/, "$1");
+        const response = await fetch(`/api/comment`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: accessToken,
+          },
+          body: JSON.stringify({ postId: postId, content: comment }),
+        });
+
+        if (response.ok) {
+          alert("댓글 작성에 성공했습니다.");
+          document.location.reload();
+        } else {
+          console.error("댓글 작성에 실패했습니다.");
+        }
+      });
+    </script>
+  </body>
 </html>
