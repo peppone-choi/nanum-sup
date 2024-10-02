@@ -217,7 +217,11 @@ main {
 /* (수정/삭제 팝업) */
 
 /* (포스트 내용) */
+/* .post-Container {
+  gap: 15px;
+} */
 .post-content-text {
+  margin-top: 30px;
   padding-left: 25px;
   padding-bottom: 120px;
   height: 22px;
@@ -245,7 +249,7 @@ main {
   display: flex;
   justify-content: flex-start;
   margin-left: 15px;
-  margin-top: 30px;
+  /* margin-top: 30px; */
   height: 22px;
   width: 350px;
   font-size: 13px;
@@ -256,9 +260,18 @@ main {
 
 /* 게시글 아이콘 부분 */
 .icon-container {
-  gap: 15px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
   margin-left: 10px;
   margin-top: 2px;
+}
+
+.icon-container button {
+  /* border: 1px solid red; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .icon-button {
@@ -272,4 +285,17 @@ main {
 
 .icon-button i {
   width: 18px;
+}
+
+.comments-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin-left: 5px;
+  color: var(--mono-300);
+}
+
+.fa-regular.fa-heart {
+  padding-right: 15px;
 }
