@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
@@ -16,56 +16,87 @@
         <title>카테고리 목록</title>
     </head>
     <body>
-        <section class="category-menu-bar" id="categoryMenu">
-            <div class="category-menu-bar-header">
-                <a href="javascript:void(0)" onclick="closeMenu()"
-                    ><i class="fa-solid fa-x"></i
-                ></a>
-                <a href="">
-                    <i class="fa-solid fa-gear"></i>
-                </a>
-                <div class="category-profile">
-                    <i class="fa-solid fa-user"></i>
-                    <p class="category-nickName">닉네임</p>
-                    <p class="category-id">@ggaong</p>
-                </div>
-            </div>
-            <div class="category-menu-bar-main">
-                <div>
-                    <% category.forEach(function(category) { %>
-                    <div class="category-list">
-                        <a
-                            href="/admin/category/<%= category.categoryId %>/posts"
-                        >
-                            <p><%= category.title %></p>
-                        </a>
-                    </div>
-                    <% }) %>
-                </div>
-                <div class="category-footer">
-                    <a href="/admin/category/write" class="admin-setup">
-                        <i class="fa-solid fa-pen"></i>
+        <main class="category-popup hidden">
+            <section class="category-menu-bar" id="categoryMenu">
+                <div class="category-menu-bar-header">
+                    <a href="javascript:void(0)" onclick="closeMenu()"
+                        ><i class="fa-solid fa-x"></i
+                    ></a>
+                    <a href="/users/:userId/edit">
+                        <i class="fa-solid fa-gear"></i>
                     </a>
-                    <div class="logout" id="logout-btn">
-                        <a href="">
-                            <p>로그아웃</p>
-                            <i class="fa-solid fa-right-from-bracket"></i>
+                    <div class="category-profile">
+                        <img
+                            src="/static/images/profile.webp"
+                            alt="프로필"
+                            class="profile-image"
+                        />
+                        <div class="category-profile-info">
+                            <p class="category-nickName">닉네임</p>
+                            <p class="category-id">@ggaong</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="category-menu-bar-main">
+                    <div>
+                        <% category.forEach(function(category) { %>
+                        <div class="category-list">
+                            <a
+                                href="/admin/category/<%= category.categoryId %>/posts"
+                            >
+                                <p><%= category.title %></p>
+                            </a>
+                        </div>
+                        <% }) %>
+                    </div>
+                    <div class="category-footer">
+                        <a href="/admin/category/write" class="admin-setup">
+                            <i class="fa-solid fa-pen"></i>
                         </a>
+                        <div class="logout" id="logout-btn">
+                            <a href="">
+                                <p>로그아웃</p>
+                                <i class="fa-solid fa-right-from-bracket"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section> -->
+
+<!-- 로그아웃 창 -->
+<!-- <div id="logout-popup" class="logout-popup hidden">
+                <div class="popup-content">
+                    <p>로그아웃 하시겠습니까?</p>
+                    <div class="logout-btn">
+                        <button class="btn-cancel" id="cancel-btn">취소</button>
+                        <button class="btn-confirm" id="confirm-btn">
+                            확인
+                        </button>
                     </div>
                 </div>
             </div>
-        </section>
+        </main>
+        <script>
+            function openMenu() {
+                document
+                    .querySelector(".category-popup")
+                    .classList.remove("hidden");
+            }
+            function closeMenu() {
+                document
+                    .querySelector(".category-popup")
+                    .classList.add("hidden");
+            }
+        </script>
+        <script>
+            function closeMenu() {
+                const body = document.querySelector("body");
+                const popup = document.querySelector(".category-popup");
 
-        <!-- 로그아웃 창 -->
-        <div id="logout-popup" class="logout-popup hidden">
-            <div class="popup-content">
-                <p>로그아웃 하시겠습니까?</p>
-                <div class="logout-btn">
-                    <button class="btn-cancel" id="cancel-btn">취소</button>
-                    <button class="btn-confirm" id="confirm-btn">확인</button>
-                </div>
-            </div>
-        </div>
+                body.classList.remove("popup-active");
+                popup.classList.add("hidden");
+            }
+        </script>
         <script>
             document.addEventListener("DOMContentLoaded", function () {
                 const logoutBtn = document.getElementById("logout-btn");
@@ -83,16 +114,9 @@
                 });
 
                 confirmBtn.addEventListener("click", function () {
-                    window.location.href = "/login";
+                    window.location.href = "/views/login";
                 });
             });
         </script>
-        <script>
-            function closeMenu() {
-                const menu = document.getElementById("categoryMenu");
-                menu.style.display = "none";
-                window.location.href = "/admin/category/:categoryId/posts";
-            }
-        </script>
     </body>
-</html>
+</html> -->

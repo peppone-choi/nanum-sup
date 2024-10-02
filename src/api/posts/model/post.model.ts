@@ -11,8 +11,16 @@ export class Post implements IPost {
   category: ICategory;
   /** 단축 URL */
   shortUrl: string;
+  /** 첨부파일 */
+  attachmentsUrl?: string[];
   /** 작성일 */
   createdAt: Date;
+  comments: IComment[];
+  pictures?: string[];
+  video?: string;
+  likes: ILike[];
+  // /** 수정일 */
+  // updatedAt: Date;
 
   constructor(params: IPost) {
     this.id = params.id;
@@ -21,6 +29,12 @@ export class Post implements IPost {
     this.author = params.author;
     this.category = params.category;
     this.shortUrl = params.shortUrl;
+    this.attachmentsUrl = params.attachmentsUrl;
     this.createdAt = params.createdAt;
+    this.comments = params.comments;
+    this.pictures = params.pictures;
+    this.video = params.video;
+    this.likes = params.likes;
+    // this.updatedAt = params.updatedAt;
   }
 }

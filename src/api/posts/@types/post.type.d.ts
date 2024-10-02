@@ -11,6 +11,18 @@ interface IPost {
   category: ICategory;
   /** 단축 URL */
   shortUrl: string;
+  /** 첨부파일 */
+  attachmentsUrl?: string[];
   /** 작성일 */
   createdAt: Date;
+  // /** 댓글 */
+  comments: IComment[];
+
+  pictures?: string[];
+
+  video?: string;
+
+  likes: ILike[];
+  // /** 수정일 */
+  // updatedAt: Date;
 }

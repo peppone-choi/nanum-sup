@@ -7,34 +7,36 @@ import { CategoryServiceImpl } from "../service/category.service";
 
 // import { MongooseUserRepository } from "@/api/user/repository/mongooseUser.repository";
 import { MongoosePostRepository } from "@/api/posts/repository/mongoosePost.repository";
+import { Post } from "@/api/posts/model/post.model";
+import { PostsServiceImpl } from "@/api/posts/service/posts.service";
+import MongooseUserRepository from "@/api/user/repository/mongooseUser.repository";
+import { MongooseCommentRepository } from "@/api/comment/repository/mongooseComment.repository";
+import MongooseLikeRepository from "@/api/like/repository/mongooseLike.repository";
+import { authCookieViewMiddleware } from "@/api/common/middlewares/authCookie.middleware";
 
 const categoryViewRouter = express.Router();
 
 const CATEGORY_VIEW_ROUTES = {
-    /** 카테고리 목록 */
-    CATEGORY_LIST: "/client/category",
-    /** 카테고리 상세  */
-    CATEGORY_DETAIL: "/client/category/:categoryId/posts",
+  /** 카테고리 목록 */
+  CATEGORY_LIST: "/category",
+  /** 카테고리 상세  */
+  CATEGORY_DETAIL: "/category/:categoryId/posts",
 } as const;
 
 const categoryViewController = new CategoryViewController(
-    new CategoryServiceImpl(
-        new MongooseCategoryRepository()
-        // new MongoosePostRepository()
-    )
+  new CategoryServiceImpl(
+    new MongooseCategoryRepository()
+    // new MongoosePostRepository(),
+    // new MongooseUserRepository()
+  ),
+  new PostsServiceImpl(new MongoosePostRepository(), new MongooseUserRepository(), new MongooseCategoryRepository(), new MongooseCommentRepository(), new MongooseLikeRepository())
 );
 
-categoryViewRouter.get(
-    extractPath(CATEGORY_VIEW_ROUTES.CATEGORY_LIST, ROUTES_INDEX.CATEGORY_VIEW),
-    categoryViewController.userCategoryListPage
-);
+// categoryViewRouter.get(
+//     extractPath(CATEGORY_VIEW_ROUTES.CATEGORY_LIST, ROUTES_INDEX.CATEGORY_VIEW),
+//     categoryViewController.userCategoryListPage
+// );
 
-categoryViewRouter.get(
-    extractPath(
-        CATEGORY_VIEW_ROUTES.CATEGORY_DETAIL,
-        ROUTES_INDEX.CATEGORY_VIEW
-    ),
-    categoryViewController.userCategoryDetailPage
-);
+categoryViewRouter.get(extractPath(CATEGORY_VIEW_ROUTES.CATEGORY_DETAIL, ROUTES_INDEX.CATEGORY_VIEW), authCookieViewMiddleware(true), categoryViewController.userCategoryDetailPage);
 
 export default categoryViewRouter;

@@ -6,57 +6,45 @@ import { CategoryServiceImpl } from "../service/category.service";
 import { MongooseCategoryRepository } from "../repository/mongooseCategory.repository";
 // import { MongooseUserRepository } from "@/api/user/repository/mongooseUser.repository";
 import { MongoosePostRepository } from "@/api/posts/repository/mongoosePost.repository";
+import { PostsServiceImpl } from "@/api/posts/service/posts.service";
+import MongooseUserRepository from "@/api/user/repository/mongooseUser.repository";
+import { MongooseCommentRepository } from "@/api/comment/repository/mongooseComment.repository";
+import MongooseLikeRepository from "@/api/like/repository/mongooseLike.repository";
 
 const adminCategoryViewRouter = express.Router();
 
 const ADMIN_CATEGORY_VIEW_ROUTES = {
-    /** 카테고리 목록 */
-    CATEGORY_LIST: "/admin/category",
-    /** 카테고리 상세  */
-    CATEGORY_DETAIL: "/admin/category/:categoryId/posts",
-    /**카테고리 등록 */
-    CATEGORY_WRITE: "/admin/category/write",
-    /** 카테고리 수정 */
-    CATEGORY_EDIT: "/admin/category/:categoryId/edit",
+  /** 카테고리 목록 */
+  CATEGORY_LIST: "/admin/category",
+  /** 카테고리 상세  */
+  CATEGORY_DETAIL: "/admin/category/:categoryId/posts",
+  /**카테고리 등록 */
+  CATEGORY_WRITE: "/admin/category/write",
+  /** 카테고리 수정 */
+  CATEGORY_EDIT: "/admin/category/:categoryId/edit",
 } as const;
 
 const adminCategoryViewController = new AdminCategoryViewController(
-    new CategoryServiceImpl(
-        new MongooseCategoryRepository()
-        // new MongoosePostRepository()
-    )
+  new CategoryServiceImpl(
+    new MongooseCategoryRepository()
+    // new MongoosePostRepository(),
+    // new MongooseUserRepository()
+  ),
+  new PostsServiceImpl(new MongoosePostRepository(), new MongooseUserRepository(), new MongooseCategoryRepository(), new MongooseCommentRepository(), new MongooseLikeRepository())
 );
 
-adminCategoryViewRouter.get(
-    extractPath(
-        ADMIN_CATEGORY_VIEW_ROUTES.CATEGORY_LIST,
-        ROUTES_INDEX.ADMIN_CATEGORY_VIEW
-    ),
-    adminCategoryViewController.categoryListPage
-);
+// adminCategoryViewRouter.get(
+//     extractPath(
+//         ADMIN_CATEGORY_VIEW_ROUTES.CATEGORY_LIST,
+//         ROUTES_INDEX.ADMIN_CATEGORY_VIEW
+//     ),
+//     adminCategoryViewController.categoryListPage
+// );
 
-adminCategoryViewRouter.get(
-    extractPath(
-        ADMIN_CATEGORY_VIEW_ROUTES.CATEGORY_WRITE,
-        ROUTES_INDEX.ADMIN_CATEGORY_VIEW
-    ),
-    adminCategoryViewController.categoryWritePage
-);
+adminCategoryViewRouter.get(extractPath(ADMIN_CATEGORY_VIEW_ROUTES.CATEGORY_WRITE, ROUTES_INDEX.ADMIN_CATEGORY_VIEW), adminCategoryViewController.categoryWritePage);
 
-adminCategoryViewRouter.get(
-    extractPath(
-        ADMIN_CATEGORY_VIEW_ROUTES.CATEGORY_EDIT,
-        ROUTES_INDEX.ADMIN_CATEGORY_VIEW
-    ),
-    adminCategoryViewController.categoryEditPage
-);
+adminCategoryViewRouter.get(extractPath(ADMIN_CATEGORY_VIEW_ROUTES.CATEGORY_EDIT, ROUTES_INDEX.ADMIN_CATEGORY_VIEW), adminCategoryViewController.categoryEditPage);
 
-adminCategoryViewRouter.get(
-    extractPath(
-        ADMIN_CATEGORY_VIEW_ROUTES.CATEGORY_DETAIL,
-        ROUTES_INDEX.ADMIN_CATEGORY_VIEW
-    ),
-    adminCategoryViewController.categoryDetailPage
-);
+adminCategoryViewRouter.get(extractPath(ADMIN_CATEGORY_VIEW_ROUTES.CATEGORY_DETAIL, ROUTES_INDEX.ADMIN_CATEGORY_VIEW), adminCategoryViewController.categoryDetailPage);
 
 export default adminCategoryViewRouter;

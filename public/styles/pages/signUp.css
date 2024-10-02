@@ -1,0 +1,295 @@
+body {
+    background-color: var(--sub-color-3) !important;
+}
+
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.header-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.arrow-left-button {
+    position: absolute;
+    left: -150px;
+    top: 10px;
+    border: 0;
+    background-repeat: no-repeat;
+    width: 18px;
+    height: 18px;
+    color: var(--mono-000);
+}
+
+.profile-image {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+.profile {
+    position: relative;
+    padding-top: 30px;
+}
+
+.profile-edit {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    padding: 10px;
+    border-radius: 50%;
+    background-color: var(--sub-color-1);
+}
+
+.profile-pen {
+    width: 13px;
+    height: 13px;
+}
+
+.image-information {
+    color: var(--mono-000);
+    padding-top: 10px;
+}
+
+.signup-input-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 0;
+}
+
+.signup-input-form input {
+    display: flex;
+    margin: 0 100px 0 10px;
+    width: 70%;
+    height: 60px;
+    border: none;
+    border-radius: 10px;
+}
+
+.form-group {
+    width: 400px;
+    height: 60px;
+    margin: 1px 0;
+    background-color: var(--mono-000);
+    border-radius: 10px;
+    padding: 0 5px;
+}
+
+.nickname-input-container,
+.id-input-container,
+.email-input-container,
+.password-input-container,
+.confirm-password-input-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.nickname-input-container img,
+.id-input-container img,
+.confirm-password-input-container img,
+.password-input-container img,
+.email-input-container img {
+    width: 40px;
+    height: 40px;
+    padding-left: 20px;
+}
+
+.nickname-double-check,
+.id-double-check,
+.email-double-check {
+    z-index: 1;
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    border-radius: 10px;
+    border: none;
+    padding: 5px 13px;
+    background-color: #b6b6b6;
+    color: var(--mono-000);
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.form-group input::placeholder {
+    font-size: 14px;
+}
+
+.introduce {
+    width: 100%;
+    height: 60px;
+    margin: 1px 0;
+    border: none;
+    border-radius: 10px;
+    resize: none;
+}
+
+.introduce::placeholder {
+    padding: 5px 0 0 10px;
+    font-size: 14px;
+}
+.introduce::-webkit-scrollbar {
+    width: 3px;
+}
+
+.introduce::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+
+.introduce::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.6);
+}
+
+.signup-information {
+    padding-top: 7px;
+    color: var(--mono-000);
+    font-size: 13px;
+}
+
+/* 팝업 */
+.availability-popup-available,
+.availability-popup-unavailable,
+.signup-confirm-popup {
+    background-color: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    height: 110px;
+    border-radius: 10px;
+    z-index: 100;
+}
+
+.availability-popup-available.hidden,
+.availability-popup-unavailable.hidden,
+.signup-confirm-popup.hidden {
+    display: none;
+}
+
+.availability-popup-available img,
+.availability-popup-unavailable img,
+.signup-confirm-popup img {
+    width: 16px;
+    height: 16px;
+}
+
+.available-popup-content,
+.unavailable-popup-content,
+.signup-popup-content {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    position: relative;
+}
+
+.available-popup-content p,
+.unavailable-popup-content p,
+.signup-popup-content p {
+    padding-bottom: 15px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    color: var(--mono-000);
+    gap: 8px;
+}
+
+.available-popup-content p:after,
+.unavailable-popup-content p:after,
+.signup-popup-content p:after {
+    content: "";
+    position: absolute;
+    left: 0px;
+    top: 33px;
+    height: 0.5px;
+    width: 100%;
+    background: #d9d9d9;
+}
+
+.unavailable-confirm-btn,
+.available-confirm-btn,
+.signup-confirm-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.available-confirm,
+.unavailable-confirm,
+.signup-confirm {
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: transparent;
+    color: var(--mono-000);
+}
+
+.edit-popup {
+    position: absolute;
+    top: 90%;
+    left: 180%;
+    transform: translate(-50%, -50%);
+    width: 130px;
+    padding: 5px;
+    background-color: white;
+    border-radius: 10px;
+    z-index: 1000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.edit-popup.hidden {
+    display: none;
+}
+
+.edit-popup-content {
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+}
+
+.upload-image-btn,
+.delete-image-btn,
+.cancel-image-upload-btn {
+    border: none;
+    border-radius: 10px;
+    padding: 5px 0;
+    margin: 2px 0;
+}
+
+.upload-image-btn {
+    background-color: var(--sub-color-5);
+}
+
+.delete-image-btn {
+    background-color: var(--sub-color-4);
+}
+
+.cancel-image-upload-btn {
+    background-color: var(--sub-color-1);
+}
+
+
+
+
+
+
+textarea {
+    padding: 15px;
+}
+
+input:focus {
+    background-color: transparent;
+} 

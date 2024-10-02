@@ -16,47 +16,21 @@ export default class UserController {
     this.signIn = this.signIn.bind(this);
     this.updateUser = this.updateUser.bind(this);
     this.deleteUser = this.deleteUser.bind(this);
+    this.existsByNickname = this.existsByNickname.bind(this);
+    this.existsByEmail = this.existsByEmail.bind(this);
+    this.existsByAccountId = this.existsByAccountId.bind(this);
   }
 
-  async getUsers(
-    req: Request<
-      getUsersRequest["path"],
-      getUsersResponse,
-      getUsersRequest["body"],
-      getUsersRequest["params"]
-    >,
-    res: Response,
-    next: NextFunction
-  ) {
+  async getUsers(req: Request<getUsersRequest["path"], getUsersResponse, getUsersRequest["body"], getUsersRequest["params"]>, res: Response, next: NextFunction) {
     const users = await this._userService.getUsers();
-    users.map((user) => new UserResponseDto(user));
     res.send(users);
   }
-  async getUserDetail(
-    req: Request<
-      getUserDetailRequest["path"],
-      getUserDetailResponse,
-      getUserDetailRequest["body"],
-      getUserDetailRequest["params"]
-    >,
-    res: Response,
-    next: NextFunction
-  ) {
+  async getUserDetail(req: Request<getUserDetailRequest["path"], getUserDetailResponse, getUserDetailRequest["body"], getUserDetailRequest["params"]>, res: Response, next: NextFunction) {
     const { userId } = req.params;
     const user = await this._userService.getUserDetail(userId);
-    const userDto = user ? new UserResponseDto(user) : null;
-    res.send(userDto);
+    res.send(user);
   }
-  async signIn(
-    req: Request<
-      createUserRequest["path"],
-      createUserResponse,
-      createUserRequest["body"],
-      createUserRequest["params"]
-    >,
-    res: Response,
-    next: NextFunction
-  ) {
+  async signIn(req: Request<createUserRequest["path"], createUserResponse, createUserRequest["body"], createUserRequest["params"]>, res: Response, next: NextFunction) {
     const { accountId, password, email, profile } = req.body;
     const user = await this._userService.signIn({
       accountId,
@@ -65,41 +39,42 @@ export default class UserController {
       role: "user",
       profile,
     });
-    res.status(201).send(new UserResponseDto(user));
+    res.status(201).send(user);
   }
-  async updateUser(
-    req: Request<
-      updateUserRequest["path"],
-      updateUserResponse,
-      updateUserRequest["body"],
-      updateUserRequest["params"]
-    >,
-    res: Response,
-    next: NextFunction
-  ) {
+  async updateUser(req: Request<updateUserRequest["path"], updateUserResponse, updateUserRequest["body"], updateUserRequest["params"]>, res: Response, next: NextFunction) {
     req.user;
     const { userId } = req.params;
-    const { email, password, role, profile } = req.body;
-    await this._userService.updateUser(
-      req.user,
-      userId,
-      { email, role, profile },
-      password
-    );
+    const { nickname, bio, thumbnail } = req.body;
+    console.log("req.user", req.user);
+    console.log("req.params", req.params);
+    console.log("req.body", req.body);
+
+    await this._userService.updateUser(req.user, userId, {
+      nickname,
+      bio,
+      thumbnail,
+    });
     res.status(204).send();
   }
-  async deleteUser(
-    req: Request<
-      deleteUserRequest["path"],
-      deleteUserResponse,
-      deleteUserRequest["body"],
-      deleteUserRequest["params"]
-    >,
-    res: Response,
-    next: NextFunction
-  ) {
+  async deleteUser(req: Request<deleteUserRequest["path"], deleteUserResponse, deleteUserRequest["body"], deleteUserRequest["params"]>, res: Response, next: NextFunction) {
     const { userId } = req.params;
     await this._userService.deleteUser(req.user, userId);
     res.status(204).send();
+  }
+  async existsByNickname(req: Request, res: Response, next: NextFunction) {
+    const { nickname } = req.params;
+    const decodedNickname = decodeURIComponent(nickname);
+    const user = await this._userService.existsByNickname(decodedNickname);
+    res.send(user);
+  }
+  async existsByEmail(req: Request, res: Response, next: NextFunction) {
+    const { email } = req.params;
+    const user = await this._userService.existsByEmail(email);
+    res.send(user);
+  }
+  async existsByAccountId(req: Request, res: Response, next: NextFunction) {
+    const { accountId } = req.params;
+    const user = await this._userService.existsByAccountId(accountId);
+    res.send(user);
   }
 }

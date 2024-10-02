@@ -10,7 +10,6 @@ export default class CommentController {
     this.editComment = this.editComment.bind(this);
     this.deleteComment = this.deleteComment.bind(this);
     this.createCommentReply = this.createCommentReply.bind(this);
-    this.getComments = this.getComments.bind(this);
   }
   async getComment(req: Request, res: Response, next: NextFunction) {
     try {
@@ -22,7 +21,9 @@ export default class CommentController {
   }
   async createComment(req: Request, res: Response, next: NextFunction) {
     try {
-      const comment = await this._commentService.createComment(req.body);
+      const user = req.user.userId;
+      const post = req.body.postId;
+      const comment = await this._commentService.createComment(post, user, req.body);
       res.status(201).send(comment);
     } catch (error) {
       next(error);
@@ -30,10 +31,7 @@ export default class CommentController {
   }
   async createCommentReply(req: Request, res: Response, next: NextFunction) {
     try {
-      const comment = await this._commentService.createCommentReply(
-        req.params.commentId,
-        req.body
-      );
+      const comment = await this._commentService.createCommentReply(req.params.commentId, req.body);
       res.status(201).send(comment);
     } catch (error) {
       next(error);
@@ -41,10 +39,7 @@ export default class CommentController {
   }
   async editComment(req: Request, res: Response, next: NextFunction) {
     try {
-      const comment = await this._commentService.editComment(
-        req.params.commentId,
-        req.body
-      );
+      const comment = await this._commentService.editComment(req.params.commentId, req.body);
       res.status(204).send();
     } catch (error) {
       next(error);
@@ -52,20 +47,8 @@ export default class CommentController {
   }
   async deleteComment(req: Request, res: Response, next: NextFunction) {
     try {
-      const comment = await this._commentService.deleteComment(
-        req.params.commentId
-      );
+      const comment = await this._commentService.deleteComment(req.params.commentId);
       res.status(204).send();
-    } catch (error) {
-      next(error);
-    }
-  }
-  async getComments(req: Request, res: Response, next: NextFunction) {
-    try {
-      const comments = await this._commentService.getComments(
-        req.params.postId
-      );
-      res.send(comments);
     } catch (error) {
       next(error);
     }

@@ -49,10 +49,12 @@ declare type updateUserRequestPath = {
   userId: string;
 };
 declare type updateUserRequestBody = {
-  email: string;
-  password?: string;
-  role: RoleType;
-  profile: IProfile;
+  /** 닉네임 */
+  nickname: string;
+  /** 자기소개 */
+  bio: string;
+  /** 썸네일 */
+  thumbnail: string;
 };
 declare type updateUserRequestParams = {};
 declare type updateUserRequest = {

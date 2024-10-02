@@ -23,41 +23,278 @@
             alt="profile header image"
           />
         </div>
+        <!-- 프로필 이미지,닉네임,아이디,소개글 -->
         <div class="profile-area">
           <img
-            src="/static/images/profile.webp"
+            src="<%- user.profile.thumbnail ? user.profile.thumbnail : `/static/images/profile.webp` %>"
             alt="profile image"
             class="profile-thumbnail"
           />
           <div class="profile-user">
-            <p class="nickName">가나다짱짱</p>
-            <p class="userid">@gasadabb</p>
-            <p class="biotext">소개글 영역입니다~ 안녕~</p>
+            <p class="nickName"><%= user.profile.nickname %></p>
+            <p class="userid">&#64;<%= user.accountId %></p>
+            <p class="biotext"><%= user.profile.bio %></p>
           </div>
+          <!-- 프로필 수정 페이지로 이동 -->
           <a href="/users/:userId/edit" class="edit">
             <i class="fa-solid fa-gear"></i>
           </a>
         </div>
-        <div class="post-area">
-          <div class="post-filter">
+        <!-- 게시글 -->
+        <div class="postContainer">
+          <!-- 내 게시글/좋아요한 게시글 필터 -->
+          <div id="post-filter">
             <button id="mypost-button">게시글</button>
             <p>ㅣ</p>
             <button id="likepost-button">좋아요</button>
           </div>
+          <% posts.forEach((post) => { %>
           <div class="post">
-            <img
-              src="/static/images/profile.webp"
-              alt="profile image"
-              class="profile-thumbnail"
-            />
-            <div class="profile-user">
-              <p class="nickName">가나다짱짱</p>
-              <p class="userid">@gasadabb</p>
+            <!-- 프로필 이미지,닉네임,아이디 -->
+            <div class="post-profile">
+              <img
+                src="<%- user.profile.thumbnail ? user.profile.thumbnail : `/static/images/profile.webp` %>"
+                alt="profile image"
+                class="post-profile-thumbnail"
+              />
+              <div class="profile-user b">
+                <p class="nickName"><%= user.profile.nickname %></p>
+                <p class="userid">&#64;<%= user.accountId %></p>
+              </div>
+              <button
+                id="listButton"
+                class="icon-button"
+                aria-label="list Icon"
+              >
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+              </button>
+              <div id="optionMenu" class="option-menu hidden">
+                <ul>
+                  <li><button id="editButton">수정</button></li>
+                  <li><button id="deleteButton">삭제</button></li>
+                </ul>
+              </div>
+              <!-- 카테고리 표기 -->
+              <div class="category">
+                <!-- <i class="fa-solid fa-icons"></i> -->
+                <span><%= post.category.title.split(' 나눔숲')[0] %></span>
+              </div>
             </div>
-            너무 배고프다 맨날 배고프다
+            <div class="post-content">
+              <% post.pictures?.forEach((image) => { %>
+              <div class="post-image">
+                <img src="<%= image %>" alt="post image" />
+              </div>
+              <% }) %>
+              <!-- 게시글 내용 -->
+              <p class="post-content-title"><a href="/posts/<%= post.postId %>"><%= post.title %></a></p>
+              <p class="post-content-text"><%= post.content %></p>
+              <!-- 게시글 작성 시간 -->
+              <p class="post-time-text"><%= post.createdAt.toISOString() %></p>
+            </div>
+            <!-- 게시글 반응 아이콘 -->
+            <div class="icon-container">
+              <button
+                id="likeButton"
+                class="icon-button"
+                aria-label="like Button"
+              >
+                <i class="fa-regular fa-heart"><%= post.likes.length %></i>
+              </button>
+              <div class="comments-text">
+                <% if (post.comments.length > 0) { %>
+                <i class="fa-solid fa-comment"></i>
+                <%- post.comments.length %> <% } else { %>
+                <i class="fa-regular fa-comment"></i>
+                0 <% } %>
+              </div>
+              <button
+                id="favoriteButton"
+                class="icon-button"
+                aria-label="favorite Icon"
+              >
+                <i class="fa-regular fa-star"></i>
+              </button>
+              <button
+                id="reportButton"
+                class="icon-button"
+                aria-label="report Icon"
+              >
+                <i class="fa-solid fa-circle-exclamation"></i>
+              </button>
+              <button
+                id="shareButton"
+                class="icon-button"
+                aria-label="share Icon"
+              >
+                <i class="fa-regular fa-share-from-square"></i>
+              </button>
+            </div>
+            <div class="short-url" style="display: none">
+              <p>공유하기</p>
+              <p>/posts/s/<%= post.shortUrl %></p>
+              <input type="text" hidden value="/posts/s/<%= post.shortUrl %>" />
+              <button class="copy">복사</button>
+            </div>
           </div>
+          <% }) %>
         </div>
       </main>
     </div>
+    <script>
+      const share = document.querySelectorAll(".fa-regular.fa-share-from-square");
+      share.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+          const share = btn.closest(".post").querySelector(".short-url");
+          if (share.style.display === "block") {
+            share.style.display = "none";
+          } else {
+            share.style.display = "block";
+          }
+          const copy = document.querySelector(".copy");
+          copy.addEventListener("click", (e) => {
+            e.preventDefault();
+            const shortUrl = document.querySelector(".short-url input");
+            shortUrl.select();
+            document.execCommand("copy");
+            alert("복사되었습니다.");
+          });
+        });
+      });
+
+      // 작성시간 한글 변환
+      const $createdAt = document.querySelectorAll(".createdAt");
+
+      const options = {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        timeZone: "Asia/Seoul",
+      };
+
+      $createdAt.forEach((e) => {
+        const createdAt = new Date(e.dataset.createdAt);
+        const formattedDate = createdAt.toLocaleString("ko-KR", options);
+        e.textContent = formattedDate;
+      });
+
+      const listIconButton = document.getElementById("listButton");
+      const optionMenu = document.getElementById("optionMenu");
+
+      // 리스트 아이콘 클릭 시 옵션창 열기/닫기
+      listIconButton.addEventListener("click", function () {
+        optionMenu.classList.toggle("hidden");
+      });
+
+      // 수정 버튼 클릭 시 동작
+      document
+        .getElementById("editButton")
+        .addEventListener("click", function () {
+          const postId = "yourpostIdHere";
+          window.location.href = `/posts/${postId}/edit`; // 페이지 이동
+          optionMenu.classList.add("hidden"); // 옵션창 닫기
+        });
+
+      // 삭제 버튼 클릭 시 동작
+      document
+        .getElementById("deleteButton")
+        .addEventListener("click", function () {
+          alert("삭제를 선택했습니다.");
+          optionMenu.classList.add("hidden"); // 옵션창 닫기
+        });
+
+      // 옵션창 외부를 클릭하면 닫기
+      window.addEventListener("click", function (event) {
+        if (
+          !listIconButton.contains(event.target) &&
+          !optionMenu.contains(event.target)
+        ) {
+          optionMenu.classList.add("hidden");
+        }
+      });
+
+      const postContainer = document.getElementById("postContainer");
+      const filterGroup = document.getElementById("post-filter");
+
+      renderInitTodoList();
+      // 게시글 필터 부분
+      (() => {
+        $.filterGroup.addEventListener("click", (e) => {
+          const $target = e.target;
+
+          const button = $target.closest("button");
+
+          if (button) {
+            e.currentTarget.querySelectorAll("button")?.forEach((button) => {
+              if (button.classList.contains("active")) {
+                button?.classList?.remove("active");
+              }
+            });
+
+            button?.classList.add("active");
+          }
+
+          const action = button?.dataset.action;
+
+          switch (action) {
+            case "completed":
+              return renderFilterList();
+            case "created":
+              return renderInitTodoList();
+            case "uncompleted":
+              return renderFilterunList();
+          }
+        });
+      })();
+
+      function renderFilterList() {
+        $.todos.innerHTML = "";
+
+        const isEmpty =
+          state.todos.filter((todo) => !!todo.completed).length === 0;
+
+        if (isEmpty) {
+          $.todos.innerHTML = `<li class="empty-item">
+            <i class="fa-regular fa-note-sticky"></i>
+            <h2>아직 완료된 할일이 없습니다. :D</h2>
+          </li>`;
+          return;
+        }
+
+        renderTodoList(state.todos.filter((todo) => !!todo.completed));
+      }
+
+      // 게시글 데이터가 비어있다고 가정
+      const posts = []; // 이 배열에 게시글 데이터가 추가될 수 있음
+
+      // 게시글이 없을 경우 메시지와 버튼을 추가
+      if (posts.length === 0) {
+        const noPostMessage = document.createElement("p");
+        noPostMessage.classList.add("message");
+        noPostMessage.textContent = "작성된 게시글이 없습니다.";
+
+        const firstPostButton = document.createElement("button");
+        firstPostButton.id = "firstPostButton";
+        firstPostButton.textContent = "첫 게시글 작성하기";
+
+        // 버튼 클릭 시 페이지 이동
+        firstPostButton.addEventListener("click", () => {
+          window.location.href = "/create-post"; // 게시글 작성 페이지로 이동
+        });
+
+        postContainer.appendChild(noPostMessage);
+        postContainer.appendChild(firstPostButton);
+      } else {
+        // 게시글이 있을 경우 게시글 목록을 표시하는 로직을 여기에 추가
+        posts.forEach((post) => {
+          const postElement = document.createElement("div");
+          postElement.textContent = post.title; // 게시글 제목 예시
+          postContainer.appendChild(postElement);
+        });
+      }
+    </script>
   </body>
 </html>

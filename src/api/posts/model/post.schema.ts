@@ -29,11 +29,38 @@ const postSchema = new mongoose.Schema<IPost>({
     trim: true,
     unique: true,
   },
-
+  attachmentsUrl: {
+    type: [String],
+    default: [],
+  },
   createdAt: {
     type: Date,
     default: Date.now,
   },
+  comments: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Comment",
+    },
+  ],
+  pictures: {
+    type: [String],
+    default: [],
+  },
+  video: {
+    type: String,
+    default: "",
+  },
+  likes: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Like",
+    },
+  ],
+  // updatedAt: {
+  //   type: Date,
+  //   default: Date.now,
+  // },
 
   // createdAt: {
   //   type: Date,

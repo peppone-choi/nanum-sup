@@ -59,6 +59,21 @@ const LIKE_ROUTES = {
   ADMIN_LIKE_API: "/admin-api/likes",
 } as const;
 
+const UPLOAD_ROUTES = {
+  UPLOAD_API: "/api/upload",
+  UPLOAD_VIEW: "/upload",
+};
+
+const FOLLOW_ROUTES = {
+  FOLLOW_API: "/api/follows",
+  ADMIN_FOLLOW_API: "/admin-api/follows",
+} as const;
+
+const REPORT_ROUTES = {
+  REPORT_API: "/api/reports",
+  ADMIN_REPORT_API: "/admin-api/reports",
+} as const;
+
 export const ROUTES_INDEX = {
   ...CATEGORY_ROUTES,
   ...POST_ROUTES,
@@ -66,4 +81,7 @@ export const ROUTES_INDEX = {
   ...COMMENT_ROUTES,
   ...USER_ROUTES,
   ...LIKE_ROUTES,
+  ...UPLOAD_ROUTES,
+  ...FOLLOW_ROUTES,
+  ...REPORT_ROUTES,
 } as const;

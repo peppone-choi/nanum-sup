@@ -1,8 +1,26 @@
-/* 메뉴 팝업 */
+/* 카테고리 팝업 */
+
+.category-popup.hidden {
+    display: none;
+}
+
+.category-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    z-index: 1000;
+}
+
 .category-menu-bar {
     background-color: rgba(255, 255, 255, 0.8);
     padding: 15px;
-    width: 280px;
+    width: 20%;
     height: 100vh;
     position: relative;
     overflow-y: auto;
@@ -38,30 +56,74 @@
 
 .category-profile {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: start;
+    /* gap: 10px; */
+    align-items: center;
     padding-bottom: 10px;
     position: relative;
+    @media (max-width: 1000px) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: 10px;
+        margin: 0 auto;
+    }
 }
 
-.fa-user {
-    font-size: 35px;
+.profile-image {
+    display: flex;
+    align-items: center;
+    font-size: 25px;
     padding: 10px;
-    background-color: #d9d9d9;
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
+    @media (max-width: 670px) {
+        transition: all 0.4s ease-in-out;
+        width: 70px;
+        height: 70px;
+    }
+    @media (max-width: 550px) {
+        transition: all 0.4s ease-in-out;
+        width: 50px;
+        height: 50px;
+    }
 }
 
 .category-nickName {
     padding: 10px 0 0;
-    font-size: 15px;
-    font-weight: bold;
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 auto;
+    @media (max-width: 1000px) {
+        font-size: 14px;
+        padding: 0;
+        font-weight: 700;
+    }
+    @media (max-width: 670px) {
+        padding: 0;
+        font-size: 14px;
+        font-weight: 700;
+    }
+    @media (max-width: 550px) {
+        padding: 0;
+        font-size: 11px;
+        font-weight: 700;
+    }
 }
 
 .category-id {
-    font-size: 12px;
+    font-size: 13px;
     padding: 0 0 15px 0;
-    font-weight: bold;
+    font-weight: 500;
+    @media (max-width: 1000px) {
+        font-size: 11px;
+    }
+    @media (max-width: 670px) {
+        font-size: 11px;
+    }
+    @media (max-width: 550px) {
+        font-size: 8px;
+    }
 }
 
 .category-id:after {
@@ -71,7 +133,7 @@
     bottom: -2px;
     height: 1px;
     width: 100%;
-    background: #a5a4a4;
+    background: #d9d9d9;
 }
 
 .category-menu-bar-main {

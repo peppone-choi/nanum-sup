@@ -22,26 +22,24 @@ export default class AdminPostsController {
     this.createDummy = this.createDummy.bind(this);
   }
 
-  
   /** 더미 데이터 */
   async createDummy(req: Request, res: Response, next: NextFunction) {
     try {
-      const list = new Array(parseInt(req.query.count?.toString() ?? "100"))
-        .fill(0)
-        .map((_) => {
-          return {
-            title: faker.lorem.words({ min: 3, max: 5 }),
-            content: faker.lorem.sentence({ min: 5, max: 10 }),
-          };
-        });
+      const list = new Array(parseInt(req.query.count?.toString() ?? "100")).fill(0).map((_) => {
+        return {
+          title: faker.lorem.words({ min: 3, max: 5 }),
+          content: faker.lorem.sentence({ min: 5, max: 10 }),
+        };
+      });
 
       for (const post of list) {
         await this._postsService.createPost(
-          "66f286b8a8d779a20c63cda3",   // userId
-          "66f247f68d1dffeca42e1a10",   // categoryId
-        {
-          ...post,
-        });
+          "66f286b8a8d779a20c63cda3", // userId
+          "66f247f68d1dffeca42e1a10", // categoryId
+          {
+            ...post,
+          }
+        );
       }
 
       res.status(201).json();
@@ -50,20 +48,8 @@ export default class AdminPostsController {
     }
   }
 
-
-
-
   /** [관리자] 글 목록 조회 */
-  async getPosts(
-    req: Request<
-      adminGetPostsRequest["path"],
-      adminGetPostsResponse,
-      adminGetPostsRequest["body"],
-      adminGetPostsRequest["params"]
-    >,
-    res: Response,
-    next: NextFunction
-  ) {
+  async getPosts(req: Request<adminGetPostsRequest["path"], adminGetPostsResponse, adminGetPostsRequest["body"], adminGetPostsRequest["params"]>, res: Response, next: NextFunction) {
     try {
       const posts = await this._postsService.getPosts();
       res.send(posts);
@@ -74,19 +60,12 @@ export default class AdminPostsController {
 
   /** [관리자] 글 상세 조회 */
   async getPostDetail(
-    req: Request<
-      adminGetPostDetailRequest["path"],
-      adminGetPostDetailResponse,
-      adminGetPostDetailRequest["body"],
-      adminGetPostDetailRequest["params"]
-    >,
+    req: Request<adminGetPostDetailRequest["path"], adminGetPostDetailResponse, adminGetPostDetailRequest["body"], adminGetPostDetailRequest["params"]>,
     res: Response,
     next: NextFunction
   ) {
     try {
-      const postDetail = await this._postsService.getPostDetail(
-        req.params.postId
-      );
+      const postDetail = await this._postsService.getPostDetail(req.params.postId);
 
       res.send(postDetail);
     } catch (error) {
@@ -95,27 +74,14 @@ export default class AdminPostsController {
   }
 
   /** [관리자] 글 생성 */
-  async createPost(
-    req: Request<
-      adminCreatePostRequest["path"],
-      adminCreatePostResponse,
-      adminCreatePostRequest["body"],
-      adminCreatePostRequest["params"]
-    >,
-    res: Response,
-    next: NextFunction
-  ) {
+  async createPost(req: Request<adminCreatePostRequest["path"], adminCreatePostResponse, adminCreatePostRequest["body"], adminCreatePostRequest["params"]>, res: Response, next: NextFunction) {
     const { userId, categoryId, title, content } = req.body;
 
     try {
-      const createdPost = await this._postsService.createPost(
-        userId,
-        categoryId,
-        {
-          title,
-          content,
-        }
-      );
+      const createdPost = await this._postsService.createPost(userId, categoryId, {
+        title,
+        content,
+      });
       res.status(201).send(createdPost);
     } catch (error) {
       next(error);
@@ -123,21 +89,12 @@ export default class AdminPostsController {
   }
 
   /** [관리자] 글 수정 */
-  async updatePost(
-    req: Request<
-      adminUpdatePostRequest["path"],
-      adminUpdatePostResponse,
-      adminUpdatePostRequest["body"],
-      adminUpdatePostRequest["params"]
-    >,
-    res: Response,
-    next: NextFunction
-  ) {
+  async updatePost(req: Request<adminUpdatePostRequest["path"], adminUpdatePostResponse, adminUpdatePostRequest["body"], adminUpdatePostRequest["params"]>, res: Response, next: NextFunction) {
     const { postId } = req.params;
-
+    const { title, content, category, pictures, video } = req.body;
+    console.log(postId, req.body);
     try {
-      const { title, content, category } = req.body;
-      await this._postsService.updatePost(postId, { title, content, category });
+      await this._postsService.updatePost(postId, title, content, category, pictures ?? [], video ?? "");
       res.status(204).json();
     } catch (error) {
       next(error);
@@ -145,16 +102,7 @@ export default class AdminPostsController {
   }
 
   /** [관리자] 글 삭제 */
-  async deletePost(
-    req: Request<
-      adminDeletePostRequest["path"],
-      adminDeletePostResponse,
-      adminDeletePostRequest["body"],
-      adminDeletePostRequest["params"]
-    >,
-    res: Response,
-    next: NextFunction
-  ) {
+  async deletePost(req: Request<adminDeletePostRequest["path"], adminDeletePostResponse, adminDeletePostRequest["body"], adminDeletePostRequest["params"]>, res: Response, next: NextFunction) {
     const { postId } = req.params;
     try {
       await this._postsService.deletePost(postId);

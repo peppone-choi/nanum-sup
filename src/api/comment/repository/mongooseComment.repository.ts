@@ -13,27 +13,27 @@ export class MongooseCommentRepository implements CommentRepository {
   }
 
   async findAll(): Promise<IComment[]> {
-    const values = await MongooseComment.find()
-      .populate("author")
-      .populate("post");
+    const values = await MongooseComment.find().populate({
+      path: "author",
+      populate: {
+        path: "profile",
+      },
+    });
 
     return values;
   }
   async findById(id: string): Promise<IComment | null> {
-    const comment = await MongooseComment.findById(id)
-      .populate("author")
-      .populate("post");
+    const comment = await MongooseComment.findById(id).populate({
+      path: "author",
+      populate: {
+        path: "profile",
+      },
+    });
     return comment;
   }
 
-  async update(
-    id: string,
-    updateCommentInfo: Partial<IComment>
-  ): Promise<IComment> {
-    const results = await MongooseComment.findByIdAndUpdate(
-      id,
-      updateCommentInfo
-    );
+  async update(id: string, updateCommentInfo: Partial<IComment>): Promise<IComment> {
+    const results = await MongooseComment.findByIdAndUpdate(id, updateCommentInfo);
     if (!results) {
       throw new HttpException(404, "댓글을 찾을 수 없습니다.");
     }
@@ -46,10 +46,7 @@ export class MongooseCommentRepository implements CommentRepository {
     return;
   }
 
-  async saveReply(
-    parent: string,
-    comment: Omit<IComment, "id">
-  ): Promise<IComment> {
+  async saveReply(parent: string, comment: Omit<IComment, "id">): Promise<IComment> {
     const parentComment = await MongooseComment.findById(parent);
     if (!parentComment) {
       throw new HttpException(404, "부모 댓글을 찾을 수 없습니다.");
@@ -59,12 +56,5 @@ export class MongooseCommentRepository implements CommentRepository {
     newComment.depth = parentComment.depth + 1;
     await newComment.save();
     return newComment;
-  }
-  async findByPostId(postId: string): Promise<IComment[]> {
-    const comments = await MongooseComment.find({ post: postId })
-      .populate("author")
-      .populate("post");
-
-    return comments;
   }
 }

@@ -3,20 +3,19 @@
 
 body {
   background-color: var(--mono-000);
-  width: 428px;
-  height: 926px;
-  border: 2px solid red;
 }
 
-.wrap {
+#wrap {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  /* height: 100vh; */
+  /* border: 2px solid red; */
 }
 
 img {
-  margin-top: 170px;
+  /* margin-top: 170px; */
   margin-bottom: 70px;
   width: 208px;
   height: 70px;
@@ -42,6 +41,7 @@ label {
   height: 55px;
   background-color: #efffe5;
   border-radius: 10px;
+
 }
 
 input[type="password"] {
@@ -75,4 +75,16 @@ input[type="password"] {
 
 .signup {
   color: var(--sub-color-1);
+}
+
+
+
+
+.form-control {
+  padding: 0 10px;
+}
+
+
+input[type="text"]:focus, input[type="password"]:focus {
+  outline: 2px solid var(--sub-color-3);
 }

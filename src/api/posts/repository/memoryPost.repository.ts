@@ -50,9 +50,32 @@ export class MemoryPostRepository implements PostRepository {
     return;
   }
   async findByShortUrl(shortUrl: string): Promise<IPost | null> {
-    const findPost = Array.from(MemoryPostRepository.store.values()).find(
-      (post) => post.shortUrl === shortUrl
-    );
+    const findPost = Array.from(MemoryPostRepository.store.values()).find((post) => post.shortUrl === shortUrl);
     return findPost ?? null;
+  }
+  async findByCategoryId(categoryId: string): Promise<IPost[]> {
+    const posts = Array.from(MemoryPostRepository.store.values()).filter((post) => post.category.id === categoryId);
+    return posts;
+  }
+  async findByUserId(userId: string): Promise<IPost[]> {
+    const posts = Array.from(MemoryPostRepository.store.values()).filter((post) => post.author.id === userId);
+    return posts;
+  }
+  async addComment(postId: string, comment: IComment): Promise<IPost> {
+    const findPost = MemoryPostRepository.store.get(postId);
+
+    if (!findPost) {
+      throw new HttpException(404, "게시물을 찾을 수 없습니다.");
+    }
+
+    const newComment = {
+      ...comment,
+      id: `comment-${findPost.comments.length}`,
+    };
+    findPost.comments.push(newComment);
+
+    MemoryPostRepository.store.set(postId, findPost);
+
+    return findPost;
   }
 }

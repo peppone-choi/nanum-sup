@@ -1,5 +1,9 @@
 import { CategoryResponseDTO } from "@/api/category/dto/categoryResponse.dto";
+import { CommentResponseDTO } from "@/api/comment/dto/commentResponse.dto";
+import LikeResponseDto from "@/api/like/dto/likeResponse.dto";
+import Like from "@/api/like/model/like.model";
 import UserResponseDto from "@/api/user/dto/userResponse.dto";
+import { th } from "@faker-js/faker/.";
 
 export class PostResponseDTO {
   postId: string;
@@ -9,6 +13,10 @@ export class PostResponseDTO {
   category: CategoryResponseDTO;
   shortUrl: string;
   createdAt: Date;
+  pictures: string[];
+  video: string;
+  comments: CommentResponseDTO[];
+  likes: LikeResponseDto[];
 
   constructor(params: IPost) {
     this.postId = params.id;
@@ -18,5 +26,9 @@ export class PostResponseDTO {
     this.category = new CategoryResponseDTO(params.category);
     this.shortUrl = params.shortUrl;
     this.createdAt = params.createdAt;
+    this.pictures = params.pictures ? params.pictures : [];
+    this.video = params.video ? params.video : "";
+    this.comments = params.comments.map((comment) => new CommentResponseDTO(comment));
+    this.likes = params.likes.map((like) => new LikeResponseDto(like));
   }
 }

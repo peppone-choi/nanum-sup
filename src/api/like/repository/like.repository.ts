@@ -1,14 +1,6 @@
 export interface LikeRepository {
-  getLikes(): Promise<ILike[]>;
-  getLikesPost(postId: string): Promise<ILike[]>;
-  getLikesComment(commentId: string): Promise<ILike[]>;
-  createLike(
-    type: "post" | "comment",
-    user: IUser,
-    post?: IPost,
-    comment?: IComment
-  ): Promise<ILike>;
+  getLike(likeId: string): Promise<ILike>;
+  createLike(user: IUser): Promise<ILike>;
   deleteLike(likeId: string): Promise<void>;
-  countLikesPost(postId: string): Promise<number>;
-  countLikesComment(commentId: string): Promise<number>;
+  likedByUser(userId: IUser, likeId: string): Promise<boolean>;
 }
