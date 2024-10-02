@@ -85,10 +85,16 @@
             <!-- <div>
             
               <i class="fa-solid fa-star"></i>
-            </div>
+            </div> -->
             <div>
               <i class="fa-solid fa-share-from-square"></i>
-            </div> -->
+            </div>
+          </div>
+          <div class="short-url" style="display: none">
+            <p>공유하기</p>
+            <p>/posts/s/<%= post.shortUrl %></p>
+            <input type="text" hidden value="/posts/s/<%= post.shortUrl %>" />
+            <button class="copy">복사</button>
           </div>
           <!-- 좋아요/댓글/즐겨찾기/공유버튼 끝  -->
 
@@ -180,6 +186,27 @@
     <!-- wrap 끝 -->
 
     <script>
+      const share = document.querySelectorAll(".fa-solid.fa-share-from-square");
+      share.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+          const share = btn.closest(".post").querySelector(".short-url");
+          if (share.style.display === "block") {
+            share.style.display = "none";
+          } else {
+            share.style.display = "block";
+          }
+          const copy = document.querySelector(".copy");
+          copy.addEventListener("click", (e) => {
+            e.preventDefault();
+            const shortUrl = document.querySelector(".short-url input");
+            shortUrl.select();
+            document.execCommand("copy");
+            alert("복사되었습니다.");
+          });
+        });
+      });
+
       const likeDiv = document.querySelector(".like");
       likeDiv.addEventListener("click", async (e) => {
         const likeBtn = e.target.closest(".fa-regular.fa-heart");
