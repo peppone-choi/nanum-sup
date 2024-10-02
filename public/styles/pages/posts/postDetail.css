@@ -31,8 +31,9 @@ a {
 }
 /* 프로필 이미지*/
 .profileImg {
-  width: 100%;
-  max-width: 45px;
+  /* width: 100%; */
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
 }
 
