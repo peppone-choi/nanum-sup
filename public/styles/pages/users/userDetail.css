@@ -112,9 +112,11 @@ main {
 /* 게시글 부분 */
 .post {
   width: 389px;
-  height: 356px;
+  min-height: 356px;
+  margin-top: 20px;
   background-color: #ffffff;
   border-radius: 20px;
+  box-shadow: #8a8a8a 0px 0px 10px;
 }
 
 /* (유저 정보) */
@@ -216,7 +218,17 @@ main {
 
 /* (포스트 내용) */
 .post-content-text {
-  padding-left: 15px;
+  padding-left: 25px;
+  padding-bottom: 120px;
+  height: 22px;
+  width: 350px;
+}
+
+.post-content-title {
+  padding-left: 25px;
+  padding-bottom: 20px;
+  font-size: 20px;
+  font-weight: bold;
   height: 22px;
   width: 350px;
 }
